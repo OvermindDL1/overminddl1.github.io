@@ -20,7 +20,6 @@
 <body>
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
     <div id="container" class="site mdl-layout mdl-js-layout
-mdl-layout--no-desktop-drawer-button
     ">
          
     <header id="header" class="mdl-layout__header site-header
@@ -34,7 +33,13 @@ mdl-layout--no-desktop-drawer-button
     </h1>
 
             <div class="mdl-layout-spacer"></div>
-                <div class="site-header__search" role="search">
+            <span class="sr-only">main navigation</span>
+            <nav class="mdl-navigation site-header__navigation"><a class="mdl-navigation__link" href="archive.html">Archive</a>
+                      <a class="mdl-navigation__link" href="categories/">Tags</a>
+                      <a class="mdl-navigation__link" href="rss.xml">RSS feed</a>
+              
+              
+            </nav><div class="site-header__search" role="search">
                     
 <!-- Google custom search -->
 <form method="get" action="https://www.google.com/search" class="navbar-form navbar-right" role="search">
@@ -60,7 +65,11 @@ mdl-layout--no-desktop-drawer-button
         </ul>
 </div>
     </header><div id="drawer" class="mdl-layout__drawer site-drawer
+mdl-layout--small-screen-only
     ">
+        <div class="mdl-layout__title site-drawer__title">
+                <span>Navigation</span>
+        </div>
         <span class="sr-only">side navigation</span>
         <nav class="mdl-navigation site-drawer__navigation"><a class="mdl-navigation__link" href="archive.html">Archive</a>
                     <a class="mdl-navigation__link" href="categories/">Tags</a>
@@ -133,7 +142,7 @@ that anyone wants clarified on or a dedicated post(s) on then please state.  :-)
 
             
         <footer id="footer" class="site-footer
-mdl-color-text--grey mdl-color--grey-800
+mdl-mega-footer
         ">
             Contents © 2016         <a href="mailto:overminddl1@overminddl1.com">OvermindDL1</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             
