@@ -1,4 +1,4 @@
-# OvermindDL1 Github Pages Site Generated
+# OvermindDL1 Github Pages Site Generator
 
 Currently using [Nikola](https://getnikola.com/) as the generator, thus it will be required to update this.
 
