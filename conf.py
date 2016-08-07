@@ -1234,7 +1234,7 @@ GLOBAL_CONTEXT = {
         },
         "top_nav_header": True,
         "more_button_header": [
-            ("/mobile/", "Mobile Site", "Mobile"),
+            #("/mobile/", "Mobile Site", "Mobile"),
         ],
         "image_plugin": "colorbox",
     }
