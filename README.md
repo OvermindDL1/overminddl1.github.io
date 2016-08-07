@@ -23,5 +23,5 @@ nikola help
 
 ## Other nikola dependencies install by:
 ```bash
-pip3 install jinja2
+pip3 install jinja2 webassets watchdog ghp-import2
 ```
