@@ -1082,10 +1082,10 @@ SEARCH_FORM = """
 <form method="get" action="https://www.google.com/search" class="navbar-form navbar-right" role="search">
 <div class="form-group">
 <input type="text" name="q" class="form-control" placeholder="Search">
-</div>
 <button type="submit" class="btn btn-primary">
-	<span class="glyphicon glyphicon-search"></span>
+	<i class="material-icons">search</i>
 </button>
+</div>
 <input type="hidden" name="sitesearch" value="%s">
 </form>
 <!-- End of custom search -->
