@@ -20,3 +20,8 @@ To check all available commands::
 ```
 nikola help
 ```
+
+## Other nikola dependencies install by:
+```bash
+pip3 install jinja2
+```
