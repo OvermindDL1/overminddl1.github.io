@@ -1206,7 +1206,7 @@ USE_OPEN_GRAPH = True
 # It can be anything, data, functions, modules, etc.
 GLOBAL_CONTEXT = {
         "mdl__version": "1.1.3",
-        "mdl__color_scheme": "brown-teal",
+        "mdl__color_scheme": "brown-indigo",
         "mdl__roboto_font": True,
         "mdl__fixed_header": False,
         "mdl__fixed_drawer": False,
