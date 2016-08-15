@@ -2,10 +2,11 @@
 .. slug: first-post
 .. date: 2016-08-07 11:23:35 UTC-06:00
 .. tags: meta
-.. category: meta
-.. link: 
+.. category: Meta
+.. link:
 .. description: Introduction post
 .. type: text
+.. author: OvermindDL1
 
 Greetings, it's been suggested by many people that I should make a blog to
 better document what I do in my various projects and to help people setup

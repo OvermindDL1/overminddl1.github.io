@@ -15,7 +15,7 @@
 <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
 <link rel="alternate" type="application/atom+xml" title="Atom" href="index.atom">
 <link rel="canonical" href="http://blog.overminddl1.com/">
-<link rel="prefetch" href="posts/first-post/" type="text/html">
+<link rel="prefetch" href="posts/elixir/pipehere/" type="text/html">
 </head>
 <body>
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
@@ -43,10 +43,8 @@
                     
 <!-- Google custom search -->
 <form method="get" action="https://www.google.com/search" class="navbar-form navbar-right" role="search">
-<div class="form-group">
-<input type="text" name="q" class="form-control" placeholder="Search"><button type="submit" class="btn btn-primary">
-	<i class="material-icons">search</i>
-</button>
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+  <input class="mdl-textfield__input" type="search" id="searchinput"><label class="mdl-textfield__label mdl-color-text--blue-50" for="searchinput">Search...</label>
 </div>
 <input type="hidden" name="sitesearch" value="http://blog.overminddl1.com/">
 </form>
@@ -60,7 +58,19 @@
 mdl-layout--small-screen-only
     ">
         <div class="mdl-layout__title site-drawer__title">
-                <span>Navigation</span>
+                <span>Hyperglot Programmer</span>
+        </div>
+        <div class="site-drawer__description">
+            
+<!-- Google custom search -->
+<form method="get" action="https://www.google.com/search" class="navbar-form navbar-right" role="search">
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+  <input class="mdl-textfield__input" type="search" id="searchinput"><label class="mdl-textfield__label " for="searchinput">Search...</label>
+</div>
+<input type="hidden" name="sitesearch" value="http://blog.overminddl1.com/">
+</form>
+<!-- End of custom search -->
+
         </div>
         <span class="sr-only">side navigation</span>
         <nav class="mdl-navigation site-drawer__navigation"><a class="mdl-navigation__link" href="archive.html">Archive</a>
@@ -77,6 +87,53 @@ mdl-layout--small-screen-only
 
 <div class="postindex">
 <div class="mdl-card mdl-cell mdl-cell--12-col
+    site-post-code
+    mdl-shadow--4dp
+">
+        <button class="mdl-button mdl-js-button mdl-button--fab mdl-color--accent mdl-js-ripple-effect">
+            <i class="material-icons mdl-color-text--white" role="presentation">
+                code
+            </i>
+            <span class="visuallyhidden">code</span>
+        </button>
+    <article class="h-entry"><div class="mdl-card__media"></div>
+    <div class="mdl-card__title">
+        <h1 class="mdl-card__title-text p-name entry-title"><a href="posts/elixir/pipehere/" class="u-url">Elixir - PipeHere</a></h1>
+    </div>
+    <div class="mdl-card__supporting-text p-summary entry-summary">
+    <div>
+<p>For my first content-post here I think I will touch on one of Elixir's niggles that bug me, the pipe operator, or specifically one of the few things that bug me about it.  Now do not take this that I hate the pipe operator, I love it, however it does have a few warts, so lets talk about one of them today.</p>
+<p>Regardless of my opinion of where a functional pipe operator like Elixir's <tt class="docutils literal">|&gt;</tt> should put arguments (<em>at the end</em>, <strong>not</strong> the beginning), wouldn't it be nice to be able to specify where a piped in argument was placed for those needed cases?</p>
+<p class="more"><a href="posts/elixir/pipehere/">Read more…</a></p>
+</div>
+    </div>
+    
+    <div class="mdl-grid mdl-card__supporting-text mdl-card--border metadata">
+        <div class="mdl-cell mdl-cell--1-col">
+          <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
+            
+            <img src="https://www.gravatar.com/avatar/5575f10ccc57e0608827fd332448225b" style="width: 100%; height: 100%;"></button>
+        </div>
+        <div class="mdl-grid mdl-cell mdl-cell--9-col">
+            <span class="mdl-cell mdl-cell--12-col site-post__author no-margin-bottom">
+                OvermindDL1
+            </span>
+            <span class="mdl-cell mdl-cell--12-col site-post__date">
+                <time class="published dt-published" datetime="2016-08-15T10:46:21-06:00" itemprop="datePublished" title="2016-08-15 10:46">2016-08-15 10:46
+                </time></span>
+        </div>
+        <span class="mdl-cell mdl-cell--2-col site-post__total-comment">
+                
+        
+    <a href="posts/elixir/pipehere/#disqus_thread" data-disqus-identifier="cache/posts/elixir/pipehere.html">Comments</a>
+
+
+        </span>
+    </div>
+
+    </article>
+</div>
+<div class="mdl-card mdl-cell mdl-cell--12-col
     site-post-text
     mdl-shadow--4dp
 ">
@@ -90,7 +147,7 @@ mdl-layout--small-screen-only
     <div class="mdl-card__title">
         <h1 class="mdl-card__title-text p-name entry-title"><a href="posts/first-post/" class="u-url">First Post</a></h1>
     </div>
-    <div class="mdl-card__supporting-text e-content entry-content">
+    <div class="mdl-card__supporting-text p-summary entry-summary">
     <div>
 <p>Greetings, it's been suggested by many people that I should make a blog to
 better document what I do in my various projects and to help people setup
@@ -103,7 +160,9 @@ that anyone wants clarified on or a dedicated post(s) on then please state.  :-)
     
     <div class="mdl-grid mdl-card__supporting-text mdl-card--border metadata">
         <div class="mdl-cell mdl-cell--1-col">
-          <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">O</button>
+          <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
+            
+            <img src="https://www.gravatar.com/avatar/5575f10ccc57e0608827fd332448225b" style="width: 100%; height: 100%;"></button>
         </div>
         <div class="mdl-grid mdl-cell mdl-cell--9-col">
             <span class="mdl-cell mdl-cell--12-col site-post__author no-margin-bottom">

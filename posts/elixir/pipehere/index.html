@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
+<head>
+<meta charset="utf-8">
+<base href="http://blog.overminddl1.com/posts/elixir/pipehere/">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Post about Vic's pipehere library and why something similar should be put in Elixir itself">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title>Elixir - PipeHere | Hyperglot Programmer</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" type="text/css">
+<link rel="stylesheet" href="//storage.googleapis.com/code.getmdl.io/1.1.3/material.blue_grey-blue.min.css">
+<link href="../../../assets/colorbox/css/colorbox.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.xml">
+<link rel="alternate" type="application/atom+xml" title="Atom" href="../../../index.atom">
+<link rel="canonical" href="http://blog.overminddl1.com/posts/elixir/pipehere/">
+<meta name="description" content="Post about Vic's pipehere library and why something similar should be put in Elixir itself">
+<meta name="author" content="OvermindDL1">
+<link rel="prev" href="../../first-post/" title="First Post" type="text/html">
+<meta property="og:site_name" content="Hyperglot Programmer">
+<meta property="og:title" content="Elixir - PipeHere">
+<meta property="og:url" content="http://blog.overminddl1.com/posts/elixir/pipehere/">
+<meta property="og:description" content="Post about Vic's pipehere library and why something similar should be put in Elixir itself">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2016-08-15T10:46:21-06:00">
+<meta property="article:tag" content="elixir">
+<meta property="article:tag" content="elixir-fix">
+<meta property="article:tag" content="pipehere">
+<meta property="article:tag" content="vic">
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div id="container" class="site mdl-layout mdl-js-layout
+    ">
+         
+    <header id="header" class="mdl-layout__header site-header
+    "><div class="mdl-layout__header-row site-header__title-row
+        ">
+            
+    <h1 id="brand" class="mdl-layout__title site-title">
+        <a href="http://blog.overminddl1.com/" title="Hyperglot Programmer" rel="home">
+                <span id="blog-title" class="mdl-color-text--primary-contrast">Hyperglot Programmer</span>
+        </a>
+    </h1>
+
+            <div class="mdl-layout-spacer"></div>
+            <span class="sr-only">main navigation</span>
+            <nav class="mdl-navigation site-header__navigation"><a class="mdl-navigation__link" href="../../../archive.html">Archive</a>
+                      <a class="mdl-navigation__link" href="../../../categories/">Tags</a>
+                      <a class="mdl-navigation__link" href="../../../rss.xml">RSS feed</a>
+              
+              
+            </nav><div class="site-header__search" role="search">
+                    
+<!-- Google custom search -->
+<form method="get" action="https://www.google.com/search" class="navbar-form navbar-right" role="search">
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+  <input class="mdl-textfield__input" type="search" id="searchinput"><label class="mdl-textfield__label mdl-color-text--blue-50" for="searchinput">Search...</label>
+</div>
+<input type="hidden" name="sitesearch" value="http://blog.overminddl1.com/">
+</form>
+<!-- End of custom search -->
+
+                </div>
+            
+
+        </div>
+    </header><div id="drawer" class="mdl-layout__drawer site-drawer
+mdl-layout--small-screen-only
+    ">
+        <div class="mdl-layout__title site-drawer__title">
+                <span>Hyperglot Programmer</span>
+        </div>
+        <div class="site-drawer__description">
+            
+<!-- Google custom search -->
+<form method="get" action="https://www.google.com/search" class="navbar-form navbar-right" role="search">
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+  <input class="mdl-textfield__input" type="search" id="searchinput"><label class="mdl-textfield__label " for="searchinput">Search...</label>
+</div>
+<input type="hidden" name="sitesearch" value="http://blog.overminddl1.com/">
+</form>
+<!-- End of custom search -->
+
+        </div>
+        <span class="sr-only">side navigation</span>
+        <nav class="mdl-navigation site-drawer__navigation"><a class="mdl-navigation__link" href="../../../archive.html">Archive</a>
+                    <a class="mdl-navigation__link" href="../../../categories/">Tags</a>
+                    <a class="mdl-navigation__link" href="../../../rss.xml">RSS feed</a>
+            
+            
+        </nav>
+</div>
+
+    
+
+         <main id="content" class="mdl-layout__content"><div class="site-post site-card mdl-grid">
+    <div class="mdl-card mdl-cell mdl-cell--12-col
+    site-post-code
+    mdl-shadow--4dp
+">
+        <article class="h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><div class="mdl-card__media"></div>
+            
+    
+    <div class="mdl-card__title">
+        <h1 class="mdl-card__title-text p-name entry-title" itemprop="headline name">Elixir - PipeHere</h1>
+    </div>
+
+    <meta name="description" itemprop="description" content="Post about Vic's pipehere library and why something similar should be put in Elixir itself">
+<div class="mdl-card__supporting-text e-content entry-content" itemprop="articleBody text">
+                <div>
+<p>For my first content-post here I think I will touch on one of Elixir's niggles that bug me, the pipe operator, or specifically one of the few things that bug me about it.  Now do not take this that I hate the pipe operator, I love it, however it does have a few warts, so lets talk about one of them today.</p>
+<p>Regardless of my opinion of where a functional pipe operator like Elixir's <tt class="docutils literal">|&gt;</tt> should put arguments (<em>at the end</em>, <strong>not</strong> the beginning), wouldn't it be nice to be able to specify where a piped in argument was placed for those needed cases?</p>
+<!-- TEASER_END -->
+<p>For a quick recap, the Elixir pipe operator basically converts this:</p>
+<table class="codetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_fba46184c1834f8d937b991d46f5c02e-1">1</a></pre></div></td>
+<td class="code"><pre class="code elixir"><a name="rest_code_fba46184c1834f8d937b991d46f5c02e-1"></a><span class="mi">42</span> <span class="o">|&gt;</span> <span class="n">some_func</span><span class="p">(</span><span class="mf">3.14</span><span class="p">)</span>
+</pre></td>
+</tr></table>
+<p>To become this:</p>
+<table class="codetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_0e9f759c4ce341b988a212be827541ea-1">1</a></pre></div></td>
+<td class="code"><pre class="code elixir"><a name="rest_code_0e9f759c4ce341b988a212be827541ea-1"></a><span class="n">some_func</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="mf">3.14</span><span class="p">)</span>
+</pre></td>
+</tr></table>
+<p>Thus this allows you to chain commands, so instead of having a huge amount of nested calls that you have to read inside-out, it flows and reads logically, such as:</p>
+<table class="codetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_344c9b6c12ab4e199d594eb4c1a44c70-1">1</a>
+<a href="#rest_code_344c9b6c12ab4e199d594eb4c1a44c70-2">2</a>
+<a href="#rest_code_344c9b6c12ab4e199d594eb4c1a44c70-3">3</a>
+<a href="#rest_code_344c9b6c12ab4e199d594eb4c1a44c70-4">4</a></pre></div></td>
+<td class="code"><pre class="code elixir"><a name="rest_code_344c9b6c12ab4e199d594eb4c1a44c70-1"></a><span class="s2">"A String"</span>
+<a name="rest_code_344c9b6c12ab4e199d594eb4c1a44c70-2"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">downcase</span>
+<a name="rest_code_344c9b6c12ab4e199d594eb4c1a44c70-3"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">normalize</span>
+<a name="rest_code_344c9b6c12ab4e199d594eb4c1a44c70-4"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">reverse</span>
+</pre></td>
+</tr></table>
+<p>Instead of:</p>
+<table class="codetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_4a47ab5838924efbbdef29b4288d3108-1">1</a></pre></div></td>
+<td class="code"><pre class="code elixir"><a name="rest_code_4a47ab5838924efbbdef29b4288d3108-1"></a><span class="nc">String</span><span class="o">.</span><span class="n">reverse</span><span class="p">(</span><span class="nc">String</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="nc">String</span><span class="o">.</span><span class="n">downcase</span><span class="p">(</span><span class="s2">"A String"</span><span class="p">)))</span>
+</pre></td>
+</tr></table>
+<p>Or by using a lot of intermediate variables like:</p>
+<table class="codetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_4e1dedbd0b8c4490be822c17d4396aed-1">1</a>
+<a href="#rest_code_4e1dedbd0b8c4490be822c17d4396aed-2">2</a>
+<a href="#rest_code_4e1dedbd0b8c4490be822c17d4396aed-3">3</a>
+<a href="#rest_code_4e1dedbd0b8c4490be822c17d4396aed-4">4</a></pre></div></td>
+<td class="code"><pre class="code elixir"><a name="rest_code_4e1dedbd0b8c4490be822c17d4396aed-1"></a><span class="n">str</span> <span class="o">=</span> <span class="s2">"A String"</span>
+<a name="rest_code_4e1dedbd0b8c4490be822c17d4396aed-2"></a><span class="n">str</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="n">downcase</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
+<a name="rest_code_4e1dedbd0b8c4490be822c17d4396aed-3"></a><span class="n">str</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
+<a name="rest_code_4e1dedbd0b8c4490be822c17d4396aed-4"></a><span class="nc">String</span><span class="o">.</span><span class="n">reverse</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
+</pre></td>
+</tr></table>
+<p>However, it always puts in to the first slot (again the merits of that not being debated here <em>cough</em>), so what if we could put it into other slots, what would that look like?</p>
+<p>Well the <a class="reference external" href="https://github.com/vic/pipe_here">pipehere</a> library adds such a feature, so instead of needing to do this:</p>
+<table class="codetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_a6ef29578a144234906bb2dd498e83cc-1">1</a>
+<a href="#rest_code_a6ef29578a144234906bb2dd498e83cc-2">2</a>
+<a href="#rest_code_a6ef29578a144234906bb2dd498e83cc-3">3</a>
+<a href="#rest_code_a6ef29578a144234906bb2dd498e83cc-4">4</a>
+<a href="#rest_code_a6ef29578a144234906bb2dd498e83cc-5">5</a></pre></div></td>
+<td class="code"><pre class="code elixir"><a name="rest_code_a6ef29578a144234906bb2dd498e83cc-1"></a><span class="n">str</span> <span class="o">=</span> <span class="s2">"A String"</span>
+<a name="rest_code_a6ef29578a144234906bb2dd498e83cc-2"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">downcase</span>
+<a name="rest_code_a6ef29578a144234906bb2dd498e83cc-3"></a><span class="n">taggify</span><span class="p">(</span><span class="s2">"@"</span><span class="p">,</span> <span class="n">str</span><span class="p">)</span>
+<a name="rest_code_a6ef29578a144234906bb2dd498e83cc-4"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">normalize</span>
+<a name="rest_code_a6ef29578a144234906bb2dd498e83cc-5"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">reverse</span>
+</pre></td>
+</tr></table>
+<p>You can instead do:</p>
+<table class="codetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_7daf5c56dfa04872a9a17e4905c23e2e-1">1</a>
+<a href="#rest_code_7daf5c56dfa04872a9a17e4905c23e2e-2">2</a>
+<a href="#rest_code_7daf5c56dfa04872a9a17e4905c23e2e-3">3</a>
+<a href="#rest_code_7daf5c56dfa04872a9a17e4905c23e2e-4">4</a>
+<a href="#rest_code_7daf5c56dfa04872a9a17e4905c23e2e-5">5</a>
+<a href="#rest_code_7daf5c56dfa04872a9a17e4905c23e2e-6">6</a></pre></div></td>
+<td class="code"><pre class="code elixir"><a name="rest_code_7daf5c56dfa04872a9a17e4905c23e2e-1"></a><span class="n">str</span> <span class="o">=</span> <span class="s2">"A String"</span>
+<a name="rest_code_7daf5c56dfa04872a9a17e4905c23e2e-2"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">downcase</span>
+<a name="rest_code_7daf5c56dfa04872a9a17e4905c23e2e-3"></a><span class="o">|&gt;</span> <span class="n">taggify</span><span class="p">(</span><span class="s2">"@"</span><span class="p">,</span> <span class="bp">_</span><span class="p">)</span>
+<a name="rest_code_7daf5c56dfa04872a9a17e4905c23e2e-4"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">normalize</span>
+<a name="rest_code_7daf5c56dfa04872a9a17e4905c23e2e-5"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">reverse</span>
+<a name="rest_code_7daf5c56dfa04872a9a17e4905c23e2e-6"></a><span class="o">|&gt;</span> <span class="n">pipehere</span>
+</pre></td>
+</tr></table>
+<p>Ahh, now this is succinct and uses an elixir defined type (_) that is not and cannot be bound in this context, thus it is free to use.  However, we do have this little trailing bit that in this case is doing the macro transformation.  This transformation could, and should, be done in the Elixir pipe operator code itself, fully backwards compatible, and adds a highly useful feature.  Basically if a call contains a <tt class="docutils literal">_</tt> then translate the argument placement to be in 'that' position instead of the first, otherwise prepend it to the first argument and be done like it is now.  At the time of this writing the <tt class="docutils literal">|&gt;</tt> operator is at <a class="reference external" href="https://github.com/elixir-lang/elixir/blob/v1.3.2/lib/elixir/lib/kernel.ex#L2769-L2780">kernel.ex#L2769-L2780</a>, which delegates the macro expansion to <a class="reference external" href="https://github.com/elixir-lang/elixir/blob/1aca21c87625565c8e974fce08eba2420718b1fb/lib/elixir/lib/macro.ex#L129-L187">macro.ex#L129-L187</a>, and it could quite easily be added in here.</p>
+<p>I am currently not seeing any issues with such an addition but there can always be some corner case that I am missing.  If anyone has an idea as to how it could be a broken idea then please tell me.</p>
+</div>
+            </div>
+            
+    <div class="mdl-grid mdl-card__supporting-text mdl-card--border metadata">
+        <div class="mdl-cell mdl-cell--1-col">
+          <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
+            
+            <img src="https://www.gravatar.com/avatar/5575f10ccc57e0608827fd332448225b" style="width: 100%; height: 100%;"></button>
+        </div>
+        <div class="mdl-grid mdl-cell mdl-cell--9-col">
+            <span class="mdl-cell mdl-cell--12-col site-post__author no-margin-bottom">
+                OvermindDL1
+            </span>
+            <span class="mdl-cell mdl-cell--12-col site-post__date">
+                <time class="published dt-published" datetime="2016-08-15T10:46:21-06:00" itemprop="datePublished" title="2016-08-15 10:46">2016-08-15 10:46
+                </time></span>
+        </div>
+        <span class="mdl-cell mdl-cell--2-col site-post__total-comment">
+                
+        
+    <a href="#disqus_thread" data-disqus-identifier="cache/posts/elixir/pipehere.html">Comments</a>
+
+
+        </span>
+    </div>
+
+            
+    <div class="mdl-grid mdl-card__actions mdl-card--border">
+        
+              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-button--accent site-post__tag" rel="tag" title="elixir" href="../../../categories/elixir/">elixir</a>
+              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-button--accent site-post__tag" rel="tag" title="elixir-fix" href="../../../categories/elixir-fix/">elixir-fix</a>
+              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-button--accent site-post__tag" rel="tag" title="pipehere" href="../../../categories/pipehere/">pipehere</a>
+              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-button--accent site-post__tag" rel="tag" title="vic" href="../../../categories/vic/">vic</a>
+
+        <div class="section-spacer"></div>
+        
+    <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--accent site-post__source-link" rel="tag" title="Source" href="index.rst">Source</a>
+
+        
+
+    </div>
+
+            <div class="mdl-color-text--primary-contrast mdl-card__supporting-text comments hidden-print">
+                <h2>Comments</h2>
+                
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="overblogdl1",
+            disqus_url="http://blog.overminddl1.com/posts/elixir/pipehere/",
+        disqus_title="Elixir - PipeHere",
+        disqus_identifier="cache/posts/elixir/pipehere.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+            </div>
+            
+
+        </article>
+</div>
+    
+        <nav class="site-navigation hidden-print pager mdl-cell mdl-cell--12-col"><a href="../../first-post/" class="site-navigation__button site-navigation__previous" rel="prev" title="First Post">
+                  <button class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect">
+                    <i class="material-icons" role="presentation">arrow_back</i>
+                  </button>
+                  Previous post
+                </a>
+            <div class="section-spacer"></div>
+        </nav><script>var disqus_shortname="overblogdl1";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+</div>
+
+            
+        <footer id="footer" class="site-footer
+mdl-mega-footer
+        ">
+            Contents © 2016 <a href="mailto:overminddl1@overminddl1.com">OvermindDL1</a> 
+<br><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+<br>This work by
+<a xmlns:cc="http://creativecommons.org/ns#" href="http://blog.overminddl1.com/" property="cc:attributionName" rel="cc:attributionURL">
+    http://blog.overminddl1.com/
+</a>
+is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+    Creative Commons Attribution-ShareAlike 4.0 International License
+</a>.
+
+            
+        </footer></main>
+</div>
+    
+        <script src="//storage.googleapis.com/code.getmdl.io/1.1.3/material.min.js"></script><script src="//code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script><script src="../../../assets/colorbox/js/jquery.colorbox-min.js" type="text/javascript"></script><script>$('.thumbnails a').colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+</body>
+</html>
