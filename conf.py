@@ -394,7 +394,7 @@ TAG_PAGES_TITLES = {
    DEFAULT_LANG: {
        "meta": "Meta-posts about this site",
        "elixir": "Posts related to the Elixir Programming Language",
-       "elixir-fix": "Posts related to additions or fixes for the Elixir Programming Language",
+       "elixir-proposal": "Posts related to additions or fixes for the Elixir Programming Language",
    },
 }
 
