@@ -356,15 +356,18 @@ POSTS_SECTIONS_ARE_INDEXES = True
 # output / TRANSLATION[lang] / TAG_PATH / tag.xml (RSS feed for a tag)
 # (translatable)
 # TAG_PATH = "categories"
+TAG_PATH = "categories"
 
 # See TAG_PATH's "list of tags" for the default setting value. Can be overwritten
 # here any path relative to the output directory.
 # (translatable)
 # TAGS_INDEX_PATH = "tags.html"
+TAGS_INDEX_PATH = "tags.html"
 
 # If TAG_PAGES_ARE_INDEXES is set to True, each tag's page will contain
 # the posts themselves. If set to False, it will be just a list of links.
 # TAG_PAGES_ARE_INDEXES = False
+TAG_PAGES_ARE_INDEXES = False
 
 # Set descriptions for tag pages to make them more interesting. The
 # default is no description. The value is used in the meta description
@@ -375,6 +378,10 @@ POSTS_SECTIONS_ARE_INDEXES = True
 #        "open source": "My contributions to my many, varied, ever-changing, and eternal libre software projects."
 #    },
 # }
+TAG_PAGES_DESCRIPTIONS = {
+   DEFAULT_LANG: {
+   },
+}
 
 # Set special titles for tag pages. The default is "Posts about TAG".
 # TAG_PAGES_TITLES = {
@@ -383,6 +390,13 @@ POSTS_SECTIONS_ARE_INDEXES = True
 #        "open source": "Posts about open source software"
 #    },
 # }
+TAG_PAGES_TITLES = {
+   DEFAULT_LANG: {
+       "meta": "Meta-posts about this site",
+       "elixir": "Posts related to the Elixir Programming Language",
+       "elixir-fix": "Posts related to additions or fixes for the Elixir Programming Language",
+   },
+}
 
 # If you do not want to display a tag publicly, you can mark it as hidden.
 # The tag will not be displayed on the tag list page, the tag cloud and posts.
@@ -394,6 +408,7 @@ HIDDEN_TAGS = ['mathjax']
 # page is still generated, linked from posts, and included in the sitemap.
 # However, more obscure tags can be hidden from the tag index page.
 # TAGLIST_MINIMUM_POSTS = 1
+TAGLIST_MINIMUM_POSTS = 1
 
 # Final locations are:
 # output / TRANSLATION[lang] / CATEGORY_PATH / index.html (list of categories)
@@ -402,6 +417,8 @@ HIDDEN_TAGS = ['mathjax']
 # (translatable)
 # CATEGORY_PATH = "categories"
 # CATEGORY_PREFIX = "cat_"
+CATEGORY_PATH = "categories"
+CATEGORY_PREFIX = "cat_"
 
 # If CATEGORY_ALLOW_HIERARCHIES is set to True, categories can be organized in
 # hierarchies. For a post, the whole path in the hierarchy must be specified,
@@ -430,7 +447,7 @@ CATEGORY_PAGES_ARE_INDEXES = True
 CATEGORY_PAGES_DESCRIPTIONS = {
    DEFAULT_LANG: {
        "Meta": "Ones that have to do with the blog itself instead of any other topic",
-       "Programming": "Programming related"
+       "Programming": "Programming related posts"
    },
 }
 
@@ -441,6 +458,12 @@ CATEGORY_PAGES_DESCRIPTIONS = {
 #        "open source": "Posts about open source software"
 #    },
 # }
+CATEGORY_PAGES_TITLES = {
+   DEFAULT_LANG: {
+       "Meta": "Meta-posts about this site",
+       "Programming": "Posts that are primarily related to programming"
+   },
+}
 
 # If you do not want to display a category publicly, you can mark it as hidden.
 # The category will not be displayed on the category list page.
@@ -456,6 +479,7 @@ ENABLE_AUTHOR_PAGES = True
 # output / TRANSLATION[lang] / AUTHOR_PATH / author.html (list of posts for a tag)
 # output / TRANSLATION[lang] / AUTHOR_PATH / author.xml (RSS feed for a tag)
 # AUTHOR_PATH = "authors"
+AUTHOR_PATH = "authors"
 
 # If AUTHOR_PAGES_ARE_INDEXES is set to True, each author's page will contain
 # the posts themselves. If set to False, it will be just a list of links.
@@ -470,6 +494,11 @@ AUTHOR_PAGES_ARE_INDEXES = False
 #        "Roberto Alsina": "Nikola father."
 #    },
 # }
+AUTHOR_PAGES_DESCRIPTIONS = {
+   DEFAULT_LANG: {
+       "OvermindDL1": "Life-long programmer of near every language can get hold of."
+   },
+}
 
 
 # If you do not want to display an author publicly, you can mark it as hidden.
@@ -480,6 +509,7 @@ HIDDEN_AUTHORS = ['Guest']
 # Final location for the main blog page and sibling paginated pages is
 # output / TRANSLATION[lang] / INDEX_PATH / index-*.html
 # INDEX_PATH = ""
+INDEX_PATH = ""
 
 # Optional HTML that displayed on “main” blog index.html files.
 # May be used for a greeting. (translatable)
@@ -503,11 +533,14 @@ FRONT_INDEX_HEADER = {
 # output / TRANSLATION[lang] / ARCHIVE_PATH / YEAR / MONTH / DAY / index.html
 # ARCHIVE_PATH = ""
 # ARCHIVE_FILENAME = "archive.html"
+ARCHIVE_PATH = ""
+ARCHIVE_FILENAME = "archive.html"
 
 # If ARCHIVES_ARE_INDEXES is set to True, each archive page which contains a list
 # of posts will contain the posts themselves. If set to False, it will be just a
 # list of links.
 # ARCHIVES_ARE_INDEXES = False
+ARCHIVES_ARE_INDEXES = False
 
 # URLs to other posts/pages can take 3 forms:
 # rel_path: a relative URL to the current page/post (default)
@@ -522,18 +555,22 @@ URL_TYPE = 'rel_path'
 # In some rare cases, this will be a problem, and you can
 # disable it by setting USE_BASE_TAG to False.
 # USE_BASE_TAG = True
+USE_BASE_TAG = True
 
 # Final location for the blog main RSS feed is:
 # output / TRANSLATION[lang] / RSS_PATH / rss.xml
 # RSS_PATH = ""
+RSS_PATH = ""
 
 # Slug the Tag URL. Easier for users to type, special characters are
 # often removed or replaced as well.
 # SLUG_TAG_PATH = True
+SLUG_TAG_PATH = True
 
 # Slug the Author URL. Easier for users to type, special characters are
 # often removed or replaced as well.
 # SLUG_AUTHOR_PATH = True
+SLUG_AUTHOR_PATH = True
 
 # A list of redirection tuples, [("foo/from.html", "/bar/to.html")].
 #
@@ -579,6 +616,7 @@ GITHUB_COMMIT_SOURCE = True
 # If you don't use an absolute path, it will be considered as relative
 # to the location of conf.py
 # OUTPUT_FOLDER = 'output'
+OUTPUT_FOLDER = 'output'
 
 # where the "cache" of partial generated content should be located
 # default: 'cache'
@@ -846,19 +884,40 @@ LICENSE = ""
 # <img alt="Creative Commons License BY-NC-SA"
 # style="border-width:0; margin-bottom:12px;"
 # src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"></a>"""
+# LICENSE = """
+# <br />
+# <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+#     <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
+# </a>
+# <br />This work by
+# <a xmlns:cc="http://creativecommons.org/ns#" href="http://blog.overminddl1.com/" property="cc:attributionName" rel="cc:attributionURL">
+#     http://blog.overminddl1.com/
+# </a>
+# is licensed under a
+# <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+#     Creative Commons Attribution-ShareAlike 4.0 International License
+# </a>.
+# """
 LICENSE = """
-<br />
-<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
-    <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
+<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
+    <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" />
 </a>
-<br />This work by
+<br />
+This work by
 <a xmlns:cc="http://creativecommons.org/ns#" href="http://blog.overminddl1.com/" property="cc:attributionName" rel="cc:attributionURL">
     http://blog.overminddl1.com/
 </a>
 is licensed under a
-<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
-    Creative Commons Attribution-ShareAlike 4.0 International License
-</a>.
+<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
+    Creative Commons Attribution-NonCommercial 4.0 International License
+</a>
+.
+<br />
+Permissions beyond the scope of this license may be available at
+<a xmlns:cc="http://creativecommons.org/ns#" href="http://blog.overminddl1.com/" rel="cc:morePermissions">
+    http://blog.overminddl1.com/
+</a>
+.
 """
 
 # A small copyright notice for the page footer (in HTML).
