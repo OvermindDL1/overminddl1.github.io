@@ -132,7 +132,7 @@ TRANSLATIONS_PATTERN = "{path}.{lang}.{ext}"
 
 NAVIGATION_LINKS = {
     DEFAULT_LANG: (
-        ("/archive.html", "Archive"),
+        ("/archives/", "Archive"),
         ("/categories/", "Tags"),
         ("/rss.xml", "RSS feed"),
     ),
@@ -362,12 +362,12 @@ TAG_PATH = "categories"
 # here any path relative to the output directory.
 # (translatable)
 # TAGS_INDEX_PATH = "tags.html"
-TAGS_INDEX_PATH = "tags.html"
+TAGS_INDEX_PATH = "categories/index.html"
 
 # If TAG_PAGES_ARE_INDEXES is set to True, each tag's page will contain
 # the posts themselves. If set to False, it will be just a list of links.
 # TAG_PAGES_ARE_INDEXES = False
-TAG_PAGES_ARE_INDEXES = False
+TAG_PAGES_ARE_INDEXES = True
 
 # Set descriptions for tag pages to make them more interesting. The
 # default is no description. The value is used in the meta description
@@ -380,6 +380,7 @@ TAG_PAGES_ARE_INDEXES = False
 # }
 TAG_PAGES_DESCRIPTIONS = {
    DEFAULT_LANG: {
+       "meta": "Meta-posts about this site",
    },
 }
 
@@ -533,8 +534,8 @@ FRONT_INDEX_HEADER = {
 # output / TRANSLATION[lang] / ARCHIVE_PATH / YEAR / MONTH / DAY / index.html
 # ARCHIVE_PATH = ""
 # ARCHIVE_FILENAME = "archive.html"
-ARCHIVE_PATH = ""
-ARCHIVE_FILENAME = "archive.html"
+ARCHIVE_PATH = "archives"
+ARCHIVE_FILENAME = "index.html"
 
 # If ARCHIVES_ARE_INDEXES is set to True, each archive page which contains a list
 # of posts will contain the posts themselves. If set to False, it will be just a
