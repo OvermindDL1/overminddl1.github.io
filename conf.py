@@ -834,10 +834,25 @@ LICENSE = ""
 # <img alt="Creative Commons License BY-NC-SA"
 # style="border-width:0; margin-bottom:12px;"
 # src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"></a>"""
+LICENSE = """
+<br />
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
+</a>
+<br />This work by
+<a xmlns:cc="http://creativecommons.org/ns#" href="http://blog.overminddl1.com/" property="cc:attributionName" rel="cc:attributionURL">
+    http://blog.overminddl1.com/
+</a>
+is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+    Creative Commons Attribution-ShareAlike 4.0 International License
+</a>.
+"""
 
 # A small copyright notice for the page footer (in HTML).
 # (translatable)
-CONTENT_FOOTER = 'Contents &copy; {date}         <a href="mailto:{email}">{author}</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         {license}'
+#CONTENT_FOOTER = 'Contents &copy; {date}         <a href="mailto:{email}">{author}</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         {license}'
+CONTENT_FOOTER = 'Contents &copy; {date} <a href="mailto:{email}">{author}</a> {license}'
 
 # Things that will be passed to CONTENT_FOOTER.format().  This is done
 # for translatability, as dicts are not formattable.  Nikola will
@@ -1206,7 +1221,7 @@ USE_OPEN_GRAPH = True
 # It can be anything, data, functions, modules, etc.
 GLOBAL_CONTEXT = {
         "mdl__version": "1.1.3",
-        "mdl__color_scheme": "brown-indigo",
+        "mdl__color_scheme": "blue_grey-blue",
         "mdl__roboto_font": True,
         "mdl__fixed_header": False,
         "mdl__fixed_drawer": False,
