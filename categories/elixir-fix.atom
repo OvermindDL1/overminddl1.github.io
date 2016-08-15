@@ -3,7 +3,7 @@
 <feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom">
   <title>Posts about elixir-fix</title>
   <id>http://blog.overminddl1.com/categories%5Celixir-fix.atom</id>
-  <updated>2016-08-15T19:16:45Z</updated>
+  <updated>2016-08-15T20:20:56Z</updated>
   <author>
     <name>OvermindDL1</name>
   </author>
@@ -21,107 +21,7 @@
     <link rel="alternate" type="text/html" href="http://blog.overminddl1.com/posts/elixir/pipehere/"/>
     <summary type="html">&lt;div&gt;&lt;p&gt;For my first content-post here I think I will touch on one of Elixir's niggles that bug me, the pipe operator, or specifically one of the few things that bug me about it.  Now do not take this that I hate the pipe operator, I love it, however it does have a few warts, so lets talk about one of them today.&lt;/p&gt;
 &lt;p&gt;Regardless of my opinion of where a functional pipe operator like Elixir's &lt;tt class="docutils literal"&gt;|&amp;gt;&lt;/tt&gt; should put arguments (&lt;em&gt;at the end&lt;/em&gt;, &lt;strong&gt;not&lt;/strong&gt; the beginning), wouldn't it be nice to be able to specify where a piped in argument was placed for those needed cases?&lt;/p&gt;
-&lt;p&gt;For a quick recap, the Elixir pipe operator basically converts this:&lt;/p&gt;
-&lt;div class="system-message"&gt;
-&lt;p class="system-message-title"&gt;System Message: ERROR/3 (&lt;tt class="docutils"&gt;&amp;lt;string&amp;gt;&lt;/tt&gt;, line 8)&lt;/p&gt;
-&lt;p&gt;Error in "code" directive:
-invalid option block.&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-.. code:: elixir
-   :number-lines:
-   42 |&amp;gt; some_func(3.14)
-
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;To become this:&lt;/p&gt;
-&lt;div class="system-message"&gt;
-&lt;p class="system-message-title"&gt;System Message: ERROR/3 (&lt;tt class="docutils"&gt;&amp;lt;string&amp;gt;&lt;/tt&gt;, line 14)&lt;/p&gt;
-&lt;p&gt;Error in "code" directive:
-invalid option block.&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-.. code:: elixir
-   :number-lines:
-   some_func(42, 3.14)
-
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;Thus this allows you to chain commands, so instead of having a huge amount of nested calls that you have to read inside-out, it flows and reads logically, such as:&lt;/p&gt;
-&lt;div class="system-message"&gt;
-&lt;p class="system-message-title"&gt;System Message: ERROR/3 (&lt;tt class="docutils"&gt;&amp;lt;string&amp;gt;&lt;/tt&gt;, line 20)&lt;/p&gt;
-&lt;p&gt;Error in "code" directive:
-invalid option block.&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-.. code:: elixir
-   :number-lines:
-   "A String"
-   |&amp;gt; String.downcase
-   |&amp;gt; String.normalize
-   |&amp;gt; String.reverse
-
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;Instead of:&lt;/p&gt;
-&lt;div class="system-message"&gt;
-&lt;p class="system-message-title"&gt;System Message: ERROR/3 (&lt;tt class="docutils"&gt;&amp;lt;string&amp;gt;&lt;/tt&gt;, line 29)&lt;/p&gt;
-&lt;p&gt;Error in "code" directive:
-invalid option block.&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-.. code:: elixir
-   :number-lines:
-   String.reverse(String.normalize(String.downcase("A String")))
-
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;Or by using a lot of intermediate variables like:&lt;/p&gt;
-&lt;div class="system-message"&gt;
-&lt;p class="system-message-title"&gt;System Message: ERROR/3 (&lt;tt class="docutils"&gt;&amp;lt;string&amp;gt;&lt;/tt&gt;, line 35)&lt;/p&gt;
-&lt;p&gt;Error in "code" directive:
-invalid option block.&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-.. code:: elixir
-   :number-lines:
-   str = "A String"
-   str = String.downcase(str)
-   str = String.normalize(str)
-   String.reverse(str)
-
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;However, it always puts in to the first slot (again the merits of that not being debated here &lt;em&gt;cough&lt;/em&gt;), so what if we could put it into other slots, what would that look like?&lt;/p&gt;
-&lt;p&gt;Well the &lt;a class="reference external" href="https://github.com/vic/pipe_here"&gt;pipehere&lt;/a&gt; library adds such a feature, so instead of needing to do this:&lt;/p&gt;
-&lt;div class="system-message"&gt;
-&lt;p class="system-message-title"&gt;System Message: ERROR/3 (&lt;tt class="docutils"&gt;&amp;lt;string&amp;gt;&lt;/tt&gt;, line 46)&lt;/p&gt;
-&lt;p&gt;Error in "code" directive:
-invalid option block.&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-.. code:: elixir
-   :number-lines:
-   str = "A String"
-   |&amp;gt; String.downcase
-   taggify("@", str)
-   |&amp;gt; String.normalize
-   |&amp;gt; String.reverse
-
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;You can instead do:&lt;/p&gt;
-&lt;div class="system-message"&gt;
-&lt;p class="system-message-title"&gt;System Message: ERROR/3 (&lt;tt class="docutils"&gt;&amp;lt;string&amp;gt;&lt;/tt&gt;, line 56)&lt;/p&gt;
-&lt;p&gt;Error in "code" directive:
-invalid option block.&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-.. code:: elixir
-   :number-lines:
-   str = "A String"
-   |&amp;gt; String.downcase
-   |&amp;gt; taggify("@", _)
-   |&amp;gt; String.normalize
-   |&amp;gt; String.reverse
-   |&amp;gt; pipehere
-
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;Ahh, now this is succinct and uses an elixir defined type (_) that is not and cannot be bound in this context, thus it is free to use.  However, we do have this little trailing bit that in this case is doing the macro transformation.  This transformation could, and should, be done in the Elixir pipe operator code itself, fully backwards compatible, and adds a highly useful feature.  Basically if a call contains a &lt;tt class="docutils literal"&gt;_&lt;/tt&gt; then translate the argument placement to be in 'that' position instead of the first, otherwise prepend it to the first argument and be done like it is now.  At the time of this writing the &lt;tt class="docutils literal"&gt;|&amp;gt;&lt;/tt&gt; operator is at &amp;lt;&lt;a class="reference external" href="https://github.com/elixir-lang/elixir/blob/v1.3.2/lib/elixir/lib/kernel.ex#L2769-L2780"&gt;https://github.com/elixir-lang/elixir/blob/v1.3.2/lib/elixir/lib/kernel.ex#L2769-L2780&lt;/a&gt;&amp;gt;, which delegates the macro expansion to &amp;lt;&lt;a class="reference external" href="https://github.com/elixir-lang/elixir/blob/1aca21c87625565c8e974fce08eba2420718b1fb/lib/elixir/lib/macro.ex#L145-L187"&gt;https://github.com/elixir-lang/elixir/blob/1aca21c87625565c8e974fce08eba2420718b1fb/lib/elixir/lib/macro.ex#L145-L187&lt;/a&gt;&amp;gt;&lt;/p&gt;&lt;/div&gt;</summary>
+&lt;p&gt;&lt;a href="http://blog.overminddl1.com/posts/elixir/pipehere/"&gt;Read more…&lt;/a&gt; (2 min remaining to read)&lt;/p&gt;&lt;/div&gt;</summary>
     <category term="elixir" label="elixir"/>
     <category term="elixir-fix" label="elixir-fix"/>
     <category term="pipehere" label="pipehere"/>
