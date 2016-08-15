@@ -116,75 +116,75 @@ mdl-layout--small-screen-only
 <!-- TEASER_END -->
 <p>For a quick recap, the Elixir pipe operator basically converts this:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_4e6276b27163433ab3a811dea10c520a-1">1</a></pre></div></td>
-<td class="code"><pre class="code elixir"><a name="rest_code_4e6276b27163433ab3a811dea10c520a-1"></a><span class="mi">42</span> <span class="o">|&gt;</span> <span class="n">some_func</span><span class="p">(</span><span class="mf">3.14</span><span class="p">)</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_63cb8553be874e3eaa88e6bef7eda4da-1">1</a></pre></div></td>
+<td class="code"><pre class="code elixir"><a name="rest_code_63cb8553be874e3eaa88e6bef7eda4da-1"></a><span class="mi">42</span> <span class="o">|&gt;</span> <span class="n">some_func</span><span class="p">(</span><span class="mf">3.14</span><span class="p">)</span>
 </pre></td>
 </tr></table>
 <p>To become this:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_00531f84b76b465dad97ae54159389b9-1">1</a></pre></div></td>
-<td class="code"><pre class="code elixir"><a name="rest_code_00531f84b76b465dad97ae54159389b9-1"></a><span class="n">some_func</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="mf">3.14</span><span class="p">)</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_db57ccfa852d4e35a60552cd2dae11b8-1">1</a></pre></div></td>
+<td class="code"><pre class="code elixir"><a name="rest_code_db57ccfa852d4e35a60552cd2dae11b8-1"></a><span class="n">some_func</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="mf">3.14</span><span class="p">)</span>
 </pre></td>
 </tr></table>
 <p>Thus this allows you to chain commands, so instead of having a huge amount of nested calls that you have to read inside-out, it flows and reads logically, such as:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_7f9048ae47cb488cbd25a13ad2ff8ef9-1">1</a>
-<a href="#rest_code_7f9048ae47cb488cbd25a13ad2ff8ef9-2">2</a>
-<a href="#rest_code_7f9048ae47cb488cbd25a13ad2ff8ef9-3">3</a>
-<a href="#rest_code_7f9048ae47cb488cbd25a13ad2ff8ef9-4">4</a></pre></div></td>
-<td class="code"><pre class="code elixir"><a name="rest_code_7f9048ae47cb488cbd25a13ad2ff8ef9-1"></a><span class="s2">"A String"</span>
-<a name="rest_code_7f9048ae47cb488cbd25a13ad2ff8ef9-2"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">downcase</span>
-<a name="rest_code_7f9048ae47cb488cbd25a13ad2ff8ef9-3"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">normalize</span>
-<a name="rest_code_7f9048ae47cb488cbd25a13ad2ff8ef9-4"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">reverse</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_36a90bc58d044bf5abcd05a9e6913a46-1">1</a>
+<a href="#rest_code_36a90bc58d044bf5abcd05a9e6913a46-2">2</a>
+<a href="#rest_code_36a90bc58d044bf5abcd05a9e6913a46-3">3</a>
+<a href="#rest_code_36a90bc58d044bf5abcd05a9e6913a46-4">4</a></pre></div></td>
+<td class="code"><pre class="code elixir"><a name="rest_code_36a90bc58d044bf5abcd05a9e6913a46-1"></a><span class="s2">"A String"</span>
+<a name="rest_code_36a90bc58d044bf5abcd05a9e6913a46-2"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">downcase</span>
+<a name="rest_code_36a90bc58d044bf5abcd05a9e6913a46-3"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">normalize</span>
+<a name="rest_code_36a90bc58d044bf5abcd05a9e6913a46-4"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">reverse</span>
 </pre></td>
 </tr></table>
 <p>Instead of:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_09cc546d396346eeb71b3817327d41d6-1">1</a></pre></div></td>
-<td class="code"><pre class="code elixir"><a name="rest_code_09cc546d396346eeb71b3817327d41d6-1"></a><span class="nc">String</span><span class="o">.</span><span class="n">reverse</span><span class="p">(</span><span class="nc">String</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="nc">String</span><span class="o">.</span><span class="n">downcase</span><span class="p">(</span><span class="s2">"A String"</span><span class="p">)))</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_eee627917311491fb606f5f5be67b4a1-1">1</a></pre></div></td>
+<td class="code"><pre class="code elixir"><a name="rest_code_eee627917311491fb606f5f5be67b4a1-1"></a><span class="nc">String</span><span class="o">.</span><span class="n">reverse</span><span class="p">(</span><span class="nc">String</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="nc">String</span><span class="o">.</span><span class="n">downcase</span><span class="p">(</span><span class="s2">"A String"</span><span class="p">)))</span>
 </pre></td>
 </tr></table>
 <p>Or by using a lot of intermediate variables like:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_edc65611bc5d43f0ad1f5e1a5195d4ef-1">1</a>
-<a href="#rest_code_edc65611bc5d43f0ad1f5e1a5195d4ef-2">2</a>
-<a href="#rest_code_edc65611bc5d43f0ad1f5e1a5195d4ef-3">3</a>
-<a href="#rest_code_edc65611bc5d43f0ad1f5e1a5195d4ef-4">4</a></pre></div></td>
-<td class="code"><pre class="code elixir"><a name="rest_code_edc65611bc5d43f0ad1f5e1a5195d4ef-1"></a><span class="n">str</span> <span class="o">=</span> <span class="s2">"A String"</span>
-<a name="rest_code_edc65611bc5d43f0ad1f5e1a5195d4ef-2"></a><span class="n">str</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="n">downcase</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
-<a name="rest_code_edc65611bc5d43f0ad1f5e1a5195d4ef-3"></a><span class="n">str</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
-<a name="rest_code_edc65611bc5d43f0ad1f5e1a5195d4ef-4"></a><span class="nc">String</span><span class="o">.</span><span class="n">reverse</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_1558726e463e459797895a080a3e8fd5-1">1</a>
+<a href="#rest_code_1558726e463e459797895a080a3e8fd5-2">2</a>
+<a href="#rest_code_1558726e463e459797895a080a3e8fd5-3">3</a>
+<a href="#rest_code_1558726e463e459797895a080a3e8fd5-4">4</a></pre></div></td>
+<td class="code"><pre class="code elixir"><a name="rest_code_1558726e463e459797895a080a3e8fd5-1"></a><span class="n">str</span> <span class="o">=</span> <span class="s2">"A String"</span>
+<a name="rest_code_1558726e463e459797895a080a3e8fd5-2"></a><span class="n">str</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="n">downcase</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
+<a name="rest_code_1558726e463e459797895a080a3e8fd5-3"></a><span class="n">str</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
+<a name="rest_code_1558726e463e459797895a080a3e8fd5-4"></a><span class="nc">String</span><span class="o">.</span><span class="n">reverse</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
 </pre></td>
 </tr></table>
 <p>However, it always puts in to the first slot (again the merits of that not being debated here <em>cough</em>), so what if we could put it into other slots, what would that look like?</p>
 <p>Well the <a class="reference external" href="https://github.com/vic/pipe_here">pipehere</a> library adds such a feature, so instead of needing to do this:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_37dda84813b44fd89852fb4ec5e8d7c6-1">1</a>
-<a href="#rest_code_37dda84813b44fd89852fb4ec5e8d7c6-2">2</a>
-<a href="#rest_code_37dda84813b44fd89852fb4ec5e8d7c6-3">3</a>
-<a href="#rest_code_37dda84813b44fd89852fb4ec5e8d7c6-4">4</a>
-<a href="#rest_code_37dda84813b44fd89852fb4ec5e8d7c6-5">5</a></pre></div></td>
-<td class="code"><pre class="code elixir"><a name="rest_code_37dda84813b44fd89852fb4ec5e8d7c6-1"></a><span class="n">str</span> <span class="o">=</span> <span class="s2">"A String"</span>
-<a name="rest_code_37dda84813b44fd89852fb4ec5e8d7c6-2"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">downcase</span>
-<a name="rest_code_37dda84813b44fd89852fb4ec5e8d7c6-3"></a><span class="n">taggify</span><span class="p">(</span><span class="s2">"@"</span><span class="p">,</span> <span class="n">str</span><span class="p">)</span>
-<a name="rest_code_37dda84813b44fd89852fb4ec5e8d7c6-4"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">normalize</span>
-<a name="rest_code_37dda84813b44fd89852fb4ec5e8d7c6-5"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">reverse</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_d0f0de43109a40b19446bf8f8537bae1-1">1</a>
+<a href="#rest_code_d0f0de43109a40b19446bf8f8537bae1-2">2</a>
+<a href="#rest_code_d0f0de43109a40b19446bf8f8537bae1-3">3</a>
+<a href="#rest_code_d0f0de43109a40b19446bf8f8537bae1-4">4</a>
+<a href="#rest_code_d0f0de43109a40b19446bf8f8537bae1-5">5</a></pre></div></td>
+<td class="code"><pre class="code elixir"><a name="rest_code_d0f0de43109a40b19446bf8f8537bae1-1"></a><span class="n">str</span> <span class="o">=</span> <span class="s2">"A String"</span>
+<a name="rest_code_d0f0de43109a40b19446bf8f8537bae1-2"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">downcase</span>
+<a name="rest_code_d0f0de43109a40b19446bf8f8537bae1-3"></a><span class="n">taggify</span><span class="p">(</span><span class="s2">"@"</span><span class="p">,</span> <span class="n">str</span><span class="p">)</span>
+<a name="rest_code_d0f0de43109a40b19446bf8f8537bae1-4"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">normalize</span>
+<a name="rest_code_d0f0de43109a40b19446bf8f8537bae1-5"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">reverse</span>
 </pre></td>
 </tr></table>
 <p>You can instead do:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_bc679941f80c4b769df8506573068b3a-1">1</a>
-<a href="#rest_code_bc679941f80c4b769df8506573068b3a-2">2</a>
-<a href="#rest_code_bc679941f80c4b769df8506573068b3a-3">3</a>
-<a href="#rest_code_bc679941f80c4b769df8506573068b3a-4">4</a>
-<a href="#rest_code_bc679941f80c4b769df8506573068b3a-5">5</a>
-<a href="#rest_code_bc679941f80c4b769df8506573068b3a-6">6</a></pre></div></td>
-<td class="code"><pre class="code elixir"><a name="rest_code_bc679941f80c4b769df8506573068b3a-1"></a><span class="n">str</span> <span class="o">=</span> <span class="s2">"A String"</span>
-<a name="rest_code_bc679941f80c4b769df8506573068b3a-2"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">downcase</span>
-<a name="rest_code_bc679941f80c4b769df8506573068b3a-3"></a><span class="o">|&gt;</span> <span class="n">taggify</span><span class="p">(</span><span class="s2">"@"</span><span class="p">,</span> <span class="bp">_</span><span class="p">)</span>
-<a name="rest_code_bc679941f80c4b769df8506573068b3a-4"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">normalize</span>
-<a name="rest_code_bc679941f80c4b769df8506573068b3a-5"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">reverse</span>
-<a name="rest_code_bc679941f80c4b769df8506573068b3a-6"></a><span class="o">|&gt;</span> <span class="n">pipehere</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_3d840615b10a4c1081615567f719be1f-1">1</a>
+<a href="#rest_code_3d840615b10a4c1081615567f719be1f-2">2</a>
+<a href="#rest_code_3d840615b10a4c1081615567f719be1f-3">3</a>
+<a href="#rest_code_3d840615b10a4c1081615567f719be1f-4">4</a>
+<a href="#rest_code_3d840615b10a4c1081615567f719be1f-5">5</a>
+<a href="#rest_code_3d840615b10a4c1081615567f719be1f-6">6</a></pre></div></td>
+<td class="code"><pre class="code elixir"><a name="rest_code_3d840615b10a4c1081615567f719be1f-1"></a><span class="n">str</span> <span class="o">=</span> <span class="s2">"A String"</span>
+<a name="rest_code_3d840615b10a4c1081615567f719be1f-2"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">downcase</span>
+<a name="rest_code_3d840615b10a4c1081615567f719be1f-3"></a><span class="o">|&gt;</span> <span class="n">taggify</span><span class="p">(</span><span class="s2">"@"</span><span class="p">,</span> <span class="bp">_</span><span class="p">)</span>
+<a name="rest_code_3d840615b10a4c1081615567f719be1f-4"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">normalize</span>
+<a name="rest_code_3d840615b10a4c1081615567f719be1f-5"></a><span class="o">|&gt;</span> <span class="nc">String</span><span class="o">.</span><span class="n">reverse</span>
+<a name="rest_code_3d840615b10a4c1081615567f719be1f-6"></a><span class="o">|&gt;</span> <span class="n">pipehere</span>
 </pre></td>
 </tr></table>
 <p>Ahh, now this is succinct and uses an elixir defined type (_) that is not and cannot be bound in this context, thus it is free to use.  However, we do have this little trailing bit that in this case is doing the macro transformation.  This transformation could, and should, be done in the Elixir pipe operator code itself, fully backwards compatible, and adds a highly useful feature.  Basically if a call contains a <tt class="docutils literal">_</tt> then translate the argument placement to be in 'that' position instead of the first, otherwise prepend it to the first argument and be done like it is now.  At the time of this writing the <tt class="docutils literal">|&gt;</tt> operator is at <a class="reference external" href="https://github.com/elixir-lang/elixir/blob/v1.3.2/lib/elixir/lib/kernel.ex#L2769-L2780">kernel.ex#L2769-L2780</a>, which delegates the macro expansion to <a class="reference external" href="https://github.com/elixir-lang/elixir/blob/1aca21c87625565c8e974fce08eba2420718b1fb/lib/elixir/lib/macro.ex#L129-L187">macro.ex#L129-L187</a>, and it could quite easily be added in here.</p>
