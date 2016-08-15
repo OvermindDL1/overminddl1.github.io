@@ -16,10 +16,16 @@ To see it:
 nikola serve -b
 ```
 
-To check all available commands::
+To check all available commands:
 ```
 nikola help
 ```
+
+To deploy the current site to github then run:
+```
+nikola github_deploy
+```
+
 
 ## Other nikola dependencies install by:
 ```bash
