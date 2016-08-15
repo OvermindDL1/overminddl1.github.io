@@ -416,6 +416,7 @@ CATEGORY_OUTPUT_FLAT_HIERARCHY = False
 # If CATEGORY_PAGES_ARE_INDEXES is set to True, each category's page will contain
 # the posts themselves. If set to False, it will be just a list of links.
 # CATEGORY_PAGES_ARE_INDEXES = False
+CATEGORY_PAGES_ARE_INDEXES = True
 
 # Set descriptions for category pages to make them more interesting. The
 # default is no description. The value is used in the meta description
@@ -426,6 +427,12 @@ CATEGORY_OUTPUT_FLAT_HIERARCHY = False
 #        "open source": "My contributions to my many, varied, ever-changing, and eternal libre software projects."
 #    },
 # }
+CATEGORY_PAGES_DESCRIPTIONS = {
+   DEFAULT_LANG: {
+       "Meta": "Ones that have to do with the blog itself instead of any other topic",
+       "Programming": "Programming related"
+   },
+}
 
 # Set special titles for category pages. The default is "Posts about CATEGORY".
 # CATEGORY_PAGES_TITLES = {
@@ -442,7 +449,7 @@ HIDDEN_CATEGORIES = []
 
 # If ENABLE_AUTHOR_PAGES is set to True and there is more than one
 # author, author pages are generated.
-# ENABLE_AUTHOR_PAGES = True
+ENABLE_AUTHOR_PAGES = True
 
 # Final locations are:
 # output / TRANSLATION[lang] / AUTHOR_PATH / index.html (list of tags)
@@ -452,7 +459,7 @@ HIDDEN_CATEGORIES = []
 
 # If AUTHOR_PAGES_ARE_INDEXES is set to True, each author's page will contain
 # the posts themselves. If set to False, it will be just a list of links.
-# AUTHOR_PAGES_ARE_INDEXES = False
+AUTHOR_PAGES_ARE_INDEXES = False
 
 # Set descriptions for author pages to make them more interesting. The
 # default is no description. The value is used in the meta description
@@ -507,6 +514,7 @@ FRONT_INDEX_HEADER = {
 # full_path: a URL with the full path from the root
 # absolute: a complete URL (that includes the SITE_URL)
 # URL_TYPE = 'rel_path'
+URL_TYPE = 'rel_path'
 
 # If USE_BASE_TAG is True, then all HTML files will include
 # something like <base href=http://foo.var.com/baz/bat> to help
@@ -575,6 +583,7 @@ GITHUB_COMMIT_SOURCE = True
 # where the "cache" of partial generated content should be located
 # default: 'cache'
 # CACHE_FOLDER = 'cache'
+CACHE_FOLDER = 'cache'
 
 # Filters to apply to the output.
 # A directory where the keys are either: a file extensions, or
@@ -796,6 +805,7 @@ IMAGE_FOLDERS = {'images': 'images'}
 
 # Show teasers (instead of full posts) in indexes? Defaults to False.
 # INDEX_TEASERS = False
+INDEX_TEASERS = True
 
 # HTML fragments with the Read more... links.
 # The following tags exist and are replaced for you:
@@ -1035,6 +1045,7 @@ MARKDOWN_EXTENSIONS = ['fenced_code', 'codehilite', 'extra']
 # By default, Nikola generates RSS files for the website and for tags, and
 # links to it.  Set this to False to disable everything RSS-related.
 # GENERATE_RSS = True
+GENERATE_RSS = True
 
 # By default, Nikola does not generates Atom files for indexes and links to
 # them. Generate Atom for tags by setting TAG_PAGES_ARE_INDEXES to True.
@@ -1045,21 +1056,25 @@ MARKDOWN_EXTENSIONS = ['fenced_code', 'codehilite', 'extra']
 # between each other. Old Atom feeds with no changes are marked as archived.
 GENERATE_ATOM = True
 
-# Only inlclude teasers in Atom and RSS feeds. Disabling include the full
+# Only include teasers in Atom and RSS feeds. Disabling include the full
 # content. Defaults to True.
 # FEED_TEASERS = True
+FEED_TEASERS = True
 
 # Strip HTML from Atom annd RSS feed summaries and content. Defaults to False.
 # FEED_PLAIN = False
+FEED_PLAIN = False
 
 # Number of posts in Atom and RSS feeds.
 # FEED_LENGTH = 10
+FEED_LENGTH = 10
 
 # Include preview image as a <figure><img></figure> at the top of the entry.
 # Requires FEED_PLAIN = False. If the preview image is found in the content,
 # it will not be included again. Image will be included as-is, aim to optmize
 # the image source for Feedly, Apple News, Flipboard, and other popular clients.
 # FEED_PREVIEWIMAGE = True
+FEED_PREVIEWIMAGE = True
 
 # RSS_LINK is a HTML fragment to link the RSS or Atom feeds. If set to None,
 # the base.tmpl will use the feed Nikola generates. However, you may want to
@@ -1092,19 +1107,50 @@ GENERATE_ATOM = True
 # """ % SITE_URL
 #
 # If you prefer a Google search form, here's an example that should just work:
-SEARCH_FORM = """
+# SEARCH_FORM = """
+# <!-- Google custom search -->
+# <form method="get" action="https://www.google.com/search" class="navbar-form navbar-right" role="search">
+# <div class="form-group">
+# <input type="text" name="q" class="form-control" placeholder="Search">
+# <button type="submit" class="btn btn-primary">
+# 	<i class="material-icons">search</i>
+# </button>
+# </div>
+# <input type="hidden" name="sitesearch" value="%s">
+# </form>
+# <!-- End of custom search -->
+# """ % SITE_URL
+# SEARCH_FORM = """
+# <!-- Google custom search -->
+# <form method="get" action="https://www.google.com/search" class="navbar-form navbar-right" role="search">
+# <div class="form-group">
+# <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+#   <input class="mdl-textfield__input" type="text" id="searchinput">
+#   <label class="mdl-textfield__label" for="searchinput">Search...</label>
+# </div>
+# <button type="submit" class="mdl-button mdl-js-button mdl-button--icon">
+#   <i class="material-icons">search</i>
+# </button>
+# </div>
+# <input type="hidden" name="sitesearch" value="%s">
+# </form>
+# <!-- End of custom search -->
+# """ % SITE_URL
+
+SEARCH_HTML = """
 <!-- Google custom search -->
 <form method="get" action="https://www.google.com/search" class="navbar-form navbar-right" role="search">
-<div class="form-group">
-<input type="text" name="q" class="form-control" placeholder="Search">
-<button type="submit" class="btn btn-primary">
-	<i class="material-icons">search</i>
-</button>
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+  <input class="mdl-textfield__input" type="search" id="searchinput">
+  <label class="mdl-textfield__label %%s" for="searchinput">Search...</label>
 </div>
 <input type="hidden" name="sitesearch" value="%s">
 </form>
 <!-- End of custom search -->
 """ % SITE_URL
+
+SEARCH_FORM = SEARCH_HTML % "mdl-color-text--blue-50"
+
 
 # Use content distribution networks for jQuery, twitter-bootstrap css and js,
 # and html5shiv (for older versions of Internet Explorer)
@@ -1151,6 +1197,9 @@ UNSLUGIFY_TITLES = True
 
 # Additional metadata that is added to a post when creating a new_post
 # ADDITIONAL_METADATA = {}
+ADDITIONAL_METADATA = {
+    'author': "OvermindDL1"
+}
 
 # Nikola supports Open Graph Protocol data for enhancing link sharing and
 # discoverability of your site on Facebook, Google+, and other services.
@@ -1236,22 +1285,26 @@ GLOBAL_CONTEXT = {
         "mdl__footer": "mdl-mega-footer",
         "mdl__navigation_large_screen_only": True,
         "mdl__drawer_small_screen_only": True,
-        "drawer_title": "Navigation",
+        "drawer_title": BLOG_TITLE,
         "drawer_logo_url": "",
         "drawer_show_title": True,
-        "drawer_description": "",
+        "drawer_description": SEARCH_HTML % "",
         "drawer_note": "",
         "title_row_middle": False,
         "navigation_row_middle": False,
         "breadcrumb_separator": ">",
         "post_type": {
             "text": "format_align_justify",
+            "code": "code",
         },
         "top_nav_header": True,
         "more_button_header": [
             #("/mobile/", "Mobile Site", "Mobile"),
         ],
         "image_plugin": "colorbox",
+        "author_gravatar": {
+            "OvermindDL1": "overminddl1@gmail.com"
+        }
     }
 
 # Add functions here and they will be called with template
