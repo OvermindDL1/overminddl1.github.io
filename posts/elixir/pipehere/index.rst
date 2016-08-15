@@ -1,7 +1,7 @@
 .. title: Elixir - PipeHere
 .. slug: pipehere
 .. date: 2016-08-15 10:46:21 UTC-06:00
-.. tags: elixir, vic, pipehere, elixir-fix
+.. tags: elixir, vic, pipehere, elixir-proposal
 .. category: Programming
 .. link:
 .. description: Post about Vic's pipehere library and why something similar should be put in Elixir itself
