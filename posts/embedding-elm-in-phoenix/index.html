@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
+<head>
+<meta charset="utf-8">
+<base href="http://blog.overminddl1.com/posts/embedding-elm-in-phoenix/">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="How to embed Elm as the javascript engine into an Elixir Phoenix application">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title>Embedding Elm in Phoenix | Hyperglot Programmer</title>
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" type="text/css">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" type="text/css">
+<link rel="stylesheet" href="//storage.googleapis.com/code.getmdl.io/1.1.3/material.blue_grey-blue.min.css">
+<link href="../../assets/colorbox/css/colorbox.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="alternate" type="application/atom+xml" title="Atom" href="../../index.atom">
+<link rel="canonical" href="http://blog.overminddl1.com/posts/embedding-elm-in-phoenix/">
+<meta name="description" content="How to embed Elm as the javascript engine into an Elixir Phoenix application">
+<meta name="author" content="OvermindDL1">
+<meta name="robots" content="noindex">
+<meta property="og:site_name" content="Hyperglot Programmer">
+<meta property="og:title" content="Embedding Elm in Phoenix">
+<meta property="og:url" content="http://blog.overminddl1.com/posts/embedding-elm-in-phoenix/">
+<meta property="og:description" content="How to embed Elm as the javascript engine into an Elixir Phoenix application">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2016-08-15T19:44:02-06:00">
+<meta property="article:tag" content="elixir">
+<meta property="article:tag" content="elm">
+<meta property="article:tag" content="phoenix">
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <div id="container" class="site mdl-layout mdl-js-layout
+    ">
+         
+    <header id="header" class="mdl-layout__header site-header
+    "><div class="mdl-layout__header-row site-header__title-row
+        ">
+            
+    <h1 id="brand" class="mdl-layout__title site-title">
+        <a href="http://blog.overminddl1.com/" title="Hyperglot Programmer" rel="home">
+                <span id="blog-title" class="mdl-color-text--primary-contrast">Hyperglot Programmer</span>
+        </a>
+    </h1>
+
+            <div class="mdl-layout-spacer"></div>
+            <span class="sr-only">main navigation</span>
+            <nav class="mdl-navigation site-header__navigation"><a class="mdl-navigation__link" href="../../archives/">Archive</a>
+                      <a class="mdl-navigation__link" href="../../categories/">Tags</a>
+                      <a class="mdl-navigation__link" href="../../rss.xml">RSS feed</a>
+              
+              
+            </nav><div class="site-header__search" role="search">
+                    
+<!-- Google custom search -->
+<form method="get" action="https://www.google.com/search" class="navbar-form navbar-right" role="search">
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+  <input class="mdl-textfield__input" type="search" id="searchinput"><label class="mdl-textfield__label mdl-color-text--blue-50" for="searchinput">Search...</label>
+</div>
+<input type="hidden" name="sitesearch" value="http://blog.overminddl1.com/">
+</form>
+<!-- End of custom search -->
+
+                </div>
+            
+
+        </div>
+    </header><div id="drawer" class="mdl-layout__drawer site-drawer
+mdl-layout--small-screen-only
+    ">
+        <div class="mdl-layout__title site-drawer__title">
+                <span>Hyperglot Programmer</span>
+        </div>
+        <div class="site-drawer__description">
+            
+<!-- Google custom search -->
+<form method="get" action="https://www.google.com/search" class="navbar-form navbar-right" role="search">
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+  <input class="mdl-textfield__input" type="search" id="searchinput"><label class="mdl-textfield__label " for="searchinput">Search...</label>
+</div>
+<input type="hidden" name="sitesearch" value="http://blog.overminddl1.com/">
+</form>
+<!-- End of custom search -->
+
+        </div>
+        <span class="sr-only">side navigation</span>
+        <nav class="mdl-navigation site-drawer__navigation"><a class="mdl-navigation__link" href="../../archives/">Archive</a>
+                    <a class="mdl-navigation__link" href="../../categories/">Tags</a>
+                    <a class="mdl-navigation__link" href="../../rss.xml">RSS feed</a>
+            
+            
+        </nav>
+</div>
+
+    
+
+         <main id="content" class="mdl-layout__content"><div class="site-post site-card mdl-grid">
+    <div class="mdl-card mdl-cell mdl-cell--12-col
+    site-post-code
+    mdl-shadow--4dp
+">
+        <article class="h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><div class="mdl-card__media"></div>
+            
+    
+    <div class="mdl-card__title">
+        <h1 class="mdl-card__title-text p-name entry-title" itemprop="headline name">Embedding Elm in Phoenix</h1>
+    </div>
+
+    <meta name="description" itemprop="description" content="How to embed Elm as the javascript engine into an Elixir Phoenix application">
+<div class="mdl-card__supporting-text e-content entry-content" itemprop="articleBody text">
+                <div>
+<p>I am setting up a new project that will be using Phoenix and Elm together, so I am taking this opportunity to document the process to make it easier for others to set up as well.  Maybe I should turn this into a mix 'new'able template sometime...</p>
+<!-- TEASER_END -->
+<div class="section" id="initial-setup">
+<h2>Initial Setup</h2>
+<p>First things first, make sure you already have nodejs (6+), npm, Erlang, Elixir, and Phoenix installed.  Elm can be useful for in-place testing but not necessary as npm will handle that for us.</p>
+<p>So lets start with a basic phoenix app, will be using normal integer IDs in the model, using brunch (webpack is <strong>so</strong> slow in my testing in comparison), and just fairly stock.  Let's name it, oh, MyServer.  So let's run this in your shell of choice:</p>
+<table class="codetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_2ff4dd150e274f55bae6bfd62babb2a9-1"> 1</a>
+<a href="#rest_code_2ff4dd150e274f55bae6bfd62babb2a9-2"> 2</a>
+<a href="#rest_code_2ff4dd150e274f55bae6bfd62babb2a9-3"> 3</a>
+<a href="#rest_code_2ff4dd150e274f55bae6bfd62babb2a9-4"> 4</a>
+<a href="#rest_code_2ff4dd150e274f55bae6bfd62babb2a9-5"> 5</a>
+<a href="#rest_code_2ff4dd150e274f55bae6bfd62babb2a9-6"> 6</a>
+<a href="#rest_code_2ff4dd150e274f55bae6bfd62babb2a9-7"> 7</a>
+<a href="#rest_code_2ff4dd150e274f55bae6bfd62babb2a9-8"> 8</a>
+<a href="#rest_code_2ff4dd150e274f55bae6bfd62babb2a9-9"> 9</a>
+<a href="#rest_code_2ff4dd150e274f55bae6bfd62babb2a9-10">10</a>
+<a href="#rest_code_2ff4dd150e274f55bae6bfd62babb2a9-11">11</a>
+<a href="#rest_code_2ff4dd150e274f55bae6bfd62babb2a9-12">12</a>
+<a href="#rest_code_2ff4dd150e274f55bae6bfd62babb2a9-13">13</a>
+<a href="#rest_code_2ff4dd150e274f55bae6bfd62babb2a9-14">14</a>
+<a href="#rest_code_2ff4dd150e274f55bae6bfd62babb2a9-15">15</a>
+<a href="#rest_code_2ff4dd150e274f55bae6bfd62babb2a9-16">16</a>
+<a href="#rest_code_2ff4dd150e274f55bae6bfd62babb2a9-17">17</a>
+<a href="#rest_code_2ff4dd150e274f55bae6bfd62babb2a9-18">18</a>
+<a href="#rest_code_2ff4dd150e274f55bae6bfd62babb2a9-19">19</a>
+<a href="#rest_code_2ff4dd150e274f55bae6bfd62babb2a9-20">20</a>
+<a href="#rest_code_2ff4dd150e274f55bae6bfd62babb2a9-21">21</a></pre></div></td>
+<td class="code"><pre class="code bash"><a name="rest_code_2ff4dd150e274f55bae6bfd62babb2a9-1"></a>$ mix phoenix.new my_server --module MyServer
+<a name="rest_code_2ff4dd150e274f55bae6bfd62babb2a9-2"></a><span class="c1"># Snip a ton of stuff as it creates the files...</span>
+<a name="rest_code_2ff4dd150e274f55bae6bfd62babb2a9-3"></a>
+<a name="rest_code_2ff4dd150e274f55bae6bfd62babb2a9-4"></a>Fetch and install dependencies? <span class="o">[</span>Yn<span class="o">]</span> Y
+<a name="rest_code_2ff4dd150e274f55bae6bfd62babb2a9-5"></a>* running mix deps.get
+<a name="rest_code_2ff4dd150e274f55bae6bfd62babb2a9-6"></a>* running npm install <span class="o">&amp;&amp;</span> node node_modules/brunch/bin/brunch build
+<a name="rest_code_2ff4dd150e274f55bae6bfd62babb2a9-7"></a>
+<a name="rest_code_2ff4dd150e274f55bae6bfd62babb2a9-8"></a>We are all set! Run your Phoenix application:
+<a name="rest_code_2ff4dd150e274f55bae6bfd62babb2a9-9"></a>
+<a name="rest_code_2ff4dd150e274f55bae6bfd62babb2a9-10"></a>    $ <span class="nb">cd</span> my_server
+<a name="rest_code_2ff4dd150e274f55bae6bfd62babb2a9-11"></a>    $ mix phoenix.server
+<a name="rest_code_2ff4dd150e274f55bae6bfd62babb2a9-12"></a>
+<a name="rest_code_2ff4dd150e274f55bae6bfd62babb2a9-13"></a>You can also run your app inside IEx <span class="o">(</span>Interactive Elixir<span class="o">)</span> as:
+<a name="rest_code_2ff4dd150e274f55bae6bfd62babb2a9-14"></a>
+<a name="rest_code_2ff4dd150e274f55bae6bfd62babb2a9-15"></a>    $ iex -S mix phoenix.server
+<a name="rest_code_2ff4dd150e274f55bae6bfd62babb2a9-16"></a>
+<a name="rest_code_2ff4dd150e274f55bae6bfd62babb2a9-17"></a>Before moving on, configure your database in config/dev.exs and run:
+<a name="rest_code_2ff4dd150e274f55bae6bfd62babb2a9-18"></a>
+<a name="rest_code_2ff4dd150e274f55bae6bfd62babb2a9-19"></a>    $ mix ecto.create
+<a name="rest_code_2ff4dd150e274f55bae6bfd62babb2a9-20"></a>
+<a name="rest_code_2ff4dd150e274f55bae6bfd62babb2a9-21"></a>$ <span class="nb">cd</span> my_server <span class="c1"># Make sure to go in to the directory if you edit here</span>
+</pre></td>
+</tr></table>
+<p>Make sure to have it fetch and install dependencies to prepare the node files by answering <tt class="docutils literal">Y</tt> to the question</p>
+<p>At this point it should also be good to set it up as a git repo, it is never too early to make your repository:</p>
+<table class="codetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_8b6f74900abe4d84a718b742847eb7f8-1">1</a>
+<a href="#rest_code_8b6f74900abe4d84a718b742847eb7f8-2">2</a>
+<a href="#rest_code_8b6f74900abe4d84a718b742847eb7f8-3">3</a>
+<a href="#rest_code_8b6f74900abe4d84a718b742847eb7f8-4">4</a>
+<a href="#rest_code_8b6f74900abe4d84a718b742847eb7f8-5">5</a>
+<a href="#rest_code_8b6f74900abe4d84a718b742847eb7f8-6">6</a></pre></div></td>
+<td class="code"><pre class="code bash"><a name="rest_code_8b6f74900abe4d84a718b742847eb7f8-1"></a>$ git init
+<a name="rest_code_8b6f74900abe4d84a718b742847eb7f8-2"></a>Initialized empty Git repository in /home/&lt;user&gt;/elixir/my_server/.git/
+<a name="rest_code_8b6f74900abe4d84a718b742847eb7f8-3"></a>$ git add .
+<a name="rest_code_8b6f74900abe4d84a718b742847eb7f8-4"></a><span class="c1"># Snip ton of files added to your new git repo</span>
+<a name="rest_code_8b6f74900abe4d84a718b742847eb7f8-5"></a>$ git commit
+<a name="rest_code_8b6f74900abe4d84a718b742847eb7f8-6"></a><span class="c1"># Snip ton of files committed to your repo</span>
+</pre></td>
+</tr></table>
+<p>Now that the basics are done, let's add elm to the project.</p>
+</div>
+<div class="section" id="adding-elm-to-phoenix-via-brunch">
+<h2>Adding Elm to Phoenix via brunch</h2>
+<p>First we need to actually have the project get and manage elm, so open your ./package.json file and go to the "devDependencies" section and add a new <tt class="docutils literal">elm</tt> entry such as:</p>
+<pre class="code json"><a name="rest_code_a46ac90e879c436794a5a542ce4508cc-1"></a><span class="s2">"elm-brunch"</span><span class="err">:</span> <span class="s2">"~0.7.0"</span><span class="err">,</span>
+</pre>
+<p>This will handle downloading and installation of elm-brunch and elm itself.  If you wish you can run <tt class="docutils literal">npm install</tt> now to get it, otherwise phoenix will get it for you when we run it later.</p>
+<p>Next we need to open the <tt class="docutils literal"><span class="pre">brunch-config.js</span></tt> file.  Go to the <tt class="docutils literal">exports.config.paths.watched</tt> section.  You will want to add a new a new path for where-ever you want to put your elm source files.  I prefer them to go in to <tt class="docutils literal">web/elm</tt> so that is what I am adding to that section:</p>
+<pre class="code javascript"><a name="rest_code_c12e66bc07ed4b0fbc1a94ee1a4f2802-1"></a><span class="s2">"web/elm"</span><span class="p">,</span>
+</pre>
+<p>We should, though not need to, but I highly recommend adding an elmBrunch configuration inside your brunch-config.js file.  To do so continue down to the <tt class="docutils literal">exports.config.plugins</tt> section and we need to add a new section after your <tt class="docutils literal">babel</tt> section (as always don't forget any commas on newlines as appropriate).  Let's start with this configuration:</p>
+<table class="codetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-1"> 1</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-2"> 2</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-3"> 3</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-4"> 4</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-5"> 5</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-6"> 6</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-7"> 7</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-8"> 8</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-9"> 9</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-10">10</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-11">11</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-12">12</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-13">13</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-14">14</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-15">15</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-16">16</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-17">17</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-18">18</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-19">19</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-20">20</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-21">21</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-22">22</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-23">23</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-24">24</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-25">25</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-26">26</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-27">27</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-28">28</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-29">29</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-30">30</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-31">31</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-32">32</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-33">33</a>
+<a href="#rest_code_5e4d3be06c334b7db64af11ea3e6ede8-34">34</a></pre></div></td>
+<td class="code"><pre class="code javascript"><a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-1"></a><span class="nx">elmBrunch</span><span class="o">:</span> <span class="p">{</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-2"></a>        <span class="c1">// Set to path where `elm-make` is located, relative to `elmFolder`</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-3"></a>        <span class="c1">// (optional)</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-4"></a>        <span class="c1">// executablePath: './node_modules/elm/binwrappers',</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-5"></a>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-6"></a>        <span class="c1">// Set to path where elm-package.json is located, defaults to project root</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-7"></a>        <span class="c1">// (optional)</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-8"></a>        <span class="c1">// Make sure to configure paths.watched in main brunch config to include</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-9"></a>        <span class="c1">// this folder</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-10"></a>        <span class="nx">elmFolder</span><span class="o">:</span> <span class="s2">"web/elm"</span><span class="p">,</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-11"></a>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-12"></a>        <span class="c1">// Set to the elm file(s) containing your "main" function</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-13"></a>        <span class="c1">// `elm make` handles all elm dependencies (required)</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-14"></a>        <span class="c1">// relative to `elmFolder`</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-15"></a>        <span class="nx">mainModules</span><span class="o">:</span> <span class="p">[</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-16"></a>                <span class="s1">'web/elm/Main.elm'</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-17"></a>        <span class="p">],</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-18"></a>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-19"></a>        <span class="c1">// Defaults to 'js/' folder in paths.public (optional)</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-20"></a>        <span class="c1">// However for phoenix we want it to be combined with the app.js file so do:</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-21"></a>        <span class="nx">outputFolder</span><span class="o">:</span> <span class="s2">"web/static/js"</span><span class="p">,</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-22"></a>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-23"></a>        <span class="c1">// If specified, all mainModules will be compiled to a single file</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-24"></a>        <span class="c1">// (optional and merged with outputFolder)</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-25"></a>        <span class="c1">// This is likely what we want to do with Phoenix for web efficiency</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-26"></a>        <span class="nx">outputFile</span><span class="o">:</span> <span class="s2">"elm.js"</span><span class="p">,</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-27"></a>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-28"></a>        <span class="c1">// optional: add some parameters that are passed to elm-make</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-29"></a>        <span class="c1">// "--warn" reports on important warnings so they do not go invisible,</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-30"></a>        <span class="c1">// I always recommend it.</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-31"></a>        <span class="nx">makeParameters</span><span class="o">:</span> <span class="p">[</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-32"></a>                <span class="s2">"--warn"</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-33"></a>        <span class="p">]</span>
+<a name="rest_code_5e4d3be06c334b7db64af11ea3e6ede8-34"></a><span class="p">}</span>
+</pre></td>
+</tr></table>
+<p>The inline comments should be able to describe what is going on, and keep in mind that any 'root' Main program you may have in Elm should be listed in <tt class="docutils literal">mainModules</tt> so they all get combined into one file to share the elm standard library and save a ton of space.</p>
+<p>With these are we are now ready to create the first Elm file and hook it into the application.</p>
+</div>
+<div class="section" id="creating-our-first-elm-application-in-phoenix">
+<h2>Creating our first Elm application in Phoenix</h2>
+<p>Create the file <tt class="docutils literal">web/elm/Main.elm</tt> or of whatever file you put in your <tt class="docutils literal">mainModules</tt> section and open it up.  Let's go ahead and do the usual Elm counter app so we can make sure that it works and that we have something to wire up.</p>
+</div>
+</div>
+            </div>
+            
+    <div class="mdl-grid mdl-card__supporting-text mdl-card--border metadata">
+        <div class="mdl-cell mdl-cell--1-col">
+          <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
+            
+            <img src="https://www.gravatar.com/avatar/5575f10ccc57e0608827fd332448225b" style="width: 100%; height: 100%;"></button>
+        </div>
+        <div class="mdl-grid mdl-cell mdl-cell--9-col">
+            <span class="mdl-cell mdl-cell--12-col site-post__author no-margin-bottom">
+                OvermindDL1
+            </span>
+            <span class="mdl-cell mdl-cell--12-col site-post__date">
+                <time class="published dt-published" datetime="2016-08-15T19:44:02-06:00" itemprop="datePublished" title="2016-08-15 19:44">2016-08-15 19:44
+                </time></span>
+        </div>
+        <span class="mdl-cell mdl-cell--2-col site-post__total-comment">
+                
+        
+    <a href="#disqus_thread" data-disqus-identifier="cache/posts/embedding-elm-in-phoenix.html">Comments</a>
+
+
+        </span>
+    </div>
+
+            
+    <div class="mdl-grid mdl-card__actions mdl-card--border">
+        
+              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-button--accent site-post__tag" rel="tag" title="elixir" href="../../categories/elixir/">elixir</a>
+              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-button--accent site-post__tag" rel="tag" title="elm" href="../../categories/elm/">elm</a>
+              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-button--accent site-post__tag" rel="tag" title="phoenix" href="../../categories/phoenix/">phoenix</a>
+
+        <div class="section-spacer"></div>
+        
+    <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--accent site-post__source-link" rel="tag" title="Source" href="index.rst">Source</a>
+
+        
+
+    </div>
+
+            <div class="mdl-color-text--primary-contrast mdl-card__supporting-text comments hidden-print">
+                <h2>Comments</h2>
+                
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="overblogdl1",
+            disqus_url="http://blog.overminddl1.com/posts/embedding-elm-in-phoenix/",
+        disqus_title="Embedding Elm in Phoenix",
+        disqus_identifier="cache/posts/embedding-elm-in-phoenix.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+            </div>
+            
+
+        </article>
+</div>
+    
+
+    
+        
+       <script>var disqus_shortname="overblogdl1";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+</div>
+
+            
+        <footer id="footer" class="site-footer
+mdl-mega-footer
+        ">
+            Contents © 2016 <a href="mailto:overminddl1@overminddl1.com">OvermindDL1</a> 
+<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
+    <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"></a>
+<br>
+This work by
+<a xmlns:cc="http://creativecommons.org/ns#" href="http://blog.overminddl1.com/" property="cc:attributionName" rel="cc:attributionURL">
+    http://blog.overminddl1.com/
+</a>
+is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
+    Creative Commons Attribution-NonCommercial 4.0 International License
+</a>
+.
+<br>
+Permissions beyond the scope of this license may be available at
+<a xmlns:cc="http://creativecommons.org/ns#" href="http://blog.overminddl1.com/" rel="cc:morePermissions">
+    http://blog.overminddl1.com/
+</a>
+.
+
+            
+        </footer></main>
+</div>
+    
+        <script src="//storage.googleapis.com/code.getmdl.io/1.1.3/material.min.js"></script><script src="//code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script><script src="../../assets/colorbox/js/jquery.colorbox-min.js" type="text/javascript"></script><script>$('.thumbnails a').colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+</body>
+</html>
