@@ -1,7 +1,7 @@
 .. title: Embedding Elm in Phoenix
 .. slug: embedding-elm-in-phoenix
 .. date: 2016-08-17 20:49:02 UTC-06:00
-.. tags: elixir, phoenix, elm, draft
+.. tags: elixir, phoenix, elm
 .. category: Programming
 .. link:
 .. description: How to embed Elm as the javascript engine into an Elixir Phoenix application
