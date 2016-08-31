@@ -17,7 +17,7 @@ Initial Setup
 
 .. note:: If you are adding elm to an existing phoenix project then feel free to skip this step.
 
-First things first, make sure you already have nodejs (6+), npm, Erlang, Elixir, and Phoenix installed.  Elm can be useful for in-place testing but not necessary as npm will handle that for us.
+First things first, make sure you already have nodejs (6+), npm, Elm, Erlang, Elixir, and Phoenix installed.
 
 So lets start with a basic phoenix app, will be using normal integer IDs in the model, using brunch (webpack is **so** slow in my testing in comparison), and just fairly stock.  Let's name it, oh, MyServer.  So let's run this in your shell of choice:
 
