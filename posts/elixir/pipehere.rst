@@ -8,7 +8,6 @@
 .. type: code
 .. author: OvermindDL1
 
-
 For my first content-post here I think I will touch on one of Elixir's niggles that bug me, the pipe operator, or specifically one of the few things that bug me about it.  Now do not take this that I hate the pipe operator, I love it, however it does have a few warts, so lets talk about one of them today.
 
 Regardless of my opinion of where a functional pipe operator like Elixir's ``|>`` should put arguments (*at the end*, **not** the beginning), wouldn't it be nice to be able to specify where a piped in argument was placed for those needed cases?
