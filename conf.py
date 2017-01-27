@@ -133,7 +133,8 @@ TRANSLATIONS_PATTERN = "{path}.{lang}.{ext}"
 NAVIGATION_LINKS = {
     DEFAULT_LANG: (
         ("/archives/", "Archive"),
-        ("/categories/", "Tags"),
+        ("/categories/", "Categories"),
+	("/tags/", "Tags"),
         ("/rss.xml", "RSS feed"),
     ),
 }
@@ -356,13 +357,13 @@ POSTS_SECTIONS_ARE_INDEXES = True
 # output / TRANSLATION[lang] / TAG_PATH / tag.xml (RSS feed for a tag)
 # (translatable)
 # TAG_PATH = "categories"
-TAG_PATH = "categories"
+TAG_PATH = "tags"
 
 # See TAG_PATH's "list of tags" for the default setting value. Can be overwritten
 # here any path relative to the output directory.
 # (translatable)
 # TAGS_INDEX_PATH = "tags.html"
-TAGS_INDEX_PATH = "categories/index.html"
+TAGS_INDEX_PATH = "tags/index"
 
 # If TAG_PAGES_ARE_INDEXES is set to True, each tag's page will contain
 # the posts themselves. If set to False, it will be just a list of links.
