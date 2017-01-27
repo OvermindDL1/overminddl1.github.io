@@ -27,7 +27,22 @@ nikola github_deploy
 ```
 
 
+## Install Nikola via:
+
+```bash
+pip install 'Nikola[extras,tests]'
+```
+
+
+## Upgrade Nikola via:
+
+```bash
+pip install --upgrade 'Nikola[extras,tests]'
+```
+
+
 ## Other nikola dependencies install by:
+
 ```bash
 pip3 install jinja2 webassets watchdog ghp-import2
 ```
