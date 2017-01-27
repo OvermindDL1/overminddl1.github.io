@@ -66,7 +66,7 @@ At this point it should also be good to set it up as a git repo, it is never too
 Other than making sure your database is setup if you are using one and so forth, that should be all the basics.  Now let's add Bucklescript to the project.
 
 
-Adding Elm to Phoenix via brunch
+Adding Bucklescript to Phoenix via brunch
 ================================
 
 Make certain that you have the dependencies for bucklescript installed first as per its documentation_, which for Windows is nothing (all self-included) or for linux it is making sure that `ninja` is already installed from your package manager.
@@ -153,4 +153,4 @@ Then launch the mix dev server via:
 Then just launch the web browser, go to http://localhost:4000/ and then check your console, you will see printed there:  ``Hello world``.  :-)
 
 
-.. _documentation: http://elm-lang.org/
+.. _documentation: http://bloomberg.github.io/bucklescript/Manual.html
