@@ -67,7 +67,7 @@ Other than making sure your database is setup if you are using one and so forth,
 
 
 Adding Bucklescript to Phoenix via brunch
-================================
+=========================================
 
 Make certain that you have the dependencies for bucklescript installed first as per its documentation_, which for Windows is nothing (all self-included) or for linux it is making sure that `ninja` is already installed from your package manager.
 
