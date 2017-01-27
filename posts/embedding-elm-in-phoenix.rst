@@ -19,7 +19,7 @@ Initial Setup
 
 First things first, make sure you already have nodejs (6+), npm, Elm, Erlang, Elixir, and Phoenix installed.
 
-So lets start with a basic phoenix app, will be using normal integer IDs in the model, using brunch (webpack is **so** slow in my testing in comparison), and just fairly stock.  Let's name it, oh, MyServer.  So let's run this in your shell of choice:
+So lets start with a basic phoenix app, will be using normal integer IDs in the model, using brunch as that is what comes with Phoenix (feel free to adjust to your own if you use another bundler), and just fairly stock.  Let's name it, oh, MyServer.  So let's run this in your shell of choice:
 
 .. code:: bash
 	:number-lines:
@@ -46,7 +46,7 @@ So lets start with a basic phoenix app, will be using normal integer IDs in the 
 
 	$ cd my_server # Make sure to go in to the directory if you edit here
 
-Make sure to have it fetch and install dependencies to prepare the node files by answering ``Y`` to the question
+	Make sure to have it fetch and install dependencies to prepare the node files by answering ``Y`` to the ``Fetch and install dependencies?`` question.
 
 At this point it should also be good to set it up as a git repo, it is never too early to make your repository:
 
