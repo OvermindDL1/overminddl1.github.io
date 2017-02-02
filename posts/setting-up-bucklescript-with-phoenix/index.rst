@@ -153,4 +153,10 @@ Then launch the mix dev server via:
 Then just launch the web browser, go to http://localhost:4000/ and then check your console, you will see printed there:  ``Hello world``.  :-)
 
 
+Errata
+======
+
+For note, you may not want to commit the cache files to your repository located at ``lib/bs`` and ``lib/ocaml``, as well as if you are working in an existing instance with cache files and you update the compiler or a major library you depend on then be sure to run ``./node_modules/.bin/bsb -clean-world -make-world``, which will wipe the cache files and rebuild it all, which only takes a few seconds at most.  :-)
+
+
 .. _documentation: http://bloomberg.github.io/bucklescript/Manual.html
