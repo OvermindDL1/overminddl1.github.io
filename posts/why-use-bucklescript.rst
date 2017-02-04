@@ -33,7 +33,7 @@ Javascript:
 History
 =======
 
-The OCaml language and compiler is about 30 years old at this point, similar syntax to other ML languages, especially ML, but to flesh out the language to be more useful in all areas.  The compiler up to today has been built up to be modularable, to be possible to make new back-ends and add new features via plugins, especially with recent incarnations that added the new ``-ppx`` support.
+The OCaml language and compiler is about 30 years old at this point, similar syntax to other ML languages, especially SML, but it fleshes out the language to be more useful in all areas.  The compiler up to today has been built up to be modularable, to be possible to make new back-ends and add new features via plugins, especially with recent incarnations that added the new ``-ppx`` support.
 
 Before the ``-ppx`` support was added there was a back-end (among many) created called Javascript_of_OCaml, or JSOO, it was a low-level backend to the OCaml compiler that took the near-native code generation and output Javascript, and it ran well but was difficult to call in to from Javascript and was very difficult to read as Javascript.
 
