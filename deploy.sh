@@ -10,3 +10,4 @@ git commit -m 'Automatic deployment'
 git push origin
 nikola build
 nikola deploy
+nikola github_deploy
