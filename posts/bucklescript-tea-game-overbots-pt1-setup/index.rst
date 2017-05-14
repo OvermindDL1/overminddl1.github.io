@@ -58,6 +58,15 @@ This will be a type of your choosing that you will give to your updater to perfo
 
 The ``update`` function takes the model structure and a message of the `msg` type of your own choosing above.  You update your model based on the message and return the updated model and an optional 'Cmd'.  Commands are used to 'do' something out of the main app interface, such as update the address bar as one example.
 
+**Your Subscriptions:**
+
+.. code:: ocaml
+
+  let subscriptions model =
+    Sub.none
+
+Subscriptions are things like listening to events on the DOM or a timer or so, you can register and unregister to subscriptions based on your model state.
+
 **Your view creator:**
 
 .. code:: ocaml
