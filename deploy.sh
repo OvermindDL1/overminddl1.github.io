@@ -4,9 +4,9 @@
 
 set +e
 
-./nikola clean
+nikola clean
 git add -A
 git commit -m 'Automatic deployment'
 git push origin
-./nikola build
-./nikola deploy
+nikola build
+nikola deploy
