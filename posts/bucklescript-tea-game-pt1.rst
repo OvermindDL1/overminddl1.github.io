@@ -182,7 +182,7 @@ I also want to use npm itself as the build system instead of using something dre
 
 .. code:: shell
 
-  ╭─overminddl1@overmind.home.overminddl1.com ~/ocaml/overbots  ‹master*›
+  ╭─overminddl1@snip ~/ocaml/overbots  ‹master*›
   ╰─➤  npm install --save-dev npm-run-all
   overbots@0.0.1 /home/overminddl1/ocaml/overbots
   └─┬ npm-run-all@4.0.2
