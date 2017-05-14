@@ -601,7 +601,7 @@ REDIRECTIONS = []
 # }
 DEPLOY_COMMANDS = {
     'default': [
-        'rsync -rltv --delete output/ overminddl1@blog.overminddl1.com:/home/overminddl1/blog.overminddl1.com',
+        'rsync -rltv --delete output/ overminddl1@overminddl1.com:/home/overminddl1/blog.overminddl1.com',
     ]
 }
 
