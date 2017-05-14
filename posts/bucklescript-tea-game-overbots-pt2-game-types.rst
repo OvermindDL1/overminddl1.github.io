@@ -33,7 +33,15 @@ The game itself will have a variety of types to hold a variety of data, and over
 Resources
 ---------
 
-Every incremental game is about the management and acquisition of resources, a min-max strategy that the player does effectively manually (and this is the primary addiction of these kind of games), so now I need to decide, will I have a set of resources types that are known ahead of time, or will I make it arbitrary for ease of changing later, especially considering that quite a variety can eventually pop up.  Based on all the ones I've done I think I will go with the unknown ones for the design, this does put a bit of a wrinkle in how to actually accomplish this, but it will also be a great opportunity to show off one of the greatest aspects of OCaml, it's first class modules, they will allow me to make resources with a defined interface for being able to display and introspect, but have an unknown storage type and extra functionality all while remaining entirely type-safe (honestly there are other methods of doing this as well, but this is a good topic to show).  I will refrain from writing a small book on all the amazing capabilities of OCaml's module system as those are documented well online already, and instead I will just jump in to it.
+Every incremental game is about the management and acquisition of resources, a min-max strategy that the player does effectively manually (and this is the primary addiction of these kind of games), so I will need a primary structure to hold all of the resource values, so a record, which I put in ``src/overbots_types_resources.ml``:
+
+.. code:: ocaml
+  :number-lines:
+
+  
+
+
+ so now I need to decide, will I have a set of resources types that are known ahead of time, or will I make it arbitrary for ease of changing later, especially considering that quite a variety can eventually pop up.  Based on all the ones I've done I think I will go with the unknown ones for the design, this does put a bit of a wrinkle in how to actually accomplish this, but it will also be a great opportunity to show off one of the greatest aspects of OCaml, it's first class modules, they will allow me to make resources with a defined interface for being able to display and introspect, but have an unknown storage type and extra functionality all while remaining entirely type-safe (honestly there are other methods of doing this as well, but this is a good topic to show).  I will refrain from writing a small book on all the amazing capabilities of OCaml's module system as those are documented well online already, and instead I will just jump in to it.
 
 So let's start with a type definition of the interface first of all, maybe starting with (in the ``src/overbots_types_resources.ml`` file) a few things like we know we are going to want to display it's amount, and it will have a name (which may change over time, so making it a getter), and we will be adding to this later but for now let's start with:
 
