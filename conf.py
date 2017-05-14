@@ -599,6 +599,11 @@ REDIRECTIONS = []
 #         "rsync -rav --delete output/ joe@my.site:/srv/www/site",
 #     ]
 # }
+DEPLOY_COMMANDS = {
+    'default': [
+        'rsync -rltv --delete output/ overminddl1@blog.overminddl1.com:/home/overminddl1/blog.overminddl1.com',
+    ]
+}
 
 # github_deploy configuration
 # For more details, read the manual:

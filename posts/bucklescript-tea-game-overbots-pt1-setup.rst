@@ -1,7 +1,7 @@
 .. title: Bucklescript-Tea Game OverBots Pt.1 - Setup
 .. slug: bucklescript-tea-game-overbots-pt1-setup
 .. date: 2017-05-13 16:17:21 UTC-06:00
-.. tags: bucklescript, bucklescript-tea
+.. tags: bucklescript, bucklescript-tea, overbots
 .. category: Programming
 .. link:
 .. description: Bucklescript-TEA tutorial game OverBots Pt.1 - Setup
