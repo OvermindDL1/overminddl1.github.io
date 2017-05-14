@@ -40,6 +40,7 @@ This is where all your data is stored, the only place, can add whatever fields y
 
 
 **Your message type:**
+
 .. code:: ocaml
 
   type msg =
