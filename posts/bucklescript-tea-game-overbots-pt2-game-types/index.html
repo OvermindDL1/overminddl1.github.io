@@ -128,31 +128,31 @@ mdl-layout--small-screen-only
 <p>Every incremental game is about the management and acquisition of resources, a min-max strategy that the player does effectively manually (and this is the primary addiction of these kind of games), so now I need to decide, will I have a set of resources types that are known ahead of time, or will I make it arbitrary for ease of changing later, especially considering that quite a variety can eventually pop up.  Based on all the ones I've done I think I will go with the unknown ones for the design, this does put a bit of a wrinkle in how to actually accomplish this, but it will also be a great opportunity to show off one of the greatest aspects of OCaml, it's first class modules, they will allow me to make resources with a defined interface for being able to display and introspect, but have an unknown storage type and extra functionality all while remaining entirely type-safe (honestly there are other methods of doing this as well, but this is a good topic to show).  I will refrain from writing a small book on all the amazing capabilities of OCaml's module system as those are documented well online already, and instead I will just jump in to it.</p>
 <p>So let's start with a type definition of the interface first of all, maybe starting with (in the <tt class="docutils literal">src/overbots_types_resources.ml</tt> file) a few things like we know we are going to want to display it's amount, and it will have a name (which may change over time, so making it a getter), and we will be adding to this later but for now let's start with:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_cf2ee4f1b6f54a5a890882ccf586739a-1">1</a>
-<a href="#rest_code_cf2ee4f1b6f54a5a890882ccf586739a-2">2</a>
-<a href="#rest_code_cf2ee4f1b6f54a5a890882ccf586739a-3">3</a>
-<a href="#rest_code_cf2ee4f1b6f54a5a890882ccf586739a-4">4</a>
-<a href="#rest_code_cf2ee4f1b6f54a5a890882ccf586739a-5">5</a>
-<a href="#rest_code_cf2ee4f1b6f54a5a890882ccf586739a-6">6</a>
-<a href="#rest_code_cf2ee4f1b6f54a5a890882ccf586739a-7">7</a>
-<a href="#rest_code_cf2ee4f1b6f54a5a890882ccf586739a-8">8</a>
-<a href="#rest_code_cf2ee4f1b6f54a5a890882ccf586739a-9">9</a></pre></div></td>
-<td class="code"><pre class="code ocaml"><a name="rest_code_cf2ee4f1b6f54a5a890882ccf586739a-1"></a><span class="k">type</span> <span class="n">resource_id</span> <span class="o">=</span> <span class="nc">ResourceID</span> <span class="k">of</span> <span class="kt">string</span>
-<a name="rest_code_cf2ee4f1b6f54a5a890882ccf586739a-2"></a>
-<a name="rest_code_cf2ee4f1b6f54a5a890882ccf586739a-3"></a><span class="k">module</span> <span class="k">type</span> <span class="nc">Resource</span> <span class="o">=</span> <span class="k">sig</span>
-<a name="rest_code_cf2ee4f1b6f54a5a890882ccf586739a-4"></a>  <span class="k">type</span> <span class="n">t</span>
-<a name="rest_code_cf2ee4f1b6f54a5a890882ccf586739a-5"></a>  <span class="k">val</span> <span class="n">id</span> <span class="o">:</span> <span class="n">resource_id</span>
-<a name="rest_code_cf2ee4f1b6f54a5a890882ccf586739a-6"></a>  <span class="k">val</span> <span class="n">name</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span>
-<a name="rest_code_cf2ee4f1b6f54a5a890882ccf586739a-7"></a>  <span class="k">val</span> <span class="n">display</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">AnimationFrame</span><span class="p">.</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span> <span class="kt">list</span> <span class="c">(* The first line will be displayed next to the name, the rest, if any, will be displayed smaller underneath *)</span>
-<a name="rest_code_cf2ee4f1b6f54a5a890882ccf586739a-8"></a>  <span class="k">val</span> <span class="n">display_details</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">AnimationFrame</span><span class="p">.</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span> <span class="kt">list</span> <span class="c">(* These will be displayed one-per-line when a resource display is expanded *)</span>
-<a name="rest_code_cf2ee4f1b6f54a5a890882ccf586739a-9"></a><span class="k">end</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_02285f0349a34e0aa538b3b1e5e8c8a7-1">1</a>
+<a href="#rest_code_02285f0349a34e0aa538b3b1e5e8c8a7-2">2</a>
+<a href="#rest_code_02285f0349a34e0aa538b3b1e5e8c8a7-3">3</a>
+<a href="#rest_code_02285f0349a34e0aa538b3b1e5e8c8a7-4">4</a>
+<a href="#rest_code_02285f0349a34e0aa538b3b1e5e8c8a7-5">5</a>
+<a href="#rest_code_02285f0349a34e0aa538b3b1e5e8c8a7-6">6</a>
+<a href="#rest_code_02285f0349a34e0aa538b3b1e5e8c8a7-7">7</a>
+<a href="#rest_code_02285f0349a34e0aa538b3b1e5e8c8a7-8">8</a>
+<a href="#rest_code_02285f0349a34e0aa538b3b1e5e8c8a7-9">9</a></pre></div></td>
+<td class="code"><pre class="code ocaml"><a name="rest_code_02285f0349a34e0aa538b3b1e5e8c8a7-1"></a><span class="k">type</span> <span class="n">resource_id</span> <span class="o">=</span> <span class="nc">ResourceID</span> <span class="k">of</span> <span class="kt">string</span>
+<a name="rest_code_02285f0349a34e0aa538b3b1e5e8c8a7-2"></a>
+<a name="rest_code_02285f0349a34e0aa538b3b1e5e8c8a7-3"></a><span class="k">module</span> <span class="k">type</span> <span class="nc">Resource</span> <span class="o">=</span> <span class="k">sig</span>
+<a name="rest_code_02285f0349a34e0aa538b3b1e5e8c8a7-4"></a>  <span class="k">type</span> <span class="n">t</span>
+<a name="rest_code_02285f0349a34e0aa538b3b1e5e8c8a7-5"></a>  <span class="k">val</span> <span class="n">id</span> <span class="o">:</span> <span class="n">resource_id</span>
+<a name="rest_code_02285f0349a34e0aa538b3b1e5e8c8a7-6"></a>  <span class="k">val</span> <span class="n">name</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span>
+<a name="rest_code_02285f0349a34e0aa538b3b1e5e8c8a7-7"></a>  <span class="k">val</span> <span class="n">display</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">AnimationFrame</span><span class="p">.</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span> <span class="kt">list</span> <span class="c">(* The first line will be displayed next to the name, the rest, if any, will be displayed smaller underneath *)</span>
+<a name="rest_code_02285f0349a34e0aa538b3b1e5e8c8a7-8"></a>  <span class="k">val</span> <span class="n">display_details</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">AnimationFrame</span><span class="p">.</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span> <span class="kt">list</span> <span class="c">(* These will be displayed one-per-line when a resource display is expanded *)</span>
+<a name="rest_code_02285f0349a34e0aa538b3b1e5e8c8a7-9"></a><span class="k">end</span>
 </pre></td>
 </tr></table>
 <p>The type <tt class="docutils literal">t</tt> is where the resource will store all it's information, which may be as simple as just a single number.</p>
 <p>I'm also going to make a <tt class="docutils literal">src/overbots_types.ml</tt> file and put this in it:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_522c9d6242fa431a878a1fbbf15c9a29-1">1</a></pre></div></td>
-<td class="code"><pre class="code ocaml"><a name="rest_code_522c9d6242fa431a878a1fbbf15c9a29-1"></a><span class="k">module</span> <span class="nc">Resources</span> <span class="o">=</span> <span class="nc">Overbots_types_resources</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_c8d00c037e414d47a1b2af6b4be91747-1">1</a></pre></div></td>
+<td class="code"><pre class="code ocaml"><a name="rest_code_c8d00c037e414d47a1b2af6b4be91747-1"></a><span class="k">module</span> <span class="nc">Resources</span> <span class="o">=</span> <span class="nc">Overbots_types_resources</span>
 </pre></td>
 </tr></table>
 <p>Next I want a place to store all the resource definitions, so inside <tt class="docutils literal">src/overbots_resources.ml</tt> I'll be placing in:</p>
