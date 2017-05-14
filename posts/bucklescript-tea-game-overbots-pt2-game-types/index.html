@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Bucklescript-TEA tutorial game OverBots Pt.1 - Game Types">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 <title>Bucklescript-Tea Game OverBots Pt.2 - Game Types | Hyperglot Programmer</title>
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" type="text/css">
@@ -14,14 +15,18 @@
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
 <link rel="alternate" type="application/atom+xml" title="Atom" href="../../index.atom">
 <link rel="canonical" href="http://blog.overminddl1.com/posts/bucklescript-tea-game-overbots-pt2-game-types/">
+<meta name="description" content="Bucklescript-TEA tutorial game OverBots Pt.1 - Game Types">
 <meta name="author" content="OvermindDL1">
 <meta name="robots" content="noindex">
 <meta property="og:site_name" content="Hyperglot Programmer">
 <meta property="og:title" content="Bucklescript-Tea Game OverBots Pt.2 - Game Types">
 <meta property="og:url" content="http://blog.overminddl1.com/posts/bucklescript-tea-game-overbots-pt2-game-types/">
-<meta property="og:description" content="Write your post here.">
+<meta property="og:description" content="Bucklescript-TEA tutorial game OverBots Pt.1 - Game Types">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2017-05-13T23:08:02-06:00">
+<meta property="article:tag" content="bucklescript">
+<meta property="article:tag" content="bucklescript-tea">
+<meta property="article:tag" content="overbots">
 </head>
 <body>
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
@@ -93,7 +98,7 @@ mdl-layout--small-screen-only
 
          <main id="content" class="mdl-layout__content"><div class="site-post site-card mdl-grid">
     <div class="mdl-card mdl-cell mdl-cell--12-col
-    site-post-text
+    site-post-code
     mdl-shadow--4dp
 ">
         <article class="h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><div class="mdl-card__media"></div>
@@ -103,11 +108,70 @@ mdl-layout--small-screen-only
         <h1 class="mdl-card__title-text p-name entry-title" itemprop="headline name">Bucklescript-Tea Game OverBots Pt.2 - Game Types</h1>
     </div>
 
-    
+    <meta name="description" itemprop="description" content="Bucklescript-TEA tutorial game OverBots Pt.1 - Game Types">
+<div class="mdl-card__supporting-text e-content entry-content" itemprop="articleBody text">
+                <div>
+<p>Welcome back to developing OverBots with Bucklescript-TEA!</p>
+<p>This time we are going to follow a 'type-driven' style of design.  This is pretty foreign in the javascript world due to limitations of the javascript language, but it is an excellent methodology to help you figure out the design of your application before you ever write executable code, thus helping you to do it properly the first time.</p>
+<!-- TEASER_END -->
+<p>However, considering this game has no real design behind it, this may of course change a few times, but over the course of this post let's see if we can help figure out what that design should be first and foremost.  :-)</p>
+<p>First, I went ahead and added a <tt class="docutils literal">README.md</tt> to the <a class="reference external" href="https://github.com/OvermindDL1/overbots">git repo</a> that points to these posts.  You can access the full posts listing via the <a class="reference external" href="../../tags/overbots/">overbots</a> tag at the bottom of each of these posts as well.</p>
+<div class="section" id="type-driven-design">
+<h2>Type-Driven Design</h2>
+<p>The way most programs are designed, especially in javascript, is either a top-down or bottom-up approach, usually people start with just an open canvas of a page and they start writing javascript to fill it in, what this means is that the overall 'model' of the application changes wildly over the course of it's life, and indeed even the individual variables often change from one revision to the next, not just in their value but also in their types, and this makes tracking down bugs significantly harder.  Languages like <a class="reference external" href="https://www.typescriptlang.org/">Typescript</a>, which adds a layer of typing on normal javascript, help catch these classes of bugs, however it does not really help people to design by types as you are still just decorating variables with types instead of designing the types <em>First</em>.  There are quite a variety of posts and pages and information about Type-Driven design by searching, so I highly suggest to feel free to do so if this is new to you as I will only talk about it cursorily, but in essence it is to design an application by figuring out the data first, then writing code to manipulate that data; you never really want, say, a bare integer around, everything needs a typed name somehow, prevents you from mixing concerns that should not be mixed, preventing entire other classes of common bugs.</p>
+</div>
+<div class="section" id="game-types">
+<h2>Game Types</h2>
+<p>The game itself will have a variety of types to hold a variety of data, and overall this will likely be a very generic incremental game, so let's start with the parts that about every incremental game has.</p>
+<div class="section" id="resources">
+<h3>Resources</h3>
+<p>Every incremental game is about the management and acquisition of resources, a min-max strategy that the player does effectively manually (and this is the primary addiction of these kind of games), so now I need to decide, will I have a set of resources types that are known ahead of time, or will I make it arbitrary for ease of changing later, especially considering that quite a variety can eventually pop up.  Based on all the ones I've done I think I will go with the unknown ones for the design, this does put a bit of a wrinkle in how to actually accomplish this, but it will also be a great opportunity to show off one of the greatest aspects of OCaml, it's first class modules, they will allow me to make resources with a defined interface for being able to display and introspect, but have an unknown storage type and extra functionality all while remaining entirely type-safe (honestly there are other methods of doing this as well, but this is a good topic to show).  I will refrain from writing a small book on all the amazing capabilities of OCaml's module system as those are documented well online already, and instead I will just jump in to it.</p>
+<p>So let's start with a type definition of the interface first of all, maybe starting with (in the <tt class="docutils literal">src/overbots_types_resources.ml</tt> file) a few things like we know we are going to want to display it's amount, and it will have a name (which may change over time, so making it a getter), and we will be adding to this later but for now let's start with:</p>
+<table class="codetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_cf2ee4f1b6f54a5a890882ccf586739a-1">1</a>
+<a href="#rest_code_cf2ee4f1b6f54a5a890882ccf586739a-2">2</a>
+<a href="#rest_code_cf2ee4f1b6f54a5a890882ccf586739a-3">3</a>
+<a href="#rest_code_cf2ee4f1b6f54a5a890882ccf586739a-4">4</a>
+<a href="#rest_code_cf2ee4f1b6f54a5a890882ccf586739a-5">5</a>
+<a href="#rest_code_cf2ee4f1b6f54a5a890882ccf586739a-6">6</a>
+<a href="#rest_code_cf2ee4f1b6f54a5a890882ccf586739a-7">7</a>
+<a href="#rest_code_cf2ee4f1b6f54a5a890882ccf586739a-8">8</a>
+<a href="#rest_code_cf2ee4f1b6f54a5a890882ccf586739a-9">9</a></pre></div></td>
+<td class="code"><pre class="code ocaml"><a name="rest_code_cf2ee4f1b6f54a5a890882ccf586739a-1"></a><span class="k">type</span> <span class="n">resource_id</span> <span class="o">=</span> <span class="nc">ResourceID</span> <span class="k">of</span> <span class="kt">string</span>
+<a name="rest_code_cf2ee4f1b6f54a5a890882ccf586739a-2"></a>
+<a name="rest_code_cf2ee4f1b6f54a5a890882ccf586739a-3"></a><span class="k">module</span> <span class="k">type</span> <span class="nc">Resource</span> <span class="o">=</span> <span class="k">sig</span>
+<a name="rest_code_cf2ee4f1b6f54a5a890882ccf586739a-4"></a>  <span class="k">type</span> <span class="n">t</span>
+<a name="rest_code_cf2ee4f1b6f54a5a890882ccf586739a-5"></a>  <span class="k">val</span> <span class="n">id</span> <span class="o">:</span> <span class="n">resource_id</span>
+<a name="rest_code_cf2ee4f1b6f54a5a890882ccf586739a-6"></a>  <span class="k">val</span> <span class="n">name</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span>
+<a name="rest_code_cf2ee4f1b6f54a5a890882ccf586739a-7"></a>  <span class="k">val</span> <span class="n">display</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">AnimationFrame</span><span class="p">.</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span> <span class="kt">list</span> <span class="c">(* The first line will be displayed next to the name, the rest, if any, will be displayed smaller underneath *)</span>
+<a name="rest_code_cf2ee4f1b6f54a5a890882ccf586739a-8"></a>  <span class="k">val</span> <span class="n">display_details</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">AnimationFrame</span><span class="p">.</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span> <span class="kt">list</span> <span class="c">(* These will be displayed one-per-line when a resource display is expanded *)</span>
+<a name="rest_code_cf2ee4f1b6f54a5a890882ccf586739a-9"></a><span class="k">end</span>
+</pre></td>
+</tr></table>
+<p>The type <tt class="docutils literal">t</tt> is where the resource will store all it's information, which may be as simple as just a single number.</p>
+<p>I'm also going to make a <tt class="docutils literal">src/overbots_types.ml</tt> file and put this in it:</p>
+<table class="codetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_522c9d6242fa431a878a1fbbf15c9a29-1">1</a></pre></div></td>
+<td class="code"><pre class="code ocaml"><a name="rest_code_522c9d6242fa431a878a1fbbf15c9a29-1"></a><span class="k">module</span> <span class="nc">Resources</span> <span class="o">=</span> <span class="nc">Overbots_types_resources</span>
+</pre></td>
+</tr></table>
+<p>Next I want a place to store all the resource definitions, so inside <tt class="docutils literal">src/overbots_resources.ml</tt> I'll be placing in:</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">&lt;string&gt;</tt>, line 54)</p>
+<p>Content block expected for the "code" directive; none found.</p>
+<pre class="literal-block">
+.. code:: ocaml
+  :number-lines:
 
 
-            <div class="mdl-card__supporting-text e-content entry-content" itemprop="articleBody text">
-                <p>Write your post here.</p>
+
+
+
+</pre>
+</div>
+</div>
+</div>
+</div>
             </div>
             
     <div class="mdl-grid mdl-card__supporting-text mdl-card--border metadata">
@@ -136,6 +200,9 @@ mdl-layout--small-screen-only
             
     <div class="mdl-grid mdl-card__actions mdl-card--border">
         
+              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-button--accent site-post__tag" rel="tag" title="bucklescript" href="../../tags/bucklescript/">bucklescript</a>
+              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-button--accent site-post__tag" rel="tag" title="bucklescript-tea" href="../../tags/bucklescript-tea/">bucklescript-tea</a>
+              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-button--accent site-post__tag" rel="tag" title="overbots" href="../../tags/overbots/">overbots</a>
 
         <div class="section-spacer"></div>
         

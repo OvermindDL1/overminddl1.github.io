@@ -1,7 +1,7 @@
 .. title: Bucklescript-Tea Game OverBots Pt.1 - Setup
 .. slug: bucklescript-tea-game-overbots-pt1-setup
 .. date: 2017-05-13 16:17:21 UTC-06:00
-.. tags: bucklescript, bucklescript-tea
+.. tags: bucklescript, bucklescript-tea, overbots
 .. category: Programming
 .. link:
 .. description: Bucklescript-TEA tutorial game OverBots Pt.1 - Setup
@@ -18,6 +18,66 @@ I've decided to make a little incremental game, they are addictive to me and I e
 
 Why did I name it OverBots?  No clue, first thing that popped up in mind.  If there is a really good and appropriate name then please suggest it.  :-)
 
+=====================
+Why Bucklescript-TEA?
+=====================
+
+Feel free to skip this section and jump down to `What is an incremental game?`_ if you know Elm_ already.  Basically Bucklescript-TEA uses `The Elm Architecture`_ but placed into the significantly more powerful language of OCaml, however most of the syntax and calls remain identical, you can 'almost' copy Elm code in to Bucklescript-TEA with minor formatting changes.  :-)
+
+Basically TEA is designed to make complex web apps that remain maintainable, fast, and reusable.  You separate your data storage into a defined and segmented area, your view in another, and your updating in yet another, all kept distinct.  The basic structure of a TEA application is as follows:
+
+**Your model definition:**
+
+.. code:: ocaml
+
+  type model = {
+    x : int
+    y : string
+    z : SomethingElse.t
+  }
+
+This is where all your data is stored, the only place, can add whatever fields you wish, can link to type definitions that are defined or that you define elsewhere and link them in here, everything eventually ends up here and is stored here.
+
+
+**Your message type:**
+.. code:: ocaml
+
+  type msg =
+  | Blah
+  | Blorp of int
+
+This will be a type of your choosing that you will give to your updater to perform actions, such as when a button is clicked or a timer elapses.
+
+**Your update 'loop':**
+
+.. code:: ocaml
+
+  let update model msg =
+  model, Cmd.none
+
+The ``update`` function takes the model structure and a message of the `msg` type of your own choosing above.  You update your model based on the message and return the updated model and an optional 'Cmd'.  Commands are used to 'do' something out of the main app interface, such as update the address bar as one example.
+
+**Your view creator:**
+
+.. code:: ocaml
+
+  let view model =
+    div
+    []
+    [ text "Hello World!"
+    ]
+
+The view function takes your model whenever it changes, creates a virtual DOM based on that model and returns it.  The internal virtual DOM implementation does a diff between this and the last state and only updates the physical DOM where and when it is necessary, thus making this overall a very cheap operation, easily composable by calling more view functions of your own choosing, so you could, for example, have a button function that returns the vdom for a button that you just call where you need it.
+
+With these parts you have a very composable and easy to reason about application that is wonderfully easy to debug while also minimizing the time needed to debug as you can easily find what message happened that caused the model to change and see exactly what occurred.
+
+============================
+What is an incremental game?
+============================
+
+The 'original' and probably most popular Incremental Game is Cookie Clicker, though the genre has now grown to encompass a variety of similar style, many of which have become time based that players min/max to increase their score.  They tend to be quite simple and most are indeed purely text based.  This one will not be so clicking repeatedly based but will be more about pure resource acquisition as this is a more challenging code design.
+
+=============
 Initial Setup
 =============
 
@@ -206,6 +266,7 @@ And to use it let's change the package.json ``"scripts"`` section to be this:
 And since I do not like to put tons of config options on the commandline in script, let's put the rollup options in a ``rollup.config.js`` file in the root directory of the project and put this in it:
 
 .. code:: javascript
+  :number-lines:
 
   export default {
     entry: 'lib/es6/overbots.js',
@@ -216,6 +277,7 @@ And since I do not like to put tons of config options on the commandline in scri
 And now we can run ``npm run build`` to build it all to a final bundled file, or run ``npm run watch`` to do the same on every save of source files.  For the purpose of testing I'm also going to make a ``release/dev.html`` file with this so I can load it in the browser for ease of development:
 
 .. code:: html
+  :number-lines:
 
   <html>
   <head>
@@ -237,3 +299,5 @@ And loading that up in the browser I just see a ``42`` printed inside a div and 
 This will be good for the initial setup, development, and etc. I think, next time let's start making the game!
 
 .. _`Why Use Bucklescript`: link://slug/why-use-bucklescript
+.. _Elm: http://elm-lang.org/
+.. _`The Elm Architecture`: https://guide.elm-lang.org/architecture/
