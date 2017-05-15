@@ -306,6 +306,47 @@ And now we can run ``npm run build`` to build it all to a final bundled file, or
 
 And loading that up in the browser I just see a ``42`` printed inside a div and that is all.  :-)
 
+===
+CSS
+===
+
+I also want to use SCSS for CSS as it makes dealing with CSS to be far more maintainable, thus:
+
+.. code:: shell
+
+  ╭─overminddl1@snip ~/ocaml/overbots  ‹master*›
+  ╰─➤  npm install --save-dev node-sass nodemon postcss autoprefixer postcss-cli
+  ├── autoprefixer@7.0.1
+  ├── node-sass@4.5.2
+  ├── nodemon@1.11.0
+  ├── postcss@6.0.1
+  └── postcss-cli@4.0.0
+
+And changing my ``package.json`` ```"scripts"`` block to be:
+
+.. code:: json
+
+  {
+    "build:bsb": "bsb -make-world",
+    "build:js": "rollup -c",
+    "build:scss": "node-sass --include-path scss scss/overbots.scss css/overbots.css",
+    "build:css": "postcss --use autoprefixer -o release/overbots.css css/overbots.css",
+    "build": "run-s build:bsb build:js build:scss build:css",
+    "watch:bsb": "bsb -w",
+    "watch:js": "rollup -c -w",
+    "watch:scss": "nodemon -e scss -x \"npm run build:scss\"",
+    "watch:css": "nodemon -e css -x \"npm run build:css\"",
+    "prewatch": "run-s build",
+    "watch": "run-p watch:bsb watch:js watch:scss watch:css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+
+And I also added a stylesheet to it in the ``dev.html`` file in the head above the script tags:
+
+.. code:: html
+
+  <link rel="stylesheet" type="text/css" href="overbots.css">
+
 This will be good for the initial setup, development, and etc. I think, next time let's start making the game!
 
 .. _`Why Use Bucklescript`: link://slug/why-use-bucklescript
