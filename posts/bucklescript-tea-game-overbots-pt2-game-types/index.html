@@ -143,31 +143,31 @@ maximum 1 argument(s) allowed, 2 supplied.</p>
 </div>
 <p>So let's start with a type definition of the interface first of all, maybe starting with (in the <tt class="docutils literal">src/overbots_types_resources.ml</tt> file) a few things like we know we are going to want to display it's amount, and it will have a name (which may change over time, so making it a getter), and we will be adding to this later but for now let's start with:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_89ed1792c0b14c018f7aa0871dc3f118-1">1</a>
-<a href="#rest_code_89ed1792c0b14c018f7aa0871dc3f118-2">2</a>
-<a href="#rest_code_89ed1792c0b14c018f7aa0871dc3f118-3">3</a>
-<a href="#rest_code_89ed1792c0b14c018f7aa0871dc3f118-4">4</a>
-<a href="#rest_code_89ed1792c0b14c018f7aa0871dc3f118-5">5</a>
-<a href="#rest_code_89ed1792c0b14c018f7aa0871dc3f118-6">6</a>
-<a href="#rest_code_89ed1792c0b14c018f7aa0871dc3f118-7">7</a>
-<a href="#rest_code_89ed1792c0b14c018f7aa0871dc3f118-8">8</a>
-<a href="#rest_code_89ed1792c0b14c018f7aa0871dc3f118-9">9</a></pre></div></td>
-<td class="code"><pre class="code ocaml"><a name="rest_code_89ed1792c0b14c018f7aa0871dc3f118-1"></a><span class="k">type</span> <span class="n">resource_id</span> <span class="o">=</span> <span class="nc">ResourceID</span> <span class="k">of</span> <span class="kt">string</span>
-<a name="rest_code_89ed1792c0b14c018f7aa0871dc3f118-2"></a>
-<a name="rest_code_89ed1792c0b14c018f7aa0871dc3f118-3"></a><span class="k">module</span> <span class="k">type</span> <span class="nc">Resource</span> <span class="o">=</span> <span class="k">sig</span>
-<a name="rest_code_89ed1792c0b14c018f7aa0871dc3f118-4"></a>  <span class="k">type</span> <span class="n">t</span>
-<a name="rest_code_89ed1792c0b14c018f7aa0871dc3f118-5"></a>  <span class="k">val</span> <span class="n">id</span> <span class="o">:</span> <span class="n">resource_id</span>
-<a name="rest_code_89ed1792c0b14c018f7aa0871dc3f118-6"></a>  <span class="k">val</span> <span class="n">name</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span>
-<a name="rest_code_89ed1792c0b14c018f7aa0871dc3f118-7"></a>  <span class="k">val</span> <span class="n">display</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">AnimationFrame</span><span class="p">.</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span> <span class="kt">list</span> <span class="c">(* The first line will be displayed next to the name, the rest, if any, will be displayed smaller underneath *)</span>
-<a name="rest_code_89ed1792c0b14c018f7aa0871dc3f118-8"></a>  <span class="k">val</span> <span class="n">display_details</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">AnimationFrame</span><span class="p">.</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span> <span class="kt">list</span> <span class="c">(* These will be displayed one-per-line when a resource display is expanded *)</span>
-<a name="rest_code_89ed1792c0b14c018f7aa0871dc3f118-9"></a><span class="k">end</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-1">1</a>
+<a href="#rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-2">2</a>
+<a href="#rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-3">3</a>
+<a href="#rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-4">4</a>
+<a href="#rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-5">5</a>
+<a href="#rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-6">6</a>
+<a href="#rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-7">7</a>
+<a href="#rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-8">8</a>
+<a href="#rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-9">9</a></pre></div></td>
+<td class="code"><pre class="code ocaml"><a name="rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-1"></a><span class="k">type</span> <span class="n">resource_id</span> <span class="o">=</span> <span class="nc">ResourceID</span> <span class="k">of</span> <span class="kt">string</span>
+<a name="rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-2"></a>
+<a name="rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-3"></a><span class="k">module</span> <span class="k">type</span> <span class="nc">Resource</span> <span class="o">=</span> <span class="k">sig</span>
+<a name="rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-4"></a>  <span class="k">type</span> <span class="n">t</span>
+<a name="rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-5"></a>  <span class="k">val</span> <span class="n">id</span> <span class="o">:</span> <span class="n">resource_id</span>
+<a name="rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-6"></a>  <span class="k">val</span> <span class="n">name</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span>
+<a name="rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-7"></a>  <span class="k">val</span> <span class="n">display</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">AnimationFrame</span><span class="p">.</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span> <span class="kt">list</span> <span class="c">(* The first line will be displayed next to the name, the rest, if any, will be displayed smaller underneath *)</span>
+<a name="rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-8"></a>  <span class="k">val</span> <span class="n">display_details</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">AnimationFrame</span><span class="p">.</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span> <span class="kt">list</span> <span class="c">(* These will be displayed one-per-line when a resource display is expanded *)</span>
+<a name="rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-9"></a><span class="k">end</span>
 </pre></td>
 </tr></table>
 <p>The type <tt class="docutils literal">t</tt> is where the resource will store all it's information, which may be as simple as just a single number.</p>
 <p>I'm also going to make a <tt class="docutils literal">src/overbots_types.ml</tt> file and put this in it:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_df8e233acba94d7294818629efd39cba-1">1</a></pre></div></td>
-<td class="code"><pre class="code ocaml"><a name="rest_code_df8e233acba94d7294818629efd39cba-1"></a><span class="k">module</span> <span class="nc">Resources</span> <span class="o">=</span> <span class="nc">Overbots_types_resources</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_22ade5c7a6cc49658fced9493e61088d-1">1</a></pre></div></td>
+<td class="code"><pre class="code ocaml"><a name="rest_code_22ade5c7a6cc49658fced9493e61088d-1"></a><span class="k">module</span> <span class="nc">Resources</span> <span class="o">=</span> <span class="nc">Overbots_types_resources</span>
 </pre></td>
 </tr></table>
 <p>Next I want a place to store all the resource definitions, so inside <tt class="docutils literal">src/overbots_resources.ml</tt> I'll be placing in:</p>
