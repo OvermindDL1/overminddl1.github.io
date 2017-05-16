@@ -347,6 +347,8 @@ And I also added a stylesheet to it in the ``dev.html`` file in the head above t
 
   <link rel="stylesheet" type="text/css" href="overbots.css">
 
+As well as creating an empty file at ``scss/overbots.scss``.
+
 This will be good for the initial setup, development, and etc. I think, next time let's start making the game!
 
 ======
