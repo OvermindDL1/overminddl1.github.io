@@ -8,7 +8,7 @@
 .. type: code
 .. author: OvermindDL1
 
-It is now time to design the application itself and this will be done by following a type-driven design, where we design the types first before writing the code that transforms them around.
+It is now time to design the application itself and this will be done by following a type-driven design, where we design the types first before writing the code that transforms the data between the types.
 
 .. TEASER_END
 
