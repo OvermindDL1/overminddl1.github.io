@@ -11,3 +11,4 @@ git push origin
 nikola build
 nikola deploy
 nikola github_deploy
+git pull
