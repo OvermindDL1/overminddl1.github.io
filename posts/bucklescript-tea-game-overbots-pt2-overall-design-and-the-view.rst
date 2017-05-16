@@ -1,6 +1,6 @@
 .. title: Bucklescript-Tea Game Overbots Pt.2 - Overall Design and the View
 .. slug: bucklescript-tea-game-overbots-pt2-overall-design-and-the-views
-.. date: 2017-05-16 09:31:19 UTC-06:00
+.. date: 2017-05-15 06:31:19 UTC-06:00
 .. tags: bucklescript, bucklescript-tea, overbots
 .. category: Programming
 .. link:
