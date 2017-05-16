@@ -349,6 +349,16 @@ And I also added a stylesheet to it in the ``dev.html`` file in the head above t
 
 This will be good for the initial setup, development, and etc. I think, next time let's start making the game!
 
+======
+Result
+======
+
+You can access the output of this post at `Overbots Pt1`_.
+
+And the source is on the `Overbots Github Pt1`_.
+
 .. _`Why Use Bucklescript`: link://slug/why-use-bucklescript
 .. _Elm: http://elm-lang.org/
 .. _`The Elm Architecture`: https://guide.elm-lang.org/architecture/
+.. _`Overbots Pt1`: dev.html
+.. _`Overbots Github Pt1`: https://github.com/OvermindDL1/overbots/tree/pt1
