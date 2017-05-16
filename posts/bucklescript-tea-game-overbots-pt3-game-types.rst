@@ -1,10 +1,10 @@
-.. title: Bucklescript-Tea Game OverBots Pt.2 - Game Types
-.. slug: bucklescript-tea-game-overbots-pt2-game-types
+.. title: Bucklescript-Tea Game OverBots Pt.3 - Game Types
+.. slug: bucklescript-tea-game-overbots-pt3-game-types
 .. date: 2017-05-13 23:08:02 UTC-06:00
 .. tags: draft, bucklescript, bucklescript-tea, overbots
 .. category: Programming
 .. link:
-.. description: Bucklescript-TEA tutorial game OverBots Pt.1 - Game Types
+.. description: Bucklescript-TEA tutorial game OverBots Pt.3 - Game Types
 .. type: code
 .. author: OvermindDL1
 
@@ -38,7 +38,7 @@ Every incremental game is about the management and acquisition of resources, a m
 .. code:: ocaml
   :number-lines:
 
-  
+
 
 
  so now I need to decide, will I have a set of resources types that are known ahead of time, or will I make it arbitrary for ease of changing later, especially considering that quite a variety can eventually pop up.  Based on all the ones I've done I think I will go with the unknown ones for the design, this does put a bit of a wrinkle in how to actually accomplish this, but it will also be a great opportunity to show off one of the greatest aspects of OCaml, it's first class modules, they will allow me to make resources with a defined interface for being able to display and introspect, but have an unknown storage type and extra functionality all while remaining entirely type-safe (honestly there are other methods of doing this as well, but this is a good topic to show).  I will refrain from writing a small book on all the amazing capabilities of OCaml's module system as those are documented well online already, and instead I will just jump in to it.

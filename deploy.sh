@@ -4,6 +4,7 @@
 
 set +e
 
+rm -r output/*
 nikola clean
 git add -A
 git commit -m 'Automatic deployment'
