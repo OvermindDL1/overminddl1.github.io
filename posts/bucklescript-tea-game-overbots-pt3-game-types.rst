@@ -264,20 +264,8 @@ Easily expandable by adding to the variants for each.  I could wrap these up int
   let bool_flag_exists fid model =
     BoolFlagSet.mem fid model.bool_flags
 
-  let bool_flag_set fid model =
-    let bool_flags = BoolFlagSet.remove fid model.bool_flags in
-    {model with bool_flags}
-
   let int_flag_value fid model =
     IntFlagMap.find fid model.int_flags
-
-  let int_flag_set fid value model =
-    let int_flags = IntFlagMap.add fid value model.int_flags in
-    {model with int_flags}
-
-  let int_flag_add fid delta model =
-    let value = delta + int_flag_value fid model in
-    int_flag_set fid value model
 
 And changing the main ``model`` type to be:
 
