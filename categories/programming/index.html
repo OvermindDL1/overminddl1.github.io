@@ -102,6 +102,52 @@ mdl-layout--small-screen-only
         </button>
     <article class="h-entry"><div class="mdl-card__media"></div>
     <div class="mdl-card__title">
+        <h1 class="mdl-card__title-text p-name entry-title"><a href="../../posts/bucklescript-tea-game-overbots-pt2-overall-design-and-the-views/" class="u-url">Bucklescript-Tea Game Overbots Pt.2 - Overall Design and the View</a></h1>
+    </div>
+    <div class="mdl-card__supporting-text p-summary entry-summary">
+    <div>
+<p>In this part let's come up with a simple format of how the game should look and act while writing out the start of the view.</p>
+<p class="more"><a href="../../posts/bucklescript-tea-game-overbots-pt2-overall-design-and-the-views/">Read more…</a></p>
+</div>
+    </div>
+    
+    <div class="mdl-grid mdl-card__supporting-text mdl-card--border metadata">
+        <div class="mdl-cell mdl-cell--1-col">
+          <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
+            
+            <img src="https://www.gravatar.com/avatar/5575f10ccc57e0608827fd332448225b" style="width: 100%; height: 100%;"></button>
+        </div>
+        <div class="mdl-grid mdl-cell mdl-cell--9-col">
+            <span class="mdl-cell mdl-cell--12-col site-post__author no-margin-bottom">
+                OvermindDL1
+            </span>
+            <span class="mdl-cell mdl-cell--12-col site-post__date">
+                <time class="published dt-published" datetime="2017-05-16T09:31:19-06:00" itemprop="datePublished" title="2017-05-16 09:31">2017-05-16 09:31
+                </time></span>
+        </div>
+        <span class="mdl-cell mdl-cell--2-col site-post__total-comment">
+                
+        
+    <a href="../../posts/bucklescript-tea-game-overbots-pt2-overall-design-and-the-views/#disqus_thread" data-disqus-identifier="cache/posts/bucklescript-tea-game-overbots-pt2-overall-design-and-the-view.html">Comments</a>
+
+
+        </span>
+    </div>
+
+    </article>
+</div>
+<div class="mdl-card mdl-cell mdl-cell--12-col
+    site-post-code
+    mdl-shadow--4dp
+">
+        <button class="mdl-button mdl-js-button mdl-button--fab mdl-color--accent mdl-js-ripple-effect">
+            <i class="material-icons mdl-color-text--white" role="presentation">
+                code
+            </i>
+            <span class="visuallyhidden">code</span>
+        </button>
+    <article class="h-entry"><div class="mdl-card__media"></div>
+    <div class="mdl-card__title">
         <h1 class="mdl-card__title-text p-name entry-title"><a href="../../posts/bucklescript-tea-game-overbots-pt1-setup/" class="u-url">Bucklescript-Tea Game OverBots Pt.1 - Setup</a></h1>
     </div>
     <div class="mdl-card__supporting-text p-summary entry-summary">
@@ -200,16 +246,16 @@ mdl-layout--small-screen-only
     <div>
 <p>Why might you want to use Bucklescript?  Let's explore just how awesome OCaml is to use on javascript over alternative languages and why it has staying power.</p>
 <p>OCaml/Bucklescript:</p>
-<pre class="code ocaml"><a name="rest_code_5c3dc2c0486e4c329a7a55b290b7fafe-1"></a><span class="n">print_endline</span> <span class="s2">"Hello World!"</span>
-<a name="rest_code_5c3dc2c0486e4c329a7a55b290b7fafe-2"></a>
-<a name="rest_code_5c3dc2c0486e4c329a7a55b290b7fafe-3"></a><span class="k">let</span> <span class="n">add</span> <span class="n">l</span> <span class="n">r</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="n">r</span>
+<pre class="code ocaml"><a name="rest_code_0e41e243254b416095c86b87e0f5f539-1"></a><span class="n">print_endline</span> <span class="s2">"Hello World!"</span>
+<a name="rest_code_0e41e243254b416095c86b87e0f5f539-2"></a>
+<a name="rest_code_0e41e243254b416095c86b87e0f5f539-3"></a><span class="k">let</span> <span class="n">add</span> <span class="n">l</span> <span class="n">r</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="n">r</span>
 </pre>
 <p>Javascript:</p>
-<pre class="code javascript"><a name="rest_code_e70296243d1940e0af2592ab4d1c566f-1"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Hello World!"</span><span class="p">);</span>
-<a name="rest_code_e70296243d1940e0af2592ab4d1c566f-2"></a>
-<a name="rest_code_e70296243d1940e0af2592ab4d1c566f-3"></a><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">l</span><span class="p">,</span> <span class="nx">r</span><span class="p">)</span> <span class="p">{</span>
-<a name="rest_code_e70296243d1940e0af2592ab4d1c566f-4"></a>  <span class="k">return</span> <span class="nx">l</span> <span class="o">+</span> <span class="nx">r</span> <span class="o">|</span> <span class="mi">0</span><span class="p">;</span>
-<a name="rest_code_e70296243d1940e0af2592ab4d1c566f-5"></a><span class="p">}</span>
+<pre class="code javascript"><a name="rest_code_e01b78f9731f4f63a3ad5f648dab2a45-1"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Hello World!"</span><span class="p">);</span>
+<a name="rest_code_e01b78f9731f4f63a3ad5f648dab2a45-2"></a>
+<a name="rest_code_e01b78f9731f4f63a3ad5f648dab2a45-3"></a><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">l</span><span class="p">,</span> <span class="nx">r</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_e01b78f9731f4f63a3ad5f648dab2a45-4"></a>  <span class="k">return</span> <span class="nx">l</span> <span class="o">+</span> <span class="nx">r</span> <span class="o">|</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_e01b78f9731f4f63a3ad5f648dab2a45-5"></a><span class="p">}</span>
 </pre>
 <p class="more"><a href="../../posts/why-use-bucklescript/">Read more…</a></p>
 </div>

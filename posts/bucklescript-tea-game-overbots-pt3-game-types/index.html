@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="Bucklescript-TEA tutorial game OverBots Pt.1 - Game Types">
+<meta name="description" content="Bucklescript-TEA tutorial game OverBots Pt.3 - Game Types">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-<title>Bucklescript-Tea Game OverBots Pt.2 - Game Types | Hyperglot Programmer</title>
+<title>Bucklescript-Tea Game OverBots Pt.3 - Game Types | Hyperglot Programmer</title>
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" type="text/css">
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" type="text/css">
 <link rel="stylesheet" href="//storage.googleapis.com/code.getmdl.io/1.1.3/material.blue_grey-blue.min.css">
@@ -14,14 +14,14 @@
 <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
 <link rel="alternate" type="application/atom+xml" title="Atom" href="../../index.atom">
-<link rel="canonical" href="http://blog.overminddl1.com/posts/bucklescript-tea-game-overbots-pt2-game-types/">
-<meta name="description" content="Bucklescript-TEA tutorial game OverBots Pt.1 - Game Types">
+<link rel="canonical" href="http://blog.overminddl1.com/posts/bucklescript-tea-game-overbots-pt3-game-types/">
+<meta name="description" content="Bucklescript-TEA tutorial game OverBots Pt.3 - Game Types">
 <meta name="author" content="OvermindDL1">
 <meta name="robots" content="noindex">
 <meta property="og:site_name" content="Hyperglot Programmer">
-<meta property="og:title" content="Bucklescript-Tea Game OverBots Pt.2 - Game Types">
-<meta property="og:url" content="http://blog.overminddl1.com/posts/bucklescript-tea-game-overbots-pt2-game-types/">
-<meta property="og:description" content="Bucklescript-TEA tutorial game OverBots Pt.1 - Game Types">
+<meta property="og:title" content="Bucklescript-Tea Game OverBots Pt.3 - Game Types">
+<meta property="og:url" content="http://blog.overminddl1.com/posts/bucklescript-tea-game-overbots-pt3-game-types/">
+<meta property="og:description" content="Bucklescript-TEA tutorial game OverBots Pt.3 - Game Types">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2017-05-13T23:08:02-06:00">
 <meta property="article:tag" content="bucklescript">
@@ -105,10 +105,10 @@ mdl-layout--small-screen-only
             
     
     <div class="mdl-card__title">
-        <h1 class="mdl-card__title-text p-name entry-title" itemprop="headline name">Bucklescript-Tea Game OverBots Pt.2 - Game Types</h1>
+        <h1 class="mdl-card__title-text p-name entry-title" itemprop="headline name">Bucklescript-Tea Game OverBots Pt.3 - Game Types</h1>
     </div>
 
-    <meta name="description" itemprop="description" content="Bucklescript-TEA tutorial game OverBots Pt.1 - Game Types">
+    <meta name="description" itemprop="description" content="Bucklescript-TEA tutorial game OverBots Pt.3 - Game Types">
 <div class="mdl-card__supporting-text e-content entry-content" itemprop="articleBody text">
                 <div>
 <p>Welcome back to developing OverBots with Bucklescript-TEA!</p>
@@ -143,31 +143,31 @@ maximum 1 argument(s) allowed, 2 supplied.</p>
 </div>
 <p>So let's start with a type definition of the interface first of all, maybe starting with (in the <tt class="docutils literal">src/overbots_types_resources.ml</tt> file) a few things like we know we are going to want to display it's amount, and it will have a name (which may change over time, so making it a getter), and we will be adding to this later but for now let's start with:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-1">1</a>
-<a href="#rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-2">2</a>
-<a href="#rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-3">3</a>
-<a href="#rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-4">4</a>
-<a href="#rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-5">5</a>
-<a href="#rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-6">6</a>
-<a href="#rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-7">7</a>
-<a href="#rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-8">8</a>
-<a href="#rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-9">9</a></pre></div></td>
-<td class="code"><pre class="code ocaml"><a name="rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-1"></a><span class="k">type</span> <span class="n">resource_id</span> <span class="o">=</span> <span class="nc">ResourceID</span> <span class="k">of</span> <span class="kt">string</span>
-<a name="rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-2"></a>
-<a name="rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-3"></a><span class="k">module</span> <span class="k">type</span> <span class="nc">Resource</span> <span class="o">=</span> <span class="k">sig</span>
-<a name="rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-4"></a>  <span class="k">type</span> <span class="n">t</span>
-<a name="rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-5"></a>  <span class="k">val</span> <span class="n">id</span> <span class="o">:</span> <span class="n">resource_id</span>
-<a name="rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-6"></a>  <span class="k">val</span> <span class="n">name</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span>
-<a name="rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-7"></a>  <span class="k">val</span> <span class="n">display</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">AnimationFrame</span><span class="p">.</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span> <span class="kt">list</span> <span class="c">(* The first line will be displayed next to the name, the rest, if any, will be displayed smaller underneath *)</span>
-<a name="rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-8"></a>  <span class="k">val</span> <span class="n">display_details</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">AnimationFrame</span><span class="p">.</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span> <span class="kt">list</span> <span class="c">(* These will be displayed one-per-line when a resource display is expanded *)</span>
-<a name="rest_code_319ae7a6696d4ca98b4aee41ebfc3c8a-9"></a><span class="k">end</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_a631d84e2fce406f9a381358922ddb29-1">1</a>
+<a href="#rest_code_a631d84e2fce406f9a381358922ddb29-2">2</a>
+<a href="#rest_code_a631d84e2fce406f9a381358922ddb29-3">3</a>
+<a href="#rest_code_a631d84e2fce406f9a381358922ddb29-4">4</a>
+<a href="#rest_code_a631d84e2fce406f9a381358922ddb29-5">5</a>
+<a href="#rest_code_a631d84e2fce406f9a381358922ddb29-6">6</a>
+<a href="#rest_code_a631d84e2fce406f9a381358922ddb29-7">7</a>
+<a href="#rest_code_a631d84e2fce406f9a381358922ddb29-8">8</a>
+<a href="#rest_code_a631d84e2fce406f9a381358922ddb29-9">9</a></pre></div></td>
+<td class="code"><pre class="code ocaml"><a name="rest_code_a631d84e2fce406f9a381358922ddb29-1"></a><span class="k">type</span> <span class="n">resource_id</span> <span class="o">=</span> <span class="nc">ResourceID</span> <span class="k">of</span> <span class="kt">string</span>
+<a name="rest_code_a631d84e2fce406f9a381358922ddb29-2"></a>
+<a name="rest_code_a631d84e2fce406f9a381358922ddb29-3"></a><span class="k">module</span> <span class="k">type</span> <span class="nc">Resource</span> <span class="o">=</span> <span class="k">sig</span>
+<a name="rest_code_a631d84e2fce406f9a381358922ddb29-4"></a>  <span class="k">type</span> <span class="n">t</span>
+<a name="rest_code_a631d84e2fce406f9a381358922ddb29-5"></a>  <span class="k">val</span> <span class="n">id</span> <span class="o">:</span> <span class="n">resource_id</span>
+<a name="rest_code_a631d84e2fce406f9a381358922ddb29-6"></a>  <span class="k">val</span> <span class="n">name</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span>
+<a name="rest_code_a631d84e2fce406f9a381358922ddb29-7"></a>  <span class="k">val</span> <span class="n">display</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">AnimationFrame</span><span class="p">.</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span> <span class="kt">list</span> <span class="c">(* The first line will be displayed next to the name, the rest, if any, will be displayed smaller underneath *)</span>
+<a name="rest_code_a631d84e2fce406f9a381358922ddb29-8"></a>  <span class="k">val</span> <span class="n">display_details</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">AnimationFrame</span><span class="p">.</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="kt">string</span> <span class="kt">list</span> <span class="c">(* These will be displayed one-per-line when a resource display is expanded *)</span>
+<a name="rest_code_a631d84e2fce406f9a381358922ddb29-9"></a><span class="k">end</span>
 </pre></td>
 </tr></table>
 <p>The type <tt class="docutils literal">t</tt> is where the resource will store all it's information, which may be as simple as just a single number.</p>
 <p>I'm also going to make a <tt class="docutils literal">src/overbots_types.ml</tt> file and put this in it:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_22ade5c7a6cc49658fced9493e61088d-1">1</a></pre></div></td>
-<td class="code"><pre class="code ocaml"><a name="rest_code_22ade5c7a6cc49658fced9493e61088d-1"></a><span class="k">module</span> <span class="nc">Resources</span> <span class="o">=</span> <span class="nc">Overbots_types_resources</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_1b4ef6053e4142928b3079bca577c721-1">1</a></pre></div></td>
+<td class="code"><pre class="code ocaml"><a name="rest_code_1b4ef6053e4142928b3079bca577c721-1"></a><span class="k">module</span> <span class="nc">Resources</span> <span class="o">=</span> <span class="nc">Overbots_types_resources</span>
 </pre></td>
 </tr></table>
 <p>Next I want a place to store all the resource definitions, so inside <tt class="docutils literal">src/overbots_resources.ml</tt> I'll be placing in:</p>
@@ -206,7 +206,7 @@ maximum 1 argument(s) allowed, 2 supplied.</p>
         <span class="mdl-cell mdl-cell--2-col site-post__total-comment">
                 
         
-    <a href="#disqus_thread" data-disqus-identifier="cache/posts/bucklescript-tea-game-overbots-pt2-game-types.html">Comments</a>
+    <a href="#disqus_thread" data-disqus-identifier="cache/posts/bucklescript-tea-game-overbots-pt3-game-types.html">Comments</a>
 
 
         </span>
@@ -234,9 +234,9 @@ maximum 1 argument(s) allowed, 2 supplied.</p>
         <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="overblogdl1",
-            disqus_url="http://blog.overminddl1.com/posts/bucklescript-tea-game-overbots-pt2-game-types/",
-        disqus_title="Bucklescript-Tea Game OverBots Pt.2 - Game Types",
-        disqus_identifier="cache/posts/bucklescript-tea-game-overbots-pt2-game-types.html",
+            disqus_url="http://blog.overminddl1.com/posts/bucklescript-tea-game-overbots-pt3-game-types/",
+        disqus_title="Bucklescript-Tea Game OverBots Pt.3 - Game Types",
+        disqus_identifier="cache/posts/bucklescript-tea-game-overbots-pt3-game-types.html",
         disqus_config = function () {
             this.language = "en";
         };
