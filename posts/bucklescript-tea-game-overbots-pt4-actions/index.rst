@@ -1,7 +1,7 @@
 .. title: Bucklescript-Tea Game OverBots Pt.4 - Actions
 .. slug: bucklescript-tea-game-overbots-pt4-actions
 .. date: 2017-05-17 06:55:42 UTC-06:00
-.. tags: bucklescript, bucklescript-tea, overbots, draft
+.. tags: bucklescript, bucklescript-tea, overbots
 .. category: Programming
 .. link:
 .. description: Bucklescript-TEA tutorial game OverBots Pt.4 - Actions
