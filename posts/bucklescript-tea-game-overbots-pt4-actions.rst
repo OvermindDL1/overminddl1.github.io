@@ -408,7 +408,7 @@ And I know CSS is boring, but here is the new css for ``.container-actions`` for
     }
   }
 
-And with this now done with the first of two major systems in an incremental game, the next post will be about the second, which is Transformation Of Resources.
+And with this now done with the first of two major systems in an incremental game, the next post will be about the second, which is Transformation Of Resources.  The example takes about 80 seconds to run considering the mini-story built above in ``timeactions``, but it shows how it all works.
 
 ======
 Result
