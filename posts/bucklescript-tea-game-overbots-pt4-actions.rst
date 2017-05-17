@@ -12,7 +12,7 @@ Today I'm going to make this actually do something now, thus actions and buttons
 
 .. TEASER_END
 
-To prepare for some of the changes later, I'm adding more helpers for the flags, so it is changed to become:
+To prepare for some of the changes later, I'm adding more helpers for the flags, so ``src/overbots_flags.ml`` is changed to become:
 
 .. code:: ocaml
   :number-lines:
