@@ -234,7 +234,7 @@ I create some timeactions of:
   let init_timeaction at actions = {at; actions}
 
   let timeactions = [|
-  init_timeaction 0.0 [ActionSetBoolFlag SolarPanelsReadyToUnfold];
+  init_timeaction 0.0 [ActionAddResourceAmount (Energy, 100.0)];
   init_timeaction 1.0 [ActionAddMsg "Hmm, what is going on?"];
   init_timeaction 3.0 [ActionSetBoolFlag InternalPowerEnabled; ActionSetFloatFlag (BasicSolarPanelSelfGeneration, 100.0); ActionAddMsg "I appear to be getting power through an umbillica interface, however the data connection across it appears to be down..."];
   init_timeaction 5.0 [ActionAddMsg "Running diagnostics..."];
@@ -254,5 +254,34 @@ I create some timeactions of:
   |]
 
 And to process those I write:
+
+.. code:: ocaml
+
+  let update_timeactions model time =
+    let open Tea in
+    let idx = int_flag_value TimeActionIdx model in
+    let {at; actions} = timeactions.(idx) in
+    if time < at then (model, Cmd.none) else
+    let model = perform_actions model actions in
+    let model = int_flag_add TimeActionIdx 1 model in
+    (model, Cmd.none)
+
+Which is called from the main `update_state` function by making it this:
+
+.. code:: ocaml
+
+  let update_state model new_time =
+    let time = new_time -. model.start_realtime in
+    let model, ta_cmds = Overbots_actions.update_timeactions model time in
+    let model = {model with gametime = time; current_realtime = new_time} in
+    (model, Cmd.batch [ta_cmds])
+
+What this does is just compare the ``timeactions`` in order as they get 'used' and run their actions as necessary, so the consequence of this is that the interface starts bare and it starts printing text, a little story of an AI terraformer in the midst of an accidental landing, the energy does not appear until the second message, but you do not see any changes happening to it yet until we make the transformers, which will likely be the next post.
+
+=======
+Buttons
+=======
+
+Now let's make the buttons as they are the manual form of actions.  To define them I'll make a variant as usual in th new file ``src/overbots_buttons.ml`` but I am going to use the variant form that I described in the resources posts that I ended up not using as I went for modules instead, I could do the same thing here, but in effort to show multiple styles (not necessarily the best for a given task) I'll use the variant form here:
 
 .. code:: ocaml

@@ -155,7 +155,7 @@ Of course go ahead and have npm/node installed, as well as the requirements for 
   Is this ok? (yes)
 
   ╭─overminddl1@snip ~/ocaml/overbots
-  ╰─➤  npm install --safe-dev bs-platform bucklescript-tea
+  ╰─➤  npm install --save-dev bs-platform bucklescript-tea
   ..snip tons and tons of stuff as it installs and compiles
   ├── bs-platform@1.7.3
   └── bucklescript-tea@0.3.2
