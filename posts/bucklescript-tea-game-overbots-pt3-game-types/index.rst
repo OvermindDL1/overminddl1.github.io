@@ -106,17 +106,17 @@ In another file, named ``src/overbots_resources.ml`` I'll put the module informa
     |> add IronOxide (module IronOxide : Resource)
     |> add RawSilicon (module RawSilicon : Resource)
 
-I think I also want the resources shown categorized, so I'll toss the definition here too after the above, lot of strings because the front-end is strings, the first element is the displayed name, the second the class name, the third is the list of resources:
+I think I also want the resources shown categorized, so I'll toss the definition here too after the above, lot of strings because the front-end is strings, the first element is the displayed name, the second the class name, the third is the list of resources, which is a tuple of the resource ID, the string name, and the class name (for css):
 
 .. code:: ocaml
 
   let displayed_resources = [
     ("", "global", [
-        Energy, "energy";
+        Energy, "Energy", "energy";
       ]);
     ("Raw", "raw", [
-        IronOxide, "ironoxide";
-        RawSilicon, "rawsilicon";
+        IronOxide, "Iron Oxide", "ironoxide";
+        RawSilicon, "Raw Silicon", "rawsilicon";
       ]);
   ]
 
