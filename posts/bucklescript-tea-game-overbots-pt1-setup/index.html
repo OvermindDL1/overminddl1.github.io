@@ -122,35 +122,35 @@ mdl-layout--small-screen-only
 <p>Feel free to skip this section and jump down to <a class="reference internal" href="#what-is-an-incremental-game">What is an incremental game?</a> if you know <a class="reference external" href="http://elm-lang.org/">Elm</a> already.  Basically Bucklescript-TEA uses <a class="reference external" href="https://guide.elm-lang.org/architecture/">The Elm Architecture</a> but placed into the significantly more powerful language of OCaml, however most of the syntax and calls remain identical, you can 'almost' copy Elm code in to Bucklescript-TEA with minor formatting changes.  :-)</p>
 <p>Basically TEA is designed to make complex web apps that remain maintainable, fast, and reusable.  You separate your data storage into a defined and segmented area, your view in another, and your updating in yet another, all kept distinct.  The basic structure of a TEA application is as follows:</p>
 <p><strong>Your model definition:</strong></p>
-<pre class="code ocaml"><a name="rest_code_470603c2684c449b86be860b10b45275-1"></a><span class="k">type</span> <span class="n">model</span> <span class="o">=</span> <span class="o">{</span>
-<a name="rest_code_470603c2684c449b86be860b10b45275-2"></a>  <span class="n">x</span> <span class="o">:</span> <span class="kt">int</span>
-<a name="rest_code_470603c2684c449b86be860b10b45275-3"></a>  <span class="n">y</span> <span class="o">:</span> <span class="kt">string</span>
-<a name="rest_code_470603c2684c449b86be860b10b45275-4"></a>  <span class="n">z</span> <span class="o">:</span> <span class="nn">SomethingElse</span><span class="p">.</span><span class="n">t</span>
-<a name="rest_code_470603c2684c449b86be860b10b45275-5"></a><span class="o">}</span>
+<pre class="code ocaml"><a name="rest_code_72715d4294664c7299efbb3f6c2ba475-1"></a><span class="k">type</span> <span class="n">model</span> <span class="o">=</span> <span class="o">{</span>
+<a name="rest_code_72715d4294664c7299efbb3f6c2ba475-2"></a>  <span class="n">x</span> <span class="o">:</span> <span class="kt">int</span>
+<a name="rest_code_72715d4294664c7299efbb3f6c2ba475-3"></a>  <span class="n">y</span> <span class="o">:</span> <span class="kt">string</span>
+<a name="rest_code_72715d4294664c7299efbb3f6c2ba475-4"></a>  <span class="n">z</span> <span class="o">:</span> <span class="nn">SomethingElse</span><span class="p">.</span><span class="n">t</span>
+<a name="rest_code_72715d4294664c7299efbb3f6c2ba475-5"></a><span class="o">}</span>
 </pre>
 <p>This is where all your data is stored, the only place, can add whatever fields you wish, can link to type definitions that are defined or that you define elsewhere and link them in here, everything eventually ends up here and is stored here.</p>
 <p><strong>Your message type:</strong></p>
-<pre class="code ocaml"><a name="rest_code_4d1dc33c53a1429ca1d7e86d1193b5a5-1"></a><span class="k">type</span> <span class="n">msg</span> <span class="o">=</span>
-<a name="rest_code_4d1dc33c53a1429ca1d7e86d1193b5a5-2"></a><span class="o">|</span> <span class="nc">Blah</span>
-<a name="rest_code_4d1dc33c53a1429ca1d7e86d1193b5a5-3"></a><span class="o">|</span> <span class="nc">Blorp</span> <span class="k">of</span> <span class="kt">int</span>
+<pre class="code ocaml"><a name="rest_code_ffc80daeabdf4b399f724d265cdb945f-1"></a><span class="k">type</span> <span class="n">msg</span> <span class="o">=</span>
+<a name="rest_code_ffc80daeabdf4b399f724d265cdb945f-2"></a><span class="o">|</span> <span class="nc">Blah</span>
+<a name="rest_code_ffc80daeabdf4b399f724d265cdb945f-3"></a><span class="o">|</span> <span class="nc">Blorp</span> <span class="k">of</span> <span class="kt">int</span>
 </pre>
 <p>This will be a type of your choosing that you will give to your updater to perform actions, such as when a button is clicked or a timer elapses.</p>
 <p><strong>Your update 'loop':</strong></p>
-<pre class="code ocaml"><a name="rest_code_1edcc8197d034760908b77f0fabd074e-1"></a><span class="k">let</span> <span class="n">update</span> <span class="n">model</span> <span class="n">msg</span> <span class="o">=</span>
-<a name="rest_code_1edcc8197d034760908b77f0fabd074e-2"></a>  <span class="n">model</span><span class="o">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span>
+<pre class="code ocaml"><a name="rest_code_a89410bdaa37420daea84bd7fde7923a-1"></a><span class="k">let</span> <span class="n">update</span> <span class="n">model</span> <span class="n">msg</span> <span class="o">=</span>
+<a name="rest_code_a89410bdaa37420daea84bd7fde7923a-2"></a>  <span class="n">model</span><span class="o">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span>
 </pre>
 <p>The <tt class="docutils literal">update</tt> function takes the model structure and a message of the <cite>msg</cite> type of your own choosing above.  You update your model based on the message and return the updated model and an optional 'Cmd'.  Commands are used to 'do' something out of the main app interface, such as update the address bar as one example.</p>
 <p><strong>Your Subscriptions:</strong></p>
-<pre class="code ocaml"><a name="rest_code_90737206b2e94ee08976a54a8c26cd1a-1"></a><span class="k">let</span> <span class="n">subscriptions</span> <span class="n">model</span> <span class="o">=</span>
-<a name="rest_code_90737206b2e94ee08976a54a8c26cd1a-2"></a>  <span class="nn">Sub</span><span class="p">.</span><span class="n">none</span>
+<pre class="code ocaml"><a name="rest_code_20ce1e74d6434ac4b48905c8fb504bc2-1"></a><span class="k">let</span> <span class="n">subscriptions</span> <span class="n">model</span> <span class="o">=</span>
+<a name="rest_code_20ce1e74d6434ac4b48905c8fb504bc2-2"></a>  <span class="nn">Sub</span><span class="p">.</span><span class="n">none</span>
 </pre>
 <p>Subscriptions are things like listening to events on the DOM or a timer or so, you can register and unregister to subscriptions based on your model state.</p>
 <p><strong>Your view creator:</strong></p>
-<pre class="code ocaml"><a name="rest_code_58f58c9702bb4624993f8862191d9fef-1"></a><span class="k">let</span> <span class="n">view</span> <span class="n">model</span> <span class="o">=</span>
-<a name="rest_code_58f58c9702bb4624993f8862191d9fef-2"></a>  <span class="n">div</span>
-<a name="rest_code_58f58c9702bb4624993f8862191d9fef-3"></a>  <span class="bp">[]</span>
-<a name="rest_code_58f58c9702bb4624993f8862191d9fef-4"></a>  <span class="o">[</span> <span class="n">text</span> <span class="s2">"Hello World!"</span>
-<a name="rest_code_58f58c9702bb4624993f8862191d9fef-5"></a>  <span class="o">]</span>
+<pre class="code ocaml"><a name="rest_code_f926b7b1ede745b5a530d15526eaa0c3-1"></a><span class="k">let</span> <span class="n">view</span> <span class="n">model</span> <span class="o">=</span>
+<a name="rest_code_f926b7b1ede745b5a530d15526eaa0c3-2"></a>  <span class="n">div</span>
+<a name="rest_code_f926b7b1ede745b5a530d15526eaa0c3-3"></a>  <span class="bp">[]</span>
+<a name="rest_code_f926b7b1ede745b5a530d15526eaa0c3-4"></a>  <span class="o">[</span> <span class="n">text</span> <span class="s2">"Hello World!"</span>
+<a name="rest_code_f926b7b1ede745b5a530d15526eaa0c3-5"></a>  <span class="o">]</span>
 </pre>
 <p>The view function takes your model whenever it changes, creates a virtual DOM based on that model and returns it.  The internal virtual DOM implementation does a diff between this and the last state and only updates the physical DOM where and when it is necessary, thus making this overall a very cheap operation, easily composable by calling more view functions of your own choosing, so you could, for example, have a button function that returns the vdom for a button that you just call where you need it.</p>
 <p>With these parts you have a very composable and easy to reason about application that is wonderfully easy to debug while also minimizing the time needed to debug as you can easily find what message happened that caused the model to change and see exactly what occurred.</p>
@@ -162,253 +162,253 @@ mdl-layout--small-screen-only
 <div class="section" id="initial-setup">
 <h2>Initial Setup</h2>
 <p>Of course go ahead and have npm/node installed, as well as the requirements for bucklescript installation (nothing really on windows as bucklescript is pre-built unless you are wanting to build it manually of course, on linux/mac you need cmake and the necessary build systems to build bucklescript).  At this point let's get started by setting up the project.</p>
-<pre class="code shell"><a name="rest_code_714084422b804811a14f1b3668795a73-1"></a>╭─overminddl1@snip ~/ocaml
-<a name="rest_code_714084422b804811a14f1b3668795a73-2"></a>╰─➤  mkdir overbots
-<a name="rest_code_714084422b804811a14f1b3668795a73-3"></a>╭─overminddl1@snip ~/ocaml
-<a name="rest_code_714084422b804811a14f1b3668795a73-4"></a>╰─➤  <span class="nb">cd</span> overbots
-<a name="rest_code_714084422b804811a14f1b3668795a73-5"></a>╭─overminddl1@snip ~/ocaml/overbots
-<a name="rest_code_714084422b804811a14f1b3668795a73-6"></a>╰─➤  npm init
-<a name="rest_code_714084422b804811a14f1b3668795a73-7"></a>This utility will walk you through creating a package.json file.
-<a name="rest_code_714084422b804811a14f1b3668795a73-8"></a>It only covers the most common items, and tries to guess sensible defaults.
-<a name="rest_code_714084422b804811a14f1b3668795a73-9"></a>
-<a name="rest_code_714084422b804811a14f1b3668795a73-10"></a>See <span class="sb">`</span>npm <span class="nb">help</span> json<span class="sb">`</span> <span class="k">for</span> definitive documentation on these fields
-<a name="rest_code_714084422b804811a14f1b3668795a73-11"></a>and exactly what they <span class="k">do</span>.
-<a name="rest_code_714084422b804811a14f1b3668795a73-12"></a>
-<a name="rest_code_714084422b804811a14f1b3668795a73-13"></a>Use <span class="sb">`</span>npm install &lt;pkg&gt; --save<span class="sb">`</span> afterwards to install a package and
-<a name="rest_code_714084422b804811a14f1b3668795a73-14"></a>save it as a dependency in the package.json file.
-<a name="rest_code_714084422b804811a14f1b3668795a73-15"></a>
-<a name="rest_code_714084422b804811a14f1b3668795a73-16"></a>Press ^C at any <span class="nb">time</span> to quit.
-<a name="rest_code_714084422b804811a14f1b3668795a73-17"></a>name: <span class="o">(</span>overbots<span class="o">)</span>
-<a name="rest_code_714084422b804811a14f1b3668795a73-18"></a>version: <span class="o">(</span><span class="m">1</span>.0.0<span class="o">)</span> <span class="m">0</span>.0.1
-<a name="rest_code_714084422b804811a14f1b3668795a73-19"></a>description: OverBots Incremental Game
-<a name="rest_code_714084422b804811a14f1b3668795a73-20"></a>entry point: <span class="o">(</span>index.js<span class="o">)</span>
-<a name="rest_code_714084422b804811a14f1b3668795a73-21"></a><span class="nb">test</span> command:
-<a name="rest_code_714084422b804811a14f1b3668795a73-22"></a>git repository: https://github.com/OvermindDL1/overbots
-<a name="rest_code_714084422b804811a14f1b3668795a73-23"></a>keywords: bucklescript bucklescript-tea
-<a name="rest_code_714084422b804811a14f1b3668795a73-24"></a>author: OvermindDL1
-<a name="rest_code_714084422b804811a14f1b3668795a73-25"></a>license: <span class="o">(</span>ISC<span class="o">)</span> GPL-3.0
-<a name="rest_code_714084422b804811a14f1b3668795a73-26"></a>About to write to /home/overminddl1/ocaml/overbots/package.json:
-<a name="rest_code_714084422b804811a14f1b3668795a73-27"></a>
-<a name="rest_code_714084422b804811a14f1b3668795a73-28"></a><span class="o">{</span>
-<a name="rest_code_714084422b804811a14f1b3668795a73-29"></a>  <span class="s2">"name"</span>: <span class="s2">"overbots"</span>,
-<a name="rest_code_714084422b804811a14f1b3668795a73-30"></a>  <span class="s2">"version"</span>: <span class="s2">"0.0.1"</span>,
-<a name="rest_code_714084422b804811a14f1b3668795a73-31"></a>  <span class="s2">"description"</span>: <span class="s2">"OverBots Incremental Game"</span>,
-<a name="rest_code_714084422b804811a14f1b3668795a73-32"></a>  <span class="s2">"main"</span>: <span class="s2">"index.js"</span>,
-<a name="rest_code_714084422b804811a14f1b3668795a73-33"></a>  <span class="s2">"dependencies"</span>: <span class="o">{</span>
-<a name="rest_code_714084422b804811a14f1b3668795a73-34"></a>    <span class="s2">"bs-platform"</span>: <span class="s2">"^1.7.3"</span>,
-<a name="rest_code_714084422b804811a14f1b3668795a73-35"></a>    <span class="s2">"bucklescript-tea"</span>: <span class="s2">"^0.3.2"</span>
-<a name="rest_code_714084422b804811a14f1b3668795a73-36"></a>  <span class="o">}</span>,
-<a name="rest_code_714084422b804811a14f1b3668795a73-37"></a>  <span class="s2">"devDependencies"</span>: <span class="o">{}</span>,
-<a name="rest_code_714084422b804811a14f1b3668795a73-38"></a>  <span class="s2">"scripts"</span>: <span class="o">{</span>
-<a name="rest_code_714084422b804811a14f1b3668795a73-39"></a>    <span class="s2">"test"</span>: <span class="s2">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>
-<a name="rest_code_714084422b804811a14f1b3668795a73-40"></a>  <span class="o">}</span>,
-<a name="rest_code_714084422b804811a14f1b3668795a73-41"></a>  <span class="s2">"repository"</span>: <span class="o">{</span>
-<a name="rest_code_714084422b804811a14f1b3668795a73-42"></a>    <span class="s2">"type"</span>: <span class="s2">"git"</span>,
-<a name="rest_code_714084422b804811a14f1b3668795a73-43"></a>    <span class="s2">"url"</span>: <span class="s2">"git+https://github.com/OvermindDL1/overbots.git"</span>
-<a name="rest_code_714084422b804811a14f1b3668795a73-44"></a>  <span class="o">}</span>,
-<a name="rest_code_714084422b804811a14f1b3668795a73-45"></a>  <span class="s2">"keywords"</span>: <span class="o">[</span>
-<a name="rest_code_714084422b804811a14f1b3668795a73-46"></a>    <span class="s2">"bucklescript"</span>,
-<a name="rest_code_714084422b804811a14f1b3668795a73-47"></a>    <span class="s2">"bucklescript-tea"</span>
-<a name="rest_code_714084422b804811a14f1b3668795a73-48"></a>  <span class="o">]</span>,
-<a name="rest_code_714084422b804811a14f1b3668795a73-49"></a>  <span class="s2">"author"</span>: <span class="s2">"OvermindDL1"</span>,
-<a name="rest_code_714084422b804811a14f1b3668795a73-50"></a>  <span class="s2">"license"</span>: <span class="s2">"GPL-3.0"</span>,
-<a name="rest_code_714084422b804811a14f1b3668795a73-51"></a>  <span class="s2">"bugs"</span>: <span class="o">{</span>
-<a name="rest_code_714084422b804811a14f1b3668795a73-52"></a>    <span class="s2">"url"</span>: <span class="s2">"https://github.com/OvermindDL1/overbots/issues"</span>
-<a name="rest_code_714084422b804811a14f1b3668795a73-53"></a>  <span class="o">}</span>,
-<a name="rest_code_714084422b804811a14f1b3668795a73-54"></a>  <span class="s2">"homepage"</span>: <span class="s2">"https://github.com/OvermindDL1/overbots#readme"</span>
-<a name="rest_code_714084422b804811a14f1b3668795a73-55"></a><span class="o">}</span>
-<a name="rest_code_714084422b804811a14f1b3668795a73-56"></a>
-<a name="rest_code_714084422b804811a14f1b3668795a73-57"></a>
-<a name="rest_code_714084422b804811a14f1b3668795a73-58"></a>Is this ok? <span class="o">(</span>yes<span class="o">)</span>
-<a name="rest_code_714084422b804811a14f1b3668795a73-59"></a>
-<a name="rest_code_714084422b804811a14f1b3668795a73-60"></a>╭─overminddl1@snip ~/ocaml/overbots
-<a name="rest_code_714084422b804811a14f1b3668795a73-61"></a>╰─➤  npm install --save-dev bs-platform bucklescript-tea
-<a name="rest_code_714084422b804811a14f1b3668795a73-62"></a>..snip tons and tons of stuff as it installs and compiles
-<a name="rest_code_714084422b804811a14f1b3668795a73-63"></a>├── bs-platform@1.7.3
-<a name="rest_code_714084422b804811a14f1b3668795a73-64"></a>└── bucklescript-tea@0.3.2
-<a name="rest_code_714084422b804811a14f1b3668795a73-65"></a>
-<a name="rest_code_714084422b804811a14f1b3668795a73-66"></a>╭─overminddl1@snip ~/ocaml/overbots
-<a name="rest_code_714084422b804811a14f1b3668795a73-67"></a>╰─➤  git init
-<a name="rest_code_714084422b804811a14f1b3668795a73-68"></a>Initialized empty Git repository in /home/overminddl1/ocaml/overbots/.git/
-<a name="rest_code_714084422b804811a14f1b3668795a73-69"></a>╭─overminddl1@snip ~/ocaml/overbots  ‹master*›
-<a name="rest_code_714084422b804811a14f1b3668795a73-70"></a>╰─➤  git remote add origin git@github.com:OvermindDL1/overbots.git
+<pre class="code shell"><a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-1"></a>╭─overminddl1@snip ~/ocaml
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-2"></a>╰─➤  mkdir overbots
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-3"></a>╭─overminddl1@snip ~/ocaml
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-4"></a>╰─➤  <span class="nb">cd</span> overbots
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-5"></a>╭─overminddl1@snip ~/ocaml/overbots
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-6"></a>╰─➤  npm init
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-7"></a>This utility will walk you through creating a package.json file.
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-8"></a>It only covers the most common items, and tries to guess sensible defaults.
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-9"></a>
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-10"></a>See <span class="sb">`</span>npm <span class="nb">help</span> json<span class="sb">`</span> <span class="k">for</span> definitive documentation on these fields
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-11"></a>and exactly what they <span class="k">do</span>.
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-12"></a>
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-13"></a>Use <span class="sb">`</span>npm install &lt;pkg&gt; --save<span class="sb">`</span> afterwards to install a package and
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-14"></a>save it as a dependency in the package.json file.
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-15"></a>
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-16"></a>Press ^C at any <span class="nb">time</span> to quit.
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-17"></a>name: <span class="o">(</span>overbots<span class="o">)</span>
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-18"></a>version: <span class="o">(</span><span class="m">1</span>.0.0<span class="o">)</span> <span class="m">0</span>.0.1
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-19"></a>description: OverBots Incremental Game
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-20"></a>entry point: <span class="o">(</span>index.js<span class="o">)</span>
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-21"></a><span class="nb">test</span> command:
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-22"></a>git repository: https://github.com/OvermindDL1/overbots
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-23"></a>keywords: bucklescript bucklescript-tea
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-24"></a>author: OvermindDL1
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-25"></a>license: <span class="o">(</span>ISC<span class="o">)</span> GPL-3.0
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-26"></a>About to write to /home/overminddl1/ocaml/overbots/package.json:
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-27"></a>
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-28"></a><span class="o">{</span>
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-29"></a>  <span class="s2">"name"</span>: <span class="s2">"overbots"</span>,
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-30"></a>  <span class="s2">"version"</span>: <span class="s2">"0.0.1"</span>,
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-31"></a>  <span class="s2">"description"</span>: <span class="s2">"OverBots Incremental Game"</span>,
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-32"></a>  <span class="s2">"main"</span>: <span class="s2">"index.js"</span>,
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-33"></a>  <span class="s2">"dependencies"</span>: <span class="o">{</span>
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-34"></a>    <span class="s2">"bs-platform"</span>: <span class="s2">"^1.7.3"</span>,
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-35"></a>    <span class="s2">"bucklescript-tea"</span>: <span class="s2">"^0.3.2"</span>
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-36"></a>  <span class="o">}</span>,
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-37"></a>  <span class="s2">"devDependencies"</span>: <span class="o">{}</span>,
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-38"></a>  <span class="s2">"scripts"</span>: <span class="o">{</span>
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-39"></a>    <span class="s2">"test"</span>: <span class="s2">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-40"></a>  <span class="o">}</span>,
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-41"></a>  <span class="s2">"repository"</span>: <span class="o">{</span>
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-42"></a>    <span class="s2">"type"</span>: <span class="s2">"git"</span>,
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-43"></a>    <span class="s2">"url"</span>: <span class="s2">"git+https://github.com/OvermindDL1/overbots.git"</span>
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-44"></a>  <span class="o">}</span>,
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-45"></a>  <span class="s2">"keywords"</span>: <span class="o">[</span>
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-46"></a>    <span class="s2">"bucklescript"</span>,
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-47"></a>    <span class="s2">"bucklescript-tea"</span>
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-48"></a>  <span class="o">]</span>,
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-49"></a>  <span class="s2">"author"</span>: <span class="s2">"OvermindDL1"</span>,
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-50"></a>  <span class="s2">"license"</span>: <span class="s2">"GPL-3.0"</span>,
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-51"></a>  <span class="s2">"bugs"</span>: <span class="o">{</span>
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-52"></a>    <span class="s2">"url"</span>: <span class="s2">"https://github.com/OvermindDL1/overbots/issues"</span>
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-53"></a>  <span class="o">}</span>,
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-54"></a>  <span class="s2">"homepage"</span>: <span class="s2">"https://github.com/OvermindDL1/overbots#readme"</span>
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-55"></a><span class="o">}</span>
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-56"></a>
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-57"></a>
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-58"></a>Is this ok? <span class="o">(</span>yes<span class="o">)</span>
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-59"></a>
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-60"></a>╭─overminddl1@snip ~/ocaml/overbots
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-61"></a>╰─➤  npm install --save-dev bs-platform bucklescript-tea
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-62"></a>..snip tons and tons of stuff as it installs and compiles
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-63"></a>├── bs-platform@1.7.3
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-64"></a>└── bucklescript-tea@0.3.2
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-65"></a>
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-66"></a>╭─overminddl1@snip ~/ocaml/overbots
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-67"></a>╰─➤  git init
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-68"></a>Initialized empty Git repository in /home/overminddl1/ocaml/overbots/.git/
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-69"></a>╭─overminddl1@snip ~/ocaml/overbots  ‹master*›
+<a name="rest_code_87b013e7d4ca49c2a800acd1fc05a37b-70"></a>╰─➤  git remote add origin git@github.com:OvermindDL1/overbots.git
 </pre>
 <p>At this point open it is not good to open a text editor of your choice.  I tend to swap between Atom and Spacemacs depending on how I feel.  It is now time to create the bucklescript scafffolding.  Right now we need to make the <tt class="docutils literal">bsconfig.json</tt> file ourselves but Bucklescript has plans to make its own creation commands later to make this part easier, however this part is not hard at all currently so let's make up the <tt class="docutils literal">bsconfig.json</tt> file:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_85925b1a94eb428eb8193d81b3698bd3-1">1</a>
-<a href="#rest_code_85925b1a94eb428eb8193d81b3698bd3-2">2</a>
-<a href="#rest_code_85925b1a94eb428eb8193d81b3698bd3-3">3</a>
-<a href="#rest_code_85925b1a94eb428eb8193d81b3698bd3-4">4</a>
-<a href="#rest_code_85925b1a94eb428eb8193d81b3698bd3-5">5</a>
-<a href="#rest_code_85925b1a94eb428eb8193d81b3698bd3-6">6</a>
-<a href="#rest_code_85925b1a94eb428eb8193d81b3698bd3-7">7</a></pre></div></td>
-<td class="code"><pre class="code json"><a name="rest_code_85925b1a94eb428eb8193d81b3698bd3-1"></a><span class="p">{</span>
-<a name="rest_code_85925b1a94eb428eb8193d81b3698bd3-2"></a>    <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"overbots"</span><span class="p">,</span>
-<a name="rest_code_85925b1a94eb428eb8193d81b3698bd3-3"></a>    <span class="nt">"sources"</span><span class="p">:</span> <span class="p">{</span> <span class="nt">"dir"</span> <span class="p">:</span> <span class="s2">"src"</span><span class="p">},</span>
-<a name="rest_code_85925b1a94eb428eb8193d81b3698bd3-4"></a>    <span class="nt">"package-specs"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"es6"</span><span class="p">],</span>
-<a name="rest_code_85925b1a94eb428eb8193d81b3698bd3-5"></a>    <span class="nt">"bs-dependencies"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"bucklescript-tea"</span><span class="p">],</span>
-<a name="rest_code_85925b1a94eb428eb8193d81b3698bd3-6"></a>    <span class="nt">"generate-merlin"</span><span class="p">:</span> <span class="kc">true</span>
-<a name="rest_code_85925b1a94eb428eb8193d81b3698bd3-7"></a><span class="p">}</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_dbb37ba9b4c742c0a7834d3b27c6bfdb-1">1</a>
+<a href="#rest_code_dbb37ba9b4c742c0a7834d3b27c6bfdb-2">2</a>
+<a href="#rest_code_dbb37ba9b4c742c0a7834d3b27c6bfdb-3">3</a>
+<a href="#rest_code_dbb37ba9b4c742c0a7834d3b27c6bfdb-4">4</a>
+<a href="#rest_code_dbb37ba9b4c742c0a7834d3b27c6bfdb-5">5</a>
+<a href="#rest_code_dbb37ba9b4c742c0a7834d3b27c6bfdb-6">6</a>
+<a href="#rest_code_dbb37ba9b4c742c0a7834d3b27c6bfdb-7">7</a></pre></div></td>
+<td class="code"><pre class="code json"><a name="rest_code_dbb37ba9b4c742c0a7834d3b27c6bfdb-1"></a><span class="p">{</span>
+<a name="rest_code_dbb37ba9b4c742c0a7834d3b27c6bfdb-2"></a>    <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"overbots"</span><span class="p">,</span>
+<a name="rest_code_dbb37ba9b4c742c0a7834d3b27c6bfdb-3"></a>    <span class="nt">"sources"</span><span class="p">:</span> <span class="p">{</span> <span class="nt">"dir"</span> <span class="p">:</span> <span class="s2">"src"</span><span class="p">},</span>
+<a name="rest_code_dbb37ba9b4c742c0a7834d3b27c6bfdb-4"></a>    <span class="nt">"package-specs"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"es6"</span><span class="p">],</span>
+<a name="rest_code_dbb37ba9b4c742c0a7834d3b27c6bfdb-5"></a>    <span class="nt">"bs-dependencies"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"bucklescript-tea"</span><span class="p">],</span>
+<a name="rest_code_dbb37ba9b4c742c0a7834d3b27c6bfdb-6"></a>    <span class="nt">"generate-merlin"</span><span class="p">:</span> <span class="kc">true</span>
+<a name="rest_code_dbb37ba9b4c742c0a7834d3b27c6bfdb-7"></a><span class="p">}</span>
 </pre></td>
 </tr></table>
 <p>I also like to have convenience commands for npm so I'm changing my <tt class="docutils literal">"scripts"</tt> section in npm's <tt class="docutils literal">package.json</tt> to become:</p>
-<pre class="code json"><a name="rest_code_eef99e79f14c4012814931f847629c41-1"></a><span class="p">{</span>
-<a name="rest_code_eef99e79f14c4012814931f847629c41-2"></a>  <span class="nt">"build"</span><span class="p">:</span> <span class="s2">"bsb -make-world"</span><span class="p">,</span>
-<a name="rest_code_eef99e79f14c4012814931f847629c41-3"></a>  <span class="nt">"prewatch"</span><span class="p">:</span> <span class="s2">"npm run build"</span><span class="p">,</span>
-<a name="rest_code_eef99e79f14c4012814931f847629c41-4"></a>  <span class="nt">"watch"</span><span class="p">:</span> <span class="s2">"bsb -w"</span><span class="p">,</span>
-<a name="rest_code_eef99e79f14c4012814931f847629c41-5"></a>  <span class="nt">"test"</span><span class="p">:</span> <span class="s2">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>
-<a name="rest_code_eef99e79f14c4012814931f847629c41-6"></a><span class="p">}</span>
+<pre class="code json"><a name="rest_code_7ad382a5a6ef4bca99eb0aacff9eaa88-1"></a><span class="p">{</span>
+<a name="rest_code_7ad382a5a6ef4bca99eb0aacff9eaa88-2"></a>  <span class="nt">"build"</span><span class="p">:</span> <span class="s2">"bsb -make-world"</span><span class="p">,</span>
+<a name="rest_code_7ad382a5a6ef4bca99eb0aacff9eaa88-3"></a>  <span class="nt">"prewatch"</span><span class="p">:</span> <span class="s2">"npm run build"</span><span class="p">,</span>
+<a name="rest_code_7ad382a5a6ef4bca99eb0aacff9eaa88-4"></a>  <span class="nt">"watch"</span><span class="p">:</span> <span class="s2">"bsb -w"</span><span class="p">,</span>
+<a name="rest_code_7ad382a5a6ef4bca99eb0aacff9eaa88-5"></a>  <span class="nt">"test"</span><span class="p">:</span> <span class="s2">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>
+<a name="rest_code_7ad382a5a6ef4bca99eb0aacff9eaa88-6"></a><span class="p">}</span>
 </pre>
 <p>And now I make my main entrance file at <tt class="docutils literal">src/main.ml</tt> and I put in it this, the basic bucklescript-tea program structure:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-1"> 1</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-2"> 2</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-3"> 3</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-4"> 4</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-5"> 5</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-6"> 6</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-7"> 7</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-8"> 8</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-9"> 9</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-10">10</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-11">11</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-12">12</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-13">13</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-14">14</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-15">15</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-16">16</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-17">17</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-18">18</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-19">19</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-20">20</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-21">21</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-22">22</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-23">23</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-24">24</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-25">25</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-26">26</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-27">27</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-28">28</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-29">29</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-30">30</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-31">31</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-32">32</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-33">33</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-34">34</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-35">35</a>
-<a href="#rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-36">36</a></pre></div></td>
-<td class="code"><pre class="code ocaml"><a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-1"></a><span class="k">open</span> <span class="nc">Tea</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-2"></a>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-3"></a><span class="k">type</span> <span class="n">msg</span> <span class="o">=</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-4"></a>  <span class="o">|</span> <span class="nc">NothingYet</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-5"></a>  <span class="o">[@@</span><span class="n">bs</span><span class="o">.</span><span class="n">deriving</span> <span class="o">{</span><span class="n">accessors</span><span class="o">}]</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-6"></a>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-7"></a><span class="k">type</span> <span class="n">model</span> <span class="o">=</span> <span class="o">{</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-8"></a>  <span class="n">notUsedYet</span> <span class="o">:</span> <span class="kt">int</span><span class="o">;</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-9"></a><span class="o">}</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-10"></a>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-11"></a><span class="k">let</span> <span class="n">init</span> <span class="bp">()</span> <span class="o">=</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-12"></a>  <span class="k">let</span> <span class="n">model</span> <span class="o">={</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-13"></a>    <span class="n">notUsedYet</span> <span class="o">=</span> <span class="mi">42</span><span class="o">;</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-14"></a>  <span class="o">}</span> <span class="k">in</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-15"></a>  <span class="o">(</span><span class="n">model</span><span class="o">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span><span class="o">)</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-16"></a>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-17"></a><span class="k">let</span> <span class="n">update</span> <span class="n">model</span> <span class="o">=</span> <span class="k">function</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-18"></a>  <span class="o">|</span> <span class="nc">NothingYet</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">model</span><span class="o">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span><span class="o">)</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-19"></a>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-20"></a><span class="k">let</span> <span class="n">subscriptions</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-21"></a>  <span class="nn">Sub</span><span class="p">.</span><span class="n">none</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-22"></a>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-23"></a><span class="k">let</span> <span class="n">view</span> <span class="n">model</span> <span class="o">=</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-24"></a>  <span class="k">let</span> <span class="k">open</span> <span class="nc">Html</span> <span class="k">in</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-25"></a>  <span class="n">div</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-26"></a>    <span class="bp">[]</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-27"></a>    <span class="o">[</span> <span class="n">text</span> <span class="o">(</span><span class="n">string_of_int</span> <span class="n">model</span><span class="o">.</span><span class="n">notUsedYet</span><span class="o">)</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-28"></a>    <span class="o">]</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-29"></a>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-30"></a><span class="k">let</span> <span class="n">main</span> <span class="o">=</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-31"></a>  <span class="nn">App</span><span class="p">.</span><span class="n">standardProgram</span> <span class="o">{</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-32"></a>    <span class="n">init</span><span class="o">;</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-33"></a>    <span class="n">update</span><span class="o">;</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-34"></a>    <span class="n">view</span><span class="o">;</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-35"></a>    <span class="n">subscriptions</span><span class="o">;</span>
-<a name="rest_code_fcfce97a0b2f4ce580c2d4ffa00e169e-36"></a>  <span class="o">}</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-1"> 1</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-2"> 2</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-3"> 3</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-4"> 4</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-5"> 5</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-6"> 6</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-7"> 7</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-8"> 8</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-9"> 9</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-10">10</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-11">11</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-12">12</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-13">13</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-14">14</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-15">15</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-16">16</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-17">17</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-18">18</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-19">19</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-20">20</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-21">21</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-22">22</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-23">23</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-24">24</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-25">25</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-26">26</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-27">27</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-28">28</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-29">29</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-30">30</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-31">31</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-32">32</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-33">33</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-34">34</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-35">35</a>
+<a href="#rest_code_a5961ab789d64d61845e3ffc78ac9a1c-36">36</a></pre></div></td>
+<td class="code"><pre class="code ocaml"><a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-1"></a><span class="k">open</span> <span class="nc">Tea</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-2"></a>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-3"></a><span class="k">type</span> <span class="n">msg</span> <span class="o">=</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-4"></a>  <span class="o">|</span> <span class="nc">NothingYet</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-5"></a>  <span class="o">[@@</span><span class="n">bs</span><span class="o">.</span><span class="n">deriving</span> <span class="o">{</span><span class="n">accessors</span><span class="o">}]</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-6"></a>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-7"></a><span class="k">type</span> <span class="n">model</span> <span class="o">=</span> <span class="o">{</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-8"></a>  <span class="n">notUsedYet</span> <span class="o">:</span> <span class="kt">int</span><span class="o">;</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-9"></a><span class="o">}</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-10"></a>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-11"></a><span class="k">let</span> <span class="n">init</span> <span class="bp">()</span> <span class="o">=</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-12"></a>  <span class="k">let</span> <span class="n">model</span> <span class="o">={</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-13"></a>    <span class="n">notUsedYet</span> <span class="o">=</span> <span class="mi">42</span><span class="o">;</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-14"></a>  <span class="o">}</span> <span class="k">in</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-15"></a>  <span class="o">(</span><span class="n">model</span><span class="o">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span><span class="o">)</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-16"></a>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-17"></a><span class="k">let</span> <span class="n">update</span> <span class="n">model</span> <span class="o">=</span> <span class="k">function</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-18"></a>  <span class="o">|</span> <span class="nc">NothingYet</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">model</span><span class="o">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span><span class="o">)</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-19"></a>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-20"></a><span class="k">let</span> <span class="n">subscriptions</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-21"></a>  <span class="nn">Sub</span><span class="p">.</span><span class="n">none</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-22"></a>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-23"></a><span class="k">let</span> <span class="n">view</span> <span class="n">model</span> <span class="o">=</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-24"></a>  <span class="k">let</span> <span class="k">open</span> <span class="nc">Html</span> <span class="k">in</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-25"></a>  <span class="n">div</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-26"></a>    <span class="bp">[]</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-27"></a>    <span class="o">[</span> <span class="n">text</span> <span class="o">(</span><span class="n">string_of_int</span> <span class="n">model</span><span class="o">.</span><span class="n">notUsedYet</span><span class="o">)</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-28"></a>    <span class="o">]</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-29"></a>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-30"></a><span class="k">let</span> <span class="n">main</span> <span class="o">=</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-31"></a>  <span class="nn">App</span><span class="p">.</span><span class="n">standardProgram</span> <span class="o">{</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-32"></a>    <span class="n">init</span><span class="o">;</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-33"></a>    <span class="n">update</span><span class="o">;</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-34"></a>    <span class="n">view</span><span class="o">;</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-35"></a>    <span class="n">subscriptions</span><span class="o">;</span>
+<a name="rest_code_a5961ab789d64d61845e3ffc78ac9a1c-36"></a>  <span class="o">}</span>
 </pre></td>
 </tr></table>
 <p>And we can compile it with <tt class="docutils literal">npm run build</tt> or we can run the auto-builder/watcher with <tt class="docutils literal">npm run watch</tt> (and <tt class="docutils literal">Ctrl+c</tt> to cancel the auto-building/watching).  It should compile cleanly with the output javascript going in to the <cite>lib/js</cite> directory.  Speaking of, let's go ahead and compile all that output together with rollup.js</p>
 <div class="section" id="production-generation">
 <h3>Production Generation</h3>
 <p>I want to be able to bundle this out to optimized javascript for easy running in the browser, and one of the best bundlers out is rollup.js, so let's use that one:</p>
-<pre class="code shell"><a name="rest_code_c40966a4af034ccea98dab7ff3f1c94c-1"></a>╭─overminddl1@snip ~/ocaml/overbots  ‹master*›
-<a name="rest_code_c40966a4af034ccea98dab7ff3f1c94c-2"></a>╰─➤  npm install --save-dev rollup-plugin-node-resolve rollup-watch rollup
-<a name="rest_code_c40966a4af034ccea98dab7ff3f1c94c-3"></a>overbots@0.0.1 /home/overminddl1/ocaml/overbots
-<a name="rest_code_c40966a4af034ccea98dab7ff3f1c94c-4"></a>├── rollup@0.41.6
-<a name="rest_code_c40966a4af034ccea98dab7ff3f1c94c-5"></a>├── rollup-plugin-node-resolve@3.0.0
-<a name="rest_code_c40966a4af034ccea98dab7ff3f1c94c-6"></a>└── rollup-watch@3.2.2
+<pre class="code shell"><a name="rest_code_882ec56c22ef49adbd6bd5340648e3ca-1"></a>╭─overminddl1@snip ~/ocaml/overbots  ‹master*›
+<a name="rest_code_882ec56c22ef49adbd6bd5340648e3ca-2"></a>╰─➤  npm install --save-dev rollup-plugin-node-resolve rollup-watch rollup
+<a name="rest_code_882ec56c22ef49adbd6bd5340648e3ca-3"></a>overbots@0.0.1 /home/overminddl1/ocaml/overbots
+<a name="rest_code_882ec56c22ef49adbd6bd5340648e3ca-4"></a>├── rollup@0.41.6
+<a name="rest_code_882ec56c22ef49adbd6bd5340648e3ca-5"></a>├── rollup-plugin-node-resolve@3.0.0
+<a name="rest_code_882ec56c22ef49adbd6bd5340648e3ca-6"></a>└── rollup-watch@3.2.2
 </pre>
 <p>I also want to use npm itself as the build system instead of using something dreadfully slow like webpack or so, thus let's install a few helpers:</p>
-<pre class="code shell"><a name="rest_code_e91d18f1c92b444e82e1283fb7634e68-1"></a>╭─overminddl1@snip ~/ocaml/overbots  ‹master*›
-<a name="rest_code_e91d18f1c92b444e82e1283fb7634e68-2"></a>╰─➤  npm install --save-dev npm-run-all
-<a name="rest_code_e91d18f1c92b444e82e1283fb7634e68-3"></a>overbots@0.0.1 /home/overminddl1/ocaml/overbots
-<a name="rest_code_e91d18f1c92b444e82e1283fb7634e68-4"></a>└─┬ npm-run-all@4.0.2
-<a name="rest_code_e91d18f1c92b444e82e1283fb7634e68-5"></a>  ├ Snip a mess of stuff...
+<pre class="code shell"><a name="rest_code_56c23c5ec0c7475aa4781500589591ed-1"></a>╭─overminddl1@snip ~/ocaml/overbots  ‹master*›
+<a name="rest_code_56c23c5ec0c7475aa4781500589591ed-2"></a>╰─➤  npm install --save-dev npm-run-all
+<a name="rest_code_56c23c5ec0c7475aa4781500589591ed-3"></a>overbots@0.0.1 /home/overminddl1/ocaml/overbots
+<a name="rest_code_56c23c5ec0c7475aa4781500589591ed-4"></a>└─┬ npm-run-all@4.0.2
+<a name="rest_code_56c23c5ec0c7475aa4781500589591ed-5"></a>  ├ Snip a mess of stuff...
 </pre>
 <p>And to use it let's change the package.json <tt class="docutils literal">"scripts"</tt> section to be this:</p>
-<pre class="code json"><a name="rest_code_d940938403084297aab7373e100d776b-1"></a><span class="p">{</span>
-<a name="rest_code_d940938403084297aab7373e100d776b-2"></a>  <span class="nt">"build:bsb"</span><span class="p">:</span> <span class="s2">"bsb -make-world"</span><span class="p">,</span>
-<a name="rest_code_d940938403084297aab7373e100d776b-3"></a>  <span class="nt">"build:js"</span><span class="p">:</span> <span class="s2">"rollup -c"</span><span class="p">,</span>
-<a name="rest_code_d940938403084297aab7373e100d776b-4"></a>  <span class="nt">"build"</span><span class="p">:</span> <span class="s2">"run-s build:bsb build:js"</span><span class="p">,</span>
-<a name="rest_code_d940938403084297aab7373e100d776b-5"></a>  <span class="nt">"watch:bsb"</span><span class="p">:</span> <span class="s2">"bsb -w"</span><span class="p">,</span>
-<a name="rest_code_d940938403084297aab7373e100d776b-6"></a>  <span class="nt">"watch:js"</span><span class="p">:</span> <span class="s2">"rollup -c -w"</span><span class="p">,</span>
-<a name="rest_code_d940938403084297aab7373e100d776b-7"></a>  <span class="nt">"prewatch"</span><span class="p">:</span> <span class="s2">"run-s build"</span><span class="p">,</span>
-<a name="rest_code_d940938403084297aab7373e100d776b-8"></a>  <span class="nt">"watch"</span><span class="p">:</span> <span class="s2">"run-p watch:bsb watch:js"</span><span class="p">,</span>
-<a name="rest_code_d940938403084297aab7373e100d776b-9"></a>  <span class="nt">"test"</span><span class="p">:</span> <span class="s2">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>
-<a name="rest_code_d940938403084297aab7373e100d776b-10"></a><span class="p">}</span>
+<pre class="code json"><a name="rest_code_82e69036807f46bfbf5debb46078e684-1"></a><span class="p">{</span>
+<a name="rest_code_82e69036807f46bfbf5debb46078e684-2"></a>  <span class="nt">"build:bsb"</span><span class="p">:</span> <span class="s2">"bsb -make-world"</span><span class="p">,</span>
+<a name="rest_code_82e69036807f46bfbf5debb46078e684-3"></a>  <span class="nt">"build:js"</span><span class="p">:</span> <span class="s2">"rollup -c"</span><span class="p">,</span>
+<a name="rest_code_82e69036807f46bfbf5debb46078e684-4"></a>  <span class="nt">"build"</span><span class="p">:</span> <span class="s2">"run-s build:bsb build:js"</span><span class="p">,</span>
+<a name="rest_code_82e69036807f46bfbf5debb46078e684-5"></a>  <span class="nt">"watch:bsb"</span><span class="p">:</span> <span class="s2">"bsb -w"</span><span class="p">,</span>
+<a name="rest_code_82e69036807f46bfbf5debb46078e684-6"></a>  <span class="nt">"watch:js"</span><span class="p">:</span> <span class="s2">"rollup -c -w"</span><span class="p">,</span>
+<a name="rest_code_82e69036807f46bfbf5debb46078e684-7"></a>  <span class="nt">"prewatch"</span><span class="p">:</span> <span class="s2">"run-s build"</span><span class="p">,</span>
+<a name="rest_code_82e69036807f46bfbf5debb46078e684-8"></a>  <span class="nt">"watch"</span><span class="p">:</span> <span class="s2">"run-p watch:bsb watch:js"</span><span class="p">,</span>
+<a name="rest_code_82e69036807f46bfbf5debb46078e684-9"></a>  <span class="nt">"test"</span><span class="p">:</span> <span class="s2">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>
+<a name="rest_code_82e69036807f46bfbf5debb46078e684-10"></a><span class="p">}</span>
 </pre>
 <p>And since I do not like to put tons of config options on the commandline in script, let's put the rollup options in a <tt class="docutils literal">rollup.config.js</tt> file in the root directory of the project and put this in it:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_520a629c59ee484e93a80058aa7a6134-1">1</a>
-<a href="#rest_code_520a629c59ee484e93a80058aa7a6134-2">2</a>
-<a href="#rest_code_520a629c59ee484e93a80058aa7a6134-3">3</a>
-<a href="#rest_code_520a629c59ee484e93a80058aa7a6134-4">4</a>
-<a href="#rest_code_520a629c59ee484e93a80058aa7a6134-5">5</a></pre></div></td>
-<td class="code"><pre class="code javascript"><a name="rest_code_520a629c59ee484e93a80058aa7a6134-1"></a><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
-<a name="rest_code_520a629c59ee484e93a80058aa7a6134-2"></a>  <span class="nx">entry</span><span class="o">:</span> <span class="s1">'lib/es6/overbots.js'</span><span class="p">,</span>
-<a name="rest_code_520a629c59ee484e93a80058aa7a6134-3"></a>  <span class="nx">format</span><span class="o">:</span> <span class="s1">'iife'</span><span class="p">,</span>
-<a name="rest_code_520a629c59ee484e93a80058aa7a6134-4"></a>  <span class="nx">dest</span><span class="o">:</span> <span class="s1">'/release/overbots-bundled.js'</span>
-<a name="rest_code_520a629c59ee484e93a80058aa7a6134-5"></a><span class="p">};</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_6cbcee44f35b4cb1b38c769f5d3f73fa-1">1</a>
+<a href="#rest_code_6cbcee44f35b4cb1b38c769f5d3f73fa-2">2</a>
+<a href="#rest_code_6cbcee44f35b4cb1b38c769f5d3f73fa-3">3</a>
+<a href="#rest_code_6cbcee44f35b4cb1b38c769f5d3f73fa-4">4</a>
+<a href="#rest_code_6cbcee44f35b4cb1b38c769f5d3f73fa-5">5</a></pre></div></td>
+<td class="code"><pre class="code javascript"><a name="rest_code_6cbcee44f35b4cb1b38c769f5d3f73fa-1"></a><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+<a name="rest_code_6cbcee44f35b4cb1b38c769f5d3f73fa-2"></a>  <span class="nx">entry</span><span class="o">:</span> <span class="s1">'lib/es6/overbots.js'</span><span class="p">,</span>
+<a name="rest_code_6cbcee44f35b4cb1b38c769f5d3f73fa-3"></a>  <span class="nx">format</span><span class="o">:</span> <span class="s1">'iife'</span><span class="p">,</span>
+<a name="rest_code_6cbcee44f35b4cb1b38c769f5d3f73fa-4"></a>  <span class="nx">dest</span><span class="o">:</span> <span class="s1">'/release/overbots-bundled.js'</span>
+<a name="rest_code_6cbcee44f35b4cb1b38c769f5d3f73fa-5"></a><span class="p">};</span>
 </pre></td>
 </tr></table>
 <p>And now we can run <tt class="docutils literal">npm run build</tt> to build it all to a final bundled file, or run <tt class="docutils literal">npm run watch</tt> to do the same on every save of source files.  For the purpose of testing I'm also going to make a <tt class="docutils literal">release/dev.html</tt> file with this so I can load it in the browser for ease of development:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_8ffdc374bea14a3091e017ad57742839-1"> 1</a>
-<a href="#rest_code_8ffdc374bea14a3091e017ad57742839-2"> 2</a>
-<a href="#rest_code_8ffdc374bea14a3091e017ad57742839-3"> 3</a>
-<a href="#rest_code_8ffdc374bea14a3091e017ad57742839-4"> 4</a>
-<a href="#rest_code_8ffdc374bea14a3091e017ad57742839-5"> 5</a>
-<a href="#rest_code_8ffdc374bea14a3091e017ad57742839-6"> 6</a>
-<a href="#rest_code_8ffdc374bea14a3091e017ad57742839-7"> 7</a>
-<a href="#rest_code_8ffdc374bea14a3091e017ad57742839-8"> 8</a>
-<a href="#rest_code_8ffdc374bea14a3091e017ad57742839-9"> 9</a>
-<a href="#rest_code_8ffdc374bea14a3091e017ad57742839-10">10</a>
-<a href="#rest_code_8ffdc374bea14a3091e017ad57742839-11">11</a>
-<a href="#rest_code_8ffdc374bea14a3091e017ad57742839-12">12</a>
-<a href="#rest_code_8ffdc374bea14a3091e017ad57742839-13">13</a>
-<a href="#rest_code_8ffdc374bea14a3091e017ad57742839-14">14</a></pre></div></td>
-<td class="code"><pre class="code html"><a name="rest_code_8ffdc374bea14a3091e017ad57742839-1"></a><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
-<a name="rest_code_8ffdc374bea14a3091e017ad57742839-2"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
-<a name="rest_code_8ffdc374bea14a3091e017ad57742839-3"></a>  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">content</span><span class="o">=</span><span class="s">"text/html;charset=utf-8"</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">"Content-Type"</span><span class="p">&gt;</span>
-<a name="rest_code_8ffdc374bea14a3091e017ad57742839-4"></a>  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">content</span><span class="o">=</span><span class="s">"utf-8"</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">"encoding"</span><span class="p">&gt;</span>
-<a name="rest_code_8ffdc374bea14a3091e017ad57742839-5"></a>  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">"overbots-bundled.js"</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-<a name="rest_code_8ffdc374bea14a3091e017ad57742839-6"></a>  <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-<a name="rest_code_8ffdc374bea14a3091e017ad57742839-7"></a>  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-<a name="rest_code_8ffdc374bea14a3091e017ad57742839-8"></a>    <span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">overbots</span><span class="p">.</span><span class="nx">main</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
-<a name="rest_code_8ffdc374bea14a3091e017ad57742839-9"></a>  <span class="p">},</span> <span class="mi">1</span><span class="p">)</span>
-<a name="rest_code_8ffdc374bea14a3091e017ad57742839-10"></a>  <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-<a name="rest_code_8ffdc374bea14a3091e017ad57742839-11"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
-<a name="rest_code_8ffdc374bea14a3091e017ad57742839-12"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-<a name="rest_code_8ffdc374bea14a3091e017ad57742839-13"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
-<a name="rest_code_8ffdc374bea14a3091e017ad57742839-14"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_56d9d0968c754017b7e6fa6a9b6c840b-1"> 1</a>
+<a href="#rest_code_56d9d0968c754017b7e6fa6a9b6c840b-2"> 2</a>
+<a href="#rest_code_56d9d0968c754017b7e6fa6a9b6c840b-3"> 3</a>
+<a href="#rest_code_56d9d0968c754017b7e6fa6a9b6c840b-4"> 4</a>
+<a href="#rest_code_56d9d0968c754017b7e6fa6a9b6c840b-5"> 5</a>
+<a href="#rest_code_56d9d0968c754017b7e6fa6a9b6c840b-6"> 6</a>
+<a href="#rest_code_56d9d0968c754017b7e6fa6a9b6c840b-7"> 7</a>
+<a href="#rest_code_56d9d0968c754017b7e6fa6a9b6c840b-8"> 8</a>
+<a href="#rest_code_56d9d0968c754017b7e6fa6a9b6c840b-9"> 9</a>
+<a href="#rest_code_56d9d0968c754017b7e6fa6a9b6c840b-10">10</a>
+<a href="#rest_code_56d9d0968c754017b7e6fa6a9b6c840b-11">11</a>
+<a href="#rest_code_56d9d0968c754017b7e6fa6a9b6c840b-12">12</a>
+<a href="#rest_code_56d9d0968c754017b7e6fa6a9b6c840b-13">13</a>
+<a href="#rest_code_56d9d0968c754017b7e6fa6a9b6c840b-14">14</a></pre></div></td>
+<td class="code"><pre class="code html"><a name="rest_code_56d9d0968c754017b7e6fa6a9b6c840b-1"></a><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<a name="rest_code_56d9d0968c754017b7e6fa6a9b6c840b-2"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<a name="rest_code_56d9d0968c754017b7e6fa6a9b6c840b-3"></a>  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">content</span><span class="o">=</span><span class="s">"text/html;charset=utf-8"</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">"Content-Type"</span><span class="p">&gt;</span>
+<a name="rest_code_56d9d0968c754017b7e6fa6a9b6c840b-4"></a>  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">content</span><span class="o">=</span><span class="s">"utf-8"</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">"encoding"</span><span class="p">&gt;</span>
+<a name="rest_code_56d9d0968c754017b7e6fa6a9b6c840b-5"></a>  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">"overbots-bundled.js"</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<a name="rest_code_56d9d0968c754017b7e6fa6a9b6c840b-6"></a>  <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<a name="rest_code_56d9d0968c754017b7e6fa6a9b6c840b-7"></a>  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+<a name="rest_code_56d9d0968c754017b7e6fa6a9b6c840b-8"></a>    <span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">overbots</span><span class="p">.</span><span class="nx">main</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+<a name="rest_code_56d9d0968c754017b7e6fa6a9b6c840b-9"></a>  <span class="p">},</span> <span class="mi">1</span><span class="p">)</span>
+<a name="rest_code_56d9d0968c754017b7e6fa6a9b6c840b-10"></a>  <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<a name="rest_code_56d9d0968c754017b7e6fa6a9b6c840b-11"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<a name="rest_code_56d9d0968c754017b7e6fa6a9b6c840b-12"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<a name="rest_code_56d9d0968c754017b7e6fa6a9b6c840b-13"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<a name="rest_code_56d9d0968c754017b7e6fa6a9b6c840b-14"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></td>
 </tr></table>
 <p>And loading that up in the browser I just see a <tt class="docutils literal">42</tt> printed inside a div and that is all.  :-)</p>
@@ -417,32 +417,32 @@ mdl-layout--small-screen-only
 <div class="section" id="css">
 <h2>CSS</h2>
 <p>I also want to use SCSS for CSS as it makes dealing with CSS to be far more maintainable, thus:</p>
-<pre class="code shell"><a name="rest_code_bc2bd92782694eb3a1acc2377f7e428a-1"></a>╭─overminddl1@snip ~/ocaml/overbots  ‹master*›
-<a name="rest_code_bc2bd92782694eb3a1acc2377f7e428a-2"></a>╰─➤  npm install --save-dev node-sass nodemon postcss autoprefixer postcss-cli
-<a name="rest_code_bc2bd92782694eb3a1acc2377f7e428a-3"></a>├── autoprefixer@7.0.1
-<a name="rest_code_bc2bd92782694eb3a1acc2377f7e428a-4"></a>├── node-sass@4.5.2
-<a name="rest_code_bc2bd92782694eb3a1acc2377f7e428a-5"></a>├── nodemon@1.11.0
-<a name="rest_code_bc2bd92782694eb3a1acc2377f7e428a-6"></a>├── postcss@6.0.1
-<a name="rest_code_bc2bd92782694eb3a1acc2377f7e428a-7"></a>└── postcss-cli@4.0.0
+<pre class="code shell"><a name="rest_code_cdf03a9b16334a11b8bb2d26f9bdae10-1"></a>╭─overminddl1@snip ~/ocaml/overbots  ‹master*›
+<a name="rest_code_cdf03a9b16334a11b8bb2d26f9bdae10-2"></a>╰─➤  npm install --save-dev node-sass nodemon postcss autoprefixer postcss-cli
+<a name="rest_code_cdf03a9b16334a11b8bb2d26f9bdae10-3"></a>├── autoprefixer@7.0.1
+<a name="rest_code_cdf03a9b16334a11b8bb2d26f9bdae10-4"></a>├── node-sass@4.5.2
+<a name="rest_code_cdf03a9b16334a11b8bb2d26f9bdae10-5"></a>├── nodemon@1.11.0
+<a name="rest_code_cdf03a9b16334a11b8bb2d26f9bdae10-6"></a>├── postcss@6.0.1
+<a name="rest_code_cdf03a9b16334a11b8bb2d26f9bdae10-7"></a>└── postcss-cli@4.0.0
 </pre>
 <p>And changing my <tt class="docutils literal">package.json</tt> <tt class="docutils literal">`"scripts"</tt> block to be:</p>
-<pre class="code json"><a name="rest_code_c7c0c14c77134518ad34fd0fe7eca764-1"></a><span class="p">{</span>
-<a name="rest_code_c7c0c14c77134518ad34fd0fe7eca764-2"></a>  <span class="nt">"build:bsb"</span><span class="p">:</span> <span class="s2">"bsb -make-world"</span><span class="p">,</span>
-<a name="rest_code_c7c0c14c77134518ad34fd0fe7eca764-3"></a>  <span class="nt">"build:js"</span><span class="p">:</span> <span class="s2">"rollup -c"</span><span class="p">,</span>
-<a name="rest_code_c7c0c14c77134518ad34fd0fe7eca764-4"></a>  <span class="nt">"build:scss"</span><span class="p">:</span> <span class="s2">"node-sass --include-path scss scss/overbots.scss css/overbots.css"</span><span class="p">,</span>
-<a name="rest_code_c7c0c14c77134518ad34fd0fe7eca764-5"></a>  <span class="nt">"build:css"</span><span class="p">:</span> <span class="s2">"postcss --use autoprefixer -o release/overbots.css css/overbots.css"</span><span class="p">,</span>
-<a name="rest_code_c7c0c14c77134518ad34fd0fe7eca764-6"></a>  <span class="nt">"build"</span><span class="p">:</span> <span class="s2">"run-s build:bsb build:js build:scss build:css"</span><span class="p">,</span>
-<a name="rest_code_c7c0c14c77134518ad34fd0fe7eca764-7"></a>  <span class="nt">"watch:bsb"</span><span class="p">:</span> <span class="s2">"bsb -w"</span><span class="p">,</span>
-<a name="rest_code_c7c0c14c77134518ad34fd0fe7eca764-8"></a>  <span class="nt">"watch:js"</span><span class="p">:</span> <span class="s2">"rollup -c -w"</span><span class="p">,</span>
-<a name="rest_code_c7c0c14c77134518ad34fd0fe7eca764-9"></a>  <span class="nt">"watch:scss"</span><span class="p">:</span> <span class="s2">"nodemon -e scss -x \"npm run build:scss\""</span><span class="p">,</span>
-<a name="rest_code_c7c0c14c77134518ad34fd0fe7eca764-10"></a>  <span class="nt">"watch:css"</span><span class="p">:</span> <span class="s2">"nodemon -e css -x \"npm run build:css\""</span><span class="p">,</span>
-<a name="rest_code_c7c0c14c77134518ad34fd0fe7eca764-11"></a>  <span class="nt">"prewatch"</span><span class="p">:</span> <span class="s2">"run-s build"</span><span class="p">,</span>
-<a name="rest_code_c7c0c14c77134518ad34fd0fe7eca764-12"></a>  <span class="nt">"watch"</span><span class="p">:</span> <span class="s2">"run-p watch:bsb watch:js watch:scss watch:css"</span><span class="p">,</span>
-<a name="rest_code_c7c0c14c77134518ad34fd0fe7eca764-13"></a>  <span class="nt">"test"</span><span class="p">:</span> <span class="s2">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>
-<a name="rest_code_c7c0c14c77134518ad34fd0fe7eca764-14"></a><span class="p">}</span>
+<pre class="code json"><a name="rest_code_b4e49f73471541ac9128379bef6c1fa7-1"></a><span class="p">{</span>
+<a name="rest_code_b4e49f73471541ac9128379bef6c1fa7-2"></a>  <span class="nt">"build:bsb"</span><span class="p">:</span> <span class="s2">"bsb -make-world"</span><span class="p">,</span>
+<a name="rest_code_b4e49f73471541ac9128379bef6c1fa7-3"></a>  <span class="nt">"build:js"</span><span class="p">:</span> <span class="s2">"rollup -c"</span><span class="p">,</span>
+<a name="rest_code_b4e49f73471541ac9128379bef6c1fa7-4"></a>  <span class="nt">"build:scss"</span><span class="p">:</span> <span class="s2">"node-sass --include-path scss scss/overbots.scss css/overbots.css"</span><span class="p">,</span>
+<a name="rest_code_b4e49f73471541ac9128379bef6c1fa7-5"></a>  <span class="nt">"build:css"</span><span class="p">:</span> <span class="s2">"postcss --use autoprefixer -o release/overbots.css css/overbots.css"</span><span class="p">,</span>
+<a name="rest_code_b4e49f73471541ac9128379bef6c1fa7-6"></a>  <span class="nt">"build"</span><span class="p">:</span> <span class="s2">"run-s build:bsb build:js build:scss build:css"</span><span class="p">,</span>
+<a name="rest_code_b4e49f73471541ac9128379bef6c1fa7-7"></a>  <span class="nt">"watch:bsb"</span><span class="p">:</span> <span class="s2">"bsb -w"</span><span class="p">,</span>
+<a name="rest_code_b4e49f73471541ac9128379bef6c1fa7-8"></a>  <span class="nt">"watch:js"</span><span class="p">:</span> <span class="s2">"rollup -c -w"</span><span class="p">,</span>
+<a name="rest_code_b4e49f73471541ac9128379bef6c1fa7-9"></a>  <span class="nt">"watch:scss"</span><span class="p">:</span> <span class="s2">"nodemon -e scss -x \"npm run build:scss\""</span><span class="p">,</span>
+<a name="rest_code_b4e49f73471541ac9128379bef6c1fa7-10"></a>  <span class="nt">"watch:css"</span><span class="p">:</span> <span class="s2">"nodemon -e css -x \"npm run build:css\""</span><span class="p">,</span>
+<a name="rest_code_b4e49f73471541ac9128379bef6c1fa7-11"></a>  <span class="nt">"prewatch"</span><span class="p">:</span> <span class="s2">"run-s build"</span><span class="p">,</span>
+<a name="rest_code_b4e49f73471541ac9128379bef6c1fa7-12"></a>  <span class="nt">"watch"</span><span class="p">:</span> <span class="s2">"run-p watch:bsb watch:js watch:scss watch:css"</span><span class="p">,</span>
+<a name="rest_code_b4e49f73471541ac9128379bef6c1fa7-13"></a>  <span class="nt">"test"</span><span class="p">:</span> <span class="s2">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>
+<a name="rest_code_b4e49f73471541ac9128379bef6c1fa7-14"></a><span class="p">}</span>
 </pre>
 <p>And I also added a stylesheet to it in the <tt class="docutils literal">dev.html</tt> file in the head above the script tags:</p>
-<pre class="code html"><a name="rest_code_e11cfb037cf64623858af7b1d8492040-1"></a><span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">"stylesheet"</span> <span class="na">type</span><span class="o">=</span><span class="s">"text/css"</span> <span class="na">href</span><span class="o">=</span><span class="s">"overbots.css"</span><span class="p">&gt;</span>
+<pre class="code html"><a name="rest_code_54cac985724940ba9eaf45f3382e1827-1"></a><span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">"stylesheet"</span> <span class="na">type</span><span class="o">=</span><span class="s">"text/css"</span> <span class="na">href</span><span class="o">=</span><span class="s">"overbots.css"</span><span class="p">&gt;</span>
 </pre>
 <p>As well as creating an empty file at <tt class="docutils literal">scss/overbots.scss</tt>.</p>
 <p>This will be good for the initial setup, development, and etc. I think, next time let's start making the game!</p>

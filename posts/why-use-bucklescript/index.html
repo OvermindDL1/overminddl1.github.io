@@ -112,16 +112,16 @@ mdl-layout--small-screen-only
                 <div>
 <p>Why might you want to use Bucklescript?  Let's explore just how awesome OCaml is to use on javascript over alternative languages and why it has staying power.</p>
 <p>OCaml/Bucklescript:</p>
-<pre class="code ocaml"><a name="rest_code_ecbc2aa68d7d4b3bbc86651ea27638cc-1"></a><span class="n">print_endline</span> <span class="s2">"Hello World!"</span>
-<a name="rest_code_ecbc2aa68d7d4b3bbc86651ea27638cc-2"></a>
-<a name="rest_code_ecbc2aa68d7d4b3bbc86651ea27638cc-3"></a><span class="k">let</span> <span class="n">add</span> <span class="n">l</span> <span class="n">r</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="n">r</span>
+<pre class="code ocaml"><a name="rest_code_712dbe0336b04152a59e21a30dbc3276-1"></a><span class="n">print_endline</span> <span class="s2">"Hello World!"</span>
+<a name="rest_code_712dbe0336b04152a59e21a30dbc3276-2"></a>
+<a name="rest_code_712dbe0336b04152a59e21a30dbc3276-3"></a><span class="k">let</span> <span class="n">add</span> <span class="n">l</span> <span class="n">r</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="n">r</span>
 </pre>
 <p>Javascript:</p>
-<pre class="code javascript"><a name="rest_code_b204d1c5f79843a093051a33f2050a0b-1"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Hello World!"</span><span class="p">);</span>
-<a name="rest_code_b204d1c5f79843a093051a33f2050a0b-2"></a>
-<a name="rest_code_b204d1c5f79843a093051a33f2050a0b-3"></a><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">l</span><span class="p">,</span> <span class="nx">r</span><span class="p">)</span> <span class="p">{</span>
-<a name="rest_code_b204d1c5f79843a093051a33f2050a0b-4"></a>  <span class="k">return</span> <span class="nx">l</span> <span class="o">+</span> <span class="nx">r</span> <span class="o">|</span> <span class="mi">0</span><span class="p">;</span>
-<a name="rest_code_b204d1c5f79843a093051a33f2050a0b-5"></a><span class="p">}</span>
+<pre class="code javascript"><a name="rest_code_9972b88900fc4564a7d90f2128e06b87-1"></a><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Hello World!"</span><span class="p">);</span>
+<a name="rest_code_9972b88900fc4564a7d90f2128e06b87-2"></a>
+<a name="rest_code_9972b88900fc4564a7d90f2128e06b87-3"></a><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">l</span><span class="p">,</span> <span class="nx">r</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_9972b88900fc4564a7d90f2128e06b87-4"></a>  <span class="k">return</span> <span class="nx">l</span> <span class="o">+</span> <span class="nx">r</span> <span class="o">|</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_9972b88900fc4564a7d90f2128e06b87-5"></a><span class="p">}</span>
 </pre>
 <!-- TEASER_END -->
 <div class="section" id="history">
@@ -136,356 +136,356 @@ mdl-layout--small-screen-only
 <p>It can inline and removing the cost of currying when possible:</p>
 <p>OCaml/Bucklescript:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_a2cc69158e20497db50e8d7fd77b2ae3-1">1</a>
-<a href="#rest_code_a2cc69158e20497db50e8d7fd77b2ae3-2">2</a>
-<a href="#rest_code_a2cc69158e20497db50e8d7fd77b2ae3-3">3</a></pre></div></td>
-<td class="code"><pre class="code ocaml"><a name="rest_code_a2cc69158e20497db50e8d7fd77b2ae3-1"></a><span class="k">let</span> <span class="n">test_curry</span> <span class="n">x</span>  <span class="n">y</span> <span class="o">=</span>  <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
-<a name="rest_code_a2cc69158e20497db50e8d7fd77b2ae3-2"></a>
-<a name="rest_code_a2cc69158e20497db50e8d7fd77b2ae3-3"></a><span class="k">let</span> <span class="n">f</span> <span class="o">=</span> <span class="n">test_curry</span> <span class="mi">32</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_71e0b0a1854d4532af0f8ca4b65e643e-1">1</a>
+<a href="#rest_code_71e0b0a1854d4532af0f8ca4b65e643e-2">2</a>
+<a href="#rest_code_71e0b0a1854d4532af0f8ca4b65e643e-3">3</a></pre></div></td>
+<td class="code"><pre class="code ocaml"><a name="rest_code_71e0b0a1854d4532af0f8ca4b65e643e-1"></a><span class="k">let</span> <span class="n">test_curry</span> <span class="n">x</span>  <span class="n">y</span> <span class="o">=</span>  <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<a name="rest_code_71e0b0a1854d4532af0f8ca4b65e643e-2"></a>
+<a name="rest_code_71e0b0a1854d4532af0f8ca4b65e643e-3"></a><span class="k">let</span> <span class="n">f</span> <span class="o">=</span> <span class="n">test_curry</span> <span class="mi">32</span>
 </pre></td>
 </tr></table>
 <p>Javascript:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_0aa64fd04bab40f5b7f5a7fb1ea07b76-1">1</a>
-<a href="#rest_code_0aa64fd04bab40f5b7f5a7fb1ea07b76-2">2</a>
-<a href="#rest_code_0aa64fd04bab40f5b7f5a7fb1ea07b76-3">3</a>
-<a href="#rest_code_0aa64fd04bab40f5b7f5a7fb1ea07b76-4">4</a>
-<a href="#rest_code_0aa64fd04bab40f5b7f5a7fb1ea07b76-5">5</a>
-<a href="#rest_code_0aa64fd04bab40f5b7f5a7fb1ea07b76-6">6</a>
-<a href="#rest_code_0aa64fd04bab40f5b7f5a7fb1ea07b76-7">7</a></pre></div></td>
-<td class="code"><pre class="code javascript"><a name="rest_code_0aa64fd04bab40f5b7f5a7fb1ea07b76-1"></a><span class="kd">function</span> <span class="nx">test_curry</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
-<a name="rest_code_0aa64fd04bab40f5b7f5a7fb1ea07b76-2"></a>  <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span> <span class="o">|</span> <span class="mi">0</span><span class="p">;</span>
-<a name="rest_code_0aa64fd04bab40f5b7f5a7fb1ea07b76-3"></a><span class="p">}</span>
-<a name="rest_code_0aa64fd04bab40f5b7f5a7fb1ea07b76-4"></a>
-<a name="rest_code_0aa64fd04bab40f5b7f5a7fb1ea07b76-5"></a><span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
-<a name="rest_code_0aa64fd04bab40f5b7f5a7fb1ea07b76-6"></a>  <span class="k">return</span> <span class="mi">32</span> <span class="o">+</span> <span class="nx">param</span> <span class="o">|</span> <span class="mi">0</span><span class="p">;</span>
-<a name="rest_code_0aa64fd04bab40f5b7f5a7fb1ea07b76-7"></a><span class="p">}</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_edd970a2b8614ee4b321a8e0d4501da6-1">1</a>
+<a href="#rest_code_edd970a2b8614ee4b321a8e0d4501da6-2">2</a>
+<a href="#rest_code_edd970a2b8614ee4b321a8e0d4501da6-3">3</a>
+<a href="#rest_code_edd970a2b8614ee4b321a8e0d4501da6-4">4</a>
+<a href="#rest_code_edd970a2b8614ee4b321a8e0d4501da6-5">5</a>
+<a href="#rest_code_edd970a2b8614ee4b321a8e0d4501da6-6">6</a>
+<a href="#rest_code_edd970a2b8614ee4b321a8e0d4501da6-7">7</a></pre></div></td>
+<td class="code"><pre class="code javascript"><a name="rest_code_edd970a2b8614ee4b321a8e0d4501da6-1"></a><span class="kd">function</span> <span class="nx">test_curry</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_edd970a2b8614ee4b321a8e0d4501da6-2"></a>  <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span> <span class="o">|</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_edd970a2b8614ee4b321a8e0d4501da6-3"></a><span class="p">}</span>
+<a name="rest_code_edd970a2b8614ee4b321a8e0d4501da6-4"></a>
+<a name="rest_code_edd970a2b8614ee4b321a8e0d4501da6-5"></a><span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_edd970a2b8614ee4b321a8e0d4501da6-6"></a>  <span class="k">return</span> <span class="mi">32</span> <span class="o">+</span> <span class="nx">param</span> <span class="o">|</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_edd970a2b8614ee4b321a8e0d4501da6-7"></a><span class="p">}</span>
 </pre></td>
 </tr></table>
 <p>It has attributes that let you define interfaces with Javascript cleanly:</p>
 <p>OCaml/Bucklescript:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_0c0079f92fa8430eb8de769dfeefd549-1"> 1</a>
-<a href="#rest_code_0c0079f92fa8430eb8de769dfeefd549-2"> 2</a>
-<a href="#rest_code_0c0079f92fa8430eb8de769dfeefd549-3"> 3</a>
-<a href="#rest_code_0c0079f92fa8430eb8de769dfeefd549-4"> 4</a>
-<a href="#rest_code_0c0079f92fa8430eb8de769dfeefd549-5"> 5</a>
-<a href="#rest_code_0c0079f92fa8430eb8de769dfeefd549-6"> 6</a>
-<a href="#rest_code_0c0079f92fa8430eb8de769dfeefd549-7"> 7</a>
-<a href="#rest_code_0c0079f92fa8430eb8de769dfeefd549-8"> 8</a>
-<a href="#rest_code_0c0079f92fa8430eb8de769dfeefd549-9"> 9</a>
-<a href="#rest_code_0c0079f92fa8430eb8de769dfeefd549-10">10</a>
-<a href="#rest_code_0c0079f92fa8430eb8de769dfeefd549-11">11</a>
-<a href="#rest_code_0c0079f92fa8430eb8de769dfeefd549-12">12</a></pre></div></td>
-<td class="code"><pre class="code ocaml"><a name="rest_code_0c0079f92fa8430eb8de769dfeefd549-1"></a><span class="k">let</span> <span class="n">type_safe_json_data</span> <span class="o">=</span> <span class="o">[%</span><span class="n">bs</span><span class="o">.</span><span class="n">obj</span> <span class="o">[|</span>
-<a name="rest_code_0c0079f92fa8430eb8de769dfeefd549-2"></a>    <span class="o">{</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">;</span> <span class="n">y</span> <span class="o">=</span> <span class="s2">"hey"</span> <span class="o">};</span>
-<a name="rest_code_0c0079f92fa8430eb8de769dfeefd549-3"></a>    <span class="o">{</span> <span class="n">x</span> <span class="o">=</span>  <span class="mi">32</span><span class="o">;</span> <span class="n">y</span> <span class="o">=</span> <span class="s2">"xx"</span> <span class="o">}</span>
-<a name="rest_code_0c0079f92fa8430eb8de769dfeefd549-4"></a><span class="o">|]</span> <span class="o">]</span>
-<a name="rest_code_0c0079f92fa8430eb8de769dfeefd549-5"></a>
-<a name="rest_code_0c0079f92fa8430eb8de769dfeefd549-6"></a><span class="k">external</span> <span class="n">optional_json_data</span> <span class="o">:</span> <span class="n">hi</span><span class="o">:</span><span class="kt">int</span> <span class="o">-&gt;</span> <span class="o">?</span><span class="n">lo</span><span class="o">:</span><span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">unit</span> <span class="o">-&gt;</span> <span class="o">_</span> <span class="o">=</span>
-<a name="rest_code_0c0079f92fa8430eb8de769dfeefd549-7"></a>    <span class="s2">""</span> <span class="o">[@@</span><span class="n">bs</span><span class="o">.</span><span class="n">obj</span><span class="o">]</span>
-<a name="rest_code_0c0079f92fa8430eb8de769dfeefd549-8"></a>
-<a name="rest_code_0c0079f92fa8430eb8de769dfeefd549-9"></a><span class="k">let</span> <span class="n">data</span> <span class="o">=</span>  <span class="o">[|</span>
-<a name="rest_code_0c0079f92fa8430eb8de769dfeefd549-10"></a>  <span class="n">optional_json_data</span> <span class="o">~</span><span class="n">hi</span><span class="o">:</span><span class="mi">3</span> <span class="bp">()</span><span class="o">;</span>
-<a name="rest_code_0c0079f92fa8430eb8de769dfeefd549-11"></a>  <span class="n">optional_json_data</span> <span class="o">~</span><span class="n">hi</span><span class="o">:</span><span class="mi">32</span> <span class="o">~</span><span class="n">lo</span><span class="o">:</span><span class="mi">3</span> <span class="bp">()</span>
-<a name="rest_code_0c0079f92fa8430eb8de769dfeefd549-12"></a><span class="o">|]</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_ab818fc08c854c86bf889805d2e3c942-1"> 1</a>
+<a href="#rest_code_ab818fc08c854c86bf889805d2e3c942-2"> 2</a>
+<a href="#rest_code_ab818fc08c854c86bf889805d2e3c942-3"> 3</a>
+<a href="#rest_code_ab818fc08c854c86bf889805d2e3c942-4"> 4</a>
+<a href="#rest_code_ab818fc08c854c86bf889805d2e3c942-5"> 5</a>
+<a href="#rest_code_ab818fc08c854c86bf889805d2e3c942-6"> 6</a>
+<a href="#rest_code_ab818fc08c854c86bf889805d2e3c942-7"> 7</a>
+<a href="#rest_code_ab818fc08c854c86bf889805d2e3c942-8"> 8</a>
+<a href="#rest_code_ab818fc08c854c86bf889805d2e3c942-9"> 9</a>
+<a href="#rest_code_ab818fc08c854c86bf889805d2e3c942-10">10</a>
+<a href="#rest_code_ab818fc08c854c86bf889805d2e3c942-11">11</a>
+<a href="#rest_code_ab818fc08c854c86bf889805d2e3c942-12">12</a></pre></div></td>
+<td class="code"><pre class="code ocaml"><a name="rest_code_ab818fc08c854c86bf889805d2e3c942-1"></a><span class="k">let</span> <span class="n">type_safe_json_data</span> <span class="o">=</span> <span class="o">[%</span><span class="n">bs</span><span class="o">.</span><span class="n">obj</span> <span class="o">[|</span>
+<a name="rest_code_ab818fc08c854c86bf889805d2e3c942-2"></a>    <span class="o">{</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">;</span> <span class="n">y</span> <span class="o">=</span> <span class="s2">"hey"</span> <span class="o">};</span>
+<a name="rest_code_ab818fc08c854c86bf889805d2e3c942-3"></a>    <span class="o">{</span> <span class="n">x</span> <span class="o">=</span>  <span class="mi">32</span><span class="o">;</span> <span class="n">y</span> <span class="o">=</span> <span class="s2">"xx"</span> <span class="o">}</span>
+<a name="rest_code_ab818fc08c854c86bf889805d2e3c942-4"></a><span class="o">|]</span> <span class="o">]</span>
+<a name="rest_code_ab818fc08c854c86bf889805d2e3c942-5"></a>
+<a name="rest_code_ab818fc08c854c86bf889805d2e3c942-6"></a><span class="k">external</span> <span class="n">optional_json_data</span> <span class="o">:</span> <span class="n">hi</span><span class="o">:</span><span class="kt">int</span> <span class="o">-&gt;</span> <span class="o">?</span><span class="n">lo</span><span class="o">:</span><span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">unit</span> <span class="o">-&gt;</span> <span class="o">_</span> <span class="o">=</span>
+<a name="rest_code_ab818fc08c854c86bf889805d2e3c942-7"></a>    <span class="s2">""</span> <span class="o">[@@</span><span class="n">bs</span><span class="o">.</span><span class="n">obj</span><span class="o">]</span>
+<a name="rest_code_ab818fc08c854c86bf889805d2e3c942-8"></a>
+<a name="rest_code_ab818fc08c854c86bf889805d2e3c942-9"></a><span class="k">let</span> <span class="n">data</span> <span class="o">=</span>  <span class="o">[|</span>
+<a name="rest_code_ab818fc08c854c86bf889805d2e3c942-10"></a>  <span class="n">optional_json_data</span> <span class="o">~</span><span class="n">hi</span><span class="o">:</span><span class="mi">3</span> <span class="bp">()</span><span class="o">;</span>
+<a name="rest_code_ab818fc08c854c86bf889805d2e3c942-11"></a>  <span class="n">optional_json_data</span> <span class="o">~</span><span class="n">hi</span><span class="o">:</span><span class="mi">32</span> <span class="o">~</span><span class="n">lo</span><span class="o">:</span><span class="mi">3</span> <span class="bp">()</span>
+<a name="rest_code_ab818fc08c854c86bf889805d2e3c942-12"></a><span class="o">|]</span>
 </pre></td>
 </tr></table>
 <p>Javascript:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_f4856edb09fc4df49d85ca68b71109ee-1"> 1</a>
-<a href="#rest_code_f4856edb09fc4df49d85ca68b71109ee-2"> 2</a>
-<a href="#rest_code_f4856edb09fc4df49d85ca68b71109ee-3"> 3</a>
-<a href="#rest_code_f4856edb09fc4df49d85ca68b71109ee-4"> 4</a>
-<a href="#rest_code_f4856edb09fc4df49d85ca68b71109ee-5"> 5</a>
-<a href="#rest_code_f4856edb09fc4df49d85ca68b71109ee-6"> 6</a>
-<a href="#rest_code_f4856edb09fc4df49d85ca68b71109ee-7"> 7</a>
-<a href="#rest_code_f4856edb09fc4df49d85ca68b71109ee-8"> 8</a>
-<a href="#rest_code_f4856edb09fc4df49d85ca68b71109ee-9"> 9</a>
-<a href="#rest_code_f4856edb09fc4df49d85ca68b71109ee-10">10</a>
-<a href="#rest_code_f4856edb09fc4df49d85ca68b71109ee-11">11</a>
-<a href="#rest_code_f4856edb09fc4df49d85ca68b71109ee-12">12</a>
-<a href="#rest_code_f4856edb09fc4df49d85ca68b71109ee-13">13</a>
-<a href="#rest_code_f4856edb09fc4df49d85ca68b71109ee-14">14</a>
-<a href="#rest_code_f4856edb09fc4df49d85ca68b71109ee-15">15</a>
-<a href="#rest_code_f4856edb09fc4df49d85ca68b71109ee-16">16</a>
-<a href="#rest_code_f4856edb09fc4df49d85ca68b71109ee-17">17</a>
-<a href="#rest_code_f4856edb09fc4df49d85ca68b71109ee-18">18</a>
-<a href="#rest_code_f4856edb09fc4df49d85ca68b71109ee-19">19</a>
-<a href="#rest_code_f4856edb09fc4df49d85ca68b71109ee-20">20</a></pre></div></td>
-<td class="code"><pre class="code javascript"><a name="rest_code_f4856edb09fc4df49d85ca68b71109ee-1"></a><span class="kd">var</span> <span class="nx">type_safe_json_data</span> <span class="o">=</span> <span class="cm">/* array */</span><span class="p">[</span>
-<a name="rest_code_f4856edb09fc4df49d85ca68b71109ee-2"></a>  <span class="p">{</span>
-<a name="rest_code_f4856edb09fc4df49d85ca68b71109ee-3"></a>    <span class="nx">x</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
-<a name="rest_code_f4856edb09fc4df49d85ca68b71109ee-4"></a>    <span class="nx">y</span><span class="o">:</span> <span class="s2">"hey"</span>
-<a name="rest_code_f4856edb09fc4df49d85ca68b71109ee-5"></a>  <span class="p">},</span>
-<a name="rest_code_f4856edb09fc4df49d85ca68b71109ee-6"></a>  <span class="p">{</span>
-<a name="rest_code_f4856edb09fc4df49d85ca68b71109ee-7"></a>    <span class="nx">x</span><span class="o">:</span> <span class="mi">32</span><span class="p">,</span>
-<a name="rest_code_f4856edb09fc4df49d85ca68b71109ee-8"></a>    <span class="nx">y</span><span class="o">:</span> <span class="s2">"xx"</span>
-<a name="rest_code_f4856edb09fc4df49d85ca68b71109ee-9"></a>  <span class="p">}</span>
-<a name="rest_code_f4856edb09fc4df49d85ca68b71109ee-10"></a><span class="p">];</span>
-<a name="rest_code_f4856edb09fc4df49d85ca68b71109ee-11"></a>
-<a name="rest_code_f4856edb09fc4df49d85ca68b71109ee-12"></a><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="cm">/* array */</span><span class="p">[</span>
-<a name="rest_code_f4856edb09fc4df49d85ca68b71109ee-13"></a>  <span class="p">{</span>
-<a name="rest_code_f4856edb09fc4df49d85ca68b71109ee-14"></a>    <span class="nx">hi</span><span class="o">:</span> <span class="mi">3</span>
-<a name="rest_code_f4856edb09fc4df49d85ca68b71109ee-15"></a>  <span class="p">},</span>
-<a name="rest_code_f4856edb09fc4df49d85ca68b71109ee-16"></a>  <span class="p">{</span>
-<a name="rest_code_f4856edb09fc4df49d85ca68b71109ee-17"></a>    <span class="nx">hi</span><span class="o">:</span> <span class="mi">32</span><span class="p">,</span>
-<a name="rest_code_f4856edb09fc4df49d85ca68b71109ee-18"></a>    <span class="nx">lo</span><span class="o">:</span> <span class="mi">3</span>
-<a name="rest_code_f4856edb09fc4df49d85ca68b71109ee-19"></a>  <span class="p">}</span>
-<a name="rest_code_f4856edb09fc4df49d85ca68b71109ee-20"></a><span class="p">];</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-1"> 1</a>
+<a href="#rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-2"> 2</a>
+<a href="#rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-3"> 3</a>
+<a href="#rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-4"> 4</a>
+<a href="#rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-5"> 5</a>
+<a href="#rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-6"> 6</a>
+<a href="#rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-7"> 7</a>
+<a href="#rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-8"> 8</a>
+<a href="#rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-9"> 9</a>
+<a href="#rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-10">10</a>
+<a href="#rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-11">11</a>
+<a href="#rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-12">12</a>
+<a href="#rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-13">13</a>
+<a href="#rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-14">14</a>
+<a href="#rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-15">15</a>
+<a href="#rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-16">16</a>
+<a href="#rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-17">17</a>
+<a href="#rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-18">18</a>
+<a href="#rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-19">19</a>
+<a href="#rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-20">20</a></pre></div></td>
+<td class="code"><pre class="code javascript"><a name="rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-1"></a><span class="kd">var</span> <span class="nx">type_safe_json_data</span> <span class="o">=</span> <span class="cm">/* array */</span><span class="p">[</span>
+<a name="rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-2"></a>  <span class="p">{</span>
+<a name="rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-3"></a>    <span class="nx">x</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+<a name="rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-4"></a>    <span class="nx">y</span><span class="o">:</span> <span class="s2">"hey"</span>
+<a name="rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-5"></a>  <span class="p">},</span>
+<a name="rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-6"></a>  <span class="p">{</span>
+<a name="rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-7"></a>    <span class="nx">x</span><span class="o">:</span> <span class="mi">32</span><span class="p">,</span>
+<a name="rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-8"></a>    <span class="nx">y</span><span class="o">:</span> <span class="s2">"xx"</span>
+<a name="rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-9"></a>  <span class="p">}</span>
+<a name="rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-10"></a><span class="p">];</span>
+<a name="rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-11"></a>
+<a name="rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-12"></a><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="cm">/* array */</span><span class="p">[</span>
+<a name="rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-13"></a>  <span class="p">{</span>
+<a name="rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-14"></a>    <span class="nx">hi</span><span class="o">:</span> <span class="mi">3</span>
+<a name="rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-15"></a>  <span class="p">},</span>
+<a name="rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-16"></a>  <span class="p">{</span>
+<a name="rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-17"></a>    <span class="nx">hi</span><span class="o">:</span> <span class="mi">32</span><span class="p">,</span>
+<a name="rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-18"></a>    <span class="nx">lo</span><span class="o">:</span> <span class="mi">3</span>
+<a name="rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-19"></a>  <span class="p">}</span>
+<a name="rest_code_41c3f0fe39de4790a8bc6e25bfc403d5-20"></a><span class="p">];</span>
 </pre></td>
 </tr></table>
 <p>Tail-call optimizations (with closure removal when possible):</p>
 <p>OCaml/Bucklescript:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_5649bacf5ff64dda8a9dff96f3bcb060-1">1</a>
-<a href="#rest_code_5649bacf5ff64dda8a9dff96f3bcb060-2">2</a>
-<a href="#rest_code_5649bacf5ff64dda8a9dff96f3bcb060-3">3</a>
-<a href="#rest_code_5649bacf5ff64dda8a9dff96f3bcb060-4">4</a>
-<a href="#rest_code_5649bacf5ff64dda8a9dff96f3bcb060-5">5</a>
-<a href="#rest_code_5649bacf5ff64dda8a9dff96f3bcb060-6">6</a></pre></div></td>
-<td class="code"><pre class="code ocaml"><a name="rest_code_5649bacf5ff64dda8a9dff96f3bcb060-1"></a><span class="k">let</span> <span class="n">tail_sum</span> <span class="n">n</span> <span class="o">=</span>
-<a name="rest_code_5649bacf5ff64dda8a9dff96f3bcb060-2"></a>  <span class="k">let</span> <span class="k">rec</span> <span class="n">aux</span> <span class="n">acc</span> <span class="n">i</span> <span class="o">=</span>
-<a name="rest_code_5649bacf5ff64dda8a9dff96f3bcb060-3"></a>    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="k">then</span>
-<a name="rest_code_5649bacf5ff64dda8a9dff96f3bcb060-4"></a>      <span class="n">aux</span> <span class="o">(</span><span class="n">acc</span> <span class="o">+</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
-<a name="rest_code_5649bacf5ff64dda8a9dff96f3bcb060-5"></a>    <span class="k">else</span> <span class="n">acc</span>
-<a name="rest_code_5649bacf5ff64dda8a9dff96f3bcb060-6"></a>  <span class="k">in</span> <span class="n">aux</span> <span class="mi">0</span> <span class="mi">0</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_fc0b3e5cf83b4763a1b33980b3630b2a-1">1</a>
+<a href="#rest_code_fc0b3e5cf83b4763a1b33980b3630b2a-2">2</a>
+<a href="#rest_code_fc0b3e5cf83b4763a1b33980b3630b2a-3">3</a>
+<a href="#rest_code_fc0b3e5cf83b4763a1b33980b3630b2a-4">4</a>
+<a href="#rest_code_fc0b3e5cf83b4763a1b33980b3630b2a-5">5</a>
+<a href="#rest_code_fc0b3e5cf83b4763a1b33980b3630b2a-6">6</a></pre></div></td>
+<td class="code"><pre class="code ocaml"><a name="rest_code_fc0b3e5cf83b4763a1b33980b3630b2a-1"></a><span class="k">let</span> <span class="n">tail_sum</span> <span class="n">n</span> <span class="o">=</span>
+<a name="rest_code_fc0b3e5cf83b4763a1b33980b3630b2a-2"></a>  <span class="k">let</span> <span class="k">rec</span> <span class="n">aux</span> <span class="n">acc</span> <span class="n">i</span> <span class="o">=</span>
+<a name="rest_code_fc0b3e5cf83b4763a1b33980b3630b2a-3"></a>    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="k">then</span>
+<a name="rest_code_fc0b3e5cf83b4763a1b33980b3630b2a-4"></a>      <span class="n">aux</span> <span class="o">(</span><span class="n">acc</span> <span class="o">+</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
+<a name="rest_code_fc0b3e5cf83b4763a1b33980b3630b2a-5"></a>    <span class="k">else</span> <span class="n">acc</span>
+<a name="rest_code_fc0b3e5cf83b4763a1b33980b3630b2a-6"></a>  <span class="k">in</span> <span class="n">aux</span> <span class="mi">0</span> <span class="mi">0</span>
 </pre></td>
 </tr></table>
 <p>Javascript:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-1"> 1</a>
-<a href="#rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-2"> 2</a>
-<a href="#rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-3"> 3</a>
-<a href="#rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-4"> 4</a>
-<a href="#rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-5"> 5</a>
-<a href="#rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-6"> 6</a>
-<a href="#rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-7"> 7</a>
-<a href="#rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-8"> 8</a>
-<a href="#rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-9"> 9</a>
-<a href="#rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-10">10</a>
-<a href="#rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-11">11</a>
-<a href="#rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-12">12</a>
-<a href="#rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-13">13</a>
-<a href="#rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-14">14</a>
-<a href="#rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-15">15</a>
-<a href="#rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-16">16</a>
-<a href="#rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-17">17</a></pre></div></td>
-<td class="code"><pre class="code javascript"><a name="rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-1"></a><span class="kd">function</span> <span class="nx">tail_sum</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
-<a name="rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-2"></a>  <span class="kd">var</span> <span class="nx">_acc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<a name="rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-3"></a>  <span class="kd">var</span> <span class="nx">_i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<a name="rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-4"></a>  <span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
-<a name="rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-5"></a>    <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">_i</span><span class="p">;</span>
-<a name="rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-6"></a>    <span class="kd">var</span> <span class="nx">acc</span> <span class="o">=</span> <span class="nx">_acc</span><span class="p">;</span>
-<a name="rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-7"></a>    <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&lt;=</span> <span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
-<a name="rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-8"></a>      <span class="nx">_i</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">0</span><span class="p">;</span>
-<a name="rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-9"></a>      <span class="nx">_acc</span> <span class="o">=</span> <span class="nx">acc</span> <span class="o">+</span> <span class="nx">i</span> <span class="o">|</span> <span class="mi">0</span><span class="p">;</span>
-<a name="rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-10"></a>      <span class="k">continue</span> <span class="p">;</span>
-<a name="rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-11"></a>
-<a name="rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-12"></a>    <span class="p">}</span>
-<a name="rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-13"></a>    <span class="k">else</span> <span class="p">{</span>
-<a name="rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-14"></a>      <span class="k">return</span> <span class="nx">acc</span><span class="p">;</span>
-<a name="rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-15"></a>    <span class="p">}</span>
-<a name="rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-16"></a>  <span class="p">};</span>
-<a name="rest_code_f1ab0091d4e7401e9a14cc789dd5ff01-17"></a><span class="p">}</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_b48138cdc1d24933a82f21388649fe18-1"> 1</a>
+<a href="#rest_code_b48138cdc1d24933a82f21388649fe18-2"> 2</a>
+<a href="#rest_code_b48138cdc1d24933a82f21388649fe18-3"> 3</a>
+<a href="#rest_code_b48138cdc1d24933a82f21388649fe18-4"> 4</a>
+<a href="#rest_code_b48138cdc1d24933a82f21388649fe18-5"> 5</a>
+<a href="#rest_code_b48138cdc1d24933a82f21388649fe18-6"> 6</a>
+<a href="#rest_code_b48138cdc1d24933a82f21388649fe18-7"> 7</a>
+<a href="#rest_code_b48138cdc1d24933a82f21388649fe18-8"> 8</a>
+<a href="#rest_code_b48138cdc1d24933a82f21388649fe18-9"> 9</a>
+<a href="#rest_code_b48138cdc1d24933a82f21388649fe18-10">10</a>
+<a href="#rest_code_b48138cdc1d24933a82f21388649fe18-11">11</a>
+<a href="#rest_code_b48138cdc1d24933a82f21388649fe18-12">12</a>
+<a href="#rest_code_b48138cdc1d24933a82f21388649fe18-13">13</a>
+<a href="#rest_code_b48138cdc1d24933a82f21388649fe18-14">14</a>
+<a href="#rest_code_b48138cdc1d24933a82f21388649fe18-15">15</a>
+<a href="#rest_code_b48138cdc1d24933a82f21388649fe18-16">16</a>
+<a href="#rest_code_b48138cdc1d24933a82f21388649fe18-17">17</a></pre></div></td>
+<td class="code"><pre class="code javascript"><a name="rest_code_b48138cdc1d24933a82f21388649fe18-1"></a><span class="kd">function</span> <span class="nx">tail_sum</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_b48138cdc1d24933a82f21388649fe18-2"></a>  <span class="kd">var</span> <span class="nx">_acc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_b48138cdc1d24933a82f21388649fe18-3"></a>  <span class="kd">var</span> <span class="nx">_i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_b48138cdc1d24933a82f21388649fe18-4"></a>  <span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_b48138cdc1d24933a82f21388649fe18-5"></a>    <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">_i</span><span class="p">;</span>
+<a name="rest_code_b48138cdc1d24933a82f21388649fe18-6"></a>    <span class="kd">var</span> <span class="nx">acc</span> <span class="o">=</span> <span class="nx">_acc</span><span class="p">;</span>
+<a name="rest_code_b48138cdc1d24933a82f21388649fe18-7"></a>    <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&lt;=</span> <span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_b48138cdc1d24933a82f21388649fe18-8"></a>      <span class="nx">_i</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_b48138cdc1d24933a82f21388649fe18-9"></a>      <span class="nx">_acc</span> <span class="o">=</span> <span class="nx">acc</span> <span class="o">+</span> <span class="nx">i</span> <span class="o">|</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_b48138cdc1d24933a82f21388649fe18-10"></a>      <span class="k">continue</span> <span class="p">;</span>
+<a name="rest_code_b48138cdc1d24933a82f21388649fe18-11"></a>
+<a name="rest_code_b48138cdc1d24933a82f21388649fe18-12"></a>    <span class="p">}</span>
+<a name="rest_code_b48138cdc1d24933a82f21388649fe18-13"></a>    <span class="k">else</span> <span class="p">{</span>
+<a name="rest_code_b48138cdc1d24933a82f21388649fe18-14"></a>      <span class="k">return</span> <span class="nx">acc</span><span class="p">;</span>
+<a name="rest_code_b48138cdc1d24933a82f21388649fe18-15"></a>    <span class="p">}</span>
+<a name="rest_code_b48138cdc1d24933a82f21388649fe18-16"></a>  <span class="p">};</span>
+<a name="rest_code_b48138cdc1d24933a82f21388649fe18-17"></a><span class="p">}</span>
 </pre></td>
 </tr></table>
 <p>It has the full power of the OCaml syntax and ecosystem, including even the powerful First-Class Modules:</p>
 <p>OCaml/Bucklescript:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-1"> 1</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-2"> 2</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-3"> 3</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-4"> 4</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-5"> 5</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-6"> 6</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-7"> 7</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-8"> 8</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-9"> 9</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-10">10</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-11">11</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-12">12</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-13">13</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-14">14</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-15">15</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-16">16</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-17">17</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-18">18</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-19">19</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-20">20</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-21">21</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-22">22</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-23">23</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-24">24</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-25">25</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-26">26</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-27">27</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-28">28</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-29">29</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-30">30</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-31">31</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-32">32</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-33">33</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-34">34</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-35">35</a>
-<a href="#rest_code_d122c5c2c1b84ea08de91de6e66aefbd-36">36</a></pre></div></td>
-<td class="code"><pre class="code ocaml"><a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-1"></a><span class="k">module</span> <span class="k">type</span> <span class="nc">X_int</span> <span class="o">=</span> <span class="k">sig</span> <span class="k">val</span> <span class="n">x</span> <span class="o">:</span> <span class="kt">int</span> <span class="k">end</span>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-2"></a>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-3"></a><span class="k">module</span> <span class="nc">Three</span> <span class="o">:</span> <span class="nc">X_int</span> <span class="o">=</span> <span class="k">struct</span> <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">3</span> <span class="k">end</span>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-4"></a>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-5"></a><span class="k">let</span> <span class="n">three</span> <span class="o">=</span> <span class="o">(</span><span class="k">module</span> <span class="nc">Three</span> <span class="o">:</span> <span class="nc">X_int</span><span class="o">)</span>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-6"></a>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-7"></a>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-8"></a><span class="k">module</span> <span class="k">type</span> <span class="nc">Bumpable</span> <span class="o">=</span> <span class="k">sig</span>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-9"></a>  <span class="k">type</span> <span class="n">t</span>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-10"></a>  <span class="k">val</span> <span class="n">bump</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-11"></a><span class="k">end</span>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-12"></a>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-13"></a><span class="k">module</span> <span class="nc">Int_bumper</span> <span class="o">=</span> <span class="k">struct</span>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-14"></a>  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-15"></a>  <span class="k">let</span> <span class="n">bump</span> <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-16"></a><span class="k">end</span>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-17"></a>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-18"></a><span class="k">module</span> <span class="nc">Float_bumper</span> <span class="o">=</span> <span class="k">struct</span>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-19"></a>  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">float</span>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-20"></a>  <span class="k">let</span> <span class="n">bump</span> <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+.</span> <span class="mi">1</span><span class="o">.</span>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-21"></a><span class="k">end</span>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-22"></a>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-23"></a>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-24"></a><span class="k">let</span> <span class="n">int_bumper</span> <span class="o">=</span> <span class="o">(</span><span class="k">module</span> <span class="nc">Int_bumper</span> <span class="o">:</span> <span class="nc">Bumpable</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span><span class="o">)</span>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-25"></a><span class="k">let</span> <span class="n">float_bumper</span> <span class="o">=</span> <span class="o">(</span><span class="k">module</span> <span class="nc">Float_bumper</span> <span class="o">:</span> <span class="nc">Bumpable</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">float</span><span class="o">)</span>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-26"></a>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-27"></a><span class="k">let</span> <span class="n">bump_list</span>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-28"></a>       <span class="o">(</span><span class="k">type</span> <span class="n">a</span><span class="o">)</span>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-29"></a>       <span class="o">(</span><span class="k">module</span> <span class="nc">B</span> <span class="o">:</span> <span class="nc">Bumpable</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="n">a</span><span class="o">)</span>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-30"></a>       <span class="o">(</span><span class="n">l</span><span class="o">:</span> <span class="n">a</span> <span class="kt">list</span><span class="o">)</span>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-31"></a>    <span class="o">=</span>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-32"></a>    <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="nn">B</span><span class="p">.</span><span class="n">bump</span> <span class="n">l</span>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-33"></a>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-34"></a><span class="k">let</span> <span class="n">int_list_bumped</span> <span class="o">=</span> <span class="n">bump_list</span> <span class="n">int_bumper</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span><span class="mi">2</span><span class="o">;</span><span class="mi">3</span><span class="o">]</span>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-35"></a>
-<a name="rest_code_d122c5c2c1b84ea08de91de6e66aefbd-36"></a><span class="k">let</span> <span class="n">float_list_bumped</span> <span class="o">=</span> <span class="n">bump_list</span> <span class="n">float_bumper</span> <span class="o">[</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">;</span><span class="mi">2</span><span class="o">.</span><span class="mi">5</span><span class="o">;</span><span class="mi">3</span><span class="o">.</span><span class="mi">5</span><span class="o">]</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-1"> 1</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-2"> 2</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-3"> 3</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-4"> 4</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-5"> 5</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-6"> 6</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-7"> 7</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-8"> 8</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-9"> 9</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-10">10</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-11">11</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-12">12</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-13">13</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-14">14</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-15">15</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-16">16</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-17">17</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-18">18</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-19">19</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-20">20</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-21">21</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-22">22</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-23">23</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-24">24</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-25">25</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-26">26</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-27">27</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-28">28</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-29">29</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-30">30</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-31">31</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-32">32</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-33">33</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-34">34</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-35">35</a>
+<a href="#rest_code_c2a397770b8e4960a791cb9fbfa22a7c-36">36</a></pre></div></td>
+<td class="code"><pre class="code ocaml"><a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-1"></a><span class="k">module</span> <span class="k">type</span> <span class="nc">X_int</span> <span class="o">=</span> <span class="k">sig</span> <span class="k">val</span> <span class="n">x</span> <span class="o">:</span> <span class="kt">int</span> <span class="k">end</span>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-2"></a>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-3"></a><span class="k">module</span> <span class="nc">Three</span> <span class="o">:</span> <span class="nc">X_int</span> <span class="o">=</span> <span class="k">struct</span> <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">3</span> <span class="k">end</span>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-4"></a>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-5"></a><span class="k">let</span> <span class="n">three</span> <span class="o">=</span> <span class="o">(</span><span class="k">module</span> <span class="nc">Three</span> <span class="o">:</span> <span class="nc">X_int</span><span class="o">)</span>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-6"></a>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-7"></a>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-8"></a><span class="k">module</span> <span class="k">type</span> <span class="nc">Bumpable</span> <span class="o">=</span> <span class="k">sig</span>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-9"></a>  <span class="k">type</span> <span class="n">t</span>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-10"></a>  <span class="k">val</span> <span class="n">bump</span> <span class="o">:</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-11"></a><span class="k">end</span>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-12"></a>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-13"></a><span class="k">module</span> <span class="nc">Int_bumper</span> <span class="o">=</span> <span class="k">struct</span>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-14"></a>  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-15"></a>  <span class="k">let</span> <span class="n">bump</span> <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-16"></a><span class="k">end</span>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-17"></a>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-18"></a><span class="k">module</span> <span class="nc">Float_bumper</span> <span class="o">=</span> <span class="k">struct</span>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-19"></a>  <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">float</span>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-20"></a>  <span class="k">let</span> <span class="n">bump</span> <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+.</span> <span class="mi">1</span><span class="o">.</span>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-21"></a><span class="k">end</span>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-22"></a>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-23"></a>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-24"></a><span class="k">let</span> <span class="n">int_bumper</span> <span class="o">=</span> <span class="o">(</span><span class="k">module</span> <span class="nc">Int_bumper</span> <span class="o">:</span> <span class="nc">Bumpable</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">int</span><span class="o">)</span>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-25"></a><span class="k">let</span> <span class="n">float_bumper</span> <span class="o">=</span> <span class="o">(</span><span class="k">module</span> <span class="nc">Float_bumper</span> <span class="o">:</span> <span class="nc">Bumpable</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="kt">float</span><span class="o">)</span>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-26"></a>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-27"></a><span class="k">let</span> <span class="n">bump_list</span>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-28"></a>       <span class="o">(</span><span class="k">type</span> <span class="n">a</span><span class="o">)</span>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-29"></a>       <span class="o">(</span><span class="k">module</span> <span class="nc">B</span> <span class="o">:</span> <span class="nc">Bumpable</span> <span class="k">with</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="n">a</span><span class="o">)</span>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-30"></a>       <span class="o">(</span><span class="n">l</span><span class="o">:</span> <span class="n">a</span> <span class="kt">list</span><span class="o">)</span>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-31"></a>    <span class="o">=</span>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-32"></a>    <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="nn">B</span><span class="p">.</span><span class="n">bump</span> <span class="n">l</span>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-33"></a>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-34"></a><span class="k">let</span> <span class="n">int_list_bumped</span> <span class="o">=</span> <span class="n">bump_list</span> <span class="n">int_bumper</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span><span class="mi">2</span><span class="o">;</span><span class="mi">3</span><span class="o">]</span>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-35"></a>
+<a name="rest_code_c2a397770b8e4960a791cb9fbfa22a7c-36"></a><span class="k">let</span> <span class="n">float_list_bumped</span> <span class="o">=</span> <span class="n">bump_list</span> <span class="n">float_bumper</span> <span class="o">[</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="o">;</span><span class="mi">2</span><span class="o">.</span><span class="mi">5</span><span class="o">;</span><span class="mi">3</span><span class="o">.</span><span class="mi">5</span><span class="o">]</span>
 </pre></td>
 </tr></table>
 <p>Javascript:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-1"> 1</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-2"> 2</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-3"> 3</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-4"> 4</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-5"> 5</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-6"> 6</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-7"> 7</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-8"> 8</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-9"> 9</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-10">10</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-11">11</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-12">12</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-13">13</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-14">14</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-15">15</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-16">16</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-17">17</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-18">18</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-19">19</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-20">20</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-21">21</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-22">22</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-23">23</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-24">24</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-25">25</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-26">26</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-27">27</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-28">28</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-29">29</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-30">30</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-31">31</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-32">32</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-33">33</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-34">34</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-35">35</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-36">36</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-37">37</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-38">38</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-39">39</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-40">40</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-41">41</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-42">42</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-43">43</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-44">44</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-45">45</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-46">46</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-47">47</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-48">48</a>
-<a href="#rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-49">49</a></pre></div></td>
-<td class="code"><pre class="code javascript"><a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-1"></a><span class="kd">var</span> <span class="nx">List</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"stdlib/list"</span><span class="p">);</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-2"></a>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-3"></a><span class="kd">var</span> <span class="nx">Three</span> <span class="o">=</span> <span class="cm">/* module */</span><span class="p">[</span><span class="cm">/* x */</span><span class="mi">3</span><span class="p">];</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-4"></a>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-5"></a><span class="kd">function</span> <span class="nx">bump</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-6"></a>  <span class="k">return</span> <span class="nx">n</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">0</span><span class="p">;</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-7"></a><span class="p">}</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-8"></a>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-9"></a><span class="kd">var</span> <span class="nx">Int_bumper</span> <span class="o">=</span> <span class="cm">/* module */</span><span class="p">[</span><span class="cm">/* bump */</span><span class="nx">bump</span><span class="p">];</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-10"></a>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-11"></a><span class="kd">function</span> <span class="nx">bump$1</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-12"></a>  <span class="k">return</span> <span class="nx">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-13"></a><span class="p">}</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-14"></a>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-15"></a><span class="kd">var</span> <span class="nx">Float_bumper</span> <span class="o">=</span> <span class="cm">/* module */</span><span class="p">[</span><span class="cm">/* bump */</span><span class="nx">bump$1</span><span class="p">];</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-16"></a>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-17"></a><span class="kd">function</span> <span class="nx">bump_list</span><span class="p">(</span><span class="nx">B</span><span class="p">)</span> <span class="p">{</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-18"></a>  <span class="k">return</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">l</span><span class="p">)</span> <span class="p">{</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-19"></a>    <span class="k">return</span> <span class="nx">List</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">B</span><span class="p">[</span><span class="cm">/* bump */</span><span class="mi">0</span><span class="p">],</span> <span class="nx">l</span><span class="p">);</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-20"></a>  <span class="p">};</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-21"></a><span class="p">}</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-22"></a>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-23"></a><span class="kd">var</span> <span class="nx">int_list_bumped</span> <span class="o">=</span> <span class="nx">bump_list</span><span class="p">(</span><span class="nx">Int_bumper</span><span class="p">)(</span><span class="cm">/* :: */</span><span class="p">[</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-24"></a>      <span class="mi">1</span><span class="p">,</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-25"></a>      <span class="cm">/* :: */</span><span class="p">[</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-26"></a>        <span class="mi">2</span><span class="p">,</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-27"></a>        <span class="cm">/* :: */</span><span class="p">[</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-28"></a>          <span class="mi">3</span><span class="p">,</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-29"></a>          <span class="cm">/* [] */</span><span class="mi">0</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-30"></a>        <span class="p">]</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-31"></a>      <span class="p">]</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-32"></a>    <span class="p">]);</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-33"></a>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-34"></a><span class="kd">var</span> <span class="nx">float_list_bumped</span> <span class="o">=</span> <span class="nx">bump_list</span><span class="p">(</span><span class="nx">Float_bumper</span><span class="p">)(</span><span class="cm">/* :: */</span><span class="p">[</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-35"></a>      <span class="mf">1.5</span><span class="p">,</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-36"></a>      <span class="cm">/* :: */</span><span class="p">[</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-37"></a>        <span class="mf">2.5</span><span class="p">,</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-38"></a>        <span class="cm">/* :: */</span><span class="p">[</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-39"></a>          <span class="mf">3.5</span><span class="p">,</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-40"></a>          <span class="cm">/* [] */</span><span class="mi">0</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-41"></a>        <span class="p">]</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-42"></a>      <span class="p">]</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-43"></a>    <span class="p">]);</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-44"></a>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-45"></a><span class="kd">var</span> <span class="nx">three</span> <span class="o">=</span> <span class="nx">Three</span><span class="p">;</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-46"></a>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-47"></a><span class="kd">var</span> <span class="nx">int_bumper</span> <span class="o">=</span> <span class="nx">Int_bumper</span><span class="p">;</span>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-48"></a>
-<a name="rest_code_4ec45af8c5e4449a8bf2a6cecd478eb4-49"></a><span class="kd">var</span> <span class="nx">float_bumper</span> <span class="o">=</span> <span class="nx">Float_bumper</span><span class="p">;</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-1"> 1</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-2"> 2</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-3"> 3</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-4"> 4</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-5"> 5</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-6"> 6</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-7"> 7</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-8"> 8</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-9"> 9</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-10">10</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-11">11</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-12">12</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-13">13</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-14">14</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-15">15</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-16">16</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-17">17</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-18">18</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-19">19</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-20">20</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-21">21</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-22">22</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-23">23</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-24">24</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-25">25</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-26">26</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-27">27</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-28">28</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-29">29</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-30">30</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-31">31</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-32">32</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-33">33</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-34">34</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-35">35</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-36">36</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-37">37</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-38">38</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-39">39</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-40">40</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-41">41</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-42">42</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-43">43</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-44">44</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-45">45</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-46">46</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-47">47</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-48">48</a>
+<a href="#rest_code_60016ef92b12453db4ea8414149fc2cc-49">49</a></pre></div></td>
+<td class="code"><pre class="code javascript"><a name="rest_code_60016ef92b12453db4ea8414149fc2cc-1"></a><span class="kd">var</span> <span class="nx">List</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"stdlib/list"</span><span class="p">);</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-2"></a>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-3"></a><span class="kd">var</span> <span class="nx">Three</span> <span class="o">=</span> <span class="cm">/* module */</span><span class="p">[</span><span class="cm">/* x */</span><span class="mi">3</span><span class="p">];</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-4"></a>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-5"></a><span class="kd">function</span> <span class="nx">bump</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-6"></a>  <span class="k">return</span> <span class="nx">n</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-7"></a><span class="p">}</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-8"></a>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-9"></a><span class="kd">var</span> <span class="nx">Int_bumper</span> <span class="o">=</span> <span class="cm">/* module */</span><span class="p">[</span><span class="cm">/* bump */</span><span class="nx">bump</span><span class="p">];</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-10"></a>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-11"></a><span class="kd">function</span> <span class="nx">bump$1</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-12"></a>  <span class="k">return</span> <span class="nx">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-13"></a><span class="p">}</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-14"></a>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-15"></a><span class="kd">var</span> <span class="nx">Float_bumper</span> <span class="o">=</span> <span class="cm">/* module */</span><span class="p">[</span><span class="cm">/* bump */</span><span class="nx">bump$1</span><span class="p">];</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-16"></a>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-17"></a><span class="kd">function</span> <span class="nx">bump_list</span><span class="p">(</span><span class="nx">B</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-18"></a>  <span class="k">return</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">l</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-19"></a>    <span class="k">return</span> <span class="nx">List</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">B</span><span class="p">[</span><span class="cm">/* bump */</span><span class="mi">0</span><span class="p">],</span> <span class="nx">l</span><span class="p">);</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-20"></a>  <span class="p">};</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-21"></a><span class="p">}</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-22"></a>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-23"></a><span class="kd">var</span> <span class="nx">int_list_bumped</span> <span class="o">=</span> <span class="nx">bump_list</span><span class="p">(</span><span class="nx">Int_bumper</span><span class="p">)(</span><span class="cm">/* :: */</span><span class="p">[</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-24"></a>      <span class="mi">1</span><span class="p">,</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-25"></a>      <span class="cm">/* :: */</span><span class="p">[</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-26"></a>        <span class="mi">2</span><span class="p">,</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-27"></a>        <span class="cm">/* :: */</span><span class="p">[</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-28"></a>          <span class="mi">3</span><span class="p">,</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-29"></a>          <span class="cm">/* [] */</span><span class="mi">0</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-30"></a>        <span class="p">]</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-31"></a>      <span class="p">]</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-32"></a>    <span class="p">]);</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-33"></a>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-34"></a><span class="kd">var</span> <span class="nx">float_list_bumped</span> <span class="o">=</span> <span class="nx">bump_list</span><span class="p">(</span><span class="nx">Float_bumper</span><span class="p">)(</span><span class="cm">/* :: */</span><span class="p">[</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-35"></a>      <span class="mf">1.5</span><span class="p">,</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-36"></a>      <span class="cm">/* :: */</span><span class="p">[</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-37"></a>        <span class="mf">2.5</span><span class="p">,</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-38"></a>        <span class="cm">/* :: */</span><span class="p">[</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-39"></a>          <span class="mf">3.5</span><span class="p">,</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-40"></a>          <span class="cm">/* [] */</span><span class="mi">0</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-41"></a>        <span class="p">]</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-42"></a>      <span class="p">]</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-43"></a>    <span class="p">]);</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-44"></a>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-45"></a><span class="kd">var</span> <span class="nx">three</span> <span class="o">=</span> <span class="nx">Three</span><span class="p">;</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-46"></a>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-47"></a><span class="kd">var</span> <span class="nx">int_bumper</span> <span class="o">=</span> <span class="nx">Int_bumper</span><span class="p">;</span>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-48"></a>
+<a name="rest_code_60016ef92b12453db4ea8414149fc2cc-49"></a><span class="kd">var</span> <span class="nx">float_bumper</span> <span class="o">=</span> <span class="nx">Float_bumper</span><span class="p">;</span>
 </pre></td>
 </tr></table>
 <p>Or see how bucklescript optimizes out unused parts as well:</p>
 <p>OCaml/Bucklescript:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_c84755cbe5834249ad37f47d43a66009-1">1</a>
-<a href="#rest_code_c84755cbe5834249ad37f47d43a66009-2">2</a>
-<a href="#rest_code_c84755cbe5834249ad37f47d43a66009-3">3</a>
-<a href="#rest_code_c84755cbe5834249ad37f47d43a66009-4">4</a></pre></div></td>
-<td class="code"><pre class="code ocaml"><a name="rest_code_c84755cbe5834249ad37f47d43a66009-1"></a><span class="k">let</span> <span class="n">testing</span> <span class="o">=</span>
-<a name="rest_code_c84755cbe5834249ad37f47d43a66009-2"></a>  <span class="k">let</span> <span class="n">aux0</span> <span class="n">l</span> <span class="n">r</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="n">r</span> <span class="k">in</span>
-<a name="rest_code_c84755cbe5834249ad37f47d43a66009-3"></a>  <span class="k">let</span> <span class="n">aux1</span> <span class="n">v</span> <span class="o">=</span> <span class="n">aux0</span> <span class="n">v</span> <span class="mi">42</span> <span class="k">in</span>
-<a name="rest_code_c84755cbe5834249ad37f47d43a66009-4"></a>  <span class="n">aux1</span> <span class="mi">42</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_05f16a0b416542c6b55d4432cf1de61a-1">1</a>
+<a href="#rest_code_05f16a0b416542c6b55d4432cf1de61a-2">2</a>
+<a href="#rest_code_05f16a0b416542c6b55d4432cf1de61a-3">3</a>
+<a href="#rest_code_05f16a0b416542c6b55d4432cf1de61a-4">4</a></pre></div></td>
+<td class="code"><pre class="code ocaml"><a name="rest_code_05f16a0b416542c6b55d4432cf1de61a-1"></a><span class="k">let</span> <span class="n">testing</span> <span class="o">=</span>
+<a name="rest_code_05f16a0b416542c6b55d4432cf1de61a-2"></a>  <span class="k">let</span> <span class="n">aux0</span> <span class="n">l</span> <span class="n">r</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="n">r</span> <span class="k">in</span>
+<a name="rest_code_05f16a0b416542c6b55d4432cf1de61a-3"></a>  <span class="k">let</span> <span class="n">aux1</span> <span class="n">v</span> <span class="o">=</span> <span class="n">aux0</span> <span class="n">v</span> <span class="mi">42</span> <span class="k">in</span>
+<a name="rest_code_05f16a0b416542c6b55d4432cf1de61a-4"></a>  <span class="n">aux1</span> <span class="mi">42</span>
 </pre></td>
 </tr></table>
 <p>Javascript:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_e485965add554fef92cac9571acbf924-1">1</a></pre></div></td>
-<td class="code"><pre class="code javascript"><a name="rest_code_e485965add554fef92cac9571acbf924-1"></a><span class="kd">var</span> <span class="nx">testing</span> <span class="o">=</span> <span class="mi">84</span><span class="p">;</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_60f308d4b1434039b5f638ec4e81138a-1">1</a></pre></div></td>
+<td class="code"><pre class="code javascript"><a name="rest_code_60f308d4b1434039b5f638ec4e81138a-1"></a><span class="kd">var</span> <span class="nx">testing</span> <span class="o">=</span> <span class="mi">84</span><span class="p">;</span>
 </pre></td>
 </tr></table>
 </div>

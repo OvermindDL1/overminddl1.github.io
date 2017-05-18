@@ -5580,11 +5580,17 @@ function calculate_delta_to_next_filled(model, resource_deltas) {
                 var value = _2(ResourceMap[/* find */21], rid, model[/* resource_values */4]);
                 var R = get_resource_module(rid);
                 var match = _1(R[/* get_value_range */2], model);
-                var at_time = delta > 0.0 ? (match[1] - value) / delta : (value - match[0]) / delta;
-                if (at_time > 0.0 && at_time < old_time) {
-                  return at_time;
-                } else {
+                var rmax = match[1];
+                var rmin = match[0];
+                if (value >= rmax || value <= rmin) {
                   return old_time;
+                } else {
+                  var at_time = delta > 0.0 ? (rmax - value) / delta : (value - rmin) / delta;
+                  if (at_time > 0.0 && at_time < old_time) {
+                    return at_time;
+                  } else {
+                    return old_time;
+                  }
                 }
               }
             }, resource_deltas, max_float);
