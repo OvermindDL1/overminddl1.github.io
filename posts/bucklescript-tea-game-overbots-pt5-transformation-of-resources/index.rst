@@ -1,7 +1,7 @@
 .. title: Bucklescript-Tea Game OverBots Pt.5 - Transformation of Resources
 .. slug: bucklescript-tea-game-overbots-pt5-transformation-of-resources
 .. date: 2017-05-18 06:32:30 UTC-06:00
-.. tags: bucklescript, bucklescript-tea, overbots, draft
+.. tags: bucklescript, bucklescript-tea, overbots
 .. category: Programming
 .. link:
 .. description: Bucklescript-Tea Game OverBots Pt.5 - Transformation of Resources

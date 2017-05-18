@@ -3,13 +3,28 @@
 <feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom">
   <title>Hyperglot Programmer</title>
   <id>http://blog.overminddl1.com/index.atom</id>
-  <updated>2017-05-17T21:57:41Z</updated>
+  <updated>2017-05-18T14:21:19Z</updated>
   <author>
     <name>OvermindDL1</name>
   </author>
   <link rel="self" type="application/atom+xml" href="http://blog.overminddl1.com/index.atom"/>
   <link rel="alternate" type="text/html" href="http://blog.overminddl1.com/"/>
   <generator uri="https://getnikola.com/">Nikola</generator>
+  <entry>
+    <title>Bucklescript-Tea Game OverBots Pt.5 - Transformation of Resources</title>
+    <id>http://blog.overminddl1.com/posts/bucklescript-tea-game-overbots-pt5-transformation-of-resources/</id>
+    <updated>2017-05-18T06:32:30-06:00</updated>
+    <published>2017-05-18T06:32:30-06:00</published>
+    <author>
+      <name>OvermindDL1</name>
+    </author>
+    <link rel="alternate" type="text/html" href="http://blog.overminddl1.com/posts/bucklescript-tea-game-overbots-pt5-transformation-of-resources/"/>
+    <summary type="html">&lt;div&gt;&lt;p&gt;Transformers of Resources are the things that can be enabled or disabled and then either consume, generate, or both a set of resources atomically.  Time to write them.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://blog.overminddl1.com/posts/bucklescript-tea-game-overbots-pt5-transformation-of-resources/"&gt;Read more…&lt;/a&gt; (6 min remaining to read)&lt;/p&gt;&lt;/div&gt;</summary>
+    <category term="bucklescript" label="bucklescript"/>
+    <category term="bucklescript-tea" label="bucklescript-tea"/>
+    <category term="overbots" label="overbots"/>
+  </entry>
   <entry>
     <title>Bucklescript-Tea Game OverBots Pt.4 - Actions</title>
     <id>http://blog.overminddl1.com/posts/bucklescript-tea-game-overbots-pt4-actions/</id>
@@ -96,15 +111,15 @@
     <link rel="alternate" type="text/html" href="http://blog.overminddl1.com/posts/why-use-bucklescript/"/>
     <summary type="html">&lt;div&gt;&lt;p&gt;Why might you want to use Bucklescript?  Let's explore just how awesome OCaml is to use on javascript over alternative languages and why it has staying power.&lt;/p&gt;
 &lt;p&gt;OCaml/Bucklescript:&lt;/p&gt;
-&lt;pre class="code ocaml"&gt;&lt;a name="rest_code_770e2c606922472895ca431389d0b19e-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;print_endline&lt;/span&gt; &lt;span class="s2"&gt;"Hello World!"&lt;/span&gt;
-&lt;a name="rest_code_770e2c606922472895ca431389d0b19e-2"&gt;&lt;/a&gt;
-&lt;a name="rest_code_770e2c606922472895ca431389d0b19e-3"&gt;&lt;/a&gt;&lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="n"&gt;add&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;
+&lt;pre class="code ocaml"&gt;&lt;a name="rest_code_ecbc2aa68d7d4b3bbc86651ea27638cc-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;print_endline&lt;/span&gt; &lt;span class="s2"&gt;"Hello World!"&lt;/span&gt;
+&lt;a name="rest_code_ecbc2aa68d7d4b3bbc86651ea27638cc-2"&gt;&lt;/a&gt;
+&lt;a name="rest_code_ecbc2aa68d7d4b3bbc86651ea27638cc-3"&gt;&lt;/a&gt;&lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="n"&gt;add&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;
 &lt;/pre&gt;&lt;p&gt;Javascript:&lt;/p&gt;
-&lt;pre class="code javascript"&gt;&lt;a name="rest_code_05000d749a3d4a0fad027ee69b5e4451-1"&gt;&lt;/a&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Hello World!"&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;a name="rest_code_05000d749a3d4a0fad027ee69b5e4451-2"&gt;&lt;/a&gt;
-&lt;a name="rest_code_05000d749a3d4a0fad027ee69b5e4451-3"&gt;&lt;/a&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;l&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;a name="rest_code_05000d749a3d4a0fad027ee69b5e4451-4"&gt;&lt;/a&gt;  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;l&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;r&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;a name="rest_code_05000d749a3d4a0fad027ee69b5e4451-5"&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;pre class="code javascript"&gt;&lt;a name="rest_code_b204d1c5f79843a093051a33f2050a0b-1"&gt;&lt;/a&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Hello World!"&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;a name="rest_code_b204d1c5f79843a093051a33f2050a0b-2"&gt;&lt;/a&gt;
+&lt;a name="rest_code_b204d1c5f79843a093051a33f2050a0b-3"&gt;&lt;/a&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;l&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;a name="rest_code_b204d1c5f79843a093051a33f2050a0b-4"&gt;&lt;/a&gt;  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;l&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;r&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;a name="rest_code_b204d1c5f79843a093051a33f2050a0b-5"&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;p&gt;&lt;a href="http://blog.overminddl1.com/posts/why-use-bucklescript/"&gt;Read more…&lt;/a&gt; (6 min remaining to read)&lt;/p&gt;&lt;/div&gt;</summary>
     <category term="bucklescript" label="bucklescript"/>
   </entry>
