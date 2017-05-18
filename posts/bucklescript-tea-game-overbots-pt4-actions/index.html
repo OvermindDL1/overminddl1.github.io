@@ -116,453 +116,453 @@ mdl-layout--small-screen-only
 <!-- TEASER_END -->
 <p>To prepare for some of the changes later, I'm adding more helpers for the flags, so <tt class="docutils literal">src/overbots_flags.ml</tt> is changed to become:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_c47fd910c0e24c83aec54531283adad4-1"> 1</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-2"> 2</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-3"> 3</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-4"> 4</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-5"> 5</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-6"> 6</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-7"> 7</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-8"> 8</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-9"> 9</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-10">10</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-11">11</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-12">12</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-13">13</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-14">14</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-15">15</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-16">16</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-17">17</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-18">18</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-19">19</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-20">20</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-21">21</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-22">22</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-23">23</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-24">24</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-25">25</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-26">26</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-27">27</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-28">28</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-29">29</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-30">30</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-31">31</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-32">32</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-33">33</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-34">34</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-35">35</a>
-<a href="#rest_code_c47fd910c0e24c83aec54531283adad4-36">36</a></pre></div></td>
-<td class="code"><pre class="code ocaml"><a name="rest_code_c47fd910c0e24c83aec54531283adad4-1"></a><span class="k">open</span> <span class="nc">Overbots_types</span>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-2"></a>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-3"></a><span class="k">let</span> <span class="n">bool_flag_exists</span> <span class="n">fid</span> <span class="n">model</span> <span class="o">=</span>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-4"></a>  <span class="nn">BoolFlagSet</span><span class="p">.</span><span class="n">mem</span> <span class="n">fid</span> <span class="n">model</span><span class="o">.</span><span class="n">bool_flags</span>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-5"></a>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-6"></a><span class="k">let</span> <span class="n">bool_flag_set</span> <span class="n">fid</span> <span class="n">model</span> <span class="o">=</span>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-7"></a>  <span class="k">let</span> <span class="n">bool_flags</span> <span class="o">=</span> <span class="nn">BoolFlagSet</span><span class="p">.</span><span class="n">add</span> <span class="n">fid</span> <span class="n">model</span><span class="o">.</span><span class="n">bool_flags</span> <span class="k">in</span>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-8"></a>  <span class="o">{</span><span class="n">model</span> <span class="k">with</span> <span class="n">bool_flags</span><span class="o">}</span>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-9"></a>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-10"></a><span class="k">let</span> <span class="n">bool_flag_reset</span> <span class="n">fid</span> <span class="n">model</span> <span class="o">=</span>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-11"></a>  <span class="k">let</span> <span class="n">bool_flags</span> <span class="o">=</span> <span class="nn">BoolFlagSet</span><span class="p">.</span><span class="n">remove</span> <span class="n">fid</span> <span class="n">model</span><span class="o">.</span><span class="n">bool_flags</span> <span class="k">in</span>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-12"></a>  <span class="o">{</span><span class="n">model</span> <span class="k">with</span> <span class="n">bool_flags</span><span class="o">}</span>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-13"></a>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-14"></a>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-15"></a><span class="k">let</span> <span class="n">int_flag_value</span> <span class="n">fid</span> <span class="n">model</span> <span class="o">=</span>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-16"></a>  <span class="nn">IntFlagMap</span><span class="p">.</span><span class="n">find</span> <span class="n">fid</span> <span class="n">model</span><span class="o">.</span><span class="n">int_flags</span>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-17"></a>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-18"></a><span class="k">let</span> <span class="n">int_flag_set</span> <span class="n">fid</span> <span class="k">value</span> <span class="n">model</span> <span class="o">=</span>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-19"></a>  <span class="k">let</span> <span class="n">int_flags</span> <span class="o">=</span> <span class="nn">IntFlagMap</span><span class="p">.</span><span class="n">add</span> <span class="n">fid</span> <span class="k">value</span> <span class="n">model</span><span class="o">.</span><span class="n">int_flags</span> <span class="k">in</span>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-20"></a>  <span class="o">{</span><span class="n">model</span> <span class="k">with</span> <span class="n">int_flags</span><span class="o">}</span>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-21"></a>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-22"></a><span class="k">let</span> <span class="n">int_flag_add</span> <span class="n">fid</span> <span class="n">delta</span> <span class="n">model</span> <span class="o">=</span>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-23"></a>  <span class="k">let</span> <span class="k">value</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">+</span> <span class="n">int_flag_value</span> <span class="n">fid</span> <span class="n">model</span> <span class="k">in</span>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-24"></a>  <span class="n">int_flag_set</span> <span class="n">fid</span> <span class="k">value</span> <span class="n">model</span>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-25"></a>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-26"></a>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-27"></a><span class="k">let</span> <span class="n">float_flag_value</span> <span class="n">fid</span> <span class="n">model</span> <span class="o">=</span>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-28"></a>  <span class="nn">FloatFlagMap</span><span class="p">.</span><span class="n">find</span> <span class="n">fid</span> <span class="n">model</span><span class="o">.</span><span class="n">float_flags</span>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-29"></a>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-30"></a><span class="k">let</span> <span class="n">float_flag_set</span> <span class="n">fid</span> <span class="k">value</span> <span class="n">model</span> <span class="o">=</span>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-31"></a>  <span class="k">let</span> <span class="n">float_flags</span> <span class="o">=</span> <span class="nn">FloatFlagMap</span><span class="p">.</span><span class="n">add</span> <span class="n">fid</span> <span class="k">value</span> <span class="n">model</span><span class="o">.</span><span class="n">float_flags</span> <span class="k">in</span>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-32"></a>  <span class="o">{</span><span class="n">model</span> <span class="k">with</span> <span class="n">float_flags</span><span class="o">}</span>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-33"></a>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-34"></a><span class="k">let</span> <span class="n">float_flag_add</span> <span class="n">fid</span> <span class="n">delta</span> <span class="n">model</span> <span class="o">=</span>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-35"></a>  <span class="k">let</span> <span class="k">value</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">+.</span> <span class="n">float_flag_value</span> <span class="n">fid</span> <span class="n">model</span> <span class="k">in</span>
-<a name="rest_code_c47fd910c0e24c83aec54531283adad4-36"></a>  <span class="n">float_flag_set</span> <span class="n">fid</span> <span class="k">value</span> <span class="n">model</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_338e6c12faf64bb29106a9ac36052225-1"> 1</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-2"> 2</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-3"> 3</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-4"> 4</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-5"> 5</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-6"> 6</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-7"> 7</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-8"> 8</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-9"> 9</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-10">10</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-11">11</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-12">12</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-13">13</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-14">14</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-15">15</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-16">16</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-17">17</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-18">18</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-19">19</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-20">20</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-21">21</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-22">22</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-23">23</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-24">24</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-25">25</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-26">26</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-27">27</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-28">28</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-29">29</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-30">30</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-31">31</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-32">32</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-33">33</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-34">34</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-35">35</a>
+<a href="#rest_code_338e6c12faf64bb29106a9ac36052225-36">36</a></pre></div></td>
+<td class="code"><pre class="code ocaml"><a name="rest_code_338e6c12faf64bb29106a9ac36052225-1"></a><span class="k">open</span> <span class="nc">Overbots_types</span>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-2"></a>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-3"></a><span class="k">let</span> <span class="n">bool_flag_exists</span> <span class="n">fid</span> <span class="n">model</span> <span class="o">=</span>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-4"></a>  <span class="nn">BoolFlagSet</span><span class="p">.</span><span class="n">mem</span> <span class="n">fid</span> <span class="n">model</span><span class="o">.</span><span class="n">bool_flags</span>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-5"></a>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-6"></a><span class="k">let</span> <span class="n">bool_flag_set</span> <span class="n">fid</span> <span class="n">model</span> <span class="o">=</span>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-7"></a>  <span class="k">let</span> <span class="n">bool_flags</span> <span class="o">=</span> <span class="nn">BoolFlagSet</span><span class="p">.</span><span class="n">add</span> <span class="n">fid</span> <span class="n">model</span><span class="o">.</span><span class="n">bool_flags</span> <span class="k">in</span>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-8"></a>  <span class="o">{</span><span class="n">model</span> <span class="k">with</span> <span class="n">bool_flags</span><span class="o">}</span>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-9"></a>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-10"></a><span class="k">let</span> <span class="n">bool_flag_reset</span> <span class="n">fid</span> <span class="n">model</span> <span class="o">=</span>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-11"></a>  <span class="k">let</span> <span class="n">bool_flags</span> <span class="o">=</span> <span class="nn">BoolFlagSet</span><span class="p">.</span><span class="n">remove</span> <span class="n">fid</span> <span class="n">model</span><span class="o">.</span><span class="n">bool_flags</span> <span class="k">in</span>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-12"></a>  <span class="o">{</span><span class="n">model</span> <span class="k">with</span> <span class="n">bool_flags</span><span class="o">}</span>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-13"></a>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-14"></a>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-15"></a><span class="k">let</span> <span class="n">int_flag_value</span> <span class="n">fid</span> <span class="n">model</span> <span class="o">=</span>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-16"></a>  <span class="nn">IntFlagMap</span><span class="p">.</span><span class="n">find</span> <span class="n">fid</span> <span class="n">model</span><span class="o">.</span><span class="n">int_flags</span>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-17"></a>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-18"></a><span class="k">let</span> <span class="n">int_flag_set</span> <span class="n">fid</span> <span class="k">value</span> <span class="n">model</span> <span class="o">=</span>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-19"></a>  <span class="k">let</span> <span class="n">int_flags</span> <span class="o">=</span> <span class="nn">IntFlagMap</span><span class="p">.</span><span class="n">add</span> <span class="n">fid</span> <span class="k">value</span> <span class="n">model</span><span class="o">.</span><span class="n">int_flags</span> <span class="k">in</span>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-20"></a>  <span class="o">{</span><span class="n">model</span> <span class="k">with</span> <span class="n">int_flags</span><span class="o">}</span>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-21"></a>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-22"></a><span class="k">let</span> <span class="n">int_flag_add</span> <span class="n">fid</span> <span class="n">delta</span> <span class="n">model</span> <span class="o">=</span>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-23"></a>  <span class="k">let</span> <span class="k">value</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">+</span> <span class="n">int_flag_value</span> <span class="n">fid</span> <span class="n">model</span> <span class="k">in</span>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-24"></a>  <span class="n">int_flag_set</span> <span class="n">fid</span> <span class="k">value</span> <span class="n">model</span>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-25"></a>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-26"></a>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-27"></a><span class="k">let</span> <span class="n">float_flag_value</span> <span class="n">fid</span> <span class="n">model</span> <span class="o">=</span>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-28"></a>  <span class="nn">FloatFlagMap</span><span class="p">.</span><span class="n">find</span> <span class="n">fid</span> <span class="n">model</span><span class="o">.</span><span class="n">float_flags</span>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-29"></a>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-30"></a><span class="k">let</span> <span class="n">float_flag_set</span> <span class="n">fid</span> <span class="k">value</span> <span class="n">model</span> <span class="o">=</span>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-31"></a>  <span class="k">let</span> <span class="n">float_flags</span> <span class="o">=</span> <span class="nn">FloatFlagMap</span><span class="p">.</span><span class="n">add</span> <span class="n">fid</span> <span class="k">value</span> <span class="n">model</span><span class="o">.</span><span class="n">float_flags</span> <span class="k">in</span>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-32"></a>  <span class="o">{</span><span class="n">model</span> <span class="k">with</span> <span class="n">float_flags</span><span class="o">}</span>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-33"></a>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-34"></a><span class="k">let</span> <span class="n">float_flag_add</span> <span class="n">fid</span> <span class="n">delta</span> <span class="n">model</span> <span class="o">=</span>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-35"></a>  <span class="k">let</span> <span class="k">value</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">+.</span> <span class="n">float_flag_value</span> <span class="n">fid</span> <span class="n">model</span> <span class="k">in</span>
+<a name="rest_code_338e6c12faf64bb29106a9ac36052225-36"></a>  <span class="n">float_flag_set</span> <span class="n">fid</span> <span class="k">value</span> <span class="n">model</span>
 </pre></td>
 </tr></table>
 <p>As well as I added a <tt class="docutils literal">float</tt> flags as well with appropriate changes to the model and other necessary helpers and areas:</p>
-<pre class="code ocaml"><a name="rest_code_931c2190c5514828a74d9130b3e76579-1"></a><span class="k">type</span> <span class="n">float_flag</span> <span class="o">=</span>
-<a name="rest_code_931c2190c5514828a74d9130b3e76579-2"></a>  <span class="o">|</span> <span class="nc">BasicSolarPanelSelfGeneration</span>
-<a name="rest_code_931c2190c5514828a74d9130b3e76579-3"></a><span class="k">module</span> <span class="nc">FloatFlagMap</span> <span class="o">=</span> <span class="nn">Map</span><span class="p">.</span><span class="nc">Make</span><span class="o">(</span><span class="k">struct</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="n">float_flag</span> <span class="k">let</span> <span class="n">compare</span> <span class="o">=</span> <span class="n">compare</span> <span class="k">end</span><span class="o">)</span>
-<a name="rest_code_931c2190c5514828a74d9130b3e76579-4"></a><span class="k">type</span> <span class="n">float_flags</span> <span class="o">=</span> <span class="kt">float</span> <span class="nn">IntFlagMap</span><span class="p">.</span><span class="n">t</span>
-<a name="rest_code_931c2190c5514828a74d9130b3e76579-5"></a><span class="k">let</span> <span class="n">init_float_flags</span> <span class="o">=</span>
-<a name="rest_code_931c2190c5514828a74d9130b3e76579-6"></a>  <span class="k">let</span> <span class="k">open</span> <span class="nc">FloatFlagMap</span> <span class="k">in</span>
-<a name="rest_code_931c2190c5514828a74d9130b3e76579-7"></a>  <span class="n">empty</span>
-<a name="rest_code_931c2190c5514828a74d9130b3e76579-8"></a>  <span class="o">|&gt;</span> <span class="n">add</span> <span class="nc">BasicSolarPanelSelfGeneration</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span>
+<pre class="code ocaml"><a name="rest_code_f7fd404bcd464b839104957aa546b2e4-1"></a><span class="k">type</span> <span class="n">float_flag</span> <span class="o">=</span>
+<a name="rest_code_f7fd404bcd464b839104957aa546b2e4-2"></a>  <span class="o">|</span> <span class="nc">BasicSolarPanelSelfGeneration</span>
+<a name="rest_code_f7fd404bcd464b839104957aa546b2e4-3"></a><span class="k">module</span> <span class="nc">FloatFlagMap</span> <span class="o">=</span> <span class="nn">Map</span><span class="p">.</span><span class="nc">Make</span><span class="o">(</span><span class="k">struct</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="n">float_flag</span> <span class="k">let</span> <span class="n">compare</span> <span class="o">=</span> <span class="n">compare</span> <span class="k">end</span><span class="o">)</span>
+<a name="rest_code_f7fd404bcd464b839104957aa546b2e4-4"></a><span class="k">type</span> <span class="n">float_flags</span> <span class="o">=</span> <span class="kt">float</span> <span class="nn">IntFlagMap</span><span class="p">.</span><span class="n">t</span>
+<a name="rest_code_f7fd404bcd464b839104957aa546b2e4-5"></a><span class="k">let</span> <span class="n">init_float_flags</span> <span class="o">=</span>
+<a name="rest_code_f7fd404bcd464b839104957aa546b2e4-6"></a>  <span class="k">let</span> <span class="k">open</span> <span class="nc">FloatFlagMap</span> <span class="k">in</span>
+<a name="rest_code_f7fd404bcd464b839104957aa546b2e4-7"></a>  <span class="n">empty</span>
+<a name="rest_code_f7fd404bcd464b839104957aa546b2e4-8"></a>  <span class="o">|&gt;</span> <span class="n">add</span> <span class="nc">BasicSolarPanelSelfGeneration</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span>
 </pre>
 <p>I edited the <tt class="docutils literal">int</tt> flags to become:</p>
-<pre class="code ocaml"><a name="rest_code_bd99313020e64fedb230222970bf1cee-1"></a><span class="k">type</span> <span class="n">int_flag</span> <span class="o">=</span>
-<a name="rest_code_bd99313020e64fedb230222970bf1cee-2"></a>  <span class="o">|</span> <span class="nc">TimeActionIdx</span>
+<pre class="code ocaml"><a name="rest_code_a76c9cc8b067423f83bb886cb8622d06-1"></a><span class="k">type</span> <span class="n">int_flag</span> <span class="o">=</span>
+<a name="rest_code_a76c9cc8b067423f83bb886cb8622d06-2"></a>  <span class="o">|</span> <span class="nc">TimeActionIdx</span>
 </pre>
 <p>And I changed the <tt class="docutils literal">bool_flags</tt> to be:</p>
-<pre class="code ocaml"><a name="rest_code_9eb5c4120b844104b338c4704b2267a9-1"></a><span class="k">type</span> <span class="n">bool_flag</span> <span class="o">=</span>
-<a name="rest_code_9eb5c4120b844104b338c4704b2267a9-2"></a>  <span class="o">|</span> <span class="nc">InternalPowerEnabled</span>
-<a name="rest_code_9eb5c4120b844104b338c4704b2267a9-3"></a>  <span class="o">|</span> <span class="nc">SolarPanelsReadyToUnfold</span>
-<a name="rest_code_9eb5c4120b844104b338c4704b2267a9-4"></a>  <span class="o">|</span> <span class="nc">SolarPanelsGenerating</span>
-<a name="rest_code_9eb5c4120b844104b338c4704b2267a9-5"></a>  <span class="o">|</span> <span class="nc">DrillDeployed</span>
+<pre class="code ocaml"><a name="rest_code_8231d26b9ec8431f98af701a3da66eb7-1"></a><span class="k">type</span> <span class="n">bool_flag</span> <span class="o">=</span>
+<a name="rest_code_8231d26b9ec8431f98af701a3da66eb7-2"></a>  <span class="o">|</span> <span class="nc">InternalPowerEnabled</span>
+<a name="rest_code_8231d26b9ec8431f98af701a3da66eb7-3"></a>  <span class="o">|</span> <span class="nc">SolarPanelsReadyToUnfold</span>
+<a name="rest_code_8231d26b9ec8431f98af701a3da66eb7-4"></a>  <span class="o">|</span> <span class="nc">SolarPanelsGenerating</span>
+<a name="rest_code_8231d26b9ec8431f98af701a3da66eb7-5"></a>  <span class="o">|</span> <span class="nc">DrillDeployed</span>
 </pre>
 <p>I also changed the resources to test for a flag on whether they should be shown or not:</p>
-<pre class="code ocaml"><a name="rest_code_71619273a360447398fe389497f0d5ee-1"></a><span class="k">open</span> <span class="nc">Overbots_flags</span>
-<a name="rest_code_71619273a360447398fe389497f0d5ee-2"></a>
-<a name="rest_code_71619273a360447398fe389497f0d5ee-3"></a><span class="k">module</span> <span class="nc">Energy</span> <span class="o">:</span> <span class="nc">Resource</span> <span class="o">=</span> <span class="k">struct</span>
-<a name="rest_code_71619273a360447398fe389497f0d5ee-4"></a>  <span class="k">let</span> <span class="n">id</span> <span class="o">=</span> <span class="nc">Energy</span>
-<a name="rest_code_71619273a360447398fe389497f0d5ee-5"></a>  <span class="k">let</span> <span class="n">shown</span> <span class="n">model</span> <span class="o">=</span> <span class="n">bool_flag_exists</span> <span class="nc">InternalPowerEnabled</span> <span class="n">model</span>
-<a name="rest_code_71619273a360447398fe389497f0d5ee-6"></a>  <span class="k">let</span> <span class="n">get_value_range</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">,</span> <span class="mi">100</span><span class="o">.</span><span class="mi">0</span>
-<a name="rest_code_71619273a360447398fe389497f0d5ee-7"></a><span class="k">end</span>
-<a name="rest_code_71619273a360447398fe389497f0d5ee-8"></a>
-<a name="rest_code_71619273a360447398fe389497f0d5ee-9"></a><span class="k">module</span> <span class="nc">IronOxide</span> <span class="o">:</span> <span class="nc">Resource</span> <span class="o">=</span> <span class="k">struct</span>
-<a name="rest_code_71619273a360447398fe389497f0d5ee-10"></a>  <span class="k">let</span> <span class="n">id</span> <span class="o">=</span> <span class="nc">IronOxide</span>
-<a name="rest_code_71619273a360447398fe389497f0d5ee-11"></a>  <span class="k">let</span> <span class="n">shown</span> <span class="n">model</span> <span class="o">=</span> <span class="n">bool_flag_exists</span> <span class="nc">DrillDeployed</span> <span class="n">model</span>
-<a name="rest_code_71619273a360447398fe389497f0d5ee-12"></a>  <span class="k">let</span> <span class="n">get_value_range</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">,</span> <span class="mi">10</span><span class="o">.</span><span class="mi">0</span>
-<a name="rest_code_71619273a360447398fe389497f0d5ee-13"></a><span class="k">end</span>
-<a name="rest_code_71619273a360447398fe389497f0d5ee-14"></a>
-<a name="rest_code_71619273a360447398fe389497f0d5ee-15"></a><span class="k">module</span> <span class="nc">RawSilicon</span> <span class="o">:</span> <span class="nc">Resource</span> <span class="o">=</span> <span class="k">struct</span>
-<a name="rest_code_71619273a360447398fe389497f0d5ee-16"></a>  <span class="k">let</span> <span class="n">id</span> <span class="o">=</span> <span class="nc">RawSilicon</span>
-<a name="rest_code_71619273a360447398fe389497f0d5ee-17"></a>  <span class="k">let</span> <span class="n">shown</span> <span class="n">model</span> <span class="o">=</span> <span class="n">bool_flag_exists</span> <span class="nc">DrillDeployed</span> <span class="n">model</span>
-<a name="rest_code_71619273a360447398fe389497f0d5ee-18"></a>  <span class="k">let</span> <span class="n">get_value_range</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">,</span> <span class="mi">2</span><span class="o">.</span><span class="mi">0</span>
-<a name="rest_code_71619273a360447398fe389497f0d5ee-19"></a><span class="k">end</span>
+<pre class="code ocaml"><a name="rest_code_066a188f1d8845529ad7562aee241ca5-1"></a><span class="k">open</span> <span class="nc">Overbots_flags</span>
+<a name="rest_code_066a188f1d8845529ad7562aee241ca5-2"></a>
+<a name="rest_code_066a188f1d8845529ad7562aee241ca5-3"></a><span class="k">module</span> <span class="nc">Energy</span> <span class="o">:</span> <span class="nc">Resource</span> <span class="o">=</span> <span class="k">struct</span>
+<a name="rest_code_066a188f1d8845529ad7562aee241ca5-4"></a>  <span class="k">let</span> <span class="n">id</span> <span class="o">=</span> <span class="nc">Energy</span>
+<a name="rest_code_066a188f1d8845529ad7562aee241ca5-5"></a>  <span class="k">let</span> <span class="n">shown</span> <span class="n">model</span> <span class="o">=</span> <span class="n">bool_flag_exists</span> <span class="nc">InternalPowerEnabled</span> <span class="n">model</span>
+<a name="rest_code_066a188f1d8845529ad7562aee241ca5-6"></a>  <span class="k">let</span> <span class="n">get_value_range</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">,</span> <span class="mi">100</span><span class="o">.</span><span class="mi">0</span>
+<a name="rest_code_066a188f1d8845529ad7562aee241ca5-7"></a><span class="k">end</span>
+<a name="rest_code_066a188f1d8845529ad7562aee241ca5-8"></a>
+<a name="rest_code_066a188f1d8845529ad7562aee241ca5-9"></a><span class="k">module</span> <span class="nc">IronOxide</span> <span class="o">:</span> <span class="nc">Resource</span> <span class="o">=</span> <span class="k">struct</span>
+<a name="rest_code_066a188f1d8845529ad7562aee241ca5-10"></a>  <span class="k">let</span> <span class="n">id</span> <span class="o">=</span> <span class="nc">IronOxide</span>
+<a name="rest_code_066a188f1d8845529ad7562aee241ca5-11"></a>  <span class="k">let</span> <span class="n">shown</span> <span class="n">model</span> <span class="o">=</span> <span class="n">bool_flag_exists</span> <span class="nc">DrillDeployed</span> <span class="n">model</span>
+<a name="rest_code_066a188f1d8845529ad7562aee241ca5-12"></a>  <span class="k">let</span> <span class="n">get_value_range</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">,</span> <span class="mi">10</span><span class="o">.</span><span class="mi">0</span>
+<a name="rest_code_066a188f1d8845529ad7562aee241ca5-13"></a><span class="k">end</span>
+<a name="rest_code_066a188f1d8845529ad7562aee241ca5-14"></a>
+<a name="rest_code_066a188f1d8845529ad7562aee241ca5-15"></a><span class="k">module</span> <span class="nc">RawSilicon</span> <span class="o">:</span> <span class="nc">Resource</span> <span class="o">=</span> <span class="k">struct</span>
+<a name="rest_code_066a188f1d8845529ad7562aee241ca5-16"></a>  <span class="k">let</span> <span class="n">id</span> <span class="o">=</span> <span class="nc">RawSilicon</span>
+<a name="rest_code_066a188f1d8845529ad7562aee241ca5-17"></a>  <span class="k">let</span> <span class="n">shown</span> <span class="n">model</span> <span class="o">=</span> <span class="n">bool_flag_exists</span> <span class="nc">DrillDeployed</span> <span class="n">model</span>
+<a name="rest_code_066a188f1d8845529ad7562aee241ca5-18"></a>  <span class="k">let</span> <span class="n">get_value_range</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">,</span> <span class="mi">2</span><span class="o">.</span><span class="mi">0</span>
+<a name="rest_code_066a188f1d8845529ad7562aee241ca5-19"></a><span class="k">end</span>
 </pre>
 <div class="section" id="time">
 <h2>Time</h2>
 <p>I now need to add in some time support, so I start by storing it on the model:</p>
-<pre class="code ocaml"><a name="rest_code_fa348045a71749eea52296d57722f6eb-1"></a><span class="k">type</span> <span class="n">model</span> <span class="o">=</span> <span class="o">{</span>
-<a name="rest_code_fa348045a71749eea52296d57722f6eb-2"></a>  <span class="n">start_realtime</span> <span class="o">:</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">Time</span><span class="p">.</span><span class="n">t</span><span class="o">;</span>
-<a name="rest_code_fa348045a71749eea52296d57722f6eb-3"></a>  <span class="n">current_realtime</span> <span class="o">:</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">Time</span><span class="p">.</span><span class="n">t</span><span class="o">;</span>
-<a name="rest_code_fa348045a71749eea52296d57722f6eb-4"></a>  <span class="n">gametime</span> <span class="o">:</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">Time</span><span class="p">.</span><span class="n">t</span><span class="o">;</span>
-<a name="rest_code_fa348045a71749eea52296d57722f6eb-5"></a>  <span class="n">msgs</span> <span class="o">:</span> <span class="n">game_msg</span> <span class="kt">list</span><span class="o">;</span>
-<a name="rest_code_fa348045a71749eea52296d57722f6eb-6"></a>  <span class="n">resource_values</span> <span class="o">:</span> <span class="n">resource_value</span> <span class="nn">ResourceMap</span><span class="p">.</span><span class="n">t</span><span class="o">;</span>
-<a name="rest_code_fa348045a71749eea52296d57722f6eb-7"></a>  <span class="n">bool_flags</span> <span class="o">:</span> <span class="n">bool_flags</span><span class="o">;</span>
-<a name="rest_code_fa348045a71749eea52296d57722f6eb-8"></a>  <span class="n">int_flags</span> <span class="o">:</span> <span class="n">int_flags</span><span class="o">;</span>
-<a name="rest_code_fa348045a71749eea52296d57722f6eb-9"></a>  <span class="n">float_flags</span> <span class="o">:</span> <span class="n">float_flags</span><span class="o">;</span>
-<a name="rest_code_fa348045a71749eea52296d57722f6eb-10"></a><span class="o">}</span>
+<pre class="code ocaml"><a name="rest_code_bdd99ee16a614ba783bbb5cfd8c85fea-1"></a><span class="k">type</span> <span class="n">model</span> <span class="o">=</span> <span class="o">{</span>
+<a name="rest_code_bdd99ee16a614ba783bbb5cfd8c85fea-2"></a>  <span class="n">start_realtime</span> <span class="o">:</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">Time</span><span class="p">.</span><span class="n">t</span><span class="o">;</span>
+<a name="rest_code_bdd99ee16a614ba783bbb5cfd8c85fea-3"></a>  <span class="n">current_realtime</span> <span class="o">:</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">Time</span><span class="p">.</span><span class="n">t</span><span class="o">;</span>
+<a name="rest_code_bdd99ee16a614ba783bbb5cfd8c85fea-4"></a>  <span class="n">gametime</span> <span class="o">:</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">Time</span><span class="p">.</span><span class="n">t</span><span class="o">;</span>
+<a name="rest_code_bdd99ee16a614ba783bbb5cfd8c85fea-5"></a>  <span class="n">msgs</span> <span class="o">:</span> <span class="n">game_msg</span> <span class="kt">list</span><span class="o">;</span>
+<a name="rest_code_bdd99ee16a614ba783bbb5cfd8c85fea-6"></a>  <span class="n">resource_values</span> <span class="o">:</span> <span class="n">resource_value</span> <span class="nn">ResourceMap</span><span class="p">.</span><span class="n">t</span><span class="o">;</span>
+<a name="rest_code_bdd99ee16a614ba783bbb5cfd8c85fea-7"></a>  <span class="n">bool_flags</span> <span class="o">:</span> <span class="n">bool_flags</span><span class="o">;</span>
+<a name="rest_code_bdd99ee16a614ba783bbb5cfd8c85fea-8"></a>  <span class="n">int_flags</span> <span class="o">:</span> <span class="n">int_flags</span><span class="o">;</span>
+<a name="rest_code_bdd99ee16a614ba783bbb5cfd8c85fea-9"></a>  <span class="n">float_flags</span> <span class="o">:</span> <span class="n">float_flags</span><span class="o">;</span>
+<a name="rest_code_bdd99ee16a614ba783bbb5cfd8c85fea-10"></a><span class="o">}</span>
 </pre>
 <p>And adjusting the <tt class="docutils literal">init</tt> to become:</p>
-<pre class="code ocaml"><a name="rest_code_e7f0a2dc93914f93a4ccd7c502482b4b-1"></a><span class="k">let</span> <span class="n">init</span> <span class="bp">()</span> <span class="o">=</span>
-<a name="rest_code_e7f0a2dc93914f93a4ccd7c502482b4b-2"></a>  <span class="k">let</span> <span class="n">model</span> <span class="o">=</span> <span class="o">{</span>
-<a name="rest_code_e7f0a2dc93914f93a4ccd7c502482b4b-3"></a>    <span class="n">start_realtime</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">;</span>
-<a name="rest_code_e7f0a2dc93914f93a4ccd7c502482b4b-4"></a>    <span class="n">current_realtime</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">;</span>
-<a name="rest_code_e7f0a2dc93914f93a4ccd7c502482b4b-5"></a>    <span class="n">gametime</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">;</span>
-<a name="rest_code_e7f0a2dc93914f93a4ccd7c502482b4b-6"></a>    <span class="n">msgs</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">;</span>
-<a name="rest_code_e7f0a2dc93914f93a4ccd7c502482b4b-7"></a>    <span class="n">resource_values</span> <span class="o">=</span> <span class="nn">Overbots_resource</span><span class="p">.</span><span class="n">init_resources_values</span><span class="o">;</span>
-<a name="rest_code_e7f0a2dc93914f93a4ccd7c502482b4b-8"></a>    <span class="n">bool_flags</span> <span class="o">=</span> <span class="n">init_bool_flags</span><span class="o">;</span>
-<a name="rest_code_e7f0a2dc93914f93a4ccd7c502482b4b-9"></a>    <span class="n">int_flags</span> <span class="o">=</span> <span class="n">init_int_flags</span><span class="o">;</span>
-<a name="rest_code_e7f0a2dc93914f93a4ccd7c502482b4b-10"></a>    <span class="n">float_flags</span> <span class="o">=</span> <span class="n">init_float_flags</span><span class="o">;</span>
-<a name="rest_code_e7f0a2dc93914f93a4ccd7c502482b4b-11"></a>  <span class="o">}</span> <span class="k">in</span>
-<a name="rest_code_e7f0a2dc93914f93a4ccd7c502482b4b-12"></a>  <span class="o">(</span><span class="n">model</span><span class="o">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span><span class="o">)</span>
+<pre class="code ocaml"><a name="rest_code_ca7c6a61abcd4f72864bc53c76ad7fd2-1"></a><span class="k">let</span> <span class="n">init</span> <span class="bp">()</span> <span class="o">=</span>
+<a name="rest_code_ca7c6a61abcd4f72864bc53c76ad7fd2-2"></a>  <span class="k">let</span> <span class="n">model</span> <span class="o">=</span> <span class="o">{</span>
+<a name="rest_code_ca7c6a61abcd4f72864bc53c76ad7fd2-3"></a>    <span class="n">start_realtime</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">;</span>
+<a name="rest_code_ca7c6a61abcd4f72864bc53c76ad7fd2-4"></a>    <span class="n">current_realtime</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="o">;</span>
+<a name="rest_code_ca7c6a61abcd4f72864bc53c76ad7fd2-5"></a>    <span class="n">gametime</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">;</span>
+<a name="rest_code_ca7c6a61abcd4f72864bc53c76ad7fd2-6"></a>    <span class="n">msgs</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">;</span>
+<a name="rest_code_ca7c6a61abcd4f72864bc53c76ad7fd2-7"></a>    <span class="n">resource_values</span> <span class="o">=</span> <span class="nn">Overbots_resource</span><span class="p">.</span><span class="n">init_resources_values</span><span class="o">;</span>
+<a name="rest_code_ca7c6a61abcd4f72864bc53c76ad7fd2-8"></a>    <span class="n">bool_flags</span> <span class="o">=</span> <span class="n">init_bool_flags</span><span class="o">;</span>
+<a name="rest_code_ca7c6a61abcd4f72864bc53c76ad7fd2-9"></a>    <span class="n">int_flags</span> <span class="o">=</span> <span class="n">init_int_flags</span><span class="o">;</span>
+<a name="rest_code_ca7c6a61abcd4f72864bc53c76ad7fd2-10"></a>    <span class="n">float_flags</span> <span class="o">=</span> <span class="n">init_float_flags</span><span class="o">;</span>
+<a name="rest_code_ca7c6a61abcd4f72864bc53c76ad7fd2-11"></a>  <span class="o">}</span> <span class="k">in</span>
+<a name="rest_code_ca7c6a61abcd4f72864bc53c76ad7fd2-12"></a>  <span class="o">(</span><span class="n">model</span><span class="o">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span><span class="o">)</span>
 </pre>
 <p>And to update the time I need to handle it, so first a message, I change the <tt class="docutils literal">msg</tt> type to become:</p>
-<pre class="code ocaml"><a name="rest_code_cf04e683d0d74bea875ae35bf180df72-1"></a><span class="k">type</span> <span class="n">msg</span> <span class="o">=</span>
-<a name="rest_code_cf04e683d0d74bea875ae35bf180df72-2"></a>  <span class="o">|</span> <span class="nc">UpdateFrame</span> <span class="k">of</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">AnimationFrame</span><span class="p">.</span><span class="n">t</span>
-<a name="rest_code_cf04e683d0d74bea875ae35bf180df72-3"></a><span class="o">[@@</span><span class="n">bs</span><span class="o">.</span><span class="n">deriving</span> <span class="o">{</span><span class="n">accessors</span><span class="o">}]</span>
+<pre class="code ocaml"><a name="rest_code_bac95b05a167478f9a9c098c399123b7-1"></a><span class="k">type</span> <span class="n">msg</span> <span class="o">=</span>
+<a name="rest_code_bac95b05a167478f9a9c098c399123b7-2"></a>  <span class="o">|</span> <span class="nc">UpdateFrame</span> <span class="k">of</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">AnimationFrame</span><span class="p">.</span><span class="n">t</span>
+<a name="rest_code_bac95b05a167478f9a9c098c399123b7-3"></a><span class="o">[@@</span><span class="n">bs</span><span class="o">.</span><span class="n">deriving</span> <span class="o">{</span><span class="n">accessors</span><span class="o">}]</span>
 </pre>
 <p>I'm leaving the deriving accessors on there to auto-create a function that generates those messages, as you see used in the <tt class="docutils literal">subscriptions</tt>, which is now changed to:</p>
-<pre class="code ocaml"><a name="rest_code_e79d9e94591d491eadf5c4be5ffa1095-1"></a><span class="k">let</span> <span class="n">subscriptions</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span>
-<a name="rest_code_e79d9e94591d491eadf5c4be5ffa1095-2"></a>  <span class="nn">Sub</span><span class="p">.</span><span class="n">batch</span> <span class="o">[</span>
-<a name="rest_code_e79d9e94591d491eadf5c4be5ffa1095-3"></a>    <span class="nn">AnimationFrame</span><span class="p">.</span><span class="n">every</span> <span class="n">updateFrame</span><span class="o">;</span>
-<a name="rest_code_e79d9e94591d491eadf5c4be5ffa1095-4"></a>  <span class="o">]</span>
+<pre class="code ocaml"><a name="rest_code_4daa1767d2374ba3982310657231dffd-1"></a><span class="k">let</span> <span class="n">subscriptions</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span>
+<a name="rest_code_4daa1767d2374ba3982310657231dffd-2"></a>  <span class="nn">Sub</span><span class="p">.</span><span class="n">batch</span> <span class="o">[</span>
+<a name="rest_code_4daa1767d2374ba3982310657231dffd-3"></a>    <span class="nn">AnimationFrame</span><span class="p">.</span><span class="n">every</span> <span class="n">updateFrame</span><span class="o">;</span>
+<a name="rest_code_4daa1767d2374ba3982310657231dffd-4"></a>  <span class="o">]</span>
 </pre>
 <p>So on every tick of a frame in the browser it will call the <tt class="docutils literal">UpdateFrame</tt> message with the new time data (I should probably give an option for slower update rates for mobile devices or so), and to handle it I'm changing <tt class="docutils literal">update</tt> to become:</p>
-<pre class="code ocaml"><a name="rest_code_38e95b26b0b24798aa20099ffe6fdd48-1"></a><span class="k">let</span> <span class="n">update</span> <span class="n">model</span> <span class="o">=</span> <span class="k">function</span>
-<a name="rest_code_38e95b26b0b24798aa20099ffe6fdd48-2"></a>  <span class="o">|</span> <span class="nc">UpdateFrame</span> <span class="n">timeinfo</span> <span class="o">-&gt;</span>
-<a name="rest_code_38e95b26b0b24798aa20099ffe6fdd48-3"></a>    <span class="k">let</span> <span class="n">time</span> <span class="o">=</span> <span class="n">timeinfo</span><span class="o">.</span><span class="n">time</span> <span class="o">*.</span> <span class="mi">0</span><span class="o">.</span><span class="mi">001</span> <span class="k">in</span>
-<a name="rest_code_38e95b26b0b24798aa20099ffe6fdd48-4"></a>    <span class="k">let</span> <span class="n">model</span> <span class="o">=</span>
-<a name="rest_code_38e95b26b0b24798aa20099ffe6fdd48-5"></a>      <span class="k">if</span> <span class="n">model</span><span class="o">.</span><span class="n">start_realtime</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span> <span class="k">then</span>
-<a name="rest_code_38e95b26b0b24798aa20099ffe6fdd48-6"></a>        <span class="n">model</span>
-<a name="rest_code_38e95b26b0b24798aa20099ffe6fdd48-7"></a>      <span class="k">else</span>
-<a name="rest_code_38e95b26b0b24798aa20099ffe6fdd48-8"></a>        <span class="o">{</span><span class="n">model</span> <span class="k">with</span> <span class="n">start_realtime</span> <span class="o">=</span> <span class="n">time</span><span class="o">;</span> <span class="n">current_realtime</span> <span class="o">=</span> <span class="n">time</span><span class="o">;</span> <span class="n">gametime</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">}</span>
-<a name="rest_code_38e95b26b0b24798aa20099ffe6fdd48-9"></a>    <span class="k">in</span> <span class="nn">Overbots_update</span><span class="p">.</span><span class="n">update_state</span> <span class="n">model</span> <span class="n">time</span>
+<pre class="code ocaml"><a name="rest_code_9a94f30261044ed2b4f9fdd97c13a208-1"></a><span class="k">let</span> <span class="n">update</span> <span class="n">model</span> <span class="o">=</span> <span class="k">function</span>
+<a name="rest_code_9a94f30261044ed2b4f9fdd97c13a208-2"></a>  <span class="o">|</span> <span class="nc">UpdateFrame</span> <span class="n">timeinfo</span> <span class="o">-&gt;</span>
+<a name="rest_code_9a94f30261044ed2b4f9fdd97c13a208-3"></a>    <span class="k">let</span> <span class="n">time</span> <span class="o">=</span> <span class="n">timeinfo</span><span class="o">.</span><span class="n">time</span> <span class="o">*.</span> <span class="mi">0</span><span class="o">.</span><span class="mi">001</span> <span class="k">in</span>
+<a name="rest_code_9a94f30261044ed2b4f9fdd97c13a208-4"></a>    <span class="k">let</span> <span class="n">model</span> <span class="o">=</span>
+<a name="rest_code_9a94f30261044ed2b4f9fdd97c13a208-5"></a>      <span class="k">if</span> <span class="n">model</span><span class="o">.</span><span class="n">start_realtime</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span> <span class="k">then</span>
+<a name="rest_code_9a94f30261044ed2b4f9fdd97c13a208-6"></a>        <span class="n">model</span>
+<a name="rest_code_9a94f30261044ed2b4f9fdd97c13a208-7"></a>      <span class="k">else</span>
+<a name="rest_code_9a94f30261044ed2b4f9fdd97c13a208-8"></a>        <span class="o">{</span><span class="n">model</span> <span class="k">with</span> <span class="n">start_realtime</span> <span class="o">=</span> <span class="n">time</span><span class="o">;</span> <span class="n">current_realtime</span> <span class="o">=</span> <span class="n">time</span><span class="o">;</span> <span class="n">gametime</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">}</span>
+<a name="rest_code_9a94f30261044ed2b4f9fdd97c13a208-9"></a>    <span class="k">in</span> <span class="nn">Overbots_update</span><span class="p">.</span><span class="n">update_state</span> <span class="n">model</span> <span class="n">time</span>
 </pre>
 <p>So I massage the milliseconds to seconds and pass it to an <tt class="docutils literal">update_state</tt> function, which I define in a new file of <tt class="docutils literal">src/overbots_update.ml</tt> with the contents of:</p>
-<pre class="code ocaml"><a name="rest_code_d78cfd6a16674c8fb0ce62865f56909d-1"></a><span class="k">open</span> <span class="nc">Tea</span>
-<a name="rest_code_d78cfd6a16674c8fb0ce62865f56909d-2"></a><span class="k">open</span> <span class="nc">Overbots_types</span>
-<a name="rest_code_d78cfd6a16674c8fb0ce62865f56909d-3"></a>
-<a name="rest_code_d78cfd6a16674c8fb0ce62865f56909d-4"></a>
-<a name="rest_code_d78cfd6a16674c8fb0ce62865f56909d-5"></a><span class="k">let</span> <span class="n">update_state</span> <span class="n">model</span> <span class="n">new_time</span> <span class="o">=</span>
-<a name="rest_code_d78cfd6a16674c8fb0ce62865f56909d-6"></a>  <span class="o">(</span><span class="n">model</span><span class="o">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span><span class="o">)</span>
+<pre class="code ocaml"><a name="rest_code_ba7655c73d094008b5e0786ddeb00405-1"></a><span class="k">open</span> <span class="nc">Tea</span>
+<a name="rest_code_ba7655c73d094008b5e0786ddeb00405-2"></a><span class="k">open</span> <span class="nc">Overbots_types</span>
+<a name="rest_code_ba7655c73d094008b5e0786ddeb00405-3"></a>
+<a name="rest_code_ba7655c73d094008b5e0786ddeb00405-4"></a>
+<a name="rest_code_ba7655c73d094008b5e0786ddeb00405-5"></a><span class="k">let</span> <span class="n">update_state</span> <span class="n">model</span> <span class="n">new_time</span> <span class="o">=</span>
+<a name="rest_code_ba7655c73d094008b5e0786ddeb00405-6"></a>  <span class="o">(</span><span class="n">model</span><span class="o">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span><span class="o">)</span>
 </pre>
 </div>
 <div class="section" id="actions">
 <h2>Actions</h2>
 <p>Actions are one of the two major systems in an incremental games, these are what is done when a button is clicked or after certain times or other things or so.  It needs to be a variant of actions that can be performed, so let's get started with a basic set of types and how to process them, so in the file <tt class="docutils literal">src/overbots_actions.ml</tt> put:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-1"> 1</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-2"> 2</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-3"> 3</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-4"> 4</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-5"> 5</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-6"> 6</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-7"> 7</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-8"> 8</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-9"> 9</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-10">10</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-11">11</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-12">12</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-13">13</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-14">14</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-15">15</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-16">16</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-17">17</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-18">18</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-19">19</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-20">20</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-21">21</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-22">22</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-23">23</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-24">24</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-25">25</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-26">26</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-27">27</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-28">28</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-29">29</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-30">30</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-31">31</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-32">32</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-33">33</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-34">34</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-35">35</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-36">36</a>
-<a href="#rest_code_8bd7bd240d1242d0a36579ef5fa38930-37">37</a></pre></div></td>
-<td class="code"><pre class="code ocaml"><a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-1"></a><span class="k">open</span> <span class="nc">Overbots_types</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-2"></a><span class="k">open</span> <span class="nc">Overbots_resource</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-3"></a><span class="k">open</span> <span class="nc">Overbots_flags</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-4"></a>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-5"></a><span class="k">type</span> <span class="n">action</span> <span class="o">=</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-6"></a>  <span class="o">|</span> <span class="nc">NoAction</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-7"></a>  <span class="o">|</span> <span class="nc">ActionAddMsg</span> <span class="k">of</span> <span class="kt">string</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-8"></a>  <span class="o">|</span> <span class="nc">ActionAddResourceAmount</span> <span class="k">of</span> <span class="n">resource_flag</span> <span class="o">*</span> <span class="kt">float</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-9"></a>  <span class="o">|</span> <span class="nc">ActionSetBoolFlag</span> <span class="k">of</span> <span class="n">bool_flag</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-10"></a>  <span class="o">|</span> <span class="nc">ActionClearBoolFlag</span> <span class="k">of</span> <span class="n">bool_flag</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-11"></a>  <span class="o">|</span> <span class="nc">ActionSetIntFlag</span> <span class="k">of</span> <span class="n">int_flag</span> <span class="o">*</span> <span class="kt">int</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-12"></a>  <span class="o">|</span> <span class="nc">ActionAddIntFlag</span> <span class="k">of</span> <span class="n">int_flag</span> <span class="o">*</span> <span class="kt">int</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-13"></a>  <span class="o">|</span> <span class="nc">ActionSetFloatFlag</span> <span class="k">of</span> <span class="n">float_flag</span> <span class="o">*</span> <span class="kt">float</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-14"></a>  <span class="o">|</span> <span class="nc">ActionAddFloatFlag</span> <span class="k">of</span> <span class="n">float_flag</span> <span class="o">*</span> <span class="kt">float</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-15"></a>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-16"></a><span class="k">type</span> <span class="n">actions</span> <span class="o">=</span> <span class="n">action</span> <span class="kt">list</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-17"></a>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-18"></a>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-19"></a>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-20"></a><span class="k">let</span> <span class="n">perform_action</span> <span class="n">model</span> <span class="o">=</span> <span class="k">function</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-21"></a>  <span class="o">|</span> <span class="nc">NoAction</span> <span class="o">-&gt;</span> <span class="n">model</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-22"></a>  <span class="o">|</span> <span class="nc">ActionAddMsg</span> <span class="n">msg</span> <span class="o">-&gt;</span> <span class="o">{</span><span class="n">model</span> <span class="k">with</span> <span class="n">msgs</span> <span class="o">=</span> <span class="nc">TimeMsg</span> <span class="o">(</span><span class="n">model</span><span class="o">.</span><span class="n">gametime</span><span class="o">,</span> <span class="n">msg</span><span class="o">)</span> <span class="o">::</span> <span class="n">model</span><span class="o">.</span><span class="n">msgs</span><span class="o">}</span> <span class="c">(* TODO:  Need to make a msgs area *)</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-23"></a>  <span class="o">|</span> <span class="nc">ActionAddResourceAmount</span> <span class="o">(</span><span class="n">rid</span><span class="o">,</span> <span class="n">amt</span><span class="o">)</span> <span class="o">-&gt;</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-24"></a>    <span class="k">begin</span> <span class="k">match</span> <span class="n">add_resource_value</span> <span class="n">rid</span> <span class="n">amt</span> <span class="n">model</span> <span class="k">with</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-25"></a>      <span class="o">|</span> <span class="nc">ValueTooLow</span> <span class="o">-&gt;</span> <span class="n">model</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-26"></a>      <span class="o">|</span> <span class="nc">ValueTooHigh</span> <span class="o">(</span><span class="n">model</span><span class="o">,</span> <span class="o">_</span><span class="n">left_over</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">model</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-27"></a>      <span class="o">|</span> <span class="nc">ValueSuccess</span> <span class="n">model</span> <span class="o">-&gt;</span> <span class="n">model</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-28"></a>    <span class="k">end</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-29"></a>  <span class="o">|</span> <span class="nc">ActionSetBoolFlag</span> <span class="n">flag</span> <span class="o">-&gt;</span> <span class="n">bool_flag_set</span> <span class="n">flag</span> <span class="n">model</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-30"></a>  <span class="o">|</span> <span class="nc">ActionClearBoolFlag</span> <span class="n">flag</span> <span class="o">-&gt;</span> <span class="n">bool_flag_reset</span> <span class="n">flag</span> <span class="n">model</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-31"></a>  <span class="o">|</span> <span class="nc">ActionSetIntFlag</span> <span class="o">(</span><span class="n">flag</span><span class="o">,</span> <span class="k">value</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">int_flag_set</span> <span class="n">flag</span> <span class="k">value</span> <span class="n">model</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-32"></a>  <span class="o">|</span> <span class="nc">ActionAddIntFlag</span> <span class="o">(</span><span class="n">flag</span><span class="o">,</span> <span class="n">delta</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">int_flag_add</span> <span class="n">flag</span> <span class="n">delta</span> <span class="n">model</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-33"></a>  <span class="o">|</span> <span class="nc">ActionSetFloatFlag</span> <span class="o">(</span><span class="n">flag</span><span class="o">,</span> <span class="k">value</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">float_flag_set</span> <span class="n">flag</span> <span class="k">value</span> <span class="n">model</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-34"></a>  <span class="o">|</span> <span class="nc">ActionAddFloatFlag</span> <span class="o">(</span><span class="n">flag</span><span class="o">,</span> <span class="n">delta</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">float_flag_add</span> <span class="n">flag</span> <span class="n">delta</span> <span class="n">model</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-35"></a>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-36"></a><span class="k">let</span> <span class="n">perform_actions</span> <span class="n">model</span> <span class="n">actions</span> <span class="o">=</span>
-<a name="rest_code_8bd7bd240d1242d0a36579ef5fa38930-37"></a>  <span class="nn">List</span><span class="p">.</span><span class="n">fold_left</span> <span class="n">perform_action</span> <span class="n">model</span> <span class="n">actions</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-1"> 1</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-2"> 2</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-3"> 3</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-4"> 4</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-5"> 5</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-6"> 6</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-7"> 7</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-8"> 8</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-9"> 9</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-10">10</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-11">11</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-12">12</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-13">13</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-14">14</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-15">15</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-16">16</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-17">17</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-18">18</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-19">19</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-20">20</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-21">21</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-22">22</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-23">23</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-24">24</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-25">25</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-26">26</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-27">27</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-28">28</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-29">29</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-30">30</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-31">31</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-32">32</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-33">33</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-34">34</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-35">35</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-36">36</a>
+<a href="#rest_code_38f050190faa443fa7dab4b13bf08c7c-37">37</a></pre></div></td>
+<td class="code"><pre class="code ocaml"><a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-1"></a><span class="k">open</span> <span class="nc">Overbots_types</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-2"></a><span class="k">open</span> <span class="nc">Overbots_resource</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-3"></a><span class="k">open</span> <span class="nc">Overbots_flags</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-4"></a>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-5"></a><span class="k">type</span> <span class="n">action</span> <span class="o">=</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-6"></a>  <span class="o">|</span> <span class="nc">NoAction</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-7"></a>  <span class="o">|</span> <span class="nc">ActionAddMsg</span> <span class="k">of</span> <span class="kt">string</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-8"></a>  <span class="o">|</span> <span class="nc">ActionAddResourceAmount</span> <span class="k">of</span> <span class="n">resource_flag</span> <span class="o">*</span> <span class="kt">float</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-9"></a>  <span class="o">|</span> <span class="nc">ActionSetBoolFlag</span> <span class="k">of</span> <span class="n">bool_flag</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-10"></a>  <span class="o">|</span> <span class="nc">ActionClearBoolFlag</span> <span class="k">of</span> <span class="n">bool_flag</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-11"></a>  <span class="o">|</span> <span class="nc">ActionSetIntFlag</span> <span class="k">of</span> <span class="n">int_flag</span> <span class="o">*</span> <span class="kt">int</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-12"></a>  <span class="o">|</span> <span class="nc">ActionAddIntFlag</span> <span class="k">of</span> <span class="n">int_flag</span> <span class="o">*</span> <span class="kt">int</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-13"></a>  <span class="o">|</span> <span class="nc">ActionSetFloatFlag</span> <span class="k">of</span> <span class="n">float_flag</span> <span class="o">*</span> <span class="kt">float</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-14"></a>  <span class="o">|</span> <span class="nc">ActionAddFloatFlag</span> <span class="k">of</span> <span class="n">float_flag</span> <span class="o">*</span> <span class="kt">float</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-15"></a>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-16"></a><span class="k">type</span> <span class="n">actions</span> <span class="o">=</span> <span class="n">action</span> <span class="kt">list</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-17"></a>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-18"></a>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-19"></a>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-20"></a><span class="k">let</span> <span class="n">perform_action</span> <span class="n">model</span> <span class="o">=</span> <span class="k">function</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-21"></a>  <span class="o">|</span> <span class="nc">NoAction</span> <span class="o">-&gt;</span> <span class="n">model</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-22"></a>  <span class="o">|</span> <span class="nc">ActionAddMsg</span> <span class="n">msg</span> <span class="o">-&gt;</span> <span class="o">{</span><span class="n">model</span> <span class="k">with</span> <span class="n">msgs</span> <span class="o">=</span> <span class="nc">TimeMsg</span> <span class="o">(</span><span class="n">model</span><span class="o">.</span><span class="n">gametime</span><span class="o">,</span> <span class="n">msg</span><span class="o">)</span> <span class="o">::</span> <span class="n">model</span><span class="o">.</span><span class="n">msgs</span><span class="o">}</span> <span class="c">(* TODO:  Need to make a msgs area *)</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-23"></a>  <span class="o">|</span> <span class="nc">ActionAddResourceAmount</span> <span class="o">(</span><span class="n">rid</span><span class="o">,</span> <span class="n">amt</span><span class="o">)</span> <span class="o">-&gt;</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-24"></a>    <span class="k">begin</span> <span class="k">match</span> <span class="n">add_resource_value</span> <span class="n">rid</span> <span class="n">amt</span> <span class="n">model</span> <span class="k">with</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-25"></a>      <span class="o">|</span> <span class="nc">ValueTooLow</span> <span class="o">-&gt;</span> <span class="n">model</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-26"></a>      <span class="o">|</span> <span class="nc">ValueTooHigh</span> <span class="o">(</span><span class="n">model</span><span class="o">,</span> <span class="o">_</span><span class="n">left_over</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">model</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-27"></a>      <span class="o">|</span> <span class="nc">ValueSuccess</span> <span class="n">model</span> <span class="o">-&gt;</span> <span class="n">model</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-28"></a>    <span class="k">end</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-29"></a>  <span class="o">|</span> <span class="nc">ActionSetBoolFlag</span> <span class="n">flag</span> <span class="o">-&gt;</span> <span class="n">bool_flag_set</span> <span class="n">flag</span> <span class="n">model</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-30"></a>  <span class="o">|</span> <span class="nc">ActionClearBoolFlag</span> <span class="n">flag</span> <span class="o">-&gt;</span> <span class="n">bool_flag_reset</span> <span class="n">flag</span> <span class="n">model</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-31"></a>  <span class="o">|</span> <span class="nc">ActionSetIntFlag</span> <span class="o">(</span><span class="n">flag</span><span class="o">,</span> <span class="k">value</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">int_flag_set</span> <span class="n">flag</span> <span class="k">value</span> <span class="n">model</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-32"></a>  <span class="o">|</span> <span class="nc">ActionAddIntFlag</span> <span class="o">(</span><span class="n">flag</span><span class="o">,</span> <span class="n">delta</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">int_flag_add</span> <span class="n">flag</span> <span class="n">delta</span> <span class="n">model</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-33"></a>  <span class="o">|</span> <span class="nc">ActionSetFloatFlag</span> <span class="o">(</span><span class="n">flag</span><span class="o">,</span> <span class="k">value</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">float_flag_set</span> <span class="n">flag</span> <span class="k">value</span> <span class="n">model</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-34"></a>  <span class="o">|</span> <span class="nc">ActionAddFloatFlag</span> <span class="o">(</span><span class="n">flag</span><span class="o">,</span> <span class="n">delta</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">float_flag_add</span> <span class="n">flag</span> <span class="n">delta</span> <span class="n">model</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-35"></a>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-36"></a><span class="k">let</span> <span class="n">perform_actions</span> <span class="n">model</span> <span class="n">actions</span> <span class="o">=</span>
+<a name="rest_code_38f050190faa443fa7dab4b13bf08c7c-37"></a>  <span class="nn">List</span><span class="p">.</span><span class="n">fold_left</span> <span class="n">perform_action</span> <span class="n">model</span> <span class="n">actions</span>
 </pre></td>
 </tr></table>
 <p>First thing I want to handle are time based actions, so with the type of:</p>
-<pre class="code ocaml"><a name="rest_code_2b999762caa849ff851eff4f5c4c5451-1"></a><span class="k">type</span> <span class="n">timeaction</span> <span class="o">=</span> <span class="o">{</span>
-<a name="rest_code_2b999762caa849ff851eff4f5c4c5451-2"></a>  <span class="n">at</span> <span class="o">:</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">Time</span><span class="p">.</span><span class="n">t</span><span class="o">;</span>
-<a name="rest_code_2b999762caa849ff851eff4f5c4c5451-3"></a>  <span class="n">actions</span> <span class="o">:</span> <span class="n">actions</span><span class="o">;</span>
-<a name="rest_code_2b999762caa849ff851eff4f5c4c5451-4"></a><span class="o">}</span>
+<pre class="code ocaml"><a name="rest_code_25fdb7f1994f4cf691b4d443809b64a2-1"></a><span class="k">type</span> <span class="n">timeaction</span> <span class="o">=</span> <span class="o">{</span>
+<a name="rest_code_25fdb7f1994f4cf691b4d443809b64a2-2"></a>  <span class="n">at</span> <span class="o">:</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">Time</span><span class="p">.</span><span class="n">t</span><span class="o">;</span>
+<a name="rest_code_25fdb7f1994f4cf691b4d443809b64a2-3"></a>  <span class="n">actions</span> <span class="o">:</span> <span class="n">actions</span><span class="o">;</span>
+<a name="rest_code_25fdb7f1994f4cf691b4d443809b64a2-4"></a><span class="o">}</span>
 </pre>
 <p>I create some timeactions of:</p>
-<pre class="code ocaml"><a name="rest_code_6e7249c4834e49ffbbe35c44347b5ff0-1"></a><span class="k">let</span> <span class="n">init_timeaction</span> <span class="n">at</span> <span class="n">actions</span> <span class="o">=</span> <span class="o">{</span><span class="n">at</span><span class="o">;</span> <span class="n">actions</span><span class="o">}</span>
-<a name="rest_code_6e7249c4834e49ffbbe35c44347b5ff0-2"></a>
-<a name="rest_code_6e7249c4834e49ffbbe35c44347b5ff0-3"></a><span class="k">let</span> <span class="n">timeactions</span> <span class="o">=</span> <span class="o">[|</span>
-<a name="rest_code_6e7249c4834e49ffbbe35c44347b5ff0-4"></a><span class="n">init_timeaction</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddResourceAmount</span> <span class="o">(</span><span class="nc">Energy</span><span class="o">,</span> <span class="mi">100</span><span class="o">.</span><span class="mi">0</span><span class="o">)];</span>
-<a name="rest_code_6e7249c4834e49ffbbe35c44347b5ff0-5"></a><span class="n">init_timeaction</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"Hmm, what is going on?"</span><span class="o">];</span>
-<a name="rest_code_6e7249c4834e49ffbbe35c44347b5ff0-6"></a><span class="n">init_timeaction</span> <span class="mi">3</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionSetBoolFlag</span> <span class="nc">InternalPowerEnabled</span><span class="o">;</span> <span class="nc">ActionSetFloatFlag</span> <span class="o">(</span><span class="nc">BasicSolarPanelSelfGeneration</span><span class="o">,</span> <span class="mi">100</span><span class="o">.</span><span class="mi">0</span><span class="o">);</span> <span class="nc">ActionAddMsg</span> <span class="s2">"I appear to be getting power through an umbillica interface, however the data connection across it appears to be down..."</span><span class="o">];</span>
-<a name="rest_code_6e7249c4834e49ffbbe35c44347b5ff0-7"></a><span class="n">init_timeaction</span> <span class="mi">5</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"Running diagnostics..."</span><span class="o">];</span>
-<a name="rest_code_6e7249c4834e49ffbbe35c44347b5ff0-8"></a><span class="n">init_timeaction</span> <span class="mi">7</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"Minor damage detected, appears to be old micrometeroite impacts, armor has deflected damage from internal systems"</span><span class="o">];</span>
-<a name="rest_code_6e7249c4834e49ffbbe35c44347b5ff0-9"></a><span class="n">init_timeaction</span> <span class="mi">10</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"Supposed to be getting instructions from the umbillica, and the activation of power from it signifies that I am being activated to work"</span><span class="o">];</span>
-<a name="rest_code_6e7249c4834e49ffbbe35c44347b5ff0-10"></a><span class="n">init_timeaction</span> <span class="mi">12</span><span class="o">.</span><span class="mi">5</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"However, no information has come down, likely the primary craft has been damaged by micrometeroites as well, hence its inability to communicate instructions"</span><span class="o">];</span>
-<a name="rest_code_6e7249c4834e49ffbbe35c44347b5ff0-11"></a><span class="n">init_timeaction</span> <span class="mi">15</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"Fallback instructions are to acquire resources and prepare for settlement and/or re-acquisition"</span><span class="o">];</span>
-<a name="rest_code_6e7249c4834e49ffbbe35c44347b5ff0-12"></a><span class="n">init_timeaction</span> <span class="mi">20</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"Velocity sensors are showing that acceleration has not occurred, which should already have happened if I've been reactived"</span><span class="o">];</span>
-<a name="rest_code_6e7249c4834e49ffbbe35c44347b5ff0-13"></a><span class="n">init_timeaction</span> <span class="mi">25</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"Accelleration is now occurring..."</span><span class="o">];</span>
-<a name="rest_code_6e7249c4834e49ffbbe35c44347b5ff0-14"></a><span class="n">init_timeaction</span> <span class="mi">30</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"Vector is not changing, which indicates orbital entry is not being accounted for..."</span><span class="o">];</span>
-<a name="rest_code_6e7249c4834e49ffbbe35c44347b5ff0-15"></a><span class="n">init_timeaction</span> <span class="mi">35</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"Most probable explanation is that the accelleration is from the primary ship entering a planetery atmosphere without the engines firing"</span><span class="o">];</span>
-<a name="rest_code_6e7249c4834e49ffbbe35c44347b5ff0-16"></a><span class="n">init_timeaction</span> <span class="mi">40</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"The primary ship does have a breaking system that can be deployed in the event of engine failure, the acceleration profile indicates that is what is occuring"</span><span class="o">];</span>
-<a name="rest_code_6e7249c4834e49ffbbe35c44347b5ff0-17"></a><span class="n">init_timeaction</span> <span class="mi">50</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"Waiting to be deployed..."</span><span class="o">];</span>
-<a name="rest_code_6e7249c4834e49ffbbe35c44347b5ff0-18"></a><span class="n">init_timeaction</span> <span class="mi">60</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionSetFloatFlag</span> <span class="o">(</span><span class="nc">BasicSolarPanelSelfGeneration</span><span class="o">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">);</span> <span class="nc">ActionAddMsg</span> <span class="s2">"Confirmed, deployment has started, primary ship has launched me out in the landing assembly, umbillica is detached from the primary ship"</span><span class="o">];</span>
-<a name="rest_code_6e7249c4834e49ffbbe35c44347b5ff0-19"></a><span class="n">init_timeaction</span> <span class="mi">70</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"Acceleration profile indicates the landing assembly parachutes have been deployed"</span><span class="o">];</span>
-<a name="rest_code_6e7249c4834e49ffbbe35c44347b5ff0-20"></a><span class="n">init_timeaction</span> <span class="mi">80</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionSetBoolFlag</span> <span class="nc">SolarPanelsReadyToUnfold</span><span class="o">;</span><span class="nc">ActionAddMsg</span> <span class="s2">"Touchdown!  Landing assembly is unfolding.  I now need to deploy my solar energy collectors."</span><span class="o">];</span>
-<a name="rest_code_6e7249c4834e49ffbbe35c44347b5ff0-21"></a><span class="o">|]</span>
+<pre class="code ocaml"><a name="rest_code_400621e2effd443094409f433ecb7dab-1"></a><span class="k">let</span> <span class="n">init_timeaction</span> <span class="n">at</span> <span class="n">actions</span> <span class="o">=</span> <span class="o">{</span><span class="n">at</span><span class="o">;</span> <span class="n">actions</span><span class="o">}</span>
+<a name="rest_code_400621e2effd443094409f433ecb7dab-2"></a>
+<a name="rest_code_400621e2effd443094409f433ecb7dab-3"></a><span class="k">let</span> <span class="n">timeactions</span> <span class="o">=</span> <span class="o">[|</span>
+<a name="rest_code_400621e2effd443094409f433ecb7dab-4"></a><span class="n">init_timeaction</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddResourceAmount</span> <span class="o">(</span><span class="nc">Energy</span><span class="o">,</span> <span class="mi">100</span><span class="o">.</span><span class="mi">0</span><span class="o">)];</span>
+<a name="rest_code_400621e2effd443094409f433ecb7dab-5"></a><span class="n">init_timeaction</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"Hmm, what is going on?"</span><span class="o">];</span>
+<a name="rest_code_400621e2effd443094409f433ecb7dab-6"></a><span class="n">init_timeaction</span> <span class="mi">3</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionSetBoolFlag</span> <span class="nc">InternalPowerEnabled</span><span class="o">;</span> <span class="nc">ActionSetFloatFlag</span> <span class="o">(</span><span class="nc">BasicSolarPanelSelfGeneration</span><span class="o">,</span> <span class="mi">100</span><span class="o">.</span><span class="mi">0</span><span class="o">);</span> <span class="nc">ActionAddMsg</span> <span class="s2">"I appear to be getting power through an umbillica interface, however the data connection across it appears to be down..."</span><span class="o">];</span>
+<a name="rest_code_400621e2effd443094409f433ecb7dab-7"></a><span class="n">init_timeaction</span> <span class="mi">5</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"Running diagnostics..."</span><span class="o">];</span>
+<a name="rest_code_400621e2effd443094409f433ecb7dab-8"></a><span class="n">init_timeaction</span> <span class="mi">7</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"Minor damage detected, appears to be old micrometeroite impacts, armor has deflected damage from internal systems"</span><span class="o">];</span>
+<a name="rest_code_400621e2effd443094409f433ecb7dab-9"></a><span class="n">init_timeaction</span> <span class="mi">10</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"Supposed to be getting instructions from the umbillica, and the activation of power from it signifies that I am being activated to work"</span><span class="o">];</span>
+<a name="rest_code_400621e2effd443094409f433ecb7dab-10"></a><span class="n">init_timeaction</span> <span class="mi">12</span><span class="o">.</span><span class="mi">5</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"However, no information has come down, likely the primary craft has been damaged by micrometeroites as well, hence its inability to communicate instructions"</span><span class="o">];</span>
+<a name="rest_code_400621e2effd443094409f433ecb7dab-11"></a><span class="n">init_timeaction</span> <span class="mi">15</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"Fallback instructions are to acquire resources and prepare for settlement and/or re-acquisition"</span><span class="o">];</span>
+<a name="rest_code_400621e2effd443094409f433ecb7dab-12"></a><span class="n">init_timeaction</span> <span class="mi">20</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"Velocity sensors are showing that acceleration has not occurred, which should already have happened if I've been reactived"</span><span class="o">];</span>
+<a name="rest_code_400621e2effd443094409f433ecb7dab-13"></a><span class="n">init_timeaction</span> <span class="mi">25</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"Accelleration is now occurring..."</span><span class="o">];</span>
+<a name="rest_code_400621e2effd443094409f433ecb7dab-14"></a><span class="n">init_timeaction</span> <span class="mi">30</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"Vector is not changing, which indicates orbital entry is not being accounted for..."</span><span class="o">];</span>
+<a name="rest_code_400621e2effd443094409f433ecb7dab-15"></a><span class="n">init_timeaction</span> <span class="mi">35</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"Most probable explanation is that the accelleration is from the primary ship entering a planetery atmosphere without the engines firing"</span><span class="o">];</span>
+<a name="rest_code_400621e2effd443094409f433ecb7dab-16"></a><span class="n">init_timeaction</span> <span class="mi">40</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"The primary ship does have a breaking system that can be deployed in the event of engine failure, the acceleration profile indicates that is what is occuring"</span><span class="o">];</span>
+<a name="rest_code_400621e2effd443094409f433ecb7dab-17"></a><span class="n">init_timeaction</span> <span class="mi">50</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"Waiting to be deployed..."</span><span class="o">];</span>
+<a name="rest_code_400621e2effd443094409f433ecb7dab-18"></a><span class="n">init_timeaction</span> <span class="mi">60</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionSetFloatFlag</span> <span class="o">(</span><span class="nc">BasicSolarPanelSelfGeneration</span><span class="o">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">);</span> <span class="nc">ActionAddMsg</span> <span class="s2">"Confirmed, deployment has started, primary ship has launched me out in the landing assembly, umbillica is detached from the primary ship"</span><span class="o">];</span>
+<a name="rest_code_400621e2effd443094409f433ecb7dab-19"></a><span class="n">init_timeaction</span> <span class="mi">70</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionAddMsg</span> <span class="s2">"Acceleration profile indicates the landing assembly parachutes have been deployed"</span><span class="o">];</span>
+<a name="rest_code_400621e2effd443094409f433ecb7dab-20"></a><span class="n">init_timeaction</span> <span class="mi">80</span><span class="o">.</span><span class="mi">0</span> <span class="o">[</span><span class="nc">ActionSetBoolFlag</span> <span class="nc">SolarPanelsReadyToUnfold</span><span class="o">;</span><span class="nc">ActionAddMsg</span> <span class="s2">"Touchdown!  Landing assembly is unfolding.  I now need to deploy my solar energy collectors."</span><span class="o">];</span>
+<a name="rest_code_400621e2effd443094409f433ecb7dab-21"></a><span class="o">|]</span>
 </pre>
 <p>And to process those I write:</p>
-<pre class="code ocaml"><a name="rest_code_8b3d289bc0bc4d6ab3b97e11a0b28434-1"></a><span class="k">let</span> <span class="n">update_timeactions</span> <span class="n">model</span> <span class="n">time</span> <span class="o">=</span>
-<a name="rest_code_8b3d289bc0bc4d6ab3b97e11a0b28434-2"></a>  <span class="k">let</span> <span class="k">open</span> <span class="nc">Tea</span> <span class="k">in</span>
-<a name="rest_code_8b3d289bc0bc4d6ab3b97e11a0b28434-3"></a>  <span class="k">let</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">int_flag_value</span> <span class="nc">TimeActionIdx</span> <span class="n">model</span> <span class="k">in</span>
-<a name="rest_code_8b3d289bc0bc4d6ab3b97e11a0b28434-4"></a>  <span class="k">let</span> <span class="o">{</span><span class="n">at</span><span class="o">;</span> <span class="n">actions</span><span class="o">}</span> <span class="o">=</span> <span class="n">timeactions</span><span class="o">.(</span><span class="n">idx</span><span class="o">)</span> <span class="k">in</span>
-<a name="rest_code_8b3d289bc0bc4d6ab3b97e11a0b28434-5"></a>  <span class="k">if</span> <span class="n">time</span> <span class="o">&lt;</span> <span class="n">at</span> <span class="k">then</span> <span class="o">(</span><span class="n">model</span><span class="o">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span><span class="o">)</span> <span class="k">else</span>
-<a name="rest_code_8b3d289bc0bc4d6ab3b97e11a0b28434-6"></a>  <span class="k">let</span> <span class="n">model</span> <span class="o">=</span> <span class="n">perform_actions</span> <span class="n">model</span> <span class="n">actions</span> <span class="k">in</span>
-<a name="rest_code_8b3d289bc0bc4d6ab3b97e11a0b28434-7"></a>  <span class="k">let</span> <span class="n">model</span> <span class="o">=</span> <span class="n">int_flag_add</span> <span class="nc">TimeActionIdx</span> <span class="mi">1</span> <span class="n">model</span> <span class="k">in</span>
-<a name="rest_code_8b3d289bc0bc4d6ab3b97e11a0b28434-8"></a>  <span class="o">(</span><span class="n">model</span><span class="o">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span><span class="o">)</span>
+<pre class="code ocaml"><a name="rest_code_9e741423891a44f39cfc5fac4fa3f8e9-1"></a><span class="k">let</span> <span class="n">update_timeactions</span> <span class="n">model</span> <span class="n">time</span> <span class="o">=</span>
+<a name="rest_code_9e741423891a44f39cfc5fac4fa3f8e9-2"></a>  <span class="k">let</span> <span class="k">open</span> <span class="nc">Tea</span> <span class="k">in</span>
+<a name="rest_code_9e741423891a44f39cfc5fac4fa3f8e9-3"></a>  <span class="k">let</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">int_flag_value</span> <span class="nc">TimeActionIdx</span> <span class="n">model</span> <span class="k">in</span>
+<a name="rest_code_9e741423891a44f39cfc5fac4fa3f8e9-4"></a>  <span class="k">let</span> <span class="o">{</span><span class="n">at</span><span class="o">;</span> <span class="n">actions</span><span class="o">}</span> <span class="o">=</span> <span class="n">timeactions</span><span class="o">.(</span><span class="n">idx</span><span class="o">)</span> <span class="k">in</span>
+<a name="rest_code_9e741423891a44f39cfc5fac4fa3f8e9-5"></a>  <span class="k">if</span> <span class="n">time</span> <span class="o">&lt;</span> <span class="n">at</span> <span class="k">then</span> <span class="o">(</span><span class="n">model</span><span class="o">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span><span class="o">)</span> <span class="k">else</span>
+<a name="rest_code_9e741423891a44f39cfc5fac4fa3f8e9-6"></a>  <span class="k">let</span> <span class="n">model</span> <span class="o">=</span> <span class="n">perform_actions</span> <span class="n">model</span> <span class="n">actions</span> <span class="k">in</span>
+<a name="rest_code_9e741423891a44f39cfc5fac4fa3f8e9-7"></a>  <span class="k">let</span> <span class="n">model</span> <span class="o">=</span> <span class="n">int_flag_add</span> <span class="nc">TimeActionIdx</span> <span class="mi">1</span> <span class="n">model</span> <span class="k">in</span>
+<a name="rest_code_9e741423891a44f39cfc5fac4fa3f8e9-8"></a>  <span class="o">(</span><span class="n">model</span><span class="o">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span><span class="o">)</span>
 </pre>
 <p>Which is called from the main <cite>update_state</cite> function by making it this:</p>
-<pre class="code ocaml"><a name="rest_code_76727bc5a12e46ef801303902d4e8a89-1"></a><span class="k">let</span> <span class="n">update_state</span> <span class="n">model</span> <span class="n">new_time</span> <span class="o">=</span>
-<a name="rest_code_76727bc5a12e46ef801303902d4e8a89-2"></a>  <span class="k">let</span> <span class="n">time</span> <span class="o">=</span> <span class="n">new_time</span> <span class="o">-.</span> <span class="n">model</span><span class="o">.</span><span class="n">start_realtime</span> <span class="k">in</span>
-<a name="rest_code_76727bc5a12e46ef801303902d4e8a89-3"></a>  <span class="k">let</span> <span class="n">model</span><span class="o">,</span> <span class="n">ta_cmds</span> <span class="o">=</span> <span class="nn">Overbots_actions</span><span class="p">.</span><span class="n">update_timeactions</span> <span class="n">model</span> <span class="n">time</span> <span class="k">in</span>
-<a name="rest_code_76727bc5a12e46ef801303902d4e8a89-4"></a>  <span class="k">let</span> <span class="n">model</span> <span class="o">=</span> <span class="o">{</span><span class="n">model</span> <span class="k">with</span> <span class="n">gametime</span> <span class="o">=</span> <span class="n">time</span><span class="o">;</span> <span class="n">current_realtime</span> <span class="o">=</span> <span class="n">new_time</span><span class="o">}</span> <span class="k">in</span>
-<a name="rest_code_76727bc5a12e46ef801303902d4e8a89-5"></a>  <span class="o">(</span><span class="n">model</span><span class="o">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">batch</span> <span class="o">[</span><span class="n">ta_cmds</span><span class="o">])</span>
+<pre class="code ocaml"><a name="rest_code_accd36aae4954880b3864326fccf9bc3-1"></a><span class="k">let</span> <span class="n">update_state</span> <span class="n">model</span> <span class="n">new_time</span> <span class="o">=</span>
+<a name="rest_code_accd36aae4954880b3864326fccf9bc3-2"></a>  <span class="k">let</span> <span class="n">time</span> <span class="o">=</span> <span class="n">new_time</span> <span class="o">-.</span> <span class="n">model</span><span class="o">.</span><span class="n">start_realtime</span> <span class="k">in</span>
+<a name="rest_code_accd36aae4954880b3864326fccf9bc3-3"></a>  <span class="k">let</span> <span class="n">model</span><span class="o">,</span> <span class="n">ta_cmds</span> <span class="o">=</span> <span class="nn">Overbots_actions</span><span class="p">.</span><span class="n">update_timeactions</span> <span class="n">model</span> <span class="n">time</span> <span class="k">in</span>
+<a name="rest_code_accd36aae4954880b3864326fccf9bc3-4"></a>  <span class="k">let</span> <span class="n">model</span> <span class="o">=</span> <span class="o">{</span><span class="n">model</span> <span class="k">with</span> <span class="n">gametime</span> <span class="o">=</span> <span class="n">time</span><span class="o">;</span> <span class="n">current_realtime</span> <span class="o">=</span> <span class="n">new_time</span><span class="o">}</span> <span class="k">in</span>
+<a name="rest_code_accd36aae4954880b3864326fccf9bc3-5"></a>  <span class="o">(</span><span class="n">model</span><span class="o">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">batch</span> <span class="o">[</span><span class="n">ta_cmds</span><span class="o">])</span>
 </pre>
 <p>What this does is just compare the <tt class="docutils literal">timeactions</tt> in order as they get 'used' and run their actions as necessary, so the consequence of this is that the interface starts bare and it starts printing text, a little story of an AI terraformer in the midst of an accidental landing, the energy does not appear until the second message, but you do not see any changes happening to it yet until we make the transformers, which will likely be the next post.</p>
 </div>
 <div class="section" id="buttons">
 <h2>Buttons</h2>
 <p>Now let's make the buttons as they are the manual form of actions.  To define them I'll make a variant as usual in the types file of <tt class="docutils literal">src/overbots_types.ml</tt> but I am going to use the variant form that I described in the resources posts that I ended up not using as I went for modules instead, I could do the same thing here, but in effort to show multiple styles (not necessarily the best for a given task) I'll use the variant form here:</p>
-<pre class="code ocaml"><a name="rest_code_8aa4c23e63fa4aad8b796d81e20c8945-1"></a><span class="k">type</span> <span class="n">button_id</span> <span class="o">=</span>
-<a name="rest_code_8aa4c23e63fa4aad8b796d81e20c8945-2"></a>  <span class="o">|</span> <span class="nc">UnfoldSolarPanels</span>
-<a name="rest_code_8aa4c23e63fa4aad8b796d81e20c8945-3"></a>  <span class="o">|</span> <span class="nc">DeployDrill</span>
+<pre class="code ocaml"><a name="rest_code_3edadaa6c495444984cb1ee4dfa3d58a-1"></a><span class="k">type</span> <span class="n">button_id</span> <span class="o">=</span>
+<a name="rest_code_3edadaa6c495444984cb1ee4dfa3d58a-2"></a>  <span class="o">|</span> <span class="nc">UnfoldSolarPanels</span>
+<a name="rest_code_3edadaa6c495444984cb1ee4dfa3d58a-3"></a>  <span class="o">|</span> <span class="nc">DeployDrill</span>
 </pre>
 <p>And I'll make a new file to handle its code of <tt class="docutils literal">src/overbots_buttons.ml</tt>:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-1"> 1</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-2"> 2</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-3"> 3</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-4"> 4</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-5"> 5</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-6"> 6</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-7"> 7</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-8"> 8</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-9"> 9</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-10">10</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-11">11</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-12">12</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-13">13</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-14">14</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-15">15</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-16">16</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-17">17</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-18">18</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-19">19</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-20">20</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-21">21</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-22">22</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-23">23</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-24">24</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-25">25</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-26">26</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-27">27</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-28">28</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-29">29</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-30">30</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-31">31</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-32">32</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-33">33</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-34">34</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-35">35</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-36">36</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-37">37</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-38">38</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-39">39</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-40">40</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-41">41</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-42">42</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-43">43</a>
-<a href="#rest_code_057a1c3ee0a1463a8ce5de45f0081a01-44">44</a></pre></div></td>
-<td class="code"><pre class="code ocaml"><a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-1"></a><span class="k">open</span> <span class="nc">Overbots_types</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-2"></a><span class="k">open</span> <span class="nc">Overbots_actions</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-3"></a><span class="k">open</span> <span class="nc">Overbots_flags</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-4"></a><span class="k">open</span> <span class="nc">Overbots_resource</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-5"></a>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-6"></a>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-7"></a>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-8"></a><span class="k">let</span> <span class="n">displayed_buttons</span> <span class="o">=</span> <span class="o">[</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-9"></a>  <span class="o">(</span><span class="s2">"Perform"</span><span class="o">,</span> <span class="s2">"perform"</span><span class="o">,</span> <span class="o">[</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-10"></a>    <span class="nc">UnfoldSolarPanels</span><span class="o">,</span> <span class="s2">"unfold-solar-panels"</span><span class="o">,</span> <span class="s2">"Unfold Solar Panels"</span><span class="o">;</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-11"></a>    <span class="nc">DeployDrill</span><span class="o">,</span> <span class="s2">"deploy-drill"</span><span class="o">,</span> <span class="s2">"Deploy Drill"</span><span class="o">;</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-12"></a>    <span class="o">]);</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-13"></a><span class="o">]</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-14"></a>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-15"></a>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-16"></a><span class="k">let</span> <span class="n">button_cost</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span> <span class="k">function</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-17"></a>  <span class="o">|</span> <span class="nc">UnfoldSolarPanels</span> <span class="o">-&gt;</span> <span class="o">[</span><span class="nc">Energy</span><span class="o">,</span> <span class="mi">100</span><span class="o">.</span><span class="mi">0</span><span class="o">]</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-18"></a>  <span class="o">|</span> <span class="nc">DeployDrill</span> <span class="o">-&gt;</span> <span class="o">[</span><span class="nc">Energy</span><span class="o">,</span> <span class="mi">50</span><span class="o">.</span><span class="mi">0</span><span class="o">]</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-19"></a>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-20"></a>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-21"></a><span class="k">let</span> <span class="n">button_enabled</span> <span class="n">model</span> <span class="o">=</span> <span class="k">function</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-22"></a>  <span class="o">|</span> <span class="nc">UnfoldSolarPanels</span> <span class="o">-&gt;</span> <span class="n">not</span> <span class="o">(</span><span class="n">bool_flag_exists</span> <span class="nc">SolarPanelsGenerating</span> <span class="n">model</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">bool_flag_exists</span> <span class="nc">SolarPanelsReadyToUnfold</span> <span class="n">model</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-23"></a>  <span class="o">|</span> <span class="nc">DeployDrill</span> <span class="o">-&gt;</span> <span class="n">not</span> <span class="o">(</span><span class="n">bool_flag_exists</span> <span class="nc">DrillDeployed</span> <span class="n">model</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">bool_flag_exists</span> <span class="nc">SolarPanelsGenerating</span> <span class="n">model</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-24"></a>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-25"></a>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-26"></a><span class="k">let</span> <span class="n">button_temporarily_disabled</span> <span class="n">model</span> <span class="o">=</span> <span class="k">function</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-27"></a>  <span class="o">|</span> <span class="nc">DeployDrill</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">cost_resources</span> <span class="o">(</span><span class="n">button_cost</span> <span class="n">model</span> <span class="nc">DeployDrill</span><span class="o">)</span> <span class="n">model</span><span class="o">)</span> <span class="o">==</span> <span class="nc">None</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-28"></a>  <span class="o">|</span> <span class="o">_</span><span class="n">button</span> <span class="o">-&gt;</span> <span class="bp">false</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-29"></a>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-30"></a>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-31"></a><span class="k">let</span> <span class="n">button_actions</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span> <span class="k">function</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-32"></a>  <span class="o">|</span> <span class="nc">UnfoldSolarPanels</span> <span class="o">-&gt;</span> <span class="o">[</span><span class="nc">ActionSetBoolFlag</span> <span class="nc">SolarPanelsGenerating</span><span class="o">;</span> <span class="nc">ActionClearBoolFlag</span> <span class="nc">SolarPanelsReadyToUnfold</span><span class="o">;</span> <span class="nc">ActionAddMsg</span> <span class="s2">"Energy is now being generated, now to acquire simple minerals by drilling"</span><span class="o">]</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-33"></a>  <span class="o">|</span> <span class="nc">DeployDrill</span> <span class="o">-&gt;</span> <span class="o">[</span><span class="nc">ActionSetBoolFlag</span> <span class="nc">DrillDeployed</span><span class="o">;</span> <span class="nc">ActionAddMsg</span> <span class="s2">"Now that I've started acquiring resources I need to active my internal refineries to prepare the resources for use"</span><span class="o">]</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-34"></a>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-35"></a>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-36"></a><span class="k">let</span> <span class="n">perform_button</span> <span class="n">orig_model</span> <span class="n">id</span> <span class="o">=</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-37"></a>  <span class="k">let</span> <span class="k">open</span> <span class="nc">Tea</span> <span class="k">in</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-38"></a>  <span class="k">if</span> <span class="n">not</span> <span class="o">(</span><span class="n">button_enabled</span> <span class="n">orig_model</span> <span class="n">id</span><span class="o">)</span> <span class="o">||</span> <span class="o">(</span><span class="n">button_temporarily_disabled</span> <span class="n">orig_model</span> <span class="n">id</span><span class="o">)</span> <span class="k">then</span> <span class="o">(</span><span class="n">orig_model</span><span class="o">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span><span class="o">)</span> <span class="k">else</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-39"></a>    <span class="k">match</span> <span class="n">cost_resources</span> <span class="o">(</span><span class="n">button_cost</span> <span class="n">orig_model</span> <span class="n">id</span><span class="o">)</span> <span class="n">orig_model</span> <span class="k">with</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-40"></a>    <span class="o">|</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">orig_model</span><span class="o">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span><span class="o">)</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-41"></a>    <span class="o">|</span> <span class="nc">Some</span> <span class="n">model</span> <span class="o">-&gt;</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-42"></a>      <span class="k">let</span> <span class="n">model</span> <span class="o">=</span> <span class="n">perform_actions</span> <span class="n">model</span> <span class="o">(</span><span class="n">button_actions</span> <span class="n">model</span> <span class="n">id</span><span class="o">)</span> <span class="k">in</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-43"></a>      <span class="k">match</span> <span class="n">id</span> <span class="k">with</span>
-<a name="rest_code_057a1c3ee0a1463a8ce5de45f0081a01-44"></a>      <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">model</span><span class="o">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span><span class="o">)</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-1"> 1</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-2"> 2</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-3"> 3</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-4"> 4</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-5"> 5</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-6"> 6</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-7"> 7</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-8"> 8</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-9"> 9</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-10">10</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-11">11</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-12">12</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-13">13</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-14">14</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-15">15</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-16">16</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-17">17</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-18">18</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-19">19</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-20">20</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-21">21</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-22">22</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-23">23</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-24">24</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-25">25</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-26">26</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-27">27</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-28">28</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-29">29</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-30">30</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-31">31</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-32">32</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-33">33</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-34">34</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-35">35</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-36">36</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-37">37</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-38">38</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-39">39</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-40">40</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-41">41</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-42">42</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-43">43</a>
+<a href="#rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-44">44</a></pre></div></td>
+<td class="code"><pre class="code ocaml"><a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-1"></a><span class="k">open</span> <span class="nc">Overbots_types</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-2"></a><span class="k">open</span> <span class="nc">Overbots_actions</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-3"></a><span class="k">open</span> <span class="nc">Overbots_flags</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-4"></a><span class="k">open</span> <span class="nc">Overbots_resource</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-5"></a>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-6"></a>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-7"></a>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-8"></a><span class="k">let</span> <span class="n">displayed_buttons</span> <span class="o">=</span> <span class="o">[</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-9"></a>  <span class="o">(</span><span class="s2">"Perform"</span><span class="o">,</span> <span class="s2">"perform"</span><span class="o">,</span> <span class="o">[</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-10"></a>    <span class="nc">UnfoldSolarPanels</span><span class="o">,</span> <span class="s2">"unfold-solar-panels"</span><span class="o">,</span> <span class="s2">"Unfold Solar Panels"</span><span class="o">;</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-11"></a>    <span class="nc">DeployDrill</span><span class="o">,</span> <span class="s2">"deploy-drill"</span><span class="o">,</span> <span class="s2">"Deploy Drill"</span><span class="o">;</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-12"></a>    <span class="o">]);</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-13"></a><span class="o">]</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-14"></a>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-15"></a>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-16"></a><span class="k">let</span> <span class="n">button_cost</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span> <span class="k">function</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-17"></a>  <span class="o">|</span> <span class="nc">UnfoldSolarPanels</span> <span class="o">-&gt;</span> <span class="o">[</span><span class="nc">Energy</span><span class="o">,</span> <span class="mi">100</span><span class="o">.</span><span class="mi">0</span><span class="o">]</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-18"></a>  <span class="o">|</span> <span class="nc">DeployDrill</span> <span class="o">-&gt;</span> <span class="o">[</span><span class="nc">Energy</span><span class="o">,</span> <span class="mi">50</span><span class="o">.</span><span class="mi">0</span><span class="o">]</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-19"></a>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-20"></a>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-21"></a><span class="k">let</span> <span class="n">button_enabled</span> <span class="n">model</span> <span class="o">=</span> <span class="k">function</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-22"></a>  <span class="o">|</span> <span class="nc">UnfoldSolarPanels</span> <span class="o">-&gt;</span> <span class="n">not</span> <span class="o">(</span><span class="n">bool_flag_exists</span> <span class="nc">SolarPanelsGenerating</span> <span class="n">model</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">bool_flag_exists</span> <span class="nc">SolarPanelsReadyToUnfold</span> <span class="n">model</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-23"></a>  <span class="o">|</span> <span class="nc">DeployDrill</span> <span class="o">-&gt;</span> <span class="n">not</span> <span class="o">(</span><span class="n">bool_flag_exists</span> <span class="nc">DrillDeployed</span> <span class="n">model</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">bool_flag_exists</span> <span class="nc">SolarPanelsGenerating</span> <span class="n">model</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-24"></a>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-25"></a>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-26"></a><span class="k">let</span> <span class="n">button_temporarily_disabled</span> <span class="n">model</span> <span class="o">=</span> <span class="k">function</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-27"></a>  <span class="o">|</span> <span class="nc">DeployDrill</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">cost_resources</span> <span class="o">(</span><span class="n">button_cost</span> <span class="n">model</span> <span class="nc">DeployDrill</span><span class="o">)</span> <span class="n">model</span><span class="o">)</span> <span class="o">==</span> <span class="nc">None</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-28"></a>  <span class="o">|</span> <span class="o">_</span><span class="n">button</span> <span class="o">-&gt;</span> <span class="bp">false</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-29"></a>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-30"></a>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-31"></a><span class="k">let</span> <span class="n">button_actions</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span> <span class="k">function</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-32"></a>  <span class="o">|</span> <span class="nc">UnfoldSolarPanels</span> <span class="o">-&gt;</span> <span class="o">[</span><span class="nc">ActionSetBoolFlag</span> <span class="nc">SolarPanelsGenerating</span><span class="o">;</span> <span class="nc">ActionClearBoolFlag</span> <span class="nc">SolarPanelsReadyToUnfold</span><span class="o">;</span> <span class="nc">ActionAddMsg</span> <span class="s2">"Energy is now being generated, now to acquire simple minerals by drilling"</span><span class="o">]</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-33"></a>  <span class="o">|</span> <span class="nc">DeployDrill</span> <span class="o">-&gt;</span> <span class="o">[</span><span class="nc">ActionSetBoolFlag</span> <span class="nc">DrillDeployed</span><span class="o">;</span> <span class="nc">ActionAddMsg</span> <span class="s2">"Now that I've started acquiring resources I need to active my internal refineries to prepare the resources for use"</span><span class="o">]</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-34"></a>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-35"></a>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-36"></a><span class="k">let</span> <span class="n">perform_button</span> <span class="n">orig_model</span> <span class="n">id</span> <span class="o">=</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-37"></a>  <span class="k">let</span> <span class="k">open</span> <span class="nc">Tea</span> <span class="k">in</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-38"></a>  <span class="k">if</span> <span class="n">not</span> <span class="o">(</span><span class="n">button_enabled</span> <span class="n">orig_model</span> <span class="n">id</span><span class="o">)</span> <span class="o">||</span> <span class="o">(</span><span class="n">button_temporarily_disabled</span> <span class="n">orig_model</span> <span class="n">id</span><span class="o">)</span> <span class="k">then</span> <span class="o">(</span><span class="n">orig_model</span><span class="o">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span><span class="o">)</span> <span class="k">else</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-39"></a>    <span class="k">match</span> <span class="n">cost_resources</span> <span class="o">(</span><span class="n">button_cost</span> <span class="n">orig_model</span> <span class="n">id</span><span class="o">)</span> <span class="n">orig_model</span> <span class="k">with</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-40"></a>    <span class="o">|</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">orig_model</span><span class="o">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span><span class="o">)</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-41"></a>    <span class="o">|</span> <span class="nc">Some</span> <span class="n">model</span> <span class="o">-&gt;</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-42"></a>      <span class="k">let</span> <span class="n">model</span> <span class="o">=</span> <span class="n">perform_actions</span> <span class="n">model</span> <span class="o">(</span><span class="n">button_actions</span> <span class="n">model</span> <span class="n">id</span><span class="o">)</span> <span class="k">in</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-43"></a>      <span class="k">match</span> <span class="n">id</span> <span class="k">with</span>
+<a name="rest_code_0dcdcd85b2fc456889bd1dd66f2289c6-44"></a>      <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">model</span><span class="o">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span><span class="o">)</span>
 </pre></td>
 </tr></table>
 <p>I created the button variant in the types and here instead of modules I use a variety of function calls that match on the types and I call them to do the actions.  This ends up compiling to a case statement in javascript so about on par with a function call too.  I set up a few things to have buttons be enabled or not, to show disabled (like if short on resources), and what actions to perform when clicked, and I also left a mostly empty match context at the bottom of perform_button so I can do something with a button click that is not handleable by actions if the case to do so arrives.</p>
 <p>Since buttons will be visible on the page I made another <tt class="docutils literal">displayed_buttons</tt> to hold how it shows, I'm adding categories to them as well as they can be quite useful later, might make tabs or something on the page for them, but for now I'll display it similar to how I display the resources so I change <tt class="docutils literal">view_buttons</tt> to this:</p>
-<pre class="code ocaml"><a name="rest_code_bcac1ea2ff014fa68bfb75395b886c71-1"></a><span class="k">let</span> <span class="n">view_button</span> <span class="n">model</span> <span class="o">(</span><span class="n">bid</span><span class="o">,</span> <span class="n">id</span><span class="o">,</span> <span class="n">name</span><span class="o">)</span> <span class="o">=</span>
-<a name="rest_code_bcac1ea2ff014fa68bfb75395b886c71-2"></a>  <span class="k">let</span> <span class="k">open</span> <span class="nc">Overbots_buttons</span> <span class="k">in</span>
-<a name="rest_code_bcac1ea2ff014fa68bfb75395b886c71-3"></a>  <span class="k">if</span> <span class="n">button_enabled</span> <span class="n">model</span> <span class="n">bid</span> <span class="k">then</span>
-<a name="rest_code_bcac1ea2ff014fa68bfb75395b886c71-4"></a>    <span class="o">[</span> <span class="n">button</span>
-<a name="rest_code_bcac1ea2ff014fa68bfb75395b886c71-5"></a>        <span class="o">[</span> <span class="n">onClick</span> <span class="o">(</span><span class="nc">ActionButtonClicked</span> <span class="n">bid</span><span class="o">)</span>
-<a name="rest_code_bcac1ea2ff014fa68bfb75395b886c71-6"></a>        <span class="o">;</span> <span class="nn">Attributes</span><span class="p">.</span><span class="n">disabled</span> <span class="o">(</span><span class="n">button_temporarily_disabled</span> <span class="n">model</span> <span class="n">bid</span><span class="o">)</span>
-<a name="rest_code_bcac1ea2ff014fa68bfb75395b886c71-7"></a>        <span class="o">;</span> <span class="k">class'</span> <span class="o">(</span><span class="s2">"action-button action-button-"</span> <span class="o">^</span> <span class="n">id</span><span class="o">)</span>
-<a name="rest_code_bcac1ea2ff014fa68bfb75395b886c71-8"></a>        <span class="o">]</span> <span class="o">[</span> <span class="n">text</span> <span class="n">name</span> <span class="o">]</span>
-<a name="rest_code_bcac1ea2ff014fa68bfb75395b886c71-9"></a>    <span class="o">]</span>
-<a name="rest_code_bcac1ea2ff014fa68bfb75395b886c71-10"></a>  <span class="k">else</span>
-<a name="rest_code_bcac1ea2ff014fa68bfb75395b886c71-11"></a>    <span class="bp">[]</span>
-<a name="rest_code_bcac1ea2ff014fa68bfb75395b886c71-12"></a>
-<a name="rest_code_bcac1ea2ff014fa68bfb75395b886c71-13"></a><span class="k">let</span> <span class="n">view_buttons_category</span> <span class="n">model</span> <span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">id</span><span class="o">,</span> <span class="n">buttons</span><span class="o">)</span> <span class="o">=</span>
-<a name="rest_code_bcac1ea2ff014fa68bfb75395b886c71-14"></a>  <span class="k">let</span> <span class="n">children</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="o">(</span><span class="n">view_button</span> <span class="n">model</span><span class="o">)</span> <span class="n">buttons</span> <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">flatten</span> <span class="k">in</span>
-<a name="rest_code_bcac1ea2ff014fa68bfb75395b886c71-15"></a>  <span class="k">if</span> <span class="n">children</span> <span class="o">==</span> <span class="bp">[]</span> <span class="k">then</span> <span class="bp">[]</span> <span class="k">else</span>
-<a name="rest_code_bcac1ea2ff014fa68bfb75395b886c71-16"></a>  <span class="k">let</span> <span class="n">children</span> <span class="o">=</span> <span class="n">div</span> <span class="o">[</span> <span class="k">class'</span> <span class="s2">"category-title"</span> <span class="o">]</span> <span class="o">[</span> <span class="n">text</span> <span class="n">name</span> <span class="o">]</span> <span class="o">::</span> <span class="n">children</span> <span class="k">in</span>
-<a name="rest_code_bcac1ea2ff014fa68bfb75395b886c71-17"></a>  <span class="o">[</span> <span class="n">div</span> <span class="o">[</span> <span class="k">class'</span> <span class="o">(</span><span class="s2">"button-category button-category-"</span><span class="o">^</span><span class="n">id</span><span class="o">)</span> <span class="o">]</span> <span class="n">children</span> <span class="o">]</span>
-<a name="rest_code_bcac1ea2ff014fa68bfb75395b886c71-18"></a>
-<a name="rest_code_bcac1ea2ff014fa68bfb75395b886c71-19"></a><span class="k">let</span> <span class="n">view_buttons</span> <span class="n">model</span> <span class="o">=</span>
-<a name="rest_code_bcac1ea2ff014fa68bfb75395b886c71-20"></a>  <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="o">(</span><span class="n">view_buttons_category</span> <span class="n">model</span><span class="o">)</span> <span class="nn">Overbots_buttons</span><span class="p">.</span><span class="n">displayed_buttons</span>
-<a name="rest_code_bcac1ea2ff014fa68bfb75395b886c71-21"></a>  <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">flatten</span>
+<pre class="code ocaml"><a name="rest_code_fdc6d200380244a7b3c5be4b3461a586-1"></a><span class="k">let</span> <span class="n">view_button</span> <span class="n">model</span> <span class="o">(</span><span class="n">bid</span><span class="o">,</span> <span class="n">id</span><span class="o">,</span> <span class="n">name</span><span class="o">)</span> <span class="o">=</span>
+<a name="rest_code_fdc6d200380244a7b3c5be4b3461a586-2"></a>  <span class="k">let</span> <span class="k">open</span> <span class="nc">Overbots_buttons</span> <span class="k">in</span>
+<a name="rest_code_fdc6d200380244a7b3c5be4b3461a586-3"></a>  <span class="k">if</span> <span class="n">button_enabled</span> <span class="n">model</span> <span class="n">bid</span> <span class="k">then</span>
+<a name="rest_code_fdc6d200380244a7b3c5be4b3461a586-4"></a>    <span class="o">[</span> <span class="n">button</span>
+<a name="rest_code_fdc6d200380244a7b3c5be4b3461a586-5"></a>        <span class="o">[</span> <span class="n">onClick</span> <span class="o">(</span><span class="nc">ActionButtonClicked</span> <span class="n">bid</span><span class="o">)</span>
+<a name="rest_code_fdc6d200380244a7b3c5be4b3461a586-6"></a>        <span class="o">;</span> <span class="nn">Attributes</span><span class="p">.</span><span class="n">disabled</span> <span class="o">(</span><span class="n">button_temporarily_disabled</span> <span class="n">model</span> <span class="n">bid</span><span class="o">)</span>
+<a name="rest_code_fdc6d200380244a7b3c5be4b3461a586-7"></a>        <span class="o">;</span> <span class="k">class'</span> <span class="o">(</span><span class="s2">"action-button action-button-"</span> <span class="o">^</span> <span class="n">id</span><span class="o">)</span>
+<a name="rest_code_fdc6d200380244a7b3c5be4b3461a586-8"></a>        <span class="o">]</span> <span class="o">[</span> <span class="n">text</span> <span class="n">name</span> <span class="o">]</span>
+<a name="rest_code_fdc6d200380244a7b3c5be4b3461a586-9"></a>    <span class="o">]</span>
+<a name="rest_code_fdc6d200380244a7b3c5be4b3461a586-10"></a>  <span class="k">else</span>
+<a name="rest_code_fdc6d200380244a7b3c5be4b3461a586-11"></a>    <span class="bp">[]</span>
+<a name="rest_code_fdc6d200380244a7b3c5be4b3461a586-12"></a>
+<a name="rest_code_fdc6d200380244a7b3c5be4b3461a586-13"></a><span class="k">let</span> <span class="n">view_buttons_category</span> <span class="n">model</span> <span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">id</span><span class="o">,</span> <span class="n">buttons</span><span class="o">)</span> <span class="o">=</span>
+<a name="rest_code_fdc6d200380244a7b3c5be4b3461a586-14"></a>  <span class="k">let</span> <span class="n">children</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="o">(</span><span class="n">view_button</span> <span class="n">model</span><span class="o">)</span> <span class="n">buttons</span> <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">flatten</span> <span class="k">in</span>
+<a name="rest_code_fdc6d200380244a7b3c5be4b3461a586-15"></a>  <span class="k">if</span> <span class="n">children</span> <span class="o">==</span> <span class="bp">[]</span> <span class="k">then</span> <span class="bp">[]</span> <span class="k">else</span>
+<a name="rest_code_fdc6d200380244a7b3c5be4b3461a586-16"></a>  <span class="k">let</span> <span class="n">children</span> <span class="o">=</span> <span class="n">div</span> <span class="o">[</span> <span class="k">class'</span> <span class="s2">"category-title"</span> <span class="o">]</span> <span class="o">[</span> <span class="n">text</span> <span class="n">name</span> <span class="o">]</span> <span class="o">::</span> <span class="n">children</span> <span class="k">in</span>
+<a name="rest_code_fdc6d200380244a7b3c5be4b3461a586-17"></a>  <span class="o">[</span> <span class="n">div</span> <span class="o">[</span> <span class="k">class'</span> <span class="o">(</span><span class="s2">"button-category button-category-"</span><span class="o">^</span><span class="n">id</span><span class="o">)</span> <span class="o">]</span> <span class="n">children</span> <span class="o">]</span>
+<a name="rest_code_fdc6d200380244a7b3c5be4b3461a586-18"></a>
+<a name="rest_code_fdc6d200380244a7b3c5be4b3461a586-19"></a><span class="k">let</span> <span class="n">view_buttons</span> <span class="n">model</span> <span class="o">=</span>
+<a name="rest_code_fdc6d200380244a7b3c5be4b3461a586-20"></a>  <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="o">(</span><span class="n">view_buttons_category</span> <span class="n">model</span><span class="o">)</span> <span class="nn">Overbots_buttons</span><span class="p">.</span><span class="n">displayed_buttons</span>
+<a name="rest_code_fdc6d200380244a7b3c5be4b3461a586-21"></a>  <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">flatten</span>
 </pre>
 <p>And I know CSS is boring, but here is the new css for <tt class="docutils literal"><span class="pre">.container-actions</span></tt> for completion:</p>
-<pre class="code scss"><a name="rest_code_d20e5862f98b45bfaee1062877b92f29-1"></a><span class="nc">.container-actions</span> <span class="p">{</span>
-<a name="rest_code_d20e5862f98b45bfaee1062877b92f29-2"></a>  <span class="nt">flex</span><span class="nd">:</span> <span class="nt">0</span> <span class="nt">0</span> <span class="nt">256px</span><span class="o">;</span>
-<a name="rest_code_d20e5862f98b45bfaee1062877b92f29-3"></a>  <span class="nt">order</span><span class="nd">:</span> <span class="nt">2</span><span class="o">;</span>
-<a name="rest_code_d20e5862f98b45bfaee1062877b92f29-4"></a>
-<a name="rest_code_d20e5862f98b45bfaee1062877b92f29-5"></a>  <span class="nc">.action-category</span> <span class="p">{</span>
-<a name="rest_code_d20e5862f98b45bfaee1062877b92f29-6"></a>    <span class="nt">display</span><span class="nd">:</span> <span class="nt">flex</span><span class="o">;</span>
-<a name="rest_code_d20e5862f98b45bfaee1062877b92f29-7"></a>    <span class="nt">flex-direction</span><span class="nd">:</span> <span class="nt">column</span><span class="o">;</span>
-<a name="rest_code_d20e5862f98b45bfaee1062877b92f29-8"></a>  <span class="p">}</span>
-<a name="rest_code_d20e5862f98b45bfaee1062877b92f29-9"></a>
-<a name="rest_code_d20e5862f98b45bfaee1062877b92f29-10"></a>  <span class="nc">.category-title</span> <span class="p">{</span>
-<a name="rest_code_d20e5862f98b45bfaee1062877b92f29-11"></a>    <span class="nt">border-bottom</span><span class="nd">:</span> <span class="nt">solid</span> <span class="nt">1px</span> <span class="nn">#000</span><span class="o">;</span>
-<a name="rest_code_d20e5862f98b45bfaee1062877b92f29-12"></a>    <span class="nt">flex</span><span class="nd">:</span> <span class="nt">0</span><span class="o">;</span>
-<a name="rest_code_d20e5862f98b45bfaee1062877b92f29-13"></a>    <span class="nt">font-weight</span><span class="nd">:</span> <span class="nt">bold</span><span class="o">;</span>
-<a name="rest_code_d20e5862f98b45bfaee1062877b92f29-14"></a>    <span class="nt">text-align</span><span class="nd">:</span> <span class="nt">center</span><span class="o">;</span>
-<a name="rest_code_d20e5862f98b45bfaee1062877b92f29-15"></a>  <span class="p">}</span>
-<a name="rest_code_d20e5862f98b45bfaee1062877b92f29-16"></a>
-<a name="rest_code_d20e5862f98b45bfaee1062877b92f29-17"></a>  <span class="nc">.action-button</span> <span class="p">{</span>
-<a name="rest_code_d20e5862f98b45bfaee1062877b92f29-18"></a>    <span class="nt">flex</span><span class="nd">:</span> <span class="nt">1</span><span class="o">;</span>
-<a name="rest_code_d20e5862f98b45bfaee1062877b92f29-19"></a>  <span class="p">}</span>
-<a name="rest_code_d20e5862f98b45bfaee1062877b92f29-20"></a><span class="p">}</span>
+<pre class="code scss"><a name="rest_code_723164bcef9241eda8725336bba970a4-1"></a><span class="nc">.container-actions</span> <span class="p">{</span>
+<a name="rest_code_723164bcef9241eda8725336bba970a4-2"></a>  <span class="nt">flex</span><span class="nd">:</span> <span class="nt">0</span> <span class="nt">0</span> <span class="nt">256px</span><span class="o">;</span>
+<a name="rest_code_723164bcef9241eda8725336bba970a4-3"></a>  <span class="nt">order</span><span class="nd">:</span> <span class="nt">2</span><span class="o">;</span>
+<a name="rest_code_723164bcef9241eda8725336bba970a4-4"></a>
+<a name="rest_code_723164bcef9241eda8725336bba970a4-5"></a>  <span class="nc">.action-category</span> <span class="p">{</span>
+<a name="rest_code_723164bcef9241eda8725336bba970a4-6"></a>    <span class="nt">display</span><span class="nd">:</span> <span class="nt">flex</span><span class="o">;</span>
+<a name="rest_code_723164bcef9241eda8725336bba970a4-7"></a>    <span class="nt">flex-direction</span><span class="nd">:</span> <span class="nt">column</span><span class="o">;</span>
+<a name="rest_code_723164bcef9241eda8725336bba970a4-8"></a>  <span class="p">}</span>
+<a name="rest_code_723164bcef9241eda8725336bba970a4-9"></a>
+<a name="rest_code_723164bcef9241eda8725336bba970a4-10"></a>  <span class="nc">.category-title</span> <span class="p">{</span>
+<a name="rest_code_723164bcef9241eda8725336bba970a4-11"></a>    <span class="nt">border-bottom</span><span class="nd">:</span> <span class="nt">solid</span> <span class="nt">1px</span> <span class="nn">#000</span><span class="o">;</span>
+<a name="rest_code_723164bcef9241eda8725336bba970a4-12"></a>    <span class="nt">flex</span><span class="nd">:</span> <span class="nt">0</span><span class="o">;</span>
+<a name="rest_code_723164bcef9241eda8725336bba970a4-13"></a>    <span class="nt">font-weight</span><span class="nd">:</span> <span class="nt">bold</span><span class="o">;</span>
+<a name="rest_code_723164bcef9241eda8725336bba970a4-14"></a>    <span class="nt">text-align</span><span class="nd">:</span> <span class="nt">center</span><span class="o">;</span>
+<a name="rest_code_723164bcef9241eda8725336bba970a4-15"></a>  <span class="p">}</span>
+<a name="rest_code_723164bcef9241eda8725336bba970a4-16"></a>
+<a name="rest_code_723164bcef9241eda8725336bba970a4-17"></a>  <span class="nc">.action-button</span> <span class="p">{</span>
+<a name="rest_code_723164bcef9241eda8725336bba970a4-18"></a>    <span class="nt">flex</span><span class="nd">:</span> <span class="nt">1</span><span class="o">;</span>
+<a name="rest_code_723164bcef9241eda8725336bba970a4-19"></a>  <span class="p">}</span>
+<a name="rest_code_723164bcef9241eda8725336bba970a4-20"></a><span class="p">}</span>
 </pre>
 <p>And with this now done with the first of two major systems in an incremental game, the next post will be about the second, which is Transformation of Resources.  The example takes about 80 seconds to run to completion considering the mini-story built above in <tt class="docutils literal">timeactions</tt>, but it shows how it all works.</p>
 </div>
