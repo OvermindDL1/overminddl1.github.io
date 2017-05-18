@@ -182,7 +182,7 @@ So I have a basic structure, not really happy with it, but can alway change it u
 That ended up being pretty easy, now to ``calculate_deltas_to_next_filled``:
 
 .. code:: ocaml
-s
+
   let calculate_delta_to_next_filled model rid delta old_time =
       if delta = 0.0 then old_time else
       let value = ResourceMap.find rid model.resource_values in
