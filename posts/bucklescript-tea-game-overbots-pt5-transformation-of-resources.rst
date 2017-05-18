@@ -189,6 +189,7 @@ That ended up being pretty easy, now to ``calculate_delta_to_next_filled``:
         let value = ResourceMap.find rid model.resource_values in
         let module R = (val get_resource_module rid) in
         let rmin, rmax = R.get_value_range model in
+        let () = Js.log ("Adding", rid, delta) in
         let at_time = if delta > 0.0 then (rmax-.value) /. delta else (value-.rmin) /. delta in
         if at_time > 0.0 && at_time < old_time
         then at_time
