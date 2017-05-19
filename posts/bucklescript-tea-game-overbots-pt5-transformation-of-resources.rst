@@ -159,7 +159,7 @@ So now it is time to fill out ``update_transformations``, which is the second bi
       let model = {model with gametime; cache} in
       (model, Tea.Cmd.none)
     else
-      let gametime = new_time -. time_slice in
+      let gametime = time_slice in
       let cache = {model.cache with transformers = []; resource_deltas = Overbots_resource.init_resources_values} in
       let model = {model with gametime; cache} in
       update_transformations model new_time
