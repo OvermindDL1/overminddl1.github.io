@@ -1,7 +1,7 @@
 .. title: Bucklescript-Tea Game OverBots Pt.6 - Serialization
 .. slug: bucklescript-tea-game-overbots-pt6-serialization
 .. date: 2017-05-19 06:27:22 UTC-06:00
-.. tags: bucklescript, bucklescript-tea, overbots, draft
+.. tags: bucklescript, bucklescript-tea, overbots
 .. category: Programming
 .. link:
 .. description: Bucklescript-Tea Game OverBots Pt.6 - Serialization
