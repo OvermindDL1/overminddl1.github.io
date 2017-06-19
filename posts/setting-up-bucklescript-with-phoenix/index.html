@@ -124,65 +124,65 @@ mdl-layout--small-screen-only
 <p>First things first, let's make sure you already have nodejs (6+), npm, Erlang, Elixir, and Phoenix installed, all in the Phoenix instructions.</p>
 <p>So lets start with a basic phoenix app, will be using normal integer IDs in the model, using brunch as that is what comes with Phoenix (feel free to adjust to your own if you use another bundler), and just fairly stock.  Let's name it, oh, MyServer.  So let's run this in your shell of choice:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_d88df685a3eb4dd7933d2f39b4b954dc-1"> 1</a>
-<a href="#rest_code_d88df685a3eb4dd7933d2f39b4b954dc-2"> 2</a>
-<a href="#rest_code_d88df685a3eb4dd7933d2f39b4b954dc-3"> 3</a>
-<a href="#rest_code_d88df685a3eb4dd7933d2f39b4b954dc-4"> 4</a>
-<a href="#rest_code_d88df685a3eb4dd7933d2f39b4b954dc-5"> 5</a>
-<a href="#rest_code_d88df685a3eb4dd7933d2f39b4b954dc-6"> 6</a>
-<a href="#rest_code_d88df685a3eb4dd7933d2f39b4b954dc-7"> 7</a>
-<a href="#rest_code_d88df685a3eb4dd7933d2f39b4b954dc-8"> 8</a>
-<a href="#rest_code_d88df685a3eb4dd7933d2f39b4b954dc-9"> 9</a>
-<a href="#rest_code_d88df685a3eb4dd7933d2f39b4b954dc-10">10</a>
-<a href="#rest_code_d88df685a3eb4dd7933d2f39b4b954dc-11">11</a>
-<a href="#rest_code_d88df685a3eb4dd7933d2f39b4b954dc-12">12</a>
-<a href="#rest_code_d88df685a3eb4dd7933d2f39b4b954dc-13">13</a>
-<a href="#rest_code_d88df685a3eb4dd7933d2f39b4b954dc-14">14</a>
-<a href="#rest_code_d88df685a3eb4dd7933d2f39b4b954dc-15">15</a>
-<a href="#rest_code_d88df685a3eb4dd7933d2f39b4b954dc-16">16</a>
-<a href="#rest_code_d88df685a3eb4dd7933d2f39b4b954dc-17">17</a>
-<a href="#rest_code_d88df685a3eb4dd7933d2f39b4b954dc-18">18</a>
-<a href="#rest_code_d88df685a3eb4dd7933d2f39b4b954dc-19">19</a>
-<a href="#rest_code_d88df685a3eb4dd7933d2f39b4b954dc-20">20</a>
-<a href="#rest_code_d88df685a3eb4dd7933d2f39b4b954dc-21">21</a></pre></div></td>
-<td class="code"><pre class="code bash"><a name="rest_code_d88df685a3eb4dd7933d2f39b4b954dc-1"></a>$ mix phoenix.new my_server --module MyServer
-<a name="rest_code_d88df685a3eb4dd7933d2f39b4b954dc-2"></a><span class="c1"># Snip a ton of stuff as it creates the files...</span>
-<a name="rest_code_d88df685a3eb4dd7933d2f39b4b954dc-3"></a>
-<a name="rest_code_d88df685a3eb4dd7933d2f39b4b954dc-4"></a>Fetch and install dependencies? <span class="o">[</span>Yn<span class="o">]</span> Y
-<a name="rest_code_d88df685a3eb4dd7933d2f39b4b954dc-5"></a>* running mix deps.get
-<a name="rest_code_d88df685a3eb4dd7933d2f39b4b954dc-6"></a>* running npm install <span class="o">&amp;&amp;</span> node node_modules/brunch/bin/brunch build
-<a name="rest_code_d88df685a3eb4dd7933d2f39b4b954dc-7"></a>
-<a name="rest_code_d88df685a3eb4dd7933d2f39b4b954dc-8"></a>We are all set! Run your Phoenix application:
-<a name="rest_code_d88df685a3eb4dd7933d2f39b4b954dc-9"></a>
-<a name="rest_code_d88df685a3eb4dd7933d2f39b4b954dc-10"></a>    $ <span class="nb">cd</span> my_server
-<a name="rest_code_d88df685a3eb4dd7933d2f39b4b954dc-11"></a>    $ mix phoenix.server
-<a name="rest_code_d88df685a3eb4dd7933d2f39b4b954dc-12"></a>
-<a name="rest_code_d88df685a3eb4dd7933d2f39b4b954dc-13"></a>You can also run your app inside IEx <span class="o">(</span>Interactive Elixir<span class="o">)</span> as:
-<a name="rest_code_d88df685a3eb4dd7933d2f39b4b954dc-14"></a>
-<a name="rest_code_d88df685a3eb4dd7933d2f39b4b954dc-15"></a>    $ iex -S mix phoenix.server
-<a name="rest_code_d88df685a3eb4dd7933d2f39b4b954dc-16"></a>
-<a name="rest_code_d88df685a3eb4dd7933d2f39b4b954dc-17"></a>Before moving on, configure your database in config/dev.exs and run:
-<a name="rest_code_d88df685a3eb4dd7933d2f39b4b954dc-18"></a>
-<a name="rest_code_d88df685a3eb4dd7933d2f39b4b954dc-19"></a>    $ mix ecto.create
-<a name="rest_code_d88df685a3eb4dd7933d2f39b4b954dc-20"></a>
-<a name="rest_code_d88df685a3eb4dd7933d2f39b4b954dc-21"></a>$ <span class="nb">cd</span> my_server <span class="c1"># Make sure to go in to the directory if you edit here</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_8b868e1305bc4709a0ccf372df2e9e1d-1"> 1</a>
+<a href="#rest_code_8b868e1305bc4709a0ccf372df2e9e1d-2"> 2</a>
+<a href="#rest_code_8b868e1305bc4709a0ccf372df2e9e1d-3"> 3</a>
+<a href="#rest_code_8b868e1305bc4709a0ccf372df2e9e1d-4"> 4</a>
+<a href="#rest_code_8b868e1305bc4709a0ccf372df2e9e1d-5"> 5</a>
+<a href="#rest_code_8b868e1305bc4709a0ccf372df2e9e1d-6"> 6</a>
+<a href="#rest_code_8b868e1305bc4709a0ccf372df2e9e1d-7"> 7</a>
+<a href="#rest_code_8b868e1305bc4709a0ccf372df2e9e1d-8"> 8</a>
+<a href="#rest_code_8b868e1305bc4709a0ccf372df2e9e1d-9"> 9</a>
+<a href="#rest_code_8b868e1305bc4709a0ccf372df2e9e1d-10">10</a>
+<a href="#rest_code_8b868e1305bc4709a0ccf372df2e9e1d-11">11</a>
+<a href="#rest_code_8b868e1305bc4709a0ccf372df2e9e1d-12">12</a>
+<a href="#rest_code_8b868e1305bc4709a0ccf372df2e9e1d-13">13</a>
+<a href="#rest_code_8b868e1305bc4709a0ccf372df2e9e1d-14">14</a>
+<a href="#rest_code_8b868e1305bc4709a0ccf372df2e9e1d-15">15</a>
+<a href="#rest_code_8b868e1305bc4709a0ccf372df2e9e1d-16">16</a>
+<a href="#rest_code_8b868e1305bc4709a0ccf372df2e9e1d-17">17</a>
+<a href="#rest_code_8b868e1305bc4709a0ccf372df2e9e1d-18">18</a>
+<a href="#rest_code_8b868e1305bc4709a0ccf372df2e9e1d-19">19</a>
+<a href="#rest_code_8b868e1305bc4709a0ccf372df2e9e1d-20">20</a>
+<a href="#rest_code_8b868e1305bc4709a0ccf372df2e9e1d-21">21</a></pre></div></td>
+<td class="code"><pre class="code bash"><a name="rest_code_8b868e1305bc4709a0ccf372df2e9e1d-1"></a>$ mix phoenix.new my_server --module MyServer
+<a name="rest_code_8b868e1305bc4709a0ccf372df2e9e1d-2"></a><span class="c1"># Snip a ton of stuff as it creates the files...</span>
+<a name="rest_code_8b868e1305bc4709a0ccf372df2e9e1d-3"></a>
+<a name="rest_code_8b868e1305bc4709a0ccf372df2e9e1d-4"></a>Fetch and install dependencies? <span class="o">[</span>Yn<span class="o">]</span> Y
+<a name="rest_code_8b868e1305bc4709a0ccf372df2e9e1d-5"></a>* running mix deps.get
+<a name="rest_code_8b868e1305bc4709a0ccf372df2e9e1d-6"></a>* running npm install <span class="o">&amp;&amp;</span> node node_modules/brunch/bin/brunch build
+<a name="rest_code_8b868e1305bc4709a0ccf372df2e9e1d-7"></a>
+<a name="rest_code_8b868e1305bc4709a0ccf372df2e9e1d-8"></a>We are all set! Run your Phoenix application:
+<a name="rest_code_8b868e1305bc4709a0ccf372df2e9e1d-9"></a>
+<a name="rest_code_8b868e1305bc4709a0ccf372df2e9e1d-10"></a>    $ <span class="nb">cd</span> my_server
+<a name="rest_code_8b868e1305bc4709a0ccf372df2e9e1d-11"></a>    $ mix phoenix.server
+<a name="rest_code_8b868e1305bc4709a0ccf372df2e9e1d-12"></a>
+<a name="rest_code_8b868e1305bc4709a0ccf372df2e9e1d-13"></a>You can also run your app inside IEx <span class="o">(</span>Interactive Elixir<span class="o">)</span> as:
+<a name="rest_code_8b868e1305bc4709a0ccf372df2e9e1d-14"></a>
+<a name="rest_code_8b868e1305bc4709a0ccf372df2e9e1d-15"></a>    $ iex -S mix phoenix.server
+<a name="rest_code_8b868e1305bc4709a0ccf372df2e9e1d-16"></a>
+<a name="rest_code_8b868e1305bc4709a0ccf372df2e9e1d-17"></a>Before moving on, configure your database in config/dev.exs and run:
+<a name="rest_code_8b868e1305bc4709a0ccf372df2e9e1d-18"></a>
+<a name="rest_code_8b868e1305bc4709a0ccf372df2e9e1d-19"></a>    $ mix ecto.create
+<a name="rest_code_8b868e1305bc4709a0ccf372df2e9e1d-20"></a>
+<a name="rest_code_8b868e1305bc4709a0ccf372df2e9e1d-21"></a>$ <span class="nb">cd</span> my_server <span class="c1"># Make sure to go in to the directory if you edit here</span>
 </pre></td>
 </tr></table>
 <p>Make sure to have it fetch and install dependencies to prepare the node files by answering <tt class="docutils literal">Y</tt> to the <tt class="docutils literal">Fetch and install dependencies?</tt> question.</p>
 <p>At this point it should also be good to set it up as a git repo, it is never too early to make your repository:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_71dd5147676e4fc39f908a2036986f87-1">1</a>
-<a href="#rest_code_71dd5147676e4fc39f908a2036986f87-2">2</a>
-<a href="#rest_code_71dd5147676e4fc39f908a2036986f87-3">3</a>
-<a href="#rest_code_71dd5147676e4fc39f908a2036986f87-4">4</a>
-<a href="#rest_code_71dd5147676e4fc39f908a2036986f87-5">5</a>
-<a href="#rest_code_71dd5147676e4fc39f908a2036986f87-6">6</a></pre></div></td>
-<td class="code"><pre class="code bash"><a name="rest_code_71dd5147676e4fc39f908a2036986f87-1"></a>$ git init
-<a name="rest_code_71dd5147676e4fc39f908a2036986f87-2"></a>Initialized empty Git repository in /home/&lt;user&gt;/elixir/my_server/.git/
-<a name="rest_code_71dd5147676e4fc39f908a2036986f87-3"></a>$ git add .
-<a name="rest_code_71dd5147676e4fc39f908a2036986f87-4"></a><span class="c1"># Snip ton of files added to your new git repo</span>
-<a name="rest_code_71dd5147676e4fc39f908a2036986f87-5"></a>$ git commit
-<a name="rest_code_71dd5147676e4fc39f908a2036986f87-6"></a><span class="c1"># Snip ton of files committed to your repo</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_934c227a42aa46dab69535bce6d9c23d-1">1</a>
+<a href="#rest_code_934c227a42aa46dab69535bce6d9c23d-2">2</a>
+<a href="#rest_code_934c227a42aa46dab69535bce6d9c23d-3">3</a>
+<a href="#rest_code_934c227a42aa46dab69535bce6d9c23d-4">4</a>
+<a href="#rest_code_934c227a42aa46dab69535bce6d9c23d-5">5</a>
+<a href="#rest_code_934c227a42aa46dab69535bce6d9c23d-6">6</a></pre></div></td>
+<td class="code"><pre class="code bash"><a name="rest_code_934c227a42aa46dab69535bce6d9c23d-1"></a>$ git init
+<a name="rest_code_934c227a42aa46dab69535bce6d9c23d-2"></a>Initialized empty Git repository in /home/&lt;user&gt;/elixir/my_server/.git/
+<a name="rest_code_934c227a42aa46dab69535bce6d9c23d-3"></a>$ git add .
+<a name="rest_code_934c227a42aa46dab69535bce6d9c23d-4"></a><span class="c1"># Snip ton of files added to your new git repo</span>
+<a name="rest_code_934c227a42aa46dab69535bce6d9c23d-5"></a>$ git commit
+<a name="rest_code_934c227a42aa46dab69535bce6d9c23d-6"></a><span class="c1"># Snip ton of files committed to your repo</span>
 </pre></td>
 </tr></table>
 <p>Other than making sure your database is setup if you are using one and so forth, that should be all the basics.  Now let's add Bucklescript to the project.</p>
@@ -191,30 +191,30 @@ mdl-layout--small-screen-only
 <h2>Adding Bucklescript to Phoenix via brunch</h2>
 <p>Make certain that you have the dependencies for bucklescript installed first as per its <a class="reference external" href="http://bucklescript.github.io/bucklescript/Manual.html">documentation</a>, which for Windows is nothing (all self-included) or for linux it is making sure that <cite>ninja</cite> is already installed from your package manager.</p>
 <p>First we need to actually acquire Bucklescript, so in the terminal run:</p>
-<pre class="code bash"><a name="rest_code_90fcbc712dbf4fb08292dfc582815cf2-1"></a>npm install --save-dev bs-platform
+<pre class="code bash"><a name="rest_code_331dc2b34ebe4b37b6ad8dbe3231e704-1"></a>npm install --save-dev bs-platform
 </pre>
 <p>This will handle downloading and installation of bucklescript itself, including compiling if necessary.</p>
 <p>Next we need to make a <tt class="docutils literal">bsconfig.json</tt> file as that is the build definition file for the <tt class="docutils literal">bsb</tt> build system, so in the project root directory put this content in a new <tt class="docutils literal">bsconfig.json</tt>:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_64a868eb0f1b472cbe780772dc4a4a41-1">1</a>
-<a href="#rest_code_64a868eb0f1b472cbe780772dc4a4a41-2">2</a>
-<a href="#rest_code_64a868eb0f1b472cbe780772dc4a4a41-3">3</a>
-<a href="#rest_code_64a868eb0f1b472cbe780772dc4a4a41-4">4</a>
-<a href="#rest_code_64a868eb0f1b472cbe780772dc4a4a41-5">5</a></pre></div></td>
-<td class="code"><pre class="code json"><a name="rest_code_64a868eb0f1b472cbe780772dc4a4a41-1"></a><span class="p">{</span>
-<a name="rest_code_64a868eb0f1b472cbe780772dc4a4a41-2"></a>  <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"my_server"</span><span class="p">,</span>
-<a name="rest_code_64a868eb0f1b472cbe780772dc4a4a41-3"></a>  <span class="nt">"sources"</span><span class="p">:</span> <span class="p">{</span><span class="nt">"dir"</span><span class="p">:</span> <span class="s2">"web/bucklescript"</span><span class="p">},</span>
-<a name="rest_code_64a868eb0f1b472cbe780772dc4a4a41-4"></a>  <span class="nt">"generate-merlin"</span><span class="p">:</span> <span class="kc">true</span>
-<a name="rest_code_64a868eb0f1b472cbe780772dc4a4a41-5"></a><span class="p">}</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_5072cd252b7c4910b624dda5266516c9-1">1</a>
+<a href="#rest_code_5072cd252b7c4910b624dda5266516c9-2">2</a>
+<a href="#rest_code_5072cd252b7c4910b624dda5266516c9-3">3</a>
+<a href="#rest_code_5072cd252b7c4910b624dda5266516c9-4">4</a>
+<a href="#rest_code_5072cd252b7c4910b624dda5266516c9-5">5</a></pre></div></td>
+<td class="code"><pre class="code json"><a name="rest_code_5072cd252b7c4910b624dda5266516c9-1"></a><span class="p">{</span>
+<a name="rest_code_5072cd252b7c4910b624dda5266516c9-2"></a>  <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"my_server"</span><span class="p">,</span>
+<a name="rest_code_5072cd252b7c4910b624dda5266516c9-3"></a>  <span class="nt">"sources"</span><span class="p">:</span> <span class="p">{</span><span class="nt">"dir"</span><span class="p">:</span> <span class="s2">"web/bucklescript"</span><span class="p">},</span>
+<a name="rest_code_5072cd252b7c4910b624dda5266516c9-4"></a>  <span class="nt">"generate-merlin"</span><span class="p">:</span> <span class="kc">true</span>
+<a name="rest_code_5072cd252b7c4910b624dda5266516c9-5"></a><span class="p">}</span>
 </pre></td>
 </tr></table>
 <p>I've chosen <tt class="docutils literal">"web/bucklescript"</tt> here to fit with the Phoenix style of putting front-end web code in to the <tt class="docutils literal">web</tt> directory, but feel free to choose where-ever you want.  The <tt class="docutils literal"><span class="pre">"generate-merlin"</span></tt> generates the <tt class="docutils literal">.merlin</tt> file for bucklescript support, but it is optional if you are not going to use <tt class="docutils literal">ocamlmerlin</tt> or are going to build it manually.</p>
 <p>Next let's create a simple example file, just to make sure it works, so create the file <tt class="docutils literal">web/bucklescript/my_file.ml</tt> and put this in it:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_406def7fbe3047ec8df21a126d712626-1">1</a>
-<a href="#rest_code_406def7fbe3047ec8df21a126d712626-2">2</a></pre></div></td>
-<td class="code"><pre class="code ocaml"><a name="rest_code_406def7fbe3047ec8df21a126d712626-1"></a><span class="k">let</span> <span class="bp">()</span> <span class="o">=</span>
-<a name="rest_code_406def7fbe3047ec8df21a126d712626-2"></a>  <span class="n">print_endline</span> <span class="s2">"Hello world"</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_ac4c62419536468390bf15f661f6d084-1">1</a>
+<a href="#rest_code_ac4c62419536468390bf15f661f6d084-2">2</a></pre></div></td>
+<td class="code"><pre class="code ocaml"><a name="rest_code_ac4c62419536468390bf15f661f6d084-1"></a><span class="k">let</span> <span class="bp">()</span> <span class="o">=</span>
+<a name="rest_code_ac4c62419536468390bf15f661f6d084-2"></a>  <span class="n">print_endline</span> <span class="s2">"Hello world"</span>
 </pre></td>
 </tr></table>
 <p>So the only thing we are doing is just printing the string <tt class="docutils literal">Hello world</tt> when this file is loaded, this will be printed to the console in the web browser.</p>
@@ -223,32 +223,32 @@ mdl-layout--small-screen-only
 <div class="section" id="telling-brunch-where-the-bucklescript-output-files-are">
 <h2>Telling Brunch where the Bucklescript output files are</h2>
 <p>The Bucklescript compiler outputs javascript in the standard commonjs format by default, which is perfect for Brunch, so let's just tell brunch where it is by altering the paths it looks in for the files, so open your <tt class="docutils literal"><span class="pre">brunch-config.js</span></tt> file and adjust the <tt class="docutils literal">paths.watched</tt> section to include the output directory for javascript, which will be <tt class="docutils literal">lib/js</tt>, so alter it as such:</p>
-<pre class="code javascript"><a name="rest_code_9d95094f75cd43b19d4a91dc50ebf95f-1"></a><span class="c1">// Phoenix paths configuration</span>
-<a name="rest_code_9d95094f75cd43b19d4a91dc50ebf95f-2"></a><span class="nx">paths</span><span class="o">:</span> <span class="p">{</span>
-<a name="rest_code_9d95094f75cd43b19d4a91dc50ebf95f-3"></a><span class="c1">// Dependencies and current project directories to watch</span>
-<a name="rest_code_9d95094f75cd43b19d4a91dc50ebf95f-4"></a><span class="nx">watched</span><span class="o">:</span> <span class="p">[</span>
-<a name="rest_code_9d95094f75cd43b19d4a91dc50ebf95f-5"></a>  <span class="s2">"lib/js"</span><span class="p">,</span> <span class="c1">// Bucklescript output files</span>
-<a name="rest_code_9d95094f75cd43b19d4a91dc50ebf95f-6"></a>  <span class="s2">"web/static"</span><span class="p">,</span>
-<a name="rest_code_9d95094f75cd43b19d4a91dc50ebf95f-7"></a>  <span class="s2">"test/static"</span>
-<a name="rest_code_9d95094f75cd43b19d4a91dc50ebf95f-8"></a><span class="p">],</span>
+<pre class="code javascript"><a name="rest_code_b6ff279d7187497dbe9a92a7e2ec5501-1"></a><span class="c1">// Phoenix paths configuration</span>
+<a name="rest_code_b6ff279d7187497dbe9a92a7e2ec5501-2"></a><span class="nx">paths</span><span class="o">:</span> <span class="p">{</span>
+<a name="rest_code_b6ff279d7187497dbe9a92a7e2ec5501-3"></a><span class="c1">// Dependencies and current project directories to watch</span>
+<a name="rest_code_b6ff279d7187497dbe9a92a7e2ec5501-4"></a><span class="nx">watched</span><span class="o">:</span> <span class="p">[</span>
+<a name="rest_code_b6ff279d7187497dbe9a92a7e2ec5501-5"></a>  <span class="s2">"lib/js"</span><span class="p">,</span> <span class="c1">// Bucklescript output files</span>
+<a name="rest_code_b6ff279d7187497dbe9a92a7e2ec5501-6"></a>  <span class="s2">"web/static"</span><span class="p">,</span>
+<a name="rest_code_b6ff279d7187497dbe9a92a7e2ec5501-7"></a>  <span class="s2">"test/static"</span>
+<a name="rest_code_b6ff279d7187497dbe9a92a7e2ec5501-8"></a><span class="p">],</span>
 </pre>
 </div>
 <div class="section" id="telling-phoenix-to-use-bucklescripts-very-fast-watcher-instead-of-the-slow-brunch-one-for-bucklescript-files">
 <h2>Telling Phoenix to use Bucklescripts very fast watcher instead of the slow Brunch one for Bucklescript files</h2>
 <p>So now Brunch knows of the output files, however we do not want brunch to be the file watcher and recompile the files as it is just so-much-slower than <tt class="docutils literal">bsb</tt> itself, so instead let's tell phoenix to start <tt class="docutils literal">bsb <span class="pre">-w</span></tt> for us, so open your <tt class="docutils literal">config/dev.exs</tt> file and adjust your <tt class="docutils literal">watchers</tt> entry to something like this:</p>
-<pre class="code elixir"><a name="rest_code_a5ed86695e95400888aa795f97b557b4-1"></a><span class="ss">watchers</span><span class="p">:</span> <span class="p">[</span>
-<a name="rest_code_a5ed86695e95400888aa795f97b557b4-2"></a>  <span class="ss">node</span><span class="p">:</span> <span class="p">[</span><span class="s2">"node_modules/brunch/bin/brunch"</span><span class="p">,</span> <span class="s2">"watch"</span><span class="p">,</span> <span class="s2">"--stdin"</span><span class="p">,</span> <span class="ss">cd</span><span class="p">:</span> <span class="nc">Path</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="s2">"../"</span><span class="p">,</span> <span class="bp">__DIR__</span><span class="p">)],</span>
-<a name="rest_code_a5ed86695e95400888aa795f97b557b4-3"></a>  <span class="ss">node</span><span class="p">:</span> <span class="p">[</span><span class="s2">"node_modules/bs-platform/bin/bsb"</span><span class="p">,</span> <span class="s2">"-w"</span><span class="p">,</span> <span class="ss">cd</span><span class="p">:</span> <span class="nc">Path</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="s2">"../"</span><span class="p">,</span> <span class="bp">__DIR__</span><span class="p">)]</span>
-<a name="rest_code_a5ed86695e95400888aa795f97b557b4-4"></a><span class="p">]</span>
+<pre class="code elixir"><a name="rest_code_4cdde604184c48b4a49d81f686a54df0-1"></a><span class="ss">watchers</span><span class="p">:</span> <span class="p">[</span>
+<a name="rest_code_4cdde604184c48b4a49d81f686a54df0-2"></a>  <span class="ss">node</span><span class="p">:</span> <span class="p">[</span><span class="s2">"node_modules/brunch/bin/brunch"</span><span class="p">,</span> <span class="s2">"watch"</span><span class="p">,</span> <span class="s2">"--stdin"</span><span class="p">,</span> <span class="ss">cd</span><span class="p">:</span> <span class="nc">Path</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="s2">"../"</span><span class="p">,</span> <span class="bp">__DIR__</span><span class="p">)],</span>
+<a name="rest_code_4cdde604184c48b4a49d81f686a54df0-3"></a>  <span class="ss">node</span><span class="p">:</span> <span class="p">[</span><span class="s2">"node_modules/bs-platform/bin/bsb"</span><span class="p">,</span> <span class="s2">"-w"</span><span class="p">,</span> <span class="ss">cd</span><span class="p">:</span> <span class="nc">Path</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="s2">"../"</span><span class="p">,</span> <span class="bp">__DIR__</span><span class="p">)]</span>
+<a name="rest_code_4cdde604184c48b4a49d81f686a54df0-4"></a><span class="p">]</span>
 </pre>
 </div>
 <div class="section" id="using-bucklescript">
 <h2>Using Bucklescript</h2>
 <p>Lastly let's just call the example file we made earlier from the normal Phoenix <tt class="docutils literal">app.js</tt> file to test it, so open your <tt class="docutils literal">web/static/js/app.js</tt> file and add this to the bottom of it (of course you can configure brunch to change the path as well):</p>
-<pre class="code javascript"><a name="rest_code_68786065a1064c65a248b13b662ce07c-1"></a><span class="kr">import</span> <span class="s2">"lib/js/web/bucklescript/my_file"</span>
+<pre class="code javascript"><a name="rest_code_488bca1c507346cf938232eb4d6932dd-1"></a><span class="kr">import</span> <span class="s2">"lib/js/web/bucklescript/my_file"</span>
 </pre>
 <p>Then launch the mix dev server via:</p>
-<pre class="code bash"><a name="rest_code_9aa10a7450e84453922ed90a3740e159-1"></a>iex -S mix phoenix.server
+<pre class="code bash"><a name="rest_code_90e680a2a77b4ceea5433b25a65abb45-1"></a>iex -S mix phoenix.server
 </pre>
 <p>Then just launch the web browser, go to <a class="reference external" href="http://localhost:4000/">http://localhost:4000/</a> and then check your console, you will see printed there:  <tt class="docutils literal">Hello world</tt>.  :-)</p>
 </div>
