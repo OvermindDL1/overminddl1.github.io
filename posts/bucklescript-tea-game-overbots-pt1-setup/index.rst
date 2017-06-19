@@ -127,11 +127,11 @@ Of course go ahead and have npm/node installed, as well as the requirements for 
     "version": "0.0.1",
     "description": "OverBots Incremental Game",
     "main": "index.js",
-    "dependencies": {
+    "devDependencies": {
       "bs-platform": "^1.7.3",
       "bucklescript-tea": "^0.3.2"
     },
-    "devDependencies": {},
+    "dependencies": {},
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1"
     },
