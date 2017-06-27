@@ -190,7 +190,7 @@ I also like to have convenience commands for npm so I'm changing my ``"scripts"`
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 
-And now I make my main entrance file at ``src/main.ml`` and I put in it this, the basic bucklescript-tea program structure:
+And now I make my main entrance file at ``src/overbots.ml`` and I put in it this, the basic bucklescript-tea program structure:
 
 .. code:: ocaml
   :number-lines:
