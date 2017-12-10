@@ -363,7 +363,7 @@ TAG_PATH = "tags"
 # here any path relative to the output directory.
 # (translatable)
 # TAGS_INDEX_PATH = "tags.html"
-TAGS_INDEX_PATH = "tags/index"
+TAGS_INDEX_PATH = "tags/index.html"
 
 # If TAG_PAGES_ARE_INDEXES is set to True, each tag's page will contain
 # the posts themselves. If set to False, it will be just a list of links.
