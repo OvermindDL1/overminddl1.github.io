@@ -124,68 +124,68 @@ mdl-layout--small-screen-only
 <p>First things first, make sure you already have nodejs (6+), npm, Elm, Erlang, Elixir, and Phoenix installed.</p>
 <p>So lets start with a basic phoenix app, will be using normal integer IDs in the model, using brunch as that is what comes with Phoenix (feel free to adjust to your own if you use another bundler), and just fairly stock.  Let's name it, oh, MyServer.  So let's run this in your shell of choice:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_f5f6e5ec0a414aa8886d3c360199c725-1"> 1</a>
-<a href="#rest_code_f5f6e5ec0a414aa8886d3c360199c725-2"> 2</a>
-<a href="#rest_code_f5f6e5ec0a414aa8886d3c360199c725-3"> 3</a>
-<a href="#rest_code_f5f6e5ec0a414aa8886d3c360199c725-4"> 4</a>
-<a href="#rest_code_f5f6e5ec0a414aa8886d3c360199c725-5"> 5</a>
-<a href="#rest_code_f5f6e5ec0a414aa8886d3c360199c725-6"> 6</a>
-<a href="#rest_code_f5f6e5ec0a414aa8886d3c360199c725-7"> 7</a>
-<a href="#rest_code_f5f6e5ec0a414aa8886d3c360199c725-8"> 8</a>
-<a href="#rest_code_f5f6e5ec0a414aa8886d3c360199c725-9"> 9</a>
-<a href="#rest_code_f5f6e5ec0a414aa8886d3c360199c725-10">10</a>
-<a href="#rest_code_f5f6e5ec0a414aa8886d3c360199c725-11">11</a>
-<a href="#rest_code_f5f6e5ec0a414aa8886d3c360199c725-12">12</a>
-<a href="#rest_code_f5f6e5ec0a414aa8886d3c360199c725-13">13</a>
-<a href="#rest_code_f5f6e5ec0a414aa8886d3c360199c725-14">14</a>
-<a href="#rest_code_f5f6e5ec0a414aa8886d3c360199c725-15">15</a>
-<a href="#rest_code_f5f6e5ec0a414aa8886d3c360199c725-16">16</a>
-<a href="#rest_code_f5f6e5ec0a414aa8886d3c360199c725-17">17</a>
-<a href="#rest_code_f5f6e5ec0a414aa8886d3c360199c725-18">18</a>
-<a href="#rest_code_f5f6e5ec0a414aa8886d3c360199c725-19">19</a>
-<a href="#rest_code_f5f6e5ec0a414aa8886d3c360199c725-20">20</a>
-<a href="#rest_code_f5f6e5ec0a414aa8886d3c360199c725-21">21</a>
-<a href="#rest_code_f5f6e5ec0a414aa8886d3c360199c725-22">22</a>
-<a href="#rest_code_f5f6e5ec0a414aa8886d3c360199c725-23">23</a></pre></div></td>
-<td class="code"><pre class="code bash"><a name="rest_code_f5f6e5ec0a414aa8886d3c360199c725-1"></a>$ mix phoenix.new my_server --module MyServer
-<a name="rest_code_f5f6e5ec0a414aa8886d3c360199c725-2"></a><span class="c1"># Snip a ton of stuff as it creates the files...</span>
-<a name="rest_code_f5f6e5ec0a414aa8886d3c360199c725-3"></a>
-<a name="rest_code_f5f6e5ec0a414aa8886d3c360199c725-4"></a>Fetch and install dependencies? <span class="o">[</span>Yn<span class="o">]</span> Y
-<a name="rest_code_f5f6e5ec0a414aa8886d3c360199c725-5"></a>* running mix deps.get
-<a name="rest_code_f5f6e5ec0a414aa8886d3c360199c725-6"></a>* running npm install <span class="o">&amp;&amp;</span> node node_modules/brunch/bin/brunch build
-<a name="rest_code_f5f6e5ec0a414aa8886d3c360199c725-7"></a>
-<a name="rest_code_f5f6e5ec0a414aa8886d3c360199c725-8"></a>We are all set! Run your Phoenix application:
-<a name="rest_code_f5f6e5ec0a414aa8886d3c360199c725-9"></a>
-<a name="rest_code_f5f6e5ec0a414aa8886d3c360199c725-10"></a>    $ <span class="nb">cd</span> my_server
-<a name="rest_code_f5f6e5ec0a414aa8886d3c360199c725-11"></a>    $ mix phoenix.server
-<a name="rest_code_f5f6e5ec0a414aa8886d3c360199c725-12"></a>
-<a name="rest_code_f5f6e5ec0a414aa8886d3c360199c725-13"></a>You can also run your app inside IEx <span class="o">(</span>Interactive Elixir<span class="o">)</span> as:
-<a name="rest_code_f5f6e5ec0a414aa8886d3c360199c725-14"></a>
-<a name="rest_code_f5f6e5ec0a414aa8886d3c360199c725-15"></a>    $ iex -S mix phoenix.server
-<a name="rest_code_f5f6e5ec0a414aa8886d3c360199c725-16"></a>
-<a name="rest_code_f5f6e5ec0a414aa8886d3c360199c725-17"></a>Before moving on, configure your database in config/dev.exs and run:
-<a name="rest_code_f5f6e5ec0a414aa8886d3c360199c725-18"></a>
-<a name="rest_code_f5f6e5ec0a414aa8886d3c360199c725-19"></a>    $ mix ecto.create
-<a name="rest_code_f5f6e5ec0a414aa8886d3c360199c725-20"></a>
-<a name="rest_code_f5f6e5ec0a414aa8886d3c360199c725-21"></a>$ <span class="nb">cd</span> my_server <span class="c1"># Make sure to go in to the directory if you edit here</span>
-<a name="rest_code_f5f6e5ec0a414aa8886d3c360199c725-22"></a>
-<a name="rest_code_f5f6e5ec0a414aa8886d3c360199c725-23"></a>Make sure to have it fetch and install dependencies to prepare the node files by answering <span class="sb">``</span>Y<span class="sb">``</span> to the <span class="sb">``</span>Fetch and install dependencies?<span class="sb">``</span> question.
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_b16af90026614bacbdc9af61aa005e74-1"> 1</a>
+<a href="#rest_code_b16af90026614bacbdc9af61aa005e74-2"> 2</a>
+<a href="#rest_code_b16af90026614bacbdc9af61aa005e74-3"> 3</a>
+<a href="#rest_code_b16af90026614bacbdc9af61aa005e74-4"> 4</a>
+<a href="#rest_code_b16af90026614bacbdc9af61aa005e74-5"> 5</a>
+<a href="#rest_code_b16af90026614bacbdc9af61aa005e74-6"> 6</a>
+<a href="#rest_code_b16af90026614bacbdc9af61aa005e74-7"> 7</a>
+<a href="#rest_code_b16af90026614bacbdc9af61aa005e74-8"> 8</a>
+<a href="#rest_code_b16af90026614bacbdc9af61aa005e74-9"> 9</a>
+<a href="#rest_code_b16af90026614bacbdc9af61aa005e74-10">10</a>
+<a href="#rest_code_b16af90026614bacbdc9af61aa005e74-11">11</a>
+<a href="#rest_code_b16af90026614bacbdc9af61aa005e74-12">12</a>
+<a href="#rest_code_b16af90026614bacbdc9af61aa005e74-13">13</a>
+<a href="#rest_code_b16af90026614bacbdc9af61aa005e74-14">14</a>
+<a href="#rest_code_b16af90026614bacbdc9af61aa005e74-15">15</a>
+<a href="#rest_code_b16af90026614bacbdc9af61aa005e74-16">16</a>
+<a href="#rest_code_b16af90026614bacbdc9af61aa005e74-17">17</a>
+<a href="#rest_code_b16af90026614bacbdc9af61aa005e74-18">18</a>
+<a href="#rest_code_b16af90026614bacbdc9af61aa005e74-19">19</a>
+<a href="#rest_code_b16af90026614bacbdc9af61aa005e74-20">20</a>
+<a href="#rest_code_b16af90026614bacbdc9af61aa005e74-21">21</a>
+<a href="#rest_code_b16af90026614bacbdc9af61aa005e74-22">22</a>
+<a href="#rest_code_b16af90026614bacbdc9af61aa005e74-23">23</a></pre></div></td>
+<td class="code"><pre class="code bash"><a name="rest_code_b16af90026614bacbdc9af61aa005e74-1"></a>$ mix phoenix.new my_server --module MyServer
+<a name="rest_code_b16af90026614bacbdc9af61aa005e74-2"></a><span class="c1"># Snip a ton of stuff as it creates the files...</span>
+<a name="rest_code_b16af90026614bacbdc9af61aa005e74-3"></a>
+<a name="rest_code_b16af90026614bacbdc9af61aa005e74-4"></a>Fetch and install dependencies? <span class="o">[</span>Yn<span class="o">]</span> Y
+<a name="rest_code_b16af90026614bacbdc9af61aa005e74-5"></a>* running mix deps.get
+<a name="rest_code_b16af90026614bacbdc9af61aa005e74-6"></a>* running npm install <span class="o">&amp;&amp;</span> node node_modules/brunch/bin/brunch build
+<a name="rest_code_b16af90026614bacbdc9af61aa005e74-7"></a>
+<a name="rest_code_b16af90026614bacbdc9af61aa005e74-8"></a>We are all set! Run your Phoenix application:
+<a name="rest_code_b16af90026614bacbdc9af61aa005e74-9"></a>
+<a name="rest_code_b16af90026614bacbdc9af61aa005e74-10"></a>    $ <span class="nb">cd</span> my_server
+<a name="rest_code_b16af90026614bacbdc9af61aa005e74-11"></a>    $ mix phoenix.server
+<a name="rest_code_b16af90026614bacbdc9af61aa005e74-12"></a>
+<a name="rest_code_b16af90026614bacbdc9af61aa005e74-13"></a>You can also run your app inside IEx <span class="o">(</span>Interactive Elixir<span class="o">)</span> as:
+<a name="rest_code_b16af90026614bacbdc9af61aa005e74-14"></a>
+<a name="rest_code_b16af90026614bacbdc9af61aa005e74-15"></a>    $ iex -S mix phoenix.server
+<a name="rest_code_b16af90026614bacbdc9af61aa005e74-16"></a>
+<a name="rest_code_b16af90026614bacbdc9af61aa005e74-17"></a>Before moving on, configure your database in config/dev.exs and run:
+<a name="rest_code_b16af90026614bacbdc9af61aa005e74-18"></a>
+<a name="rest_code_b16af90026614bacbdc9af61aa005e74-19"></a>    $ mix ecto.create
+<a name="rest_code_b16af90026614bacbdc9af61aa005e74-20"></a>
+<a name="rest_code_b16af90026614bacbdc9af61aa005e74-21"></a>$ <span class="nb">cd</span> my_server <span class="c1"># Make sure to go in to the directory if you edit here</span>
+<a name="rest_code_b16af90026614bacbdc9af61aa005e74-22"></a>
+<a name="rest_code_b16af90026614bacbdc9af61aa005e74-23"></a>Make sure to have it fetch and install dependencies to prepare the node files by answering <span class="sb">``</span>Y<span class="sb">``</span> to the <span class="sb">``</span>Fetch and install dependencies?<span class="sb">``</span> question.
 </pre></td>
 </tr></table>
 <p>At this point it should also be good to set it up as a git repo, it is never too early to make your repository:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_a7162d5599f44ebf8de7372af286ab8e-1">1</a>
-<a href="#rest_code_a7162d5599f44ebf8de7372af286ab8e-2">2</a>
-<a href="#rest_code_a7162d5599f44ebf8de7372af286ab8e-3">3</a>
-<a href="#rest_code_a7162d5599f44ebf8de7372af286ab8e-4">4</a>
-<a href="#rest_code_a7162d5599f44ebf8de7372af286ab8e-5">5</a>
-<a href="#rest_code_a7162d5599f44ebf8de7372af286ab8e-6">6</a></pre></div></td>
-<td class="code"><pre class="code bash"><a name="rest_code_a7162d5599f44ebf8de7372af286ab8e-1"></a>$ git init
-<a name="rest_code_a7162d5599f44ebf8de7372af286ab8e-2"></a>Initialized empty Git repository in /home/&lt;user&gt;/elixir/my_server/.git/
-<a name="rest_code_a7162d5599f44ebf8de7372af286ab8e-3"></a>$ git add .
-<a name="rest_code_a7162d5599f44ebf8de7372af286ab8e-4"></a><span class="c1"># Snip ton of files added to your new git repo</span>
-<a name="rest_code_a7162d5599f44ebf8de7372af286ab8e-5"></a>$ git commit
-<a name="rest_code_a7162d5599f44ebf8de7372af286ab8e-6"></a><span class="c1"># Snip ton of files committed to your repo</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_5c8b54e5de7341169c12c28e1b4527cd-1">1</a>
+<a href="#rest_code_5c8b54e5de7341169c12c28e1b4527cd-2">2</a>
+<a href="#rest_code_5c8b54e5de7341169c12c28e1b4527cd-3">3</a>
+<a href="#rest_code_5c8b54e5de7341169c12c28e1b4527cd-4">4</a>
+<a href="#rest_code_5c8b54e5de7341169c12c28e1b4527cd-5">5</a>
+<a href="#rest_code_5c8b54e5de7341169c12c28e1b4527cd-6">6</a></pre></div></td>
+<td class="code"><pre class="code bash"><a name="rest_code_5c8b54e5de7341169c12c28e1b4527cd-1"></a>$ git init
+<a name="rest_code_5c8b54e5de7341169c12c28e1b4527cd-2"></a>Initialized empty Git repository in /home/&lt;user&gt;/elixir/my_server/.git/
+<a name="rest_code_5c8b54e5de7341169c12c28e1b4527cd-3"></a>$ git add .
+<a name="rest_code_5c8b54e5de7341169c12c28e1b4527cd-4"></a><span class="c1"># Snip ton of files added to your new git repo</span>
+<a name="rest_code_5c8b54e5de7341169c12c28e1b4527cd-5"></a>$ git commit
+<a name="rest_code_5c8b54e5de7341169c12c28e1b4527cd-6"></a><span class="c1"># Snip ton of files committed to your repo</span>
 </pre></td>
 </tr></table>
 <p>Other than making sure your database is setup if you are using one and so forth, that should be all the basics.  Now let's add elm to the project.</p>
@@ -193,78 +193,78 @@ mdl-layout--small-screen-only
 <div class="section" id="adding-elm-to-phoenix-via-brunch">
 <h2>Adding Elm to Phoenix via brunch</h2>
 <p>First we need to actually have the project get and manage elm, so open your ./package.json file and go to the "devDependencies" section and add a new <tt class="docutils literal">elm</tt> entry such as:</p>
-<pre class="code javascript"><a name="rest_code_47a34e4983c24c5085f20b6ed347b1b9-1"></a><span class="s2">"elm-brunch"</span><span class="o">:</span> <span class="s2">"~0.7.0"</span><span class="p">,</span>
+<pre class="code javascript"><a name="rest_code_c3871477b6364383b3708c6782628dcb-1"></a><span class="s2">"elm-brunch"</span><span class="o">:</span> <span class="s2">"~0.7.0"</span><span class="p">,</span>
 </pre>
 <p>This will handle downloading and installation of elm-brunch and elm itself.  If you wish you can run <tt class="docutils literal">npm install</tt> now to get it, otherwise phoenix will get it for you when we run it later.</p>
 <p>Next we need to open the <tt class="docutils literal"><span class="pre">brunch-config.js</span></tt> file.  Go to the <tt class="docutils literal">exports.config.paths.watched</tt> section.  You will want to add a new a new path for where-ever you want to put your elm source files.  I prefer them to go in to <tt class="docutils literal">web/elm</tt> so that is what I am adding to that section:</p>
-<pre class="code javascript"><a name="rest_code_e4ef62215711498c990d4169d09b87b3-1"></a><span class="s2">"web/elm"</span><span class="p">,</span>
+<pre class="code javascript"><a name="rest_code_b64725a736e34761bfa98a1b0edf2593-1"></a><span class="s2">"web/elm"</span><span class="p">,</span>
 </pre>
 <p>We should, though not need to, but I highly recommend adding an elmBrunch configuration inside your brunch-config.js file.  To do so continue down to the <tt class="docutils literal">exports.config.plugins</tt> section and we need to add a new section after your <tt class="docutils literal">babel</tt> section (as always don't forget any commas on newlines as appropriate).  Let's start with this configuration:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-1"> 1</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-2"> 2</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-3"> 3</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-4"> 4</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-5"> 5</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-6"> 6</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-7"> 7</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-8"> 8</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-9"> 9</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-10">10</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-11">11</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-12">12</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-13">13</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-14">14</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-15">15</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-16">16</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-17">17</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-18">18</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-19">19</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-20">20</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-21">21</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-22">22</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-23">23</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-24">24</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-25">25</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-26">26</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-27">27</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-28">28</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-29">29</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-30">30</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-31">31</a>
-<a href="#rest_code_99ba8e641b6b4635b644cdd7fd898c4f-32">32</a></pre></div></td>
-<td class="code"><pre class="code javascript"><a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-1"></a><span class="nx">elmBrunch</span><span class="o">:</span> <span class="p">{</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-2"></a>        <span class="c1">// Set to path where `elm-make` is located, relative to `elmFolder`</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-3"></a>        <span class="c1">// (optional)</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-4"></a>        <span class="c1">// executablePath: './node_modules/elm/binwrappers',</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-5"></a>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-6"></a>        <span class="c1">// Set to path where elm-package.json is located, defaults to project root</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-7"></a>        <span class="c1">// (optional)</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-8"></a>        <span class="nx">elmFolder</span><span class="o">:</span> <span class="s2">"."</span><span class="p">,</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-9"></a>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-10"></a>        <span class="c1">// Set to the elm file(s) containing your "main" function</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-11"></a>        <span class="c1">// `elm make` handles all elm dependencies (required)</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-12"></a>        <span class="c1">// relative to `elmFolder`</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-13"></a>        <span class="nx">mainModules</span><span class="o">:</span> <span class="p">[</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-14"></a>                <span class="s1">'web/elm/Main.elm'</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-15"></a>        <span class="p">],</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-16"></a>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-17"></a>        <span class="c1">// Defaults to 'js/' folder in paths.public (optional)</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-18"></a>        <span class="c1">// However for phoenix we want it to be combined with the app.js file so do:</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-19"></a>        <span class="nx">outputFolder</span><span class="o">:</span> <span class="s2">"web/static/js"</span><span class="p">,</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-20"></a>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-21"></a>        <span class="c1">// If specified, all mainModules will be compiled to a single file</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-22"></a>        <span class="c1">// (optional and merged with outputFolder)</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-23"></a>        <span class="c1">// This is likely what we want to do with Phoenix for web efficiency</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-24"></a>        <span class="nx">outputFile</span><span class="o">:</span> <span class="s2">"elm.js"</span><span class="p">,</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-25"></a>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-26"></a>        <span class="c1">// optional: add some parameters that are passed to elm-make</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-27"></a>        <span class="c1">// "--warn" reports on important warnings so they do not go invisible,</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-28"></a>        <span class="c1">// I always recommend it.</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-29"></a>        <span class="nx">makeParameters</span><span class="o">:</span> <span class="p">[</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-30"></a>                <span class="s2">"--warn"</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-31"></a>        <span class="p">]</span>
-<a name="rest_code_99ba8e641b6b4635b644cdd7fd898c4f-32"></a><span class="p">}</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_d345eebe77964d8f845b08812cf53974-1"> 1</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-2"> 2</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-3"> 3</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-4"> 4</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-5"> 5</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-6"> 6</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-7"> 7</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-8"> 8</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-9"> 9</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-10">10</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-11">11</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-12">12</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-13">13</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-14">14</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-15">15</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-16">16</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-17">17</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-18">18</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-19">19</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-20">20</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-21">21</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-22">22</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-23">23</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-24">24</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-25">25</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-26">26</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-27">27</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-28">28</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-29">29</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-30">30</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-31">31</a>
+<a href="#rest_code_d345eebe77964d8f845b08812cf53974-32">32</a></pre></div></td>
+<td class="code"><pre class="code javascript"><a name="rest_code_d345eebe77964d8f845b08812cf53974-1"></a><span class="nx">elmBrunch</span><span class="o">:</span> <span class="p">{</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-2"></a>        <span class="c1">// Set to path where `elm-make` is located, relative to `elmFolder`</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-3"></a>        <span class="c1">// (optional)</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-4"></a>        <span class="c1">// executablePath: './node_modules/elm/binwrappers',</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-5"></a>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-6"></a>        <span class="c1">// Set to path where elm-package.json is located, defaults to project root</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-7"></a>        <span class="c1">// (optional)</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-8"></a>        <span class="nx">elmFolder</span><span class="o">:</span> <span class="s2">"."</span><span class="p">,</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-9"></a>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-10"></a>        <span class="c1">// Set to the elm file(s) containing your "main" function</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-11"></a>        <span class="c1">// `elm make` handles all elm dependencies (required)</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-12"></a>        <span class="c1">// relative to `elmFolder`</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-13"></a>        <span class="nx">mainModules</span><span class="o">:</span> <span class="p">[</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-14"></a>                <span class="s1">'web/elm/Main.elm'</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-15"></a>        <span class="p">],</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-16"></a>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-17"></a>        <span class="c1">// Defaults to 'js/' folder in paths.public (optional)</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-18"></a>        <span class="c1">// However for phoenix we want it to be combined with the app.js file so do:</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-19"></a>        <span class="nx">outputFolder</span><span class="o">:</span> <span class="s2">"web/static/js"</span><span class="p">,</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-20"></a>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-21"></a>        <span class="c1">// If specified, all mainModules will be compiled to a single file</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-22"></a>        <span class="c1">// (optional and merged with outputFolder)</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-23"></a>        <span class="c1">// This is likely what we want to do with Phoenix for web efficiency</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-24"></a>        <span class="nx">outputFile</span><span class="o">:</span> <span class="s2">"elm.js"</span><span class="p">,</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-25"></a>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-26"></a>        <span class="c1">// optional: add some parameters that are passed to elm-make</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-27"></a>        <span class="c1">// "--warn" reports on important warnings so they do not go invisible,</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-28"></a>        <span class="c1">// I always recommend it.</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-29"></a>        <span class="nx">makeParameters</span><span class="o">:</span> <span class="p">[</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-30"></a>                <span class="s2">"--warn"</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-31"></a>        <span class="p">]</span>
+<a name="rest_code_d345eebe77964d8f845b08812cf53974-32"></a><span class="p">}</span>
 </pre></td>
 </tr></table>
 <p>The inline comments should be able to describe what is going on, and keep in mind that any 'root' Main program you may have in Elm should be listed in <tt class="docutils literal">mainModules</tt> so they all get combined into one file to share the elm standard library and save a ton of space.</p>
@@ -273,41 +273,41 @@ mdl-layout--small-screen-only
 <h2>Setup Elm Itself</h2>
 <p>Setting up elm itself just involves setting up its package file, to do that make a file named <cite>elm-package.json</cite> and populate it with:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_d433d8e7534c46149e1cbf46aff15893-1"> 1</a>
-<a href="#rest_code_d433d8e7534c46149e1cbf46aff15893-2"> 2</a>
-<a href="#rest_code_d433d8e7534c46149e1cbf46aff15893-3"> 3</a>
-<a href="#rest_code_d433d8e7534c46149e1cbf46aff15893-4"> 4</a>
-<a href="#rest_code_d433d8e7534c46149e1cbf46aff15893-5"> 5</a>
-<a href="#rest_code_d433d8e7534c46149e1cbf46aff15893-6"> 6</a>
-<a href="#rest_code_d433d8e7534c46149e1cbf46aff15893-7"> 7</a>
-<a href="#rest_code_d433d8e7534c46149e1cbf46aff15893-8"> 8</a>
-<a href="#rest_code_d433d8e7534c46149e1cbf46aff15893-9"> 9</a>
-<a href="#rest_code_d433d8e7534c46149e1cbf46aff15893-10">10</a>
-<a href="#rest_code_d433d8e7534c46149e1cbf46aff15893-11">11</a>
-<a href="#rest_code_d433d8e7534c46149e1cbf46aff15893-12">12</a>
-<a href="#rest_code_d433d8e7534c46149e1cbf46aff15893-13">13</a>
-<a href="#rest_code_d433d8e7534c46149e1cbf46aff15893-14">14</a>
-<a href="#rest_code_d433d8e7534c46149e1cbf46aff15893-15">15</a></pre></div></td>
-<td class="code"><pre class="code javascript"><a name="rest_code_d433d8e7534c46149e1cbf46aff15893-1"></a><span class="p">{</span>
-<a name="rest_code_d433d8e7534c46149e1cbf46aff15893-2"></a>    <span class="s2">"version"</span><span class="o">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
-<a name="rest_code_d433d8e7534c46149e1cbf46aff15893-3"></a>    <span class="s2">"summary"</span><span class="o">:</span> <span class="s2">"helpful summary of your project, less than 80 characters"</span><span class="p">,</span>
-<a name="rest_code_d433d8e7534c46149e1cbf46aff15893-4"></a>    <span class="s2">"repository"</span><span class="o">:</span> <span class="s2">"https://github.com/user/project.git"</span><span class="p">,</span>
-<a name="rest_code_d433d8e7534c46149e1cbf46aff15893-5"></a>    <span class="s2">"license"</span><span class="o">:</span> <span class="s2">"BSD3"</span><span class="p">,</span>
-<a name="rest_code_d433d8e7534c46149e1cbf46aff15893-6"></a>    <span class="s2">"source-directories"</span><span class="o">:</span> <span class="p">[</span>
-<a name="rest_code_d433d8e7534c46149e1cbf46aff15893-7"></a>        <span class="s2">"."</span>
-<a name="rest_code_d433d8e7534c46149e1cbf46aff15893-8"></a>    <span class="p">],</span>
-<a name="rest_code_d433d8e7534c46149e1cbf46aff15893-9"></a>    <span class="s2">"exposed-modules"</span><span class="o">:</span> <span class="p">[],</span>
-<a name="rest_code_d433d8e7534c46149e1cbf46aff15893-10"></a>    <span class="s2">"dependencies"</span><span class="o">:</span> <span class="p">{</span>
-<a name="rest_code_d433d8e7534c46149e1cbf46aff15893-11"></a>        <span class="s2">"elm-lang/core"</span><span class="o">:</span> <span class="s2">"4.0.5 &lt;= v &lt; 5.0.0"</span><span class="p">,</span>
-<a name="rest_code_d433d8e7534c46149e1cbf46aff15893-12"></a>        <span class="s2">"elm-lang/html"</span><span class="o">:</span> <span class="s2">"1.1.0 &lt;= v &lt; 2.0.0"</span>
-<a name="rest_code_d433d8e7534c46149e1cbf46aff15893-13"></a>    <span class="p">},</span>
-<a name="rest_code_d433d8e7534c46149e1cbf46aff15893-14"></a>    <span class="s2">"elm-version"</span><span class="o">:</span> <span class="s2">"0.17.1 &lt;= v &lt; 0.18.0"</span>
-<a name="rest_code_d433d8e7534c46149e1cbf46aff15893-15"></a><span class="p">}</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_dc061ea5a6df4435a42963c081ec7a98-1"> 1</a>
+<a href="#rest_code_dc061ea5a6df4435a42963c081ec7a98-2"> 2</a>
+<a href="#rest_code_dc061ea5a6df4435a42963c081ec7a98-3"> 3</a>
+<a href="#rest_code_dc061ea5a6df4435a42963c081ec7a98-4"> 4</a>
+<a href="#rest_code_dc061ea5a6df4435a42963c081ec7a98-5"> 5</a>
+<a href="#rest_code_dc061ea5a6df4435a42963c081ec7a98-6"> 6</a>
+<a href="#rest_code_dc061ea5a6df4435a42963c081ec7a98-7"> 7</a>
+<a href="#rest_code_dc061ea5a6df4435a42963c081ec7a98-8"> 8</a>
+<a href="#rest_code_dc061ea5a6df4435a42963c081ec7a98-9"> 9</a>
+<a href="#rest_code_dc061ea5a6df4435a42963c081ec7a98-10">10</a>
+<a href="#rest_code_dc061ea5a6df4435a42963c081ec7a98-11">11</a>
+<a href="#rest_code_dc061ea5a6df4435a42963c081ec7a98-12">12</a>
+<a href="#rest_code_dc061ea5a6df4435a42963c081ec7a98-13">13</a>
+<a href="#rest_code_dc061ea5a6df4435a42963c081ec7a98-14">14</a>
+<a href="#rest_code_dc061ea5a6df4435a42963c081ec7a98-15">15</a></pre></div></td>
+<td class="code"><pre class="code javascript"><a name="rest_code_dc061ea5a6df4435a42963c081ec7a98-1"></a><span class="p">{</span>
+<a name="rest_code_dc061ea5a6df4435a42963c081ec7a98-2"></a>    <span class="s2">"version"</span><span class="o">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+<a name="rest_code_dc061ea5a6df4435a42963c081ec7a98-3"></a>    <span class="s2">"summary"</span><span class="o">:</span> <span class="s2">"helpful summary of your project, less than 80 characters"</span><span class="p">,</span>
+<a name="rest_code_dc061ea5a6df4435a42963c081ec7a98-4"></a>    <span class="s2">"repository"</span><span class="o">:</span> <span class="s2">"https://github.com/user/project.git"</span><span class="p">,</span>
+<a name="rest_code_dc061ea5a6df4435a42963c081ec7a98-5"></a>    <span class="s2">"license"</span><span class="o">:</span> <span class="s2">"BSD3"</span><span class="p">,</span>
+<a name="rest_code_dc061ea5a6df4435a42963c081ec7a98-6"></a>    <span class="s2">"source-directories"</span><span class="o">:</span> <span class="p">[</span>
+<a name="rest_code_dc061ea5a6df4435a42963c081ec7a98-7"></a>        <span class="s2">"."</span>
+<a name="rest_code_dc061ea5a6df4435a42963c081ec7a98-8"></a>    <span class="p">],</span>
+<a name="rest_code_dc061ea5a6df4435a42963c081ec7a98-9"></a>    <span class="s2">"exposed-modules"</span><span class="o">:</span> <span class="p">[],</span>
+<a name="rest_code_dc061ea5a6df4435a42963c081ec7a98-10"></a>    <span class="s2">"dependencies"</span><span class="o">:</span> <span class="p">{</span>
+<a name="rest_code_dc061ea5a6df4435a42963c081ec7a98-11"></a>        <span class="s2">"elm-lang/core"</span><span class="o">:</span> <span class="s2">"4.0.5 &lt;= v &lt; 5.0.0"</span><span class="p">,</span>
+<a name="rest_code_dc061ea5a6df4435a42963c081ec7a98-12"></a>        <span class="s2">"elm-lang/html"</span><span class="o">:</span> <span class="s2">"1.1.0 &lt;= v &lt; 2.0.0"</span>
+<a name="rest_code_dc061ea5a6df4435a42963c081ec7a98-13"></a>    <span class="p">},</span>
+<a name="rest_code_dc061ea5a6df4435a42963c081ec7a98-14"></a>    <span class="s2">"elm-version"</span><span class="o">:</span> <span class="s2">"0.17.1 &lt;= v &lt; 0.18.0"</span>
+<a name="rest_code_dc061ea5a6df4435a42963c081ec7a98-15"></a><span class="p">}</span>
 </pre></td>
 </tr></table>
 <p>The version must always start out with 1.0.0, enforced by much of Elm itself.  Alter the summary, repository, and license as makes sense, but keep summary to less than 80 characters, this will also error out at you in Elm if too long.  The <tt class="docutils literal"><span class="pre">source-directories</span></tt> must contain a list of only <tt class="docutils literal">"web/elm"</tt> or where-ever you chose to place it, or else it can try to compile a lot more than you expect.  The <tt class="docutils literal"><span class="pre">"exposed-modules"</span></tt> is only used if you are making a distributable Elm library, which not really for this project.  The two listed dependencies are the usual to get started with a basic Elm program, like a Counter.  And finally the <tt class="docutils literal"><span class="pre">"elm-version"</span></tt> should be self-explanatory, all versioning in Elm is semver and enforced by the Elm system.</p>
 <p>Next, though optional, I would highly recommend adding the following line to your <tt class="docutils literal">.gitignore</tt> file to ignore the elm cache directory:</p>
-<pre class="code text"><a name="rest_code_3281124ad6c44998aecebd37f3f54318-1"></a>/elm-stuff/
+<pre class="code text"><a name="rest_code_b5947b31be1a4b03a56ee75331f825b4-1"></a>/elm-stuff/
 </pre>
 <p>With these are we are now ready to create the first Elm file and hook it into the application.</p>
 </div>
@@ -315,116 +315,116 @@ mdl-layout--small-screen-only
 <h2>Creating our first Elm application in Phoenix</h2>
 <p>Create the file <tt class="docutils literal">web/elm/Main.elm</tt> or of whatever file you put in your <tt class="docutils literal">mainModules</tt> section and open it up.  Let's go ahead and do the usual Elm counter app so we can make sure that it works and so that we have something to wire up:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-1"> 1</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-2"> 2</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-3"> 3</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-4"> 4</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-5"> 5</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-6"> 6</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-7"> 7</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-8"> 8</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-9"> 9</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-10">10</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-11">11</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-12">12</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-13">13</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-14">14</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-15">15</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-16">16</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-17">17</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-18">18</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-19">19</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-20">20</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-21">21</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-22">22</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-23">23</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-24">24</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-25">25</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-26">26</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-27">27</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-28">28</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-29">29</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-30">30</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-31">31</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-32">32</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-33">33</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-34">34</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-35">35</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-36">36</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-37">37</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-38">38</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-39">39</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-40">40</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-41">41</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-42">42</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-43">43</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-44">44</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-45">45</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-46">46</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-47">47</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-48">48</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-49">49</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-50">50</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-51">51</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-52">52</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-53">53</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-54">54</a>
-<a href="#rest_code_ad357eaf04b6468f86f3a1d533615fa5-55">55</a></pre></div></td>
-<td class="code"><pre class="code elm"><a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-1"></a><span class="kn">module </span><span class="nc">Main</span> <span class="nv">exposing</span> <span class="nf">(..)</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-2"></a>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-3"></a><span class="kn">import </span><span class="nc">Html</span> <span class="nv">exposing</span> <span class="p">(</span><span class="kt">Html</span><span class="p">,</span> <span class="nv">button</span><span class="p">,</span> <span class="nv">div</span><span class="p">,</span> <span class="nv">text</span><span class="p">)</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-4"></a><span class="kn">import </span><span class="nc">Html.App</span> <span class="kr">as</span> <span class="kt">Html</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-5"></a><span class="kn">import </span><span class="nc">Html.Events</span> <span class="nv">exposing</span> <span class="p">(</span><span class="nv">onClick</span><span class="p">)</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-6"></a>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-7"></a>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-8"></a><span class="kr">main </span><span class="nf">:</span> <span class="kt">Program</span> <span class="kt">Never</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-9"></a><span class="kr">main </span><span class="nf">=</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-10"></a>    <span class="kt">Html</span><span class="nf">.</span><span class="nv">beginnerProgram</span> <span class="p">{</span> <span class="nv">model</span> <span class="nf">=</span> <span class="nv">model</span><span class="p">,</span> <span class="nv">view</span> <span class="nf">=</span> <span class="nv">view</span><span class="p">,</span> <span class="nv">update</span> <span class="nf">=</span> <span class="nv">update</span> <span class="p">}</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-11"></a>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-12"></a>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-13"></a>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-14"></a><span class="c1">-- MODEL</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-15"></a>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-16"></a>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-17"></a><span class="kr">type</span> <span class="kr">alias</span> <span class="kt">Model</span> <span class="nf">=</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-18"></a>    <span class="kt">Int</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-19"></a>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-20"></a>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-21"></a><span class="nv">model</span> <span class="nf">:</span> <span class="kt">Model</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-22"></a><span class="nv">model</span> <span class="nf">=</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-23"></a>    <span class="mi">0</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-24"></a>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-25"></a>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-26"></a>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-27"></a><span class="c1">-- UPDATE</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-28"></a>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-29"></a>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-30"></a><span class="kr">type</span> <span class="kt">Msg</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-31"></a>    <span class="nf">=</span> <span class="kt">Increment</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-32"></a>    <span class="nf">|</span> <span class="kt">Decrement</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-33"></a>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-34"></a>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-35"></a><span class="nv">update</span> <span class="nf">:</span> <span class="kt">Msg</span> <span class="nf">-&gt;</span> <span class="kt">Model</span> <span class="nf">-&gt;</span> <span class="kt">Model</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-36"></a><span class="nv">update</span> <span class="nv">msg</span> <span class="nv">model</span> <span class="nf">=</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-37"></a>    <span class="kr">case</span> <span class="nv">msg</span> <span class="kr">of</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-38"></a>        <span class="kt">Increment</span> <span class="nf">-&gt;</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-39"></a>            <span class="nv">model</span> <span class="nf">+</span> <span class="mi">1</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-40"></a>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-41"></a>        <span class="kt">Decrement</span> <span class="nf">-&gt;</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-42"></a>            <span class="nv">model</span> <span class="nf">-</span> <span class="mi">1</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-43"></a>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-44"></a>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-45"></a>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-46"></a><span class="c1">-- VIEW</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-47"></a>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-48"></a>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-49"></a><span class="nv">view</span> <span class="nf">:</span> <span class="kt">Model</span> <span class="nf">-&gt;</span> <span class="kt">Html</span> <span class="kt">Msg</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-50"></a><span class="nv">view</span> <span class="nv">model</span> <span class="nf">=</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-51"></a>    <span class="nv">div</span> <span class="p">[]</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-52"></a>        <span class="p">[</span> <span class="nv">button</span> <span class="p">[</span> <span class="nv">onClick</span> <span class="kt">Decrement</span> <span class="p">]</span> <span class="p">[</span> <span class="nv">text</span> <span class="s">"-"</span> <span class="p">]</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-53"></a>        <span class="p">,</span> <span class="nv">div</span> <span class="p">[]</span> <span class="p">[</span> <span class="nv">text</span> <span class="p">(</span><span class="nv">toString</span> <span class="nv">model</span><span class="p">)</span> <span class="p">]</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-54"></a>        <span class="p">,</span> <span class="nv">button</span> <span class="p">[</span> <span class="nv">onClick</span> <span class="kt">Increment</span> <span class="p">]</span> <span class="p">[</span> <span class="nv">text</span> <span class="s">"+"</span> <span class="p">]</span>
-<a name="rest_code_ad357eaf04b6468f86f3a1d533615fa5-55"></a>        <span class="p">]</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_bda5e930f84c48fb9552d68676649a57-1"> 1</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-2"> 2</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-3"> 3</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-4"> 4</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-5"> 5</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-6"> 6</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-7"> 7</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-8"> 8</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-9"> 9</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-10">10</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-11">11</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-12">12</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-13">13</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-14">14</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-15">15</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-16">16</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-17">17</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-18">18</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-19">19</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-20">20</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-21">21</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-22">22</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-23">23</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-24">24</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-25">25</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-26">26</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-27">27</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-28">28</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-29">29</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-30">30</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-31">31</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-32">32</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-33">33</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-34">34</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-35">35</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-36">36</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-37">37</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-38">38</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-39">39</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-40">40</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-41">41</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-42">42</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-43">43</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-44">44</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-45">45</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-46">46</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-47">47</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-48">48</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-49">49</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-50">50</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-51">51</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-52">52</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-53">53</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-54">54</a>
+<a href="#rest_code_bda5e930f84c48fb9552d68676649a57-55">55</a></pre></div></td>
+<td class="code"><pre class="code elm"><a name="rest_code_bda5e930f84c48fb9552d68676649a57-1"></a><span class="kn">module </span><span class="nc">Main</span> <span class="nv">exposing</span> <span class="nf">(..)</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-2"></a>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-3"></a><span class="kn">import </span><span class="nc">Html</span> <span class="nv">exposing</span> <span class="p">(</span><span class="kt">Html</span><span class="p">,</span> <span class="nv">button</span><span class="p">,</span> <span class="nv">div</span><span class="p">,</span> <span class="nv">text</span><span class="p">)</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-4"></a><span class="kn">import </span><span class="nc">Html.App</span> <span class="kr">as</span> <span class="kt">Html</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-5"></a><span class="kn">import </span><span class="nc">Html.Events</span> <span class="nv">exposing</span> <span class="p">(</span><span class="nv">onClick</span><span class="p">)</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-6"></a>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-7"></a>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-8"></a><span class="kr">main </span><span class="nf">:</span> <span class="kt">Program</span> <span class="kt">Never</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-9"></a><span class="kr">main </span><span class="nf">=</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-10"></a>    <span class="kt">Html</span><span class="nf">.</span><span class="nv">beginnerProgram</span> <span class="p">{</span> <span class="nv">model</span> <span class="nf">=</span> <span class="nv">model</span><span class="p">,</span> <span class="nv">view</span> <span class="nf">=</span> <span class="nv">view</span><span class="p">,</span> <span class="nv">update</span> <span class="nf">=</span> <span class="nv">update</span> <span class="p">}</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-11"></a>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-12"></a>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-13"></a>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-14"></a><span class="c1">-- MODEL</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-15"></a>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-16"></a>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-17"></a><span class="kr">type</span> <span class="kr">alias</span> <span class="kt">Model</span> <span class="nf">=</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-18"></a>    <span class="kt">Int</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-19"></a>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-20"></a>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-21"></a><span class="nv">model</span> <span class="nf">:</span> <span class="kt">Model</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-22"></a><span class="nv">model</span> <span class="nf">=</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-23"></a>    <span class="mi">0</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-24"></a>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-25"></a>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-26"></a>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-27"></a><span class="c1">-- UPDATE</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-28"></a>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-29"></a>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-30"></a><span class="kr">type</span> <span class="kt">Msg</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-31"></a>    <span class="nf">=</span> <span class="kt">Increment</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-32"></a>    <span class="nf">|</span> <span class="kt">Decrement</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-33"></a>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-34"></a>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-35"></a><span class="nv">update</span> <span class="nf">:</span> <span class="kt">Msg</span> <span class="nf">-&gt;</span> <span class="kt">Model</span> <span class="nf">-&gt;</span> <span class="kt">Model</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-36"></a><span class="nv">update</span> <span class="nv">msg</span> <span class="nv">model</span> <span class="nf">=</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-37"></a>    <span class="kr">case</span> <span class="nv">msg</span> <span class="kr">of</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-38"></a>        <span class="kt">Increment</span> <span class="nf">-&gt;</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-39"></a>            <span class="nv">model</span> <span class="nf">+</span> <span class="mi">1</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-40"></a>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-41"></a>        <span class="kt">Decrement</span> <span class="nf">-&gt;</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-42"></a>            <span class="nv">model</span> <span class="nf">-</span> <span class="mi">1</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-43"></a>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-44"></a>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-45"></a>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-46"></a><span class="c1">-- VIEW</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-47"></a>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-48"></a>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-49"></a><span class="nv">view</span> <span class="nf">:</span> <span class="kt">Model</span> <span class="nf">-&gt;</span> <span class="kt">Html</span> <span class="kt">Msg</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-50"></a><span class="nv">view</span> <span class="nv">model</span> <span class="nf">=</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-51"></a>    <span class="nv">div</span> <span class="p">[]</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-52"></a>        <span class="p">[</span> <span class="nv">button</span> <span class="p">[</span> <span class="nv">onClick</span> <span class="kt">Decrement</span> <span class="p">]</span> <span class="p">[</span> <span class="nv">text</span> <span class="s">"-"</span> <span class="p">]</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-53"></a>        <span class="p">,</span> <span class="nv">div</span> <span class="p">[]</span> <span class="p">[</span> <span class="nv">text</span> <span class="p">(</span><span class="nv">toString</span> <span class="nv">model</span><span class="p">)</span> <span class="p">]</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-54"></a>        <span class="p">,</span> <span class="nv">button</span> <span class="p">[</span> <span class="nv">onClick</span> <span class="kt">Increment</span> <span class="p">]</span> <span class="p">[</span> <span class="nv">text</span> <span class="s">"+"</span> <span class="p">]</span>
+<a name="rest_code_bda5e930f84c48fb9552d68676649a57-55"></a>        <span class="p">]</span>
 </pre></td>
 </tr></table>
 <p>This is the standard beginner counter app from the Elm docs and will work wonderfully for testing the integration with the Phoenix system.</p>
@@ -434,24 +434,24 @@ mdl-layout--small-screen-only
 <h2>Embed Elm in a Phoenix Page</h2>
 <p>In general the <tt class="docutils literal">elm.someApp.fullscreen</tt> should not be used, all it does is just do <tt class="docutils literal">elm.someApp.embed(document.body)</tt>, and if you want to add it to the body then explicitly doing so is better anyway.  For now let's go ahead and add it to our index page of this default app so open up <tt class="docutils literal">web/templates/page/index.html.eex</tt>, let's wipe it out and replace it all with just this:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_e277ccc75d174b39bc62094b1b47e9fe-1">1</a></pre></div></td>
-<td class="code"><pre class="code html"><a name="rest_code_e277ccc75d174b39bc62094b1b47e9fe-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">"counter-app"</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_d3b736c1daf44215b22c5a6232212b7a-1">1</a></pre></div></td>
+<td class="code"><pre class="code html"><a name="rest_code_d3b736c1daf44215b22c5a6232212b7a-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">"counter-app"</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </pre></td>
 </tr></table>
 <p>A nice simple div with an id of whatever you want to hook to.  Next open your <tt class="docutils literal">web/static/js/app.js</tt> and at the bottom of it add this:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_50af98ea5c884e60bbeda0eb44fc58f4-1">1</a>
-<a href="#rest_code_50af98ea5c884e60bbeda0eb44fc58f4-2">2</a>
-<a href="#rest_code_50af98ea5c884e60bbeda0eb44fc58f4-3">3</a>
-<a href="#rest_code_50af98ea5c884e60bbeda0eb44fc58f4-4">4</a>
-<a href="#rest_code_50af98ea5c884e60bbeda0eb44fc58f4-5">5</a>
-<a href="#rest_code_50af98ea5c884e60bbeda0eb44fc58f4-6">6</a></pre></div></td>
-<td class="code"><pre class="code javascript"><a name="rest_code_50af98ea5c884e60bbeda0eb44fc58f4-1"></a><span class="kr">import</span> <span class="nx">Elm</span> <span class="nx">from</span> <span class="s2">"./elm.js"</span>
-<a name="rest_code_50af98ea5c884e60bbeda0eb44fc58f4-2"></a>
-<a name="rest_code_50af98ea5c884e60bbeda0eb44fc58f4-3"></a><span class="kd">let</span> <span class="nx">counterDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"counter-app"</span><span class="p">)</span>
-<a name="rest_code_50af98ea5c884e60bbeda0eb44fc58f4-4"></a><span class="k">if</span> <span class="p">(</span><span class="nx">counterDiv</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
-<a name="rest_code_50af98ea5c884e60bbeda0eb44fc58f4-5"></a>        <span class="nx">Elm</span><span class="p">.</span><span class="nx">Main</span><span class="p">.</span><span class="nx">embed</span><span class="p">(</span><span class="nx">counterDiv</span><span class="p">)</span>
-<a name="rest_code_50af98ea5c884e60bbeda0eb44fc58f4-6"></a><span class="p">}</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_7f4ed519f64146afa7a4a1130140ae2f-1">1</a>
+<a href="#rest_code_7f4ed519f64146afa7a4a1130140ae2f-2">2</a>
+<a href="#rest_code_7f4ed519f64146afa7a4a1130140ae2f-3">3</a>
+<a href="#rest_code_7f4ed519f64146afa7a4a1130140ae2f-4">4</a>
+<a href="#rest_code_7f4ed519f64146afa7a4a1130140ae2f-5">5</a>
+<a href="#rest_code_7f4ed519f64146afa7a4a1130140ae2f-6">6</a></pre></div></td>
+<td class="code"><pre class="code javascript"><a name="rest_code_7f4ed519f64146afa7a4a1130140ae2f-1"></a><span class="kr">import</span> <span class="nx">Elm</span> <span class="nx">from</span> <span class="s2">"./elm.js"</span>
+<a name="rest_code_7f4ed519f64146afa7a4a1130140ae2f-2"></a>
+<a name="rest_code_7f4ed519f64146afa7a4a1130140ae2f-3"></a><span class="kd">let</span> <span class="nx">counterDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"counter-app"</span><span class="p">)</span>
+<a name="rest_code_7f4ed519f64146afa7a4a1130140ae2f-4"></a><span class="k">if</span> <span class="p">(</span><span class="nx">counterDiv</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_7f4ed519f64146afa7a4a1130140ae2f-5"></a>        <span class="nx">Elm</span><span class="p">.</span><span class="nx">Main</span><span class="p">.</span><span class="nx">embed</span><span class="p">(</span><span class="nx">counterDiv</span><span class="p">)</span>
+<a name="rest_code_7f4ed519f64146afa7a4a1130140ae2f-6"></a><span class="p">}</span>
 </pre></td>
 </tr></table>
 <p>Inside the if is a good place to register ports and such as well if you need any for your app.  But right now you should be able to load your browser to the main index page and see your counter.  I seem to be able to get around 100 clicks per second with my mouse-macro on my system.  :-)</p>

@@ -128,8 +128,8 @@ mdl-layout--small-screen-only
 <div class="section" id="messages">
 <h3>Messages</h3>
 <p>A message box let's us do a little hint of a story, little though it often is in such game, as well as giving information to the player about what is happened and/or what they have done for reference later.  I'll create this type in the <tt class="docutils literal">src/overbots_types.ml</tt> file for now:</p>
-<pre class="code ocaml"><a name="rest_code_16fdf48b0b514119a86f5fe91f325f41-1"></a><span class="k">type</span> <span class="n">game_msg</span> <span class="o">=</span>
-<a name="rest_code_16fdf48b0b514119a86f5fe91f325f41-2"></a>  <span class="o">|</span> <span class="nc">TimeMsg</span> <span class="k">of</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">Time</span><span class="p">.</span><span class="n">t</span> <span class="o">*</span> <span class="kt">string</span>
+<pre class="code ocaml"><a name="rest_code_69067d7cf46c44bf9274cbc7cb919394-1"></a><span class="k">type</span> <span class="n">game_msg</span> <span class="o">=</span>
+<a name="rest_code_69067d7cf46c44bf9274cbc7cb919394-2"></a>  <span class="o">|</span> <span class="nc">TimeMsg</span> <span class="k">of</span> <span class="nn">Tea</span><span class="p">.</span><span class="nn">Time</span><span class="p">.</span><span class="n">t</span> <span class="o">*</span> <span class="kt">string</span>
 </pre>
 <p>I'm making this a variant, even if just a single constructor variant, for two reasons.  The first is that it keeps everything even more strongly typed, imagine if I got another tuple somewhere that held a time and string for some other reason, I could accidentally mix them.  Second is that I may want to expand it later, maybe a URL message or something, and this leaves that open to do so more easily.  I'll follow this pattern through-out typing everything.</p>
 </div>
@@ -158,245 +158,245 @@ type resource_values = resource_value ResourceMap.t -->
 <p>So I've defined the names of the resources that I will support, the <tt class="docutils literal">Map</tt> type that uses it as the key, and I've defined the type that I want the resources to be as well as named a few starting resources.</p>
 <p>In another file, named <tt class="docutils literal">src/overbots_resources.ml</tt> I'll put the module information and the initial resource definition:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_1981431e865d4843a6c29d88017882ee-1"> 1</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-2"> 2</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-3"> 3</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-4"> 4</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-5"> 5</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-6"> 6</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-7"> 7</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-8"> 8</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-9"> 9</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-10">10</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-11">11</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-12">12</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-13">13</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-14">14</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-15">15</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-16">16</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-17">17</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-18">18</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-19">19</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-20">20</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-21">21</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-22">22</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-23">23</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-24">24</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-25">25</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-26">26</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-27">27</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-28">28</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-29">29</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-30">30</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-31">31</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-32">32</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-33">33</a>
-<a href="#rest_code_1981431e865d4843a6c29d88017882ee-34">34</a></pre></div></td>
-<td class="code"><pre class="code ocaml"><a name="rest_code_1981431e865d4843a6c29d88017882ee-1"></a><span class="k">open</span> <span class="nc">Overbots_types</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-2"></a>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-3"></a><span class="k">module</span> <span class="k">type</span> <span class="nc">Resource</span> <span class="o">=</span> <span class="k">sig</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-4"></a>  <span class="k">val</span> <span class="n">id</span> <span class="o">:</span> <span class="n">resource_flag</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-5"></a>  <span class="k">val</span> <span class="n">shown</span> <span class="o">:</span> <span class="n">model</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-6"></a>  <span class="k">val</span> <span class="n">get_value_range</span> <span class="o">:</span> <span class="n">model</span> <span class="o">-&gt;</span> <span class="n">resource_value</span> <span class="o">*</span> <span class="n">resource_value</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-7"></a><span class="k">end</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-8"></a>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-9"></a>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-10"></a><span class="k">module</span> <span class="nc">Energy</span> <span class="o">:</span> <span class="nc">Resource</span> <span class="o">=</span> <span class="k">struct</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-11"></a>  <span class="k">let</span> <span class="n">id</span> <span class="o">=</span> <span class="nc">Energy</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-12"></a>  <span class="k">let</span> <span class="n">shown</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span> <span class="bp">true</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-13"></a>  <span class="k">let</span> <span class="n">get_value_range</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">,</span> <span class="mi">100</span><span class="o">.</span><span class="mi">0</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-14"></a><span class="k">end</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-15"></a>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-16"></a><span class="k">module</span> <span class="nc">IronOxide</span> <span class="o">:</span> <span class="nc">Resource</span> <span class="o">=</span> <span class="k">struct</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-17"></a>  <span class="k">let</span> <span class="n">id</span> <span class="o">=</span> <span class="nc">IronOxide</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-18"></a>  <span class="k">let</span> <span class="n">shown</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span> <span class="bp">true</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-19"></a>  <span class="k">let</span> <span class="n">get_value_range</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">,</span> <span class="mi">10</span><span class="o">.</span><span class="mi">0</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-20"></a><span class="k">end</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-21"></a>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-22"></a><span class="k">module</span> <span class="nc">RawSilicon</span> <span class="o">:</span> <span class="nc">Resource</span> <span class="o">=</span> <span class="k">struct</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-23"></a>  <span class="k">let</span> <span class="n">id</span> <span class="o">=</span> <span class="nc">RawSilicon</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-24"></a>  <span class="k">let</span> <span class="n">shown</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span> <span class="bp">true</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-25"></a>  <span class="k">let</span> <span class="n">get_value_range</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">,</span> <span class="mi">2</span><span class="o">.</span><span class="mi">0</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-26"></a><span class="k">end</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-27"></a>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-28"></a>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-29"></a><span class="k">let</span> <span class="n">all_resources</span> <span class="o">=</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-30"></a>  <span class="k">let</span> <span class="k">open</span> <span class="nc">ResourceMap</span> <span class="k">in</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-31"></a>  <span class="n">empty</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-32"></a>  <span class="o">|&gt;</span> <span class="n">add</span> <span class="nc">Energy</span> <span class="o">(</span><span class="k">module</span> <span class="nc">Energy</span> <span class="o">:</span> <span class="nc">Resource</span><span class="o">)</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-33"></a>  <span class="o">|&gt;</span> <span class="n">add</span> <span class="nc">IronOxide</span> <span class="o">(</span><span class="k">module</span> <span class="nc">IronOxide</span> <span class="o">:</span> <span class="nc">Resource</span><span class="o">)</span>
-<a name="rest_code_1981431e865d4843a6c29d88017882ee-34"></a>  <span class="o">|&gt;</span> <span class="n">add</span> <span class="nc">RawSilicon</span> <span class="o">(</span><span class="k">module</span> <span class="nc">RawSilicon</span> <span class="o">:</span> <span class="nc">Resource</span><span class="o">)</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-1"> 1</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-2"> 2</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-3"> 3</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-4"> 4</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-5"> 5</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-6"> 6</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-7"> 7</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-8"> 8</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-9"> 9</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-10">10</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-11">11</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-12">12</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-13">13</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-14">14</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-15">15</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-16">16</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-17">17</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-18">18</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-19">19</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-20">20</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-21">21</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-22">22</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-23">23</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-24">24</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-25">25</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-26">26</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-27">27</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-28">28</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-29">29</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-30">30</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-31">31</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-32">32</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-33">33</a>
+<a href="#rest_code_8b1941a5bee74010bd4f64ecaf88686e-34">34</a></pre></div></td>
+<td class="code"><pre class="code ocaml"><a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-1"></a><span class="k">open</span> <span class="nc">Overbots_types</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-2"></a>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-3"></a><span class="k">module</span> <span class="k">type</span> <span class="nc">Resource</span> <span class="o">=</span> <span class="k">sig</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-4"></a>  <span class="k">val</span> <span class="n">id</span> <span class="o">:</span> <span class="n">resource_flag</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-5"></a>  <span class="k">val</span> <span class="n">shown</span> <span class="o">:</span> <span class="n">model</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-6"></a>  <span class="k">val</span> <span class="n">get_value_range</span> <span class="o">:</span> <span class="n">model</span> <span class="o">-&gt;</span> <span class="n">resource_value</span> <span class="o">*</span> <span class="n">resource_value</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-7"></a><span class="k">end</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-8"></a>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-9"></a>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-10"></a><span class="k">module</span> <span class="nc">Energy</span> <span class="o">:</span> <span class="nc">Resource</span> <span class="o">=</span> <span class="k">struct</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-11"></a>  <span class="k">let</span> <span class="n">id</span> <span class="o">=</span> <span class="nc">Energy</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-12"></a>  <span class="k">let</span> <span class="n">shown</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span> <span class="bp">true</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-13"></a>  <span class="k">let</span> <span class="n">get_value_range</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">,</span> <span class="mi">100</span><span class="o">.</span><span class="mi">0</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-14"></a><span class="k">end</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-15"></a>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-16"></a><span class="k">module</span> <span class="nc">IronOxide</span> <span class="o">:</span> <span class="nc">Resource</span> <span class="o">=</span> <span class="k">struct</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-17"></a>  <span class="k">let</span> <span class="n">id</span> <span class="o">=</span> <span class="nc">IronOxide</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-18"></a>  <span class="k">let</span> <span class="n">shown</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span> <span class="bp">true</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-19"></a>  <span class="k">let</span> <span class="n">get_value_range</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">,</span> <span class="mi">10</span><span class="o">.</span><span class="mi">0</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-20"></a><span class="k">end</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-21"></a>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-22"></a><span class="k">module</span> <span class="nc">RawSilicon</span> <span class="o">:</span> <span class="nc">Resource</span> <span class="o">=</span> <span class="k">struct</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-23"></a>  <span class="k">let</span> <span class="n">id</span> <span class="o">=</span> <span class="nc">RawSilicon</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-24"></a>  <span class="k">let</span> <span class="n">shown</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span> <span class="bp">true</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-25"></a>  <span class="k">let</span> <span class="n">get_value_range</span> <span class="o">_</span><span class="n">model</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">,</span> <span class="mi">2</span><span class="o">.</span><span class="mi">0</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-26"></a><span class="k">end</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-27"></a>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-28"></a>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-29"></a><span class="k">let</span> <span class="n">all_resources</span> <span class="o">=</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-30"></a>  <span class="k">let</span> <span class="k">open</span> <span class="nc">ResourceMap</span> <span class="k">in</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-31"></a>  <span class="n">empty</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-32"></a>  <span class="o">|&gt;</span> <span class="n">add</span> <span class="nc">Energy</span> <span class="o">(</span><span class="k">module</span> <span class="nc">Energy</span> <span class="o">:</span> <span class="nc">Resource</span><span class="o">)</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-33"></a>  <span class="o">|&gt;</span> <span class="n">add</span> <span class="nc">IronOxide</span> <span class="o">(</span><span class="k">module</span> <span class="nc">IronOxide</span> <span class="o">:</span> <span class="nc">Resource</span><span class="o">)</span>
+<a name="rest_code_8b1941a5bee74010bd4f64ecaf88686e-34"></a>  <span class="o">|&gt;</span> <span class="n">add</span> <span class="nc">RawSilicon</span> <span class="o">(</span><span class="k">module</span> <span class="nc">RawSilicon</span> <span class="o">:</span> <span class="nc">Resource</span><span class="o">)</span>
 </pre></td>
 </tr></table>
 <p>I think I also want the resources shown categorized, so I'll toss the definition here too after the above, lot of strings because the front-end is strings, the first element is the displayed name, the second the class name, the third is the list of resources, which is a tuple of the resource ID, the string name, and the class name (for css):</p>
-<pre class="code ocaml"><a name="rest_code_998f1e8d8c00479b98923caac120f971-1"></a><span class="k">let</span> <span class="n">displayed_resources</span> <span class="o">=</span> <span class="o">[</span>
-<a name="rest_code_998f1e8d8c00479b98923caac120f971-2"></a>  <span class="o">(</span><span class="s2">""</span><span class="o">,</span> <span class="s2">"global"</span><span class="o">,</span> <span class="o">[</span>
-<a name="rest_code_998f1e8d8c00479b98923caac120f971-3"></a>      <span class="nc">Energy</span><span class="o">,</span> <span class="s2">"Energy"</span><span class="o">,</span> <span class="s2">"energy"</span><span class="o">;</span>
-<a name="rest_code_998f1e8d8c00479b98923caac120f971-4"></a>    <span class="o">]);</span>
-<a name="rest_code_998f1e8d8c00479b98923caac120f971-5"></a>  <span class="o">(</span><span class="s2">"Raw"</span><span class="o">,</span> <span class="s2">"raw"</span><span class="o">,</span> <span class="o">[</span>
-<a name="rest_code_998f1e8d8c00479b98923caac120f971-6"></a>      <span class="nc">IronOxide</span><span class="o">,</span> <span class="s2">"Iron Oxide"</span><span class="o">,</span> <span class="s2">"ironoxide"</span><span class="o">;</span>
-<a name="rest_code_998f1e8d8c00479b98923caac120f971-7"></a>      <span class="nc">RawSilicon</span><span class="o">,</span> <span class="s2">"Raw Silicon"</span><span class="o">,</span> <span class="s2">"rawsilicon"</span><span class="o">;</span>
-<a name="rest_code_998f1e8d8c00479b98923caac120f971-8"></a>    <span class="o">]);</span>
-<a name="rest_code_998f1e8d8c00479b98923caac120f971-9"></a><span class="o">]</span>
+<pre class="code ocaml"><a name="rest_code_b0a340dff18a4cb7a2d2d060ed7a2e90-1"></a><span class="k">let</span> <span class="n">displayed_resources</span> <span class="o">=</span> <span class="o">[</span>
+<a name="rest_code_b0a340dff18a4cb7a2d2d060ed7a2e90-2"></a>  <span class="o">(</span><span class="s2">""</span><span class="o">,</span> <span class="s2">"global"</span><span class="o">,</span> <span class="o">[</span>
+<a name="rest_code_b0a340dff18a4cb7a2d2d060ed7a2e90-3"></a>      <span class="nc">Energy</span><span class="o">,</span> <span class="s2">"Energy"</span><span class="o">,</span> <span class="s2">"energy"</span><span class="o">;</span>
+<a name="rest_code_b0a340dff18a4cb7a2d2d060ed7a2e90-4"></a>    <span class="o">]);</span>
+<a name="rest_code_b0a340dff18a4cb7a2d2d060ed7a2e90-5"></a>  <span class="o">(</span><span class="s2">"Raw"</span><span class="o">,</span> <span class="s2">"raw"</span><span class="o">,</span> <span class="o">[</span>
+<a name="rest_code_b0a340dff18a4cb7a2d2d060ed7a2e90-6"></a>      <span class="nc">IronOxide</span><span class="o">,</span> <span class="s2">"Iron Oxide"</span><span class="o">,</span> <span class="s2">"ironoxide"</span><span class="o">;</span>
+<a name="rest_code_b0a340dff18a4cb7a2d2d060ed7a2e90-7"></a>      <span class="nc">RawSilicon</span><span class="o">,</span> <span class="s2">"Raw Silicon"</span><span class="o">,</span> <span class="s2">"rawsilicon"</span><span class="o">;</span>
+<a name="rest_code_b0a340dff18a4cb7a2d2d060ed7a2e90-8"></a>    <span class="o">]);</span>
+<a name="rest_code_b0a340dff18a4cb7a2d2d060ed7a2e90-9"></a><span class="o">]</span>
 </pre>
 <p>And now to toss in a set of helpers that will be useful later:</p>
-<pre class="code ocaml"><a name="rest_code_10d94629eaa549909adb877e42101ed8-1"></a><span class="k">let</span> <span class="n">get_resource_module</span> <span class="n">rid</span> <span class="o">=</span>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-2"></a>  <span class="nn">ResourceMap</span><span class="p">.</span><span class="n">find</span> <span class="n">rid</span> <span class="n">all_resources</span>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-3"></a>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-4"></a>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-5"></a><span class="k">let</span> <span class="n">get_resource_value</span> <span class="n">rid</span> <span class="n">model</span> <span class="o">=</span>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-6"></a>  <span class="nn">ResourceMap</span><span class="p">.</span><span class="n">find</span> <span class="n">rid</span> <span class="n">model</span><span class="o">.</span><span class="n">resource_values</span>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-7"></a>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-8"></a>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-9"></a><span class="k">type</span> <span class="n">resource_value_state</span> <span class="o">=</span>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-10"></a>  <span class="o">|</span> <span class="nc">ValueTooLow</span>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-11"></a>  <span class="o">|</span> <span class="nc">ValueTooHigh</span> <span class="k">of</span> <span class="n">model</span> <span class="o">*</span> <span class="n">resource_value</span>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-12"></a>  <span class="o">|</span> <span class="nc">ValueSuccess</span> <span class="k">of</span> <span class="n">model</span>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-13"></a>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-14"></a><span class="k">let</span> <span class="n">set_resource_value</span> <span class="n">rid</span> <span class="k">value</span> <span class="n">model</span> <span class="o">=</span>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-15"></a>  <span class="k">let</span> <span class="k">module</span> <span class="nc">R</span> <span class="o">=</span> <span class="o">(</span><span class="k">val</span> <span class="n">get_resource_module</span> <span class="n">rid</span><span class="o">)</span> <span class="k">in</span>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-16"></a>  <span class="k">let</span> <span class="n">rmin</span><span class="o">,</span> <span class="n">rmax</span> <span class="o">=</span> <span class="nn">R</span><span class="p">.</span><span class="n">get_value_range</span> <span class="n">model</span> <span class="k">in</span>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-17"></a>  <span class="k">if</span> <span class="k">value</span> <span class="o">&lt;</span> <span class="n">rmin</span> <span class="k">then</span> <span class="nc">ValueTooLow</span> <span class="k">else</span>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-18"></a>  <span class="k">if</span> <span class="k">value</span> <span class="o">&gt;</span> <span class="n">rmax</span> <span class="k">then</span>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-19"></a>    <span class="k">let</span> <span class="n">resource_values</span> <span class="o">=</span> <span class="nn">ResourceMap</span><span class="p">.</span><span class="n">add</span> <span class="n">rid</span> <span class="n">rmax</span> <span class="n">model</span><span class="o">.</span><span class="n">resource_values</span> <span class="k">in</span>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-20"></a>    <span class="nc">ValueTooHigh</span> <span class="o">({</span><span class="n">model</span> <span class="k">with</span> <span class="n">resource_values</span><span class="o">},</span> <span class="k">value</span><span class="o">-.</span><span class="n">rmax</span><span class="o">)</span>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-21"></a>  <span class="k">else</span>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-22"></a>    <span class="k">let</span> <span class="n">resource_values</span> <span class="o">=</span> <span class="nn">ResourceMap</span><span class="p">.</span><span class="n">add</span> <span class="n">rid</span> <span class="k">value</span> <span class="n">model</span><span class="o">.</span><span class="n">resource_values</span> <span class="k">in</span>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-23"></a>    <span class="nc">ValueSuccess</span> <span class="o">{</span><span class="n">model</span> <span class="k">with</span> <span class="n">resource_values</span><span class="o">}</span>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-24"></a>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-25"></a><span class="k">let</span> <span class="n">add_resource_value</span> <span class="n">rid</span> <span class="n">delta</span> <span class="n">model</span> <span class="o">=</span>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-26"></a>  <span class="k">let</span> <span class="k">value</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">+.</span> <span class="n">get_resource_value</span> <span class="n">rid</span> <span class="n">model</span> <span class="k">in</span>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-27"></a>  <span class="n">set_resource_value</span> <span class="n">rid</span> <span class="k">value</span> <span class="n">model</span>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-28"></a>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-29"></a>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-30"></a><span class="k">let</span> <span class="n">init_resources_values</span> <span class="o">=</span>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-31"></a>  <span class="k">let</span> <span class="n">resource_folder</span> <span class="n">rid</span> <span class="o">_</span><span class="n">r</span> <span class="n">acc</span> <span class="o">=</span>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-32"></a>    <span class="nn">ResourceMap</span><span class="p">.</span><span class="n">add</span> <span class="n">rid</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span> <span class="n">acc</span> <span class="k">in</span>
-<a name="rest_code_10d94629eaa549909adb877e42101ed8-33"></a>  <span class="nn">ResourceMap</span><span class="p">.</span><span class="n">fold</span> <span class="n">resource_folder</span> <span class="n">all_resources</span> <span class="nn">ResourceMap</span><span class="p">.</span><span class="n">empty</span>
+<pre class="code ocaml"><a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-1"></a><span class="k">let</span> <span class="n">get_resource_module</span> <span class="n">rid</span> <span class="o">=</span>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-2"></a>  <span class="nn">ResourceMap</span><span class="p">.</span><span class="n">find</span> <span class="n">rid</span> <span class="n">all_resources</span>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-3"></a>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-4"></a>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-5"></a><span class="k">let</span> <span class="n">get_resource_value</span> <span class="n">rid</span> <span class="n">model</span> <span class="o">=</span>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-6"></a>  <span class="nn">ResourceMap</span><span class="p">.</span><span class="n">find</span> <span class="n">rid</span> <span class="n">model</span><span class="o">.</span><span class="n">resource_values</span>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-7"></a>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-8"></a>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-9"></a><span class="k">type</span> <span class="n">resource_value_state</span> <span class="o">=</span>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-10"></a>  <span class="o">|</span> <span class="nc">ValueTooLow</span>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-11"></a>  <span class="o">|</span> <span class="nc">ValueTooHigh</span> <span class="k">of</span> <span class="n">model</span> <span class="o">*</span> <span class="n">resource_value</span>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-12"></a>  <span class="o">|</span> <span class="nc">ValueSuccess</span> <span class="k">of</span> <span class="n">model</span>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-13"></a>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-14"></a><span class="k">let</span> <span class="n">set_resource_value</span> <span class="n">rid</span> <span class="k">value</span> <span class="n">model</span> <span class="o">=</span>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-15"></a>  <span class="k">let</span> <span class="k">module</span> <span class="nc">R</span> <span class="o">=</span> <span class="o">(</span><span class="k">val</span> <span class="n">get_resource_module</span> <span class="n">rid</span><span class="o">)</span> <span class="k">in</span>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-16"></a>  <span class="k">let</span> <span class="n">rmin</span><span class="o">,</span> <span class="n">rmax</span> <span class="o">=</span> <span class="nn">R</span><span class="p">.</span><span class="n">get_value_range</span> <span class="n">model</span> <span class="k">in</span>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-17"></a>  <span class="k">if</span> <span class="k">value</span> <span class="o">&lt;</span> <span class="n">rmin</span> <span class="k">then</span> <span class="nc">ValueTooLow</span> <span class="k">else</span>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-18"></a>  <span class="k">if</span> <span class="k">value</span> <span class="o">&gt;</span> <span class="n">rmax</span> <span class="k">then</span>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-19"></a>    <span class="k">let</span> <span class="n">resource_values</span> <span class="o">=</span> <span class="nn">ResourceMap</span><span class="p">.</span><span class="n">add</span> <span class="n">rid</span> <span class="n">rmax</span> <span class="n">model</span><span class="o">.</span><span class="n">resource_values</span> <span class="k">in</span>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-20"></a>    <span class="nc">ValueTooHigh</span> <span class="o">({</span><span class="n">model</span> <span class="k">with</span> <span class="n">resource_values</span><span class="o">},</span> <span class="k">value</span><span class="o">-.</span><span class="n">rmax</span><span class="o">)</span>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-21"></a>  <span class="k">else</span>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-22"></a>    <span class="k">let</span> <span class="n">resource_values</span> <span class="o">=</span> <span class="nn">ResourceMap</span><span class="p">.</span><span class="n">add</span> <span class="n">rid</span> <span class="k">value</span> <span class="n">model</span><span class="o">.</span><span class="n">resource_values</span> <span class="k">in</span>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-23"></a>    <span class="nc">ValueSuccess</span> <span class="o">{</span><span class="n">model</span> <span class="k">with</span> <span class="n">resource_values</span><span class="o">}</span>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-24"></a>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-25"></a><span class="k">let</span> <span class="n">add_resource_value</span> <span class="n">rid</span> <span class="n">delta</span> <span class="n">model</span> <span class="o">=</span>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-26"></a>  <span class="k">let</span> <span class="k">value</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">+.</span> <span class="n">get_resource_value</span> <span class="n">rid</span> <span class="n">model</span> <span class="k">in</span>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-27"></a>  <span class="n">set_resource_value</span> <span class="n">rid</span> <span class="k">value</span> <span class="n">model</span>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-28"></a>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-29"></a>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-30"></a><span class="k">let</span> <span class="n">init_resources_values</span> <span class="o">=</span>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-31"></a>  <span class="k">let</span> <span class="n">resource_folder</span> <span class="n">rid</span> <span class="o">_</span><span class="n">r</span> <span class="n">acc</span> <span class="o">=</span>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-32"></a>    <span class="nn">ResourceMap</span><span class="p">.</span><span class="n">add</span> <span class="n">rid</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span> <span class="n">acc</span> <span class="k">in</span>
+<a name="rest_code_ec15c243fcaa47ddb6cb310cfa60df4c-33"></a>  <span class="nn">ResourceMap</span><span class="p">.</span><span class="n">fold</span> <span class="n">resource_folder</span> <span class="n">all_resources</span> <span class="nn">ResourceMap</span><span class="p">.</span><span class="n">empty</span>
 </pre>
 <p>And since I want to display these, to <tt class="docutils literal">src/overbots_view.ml</tt> and changing the <tt class="docutils literal">view_resources</tt> function to be this:</p>
-<pre class="code ocaml"><a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-1"></a><span class="k">let</span> <span class="n">format_value</span> <span class="k">value</span> <span class="o">=</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-2"></a>  <span class="k">if</span> <span class="k">value</span> <span class="o">&lt;</span> <span class="mi">10000</span><span class="o">.</span><span class="mi">0</span> <span class="k">then</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-3"></a>    <span class="k">let</span> <span class="n">str</span> <span class="o">=</span> <span class="n">string_of_float</span> <span class="k">value</span> <span class="k">in</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-4"></a>    <span class="k">let</span> <span class="n">str</span> <span class="o">=</span> <span class="nn">String</span><span class="p">.</span><span class="n">sub</span> <span class="n">str</span> <span class="mi">0</span> <span class="o">(</span><span class="n">min</span> <span class="o">(</span><span class="nn">String</span><span class="p">.</span><span class="n">length</span> <span class="n">str</span><span class="o">)</span> <span class="mi">6</span><span class="o">)</span> <span class="k">in</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-5"></a>    <span class="n">str</span> <span class="o">^</span> <span class="nn">String</span><span class="p">.</span><span class="n">make</span> <span class="o">(</span><span class="mi">6</span> <span class="o">-</span> <span class="nn">String</span><span class="p">.</span><span class="n">length</span> <span class="n">str</span><span class="o">)</span> <span class="sc">'0'</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-6"></a>  <span class="k">else</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-7"></a>    <span class="n">string_of_int</span> <span class="o">(</span><span class="n">int_of_float</span> <span class="k">value</span><span class="o">)</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-8"></a>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-9"></a><span class="k">let</span> <span class="n">view_resources_category_resource</span> <span class="n">model</span> <span class="o">(</span><span class="n">rid</span><span class="o">,</span> <span class="n">name</span><span class="o">,</span> <span class="n">id</span><span class="o">)</span> <span class="o">=</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-10"></a>  <span class="k">let</span> <span class="n">r</span> <span class="o">=</span> <span class="nn">Overbots_resource</span><span class="p">.</span><span class="n">get_resource_module</span> <span class="n">rid</span> <span class="k">in</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-11"></a>  <span class="k">let</span> <span class="k">module</span> <span class="nc">R</span> <span class="o">=</span> <span class="o">(</span><span class="k">val</span> <span class="n">r</span><span class="o">)</span> <span class="k">in</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-12"></a>  <span class="k">if</span> <span class="n">not</span> <span class="o">(</span><span class="nn">R</span><span class="p">.</span><span class="n">shown</span> <span class="n">model</span><span class="o">)</span> <span class="k">then</span> <span class="bp">[]</span> <span class="k">else</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-13"></a>  <span class="k">let</span> <span class="k">value</span> <span class="o">=</span> <span class="n">format_value</span> <span class="o">(</span><span class="nn">Overbots_resource</span><span class="p">.</span><span class="n">get_resource_value</span> <span class="n">rid</span> <span class="n">model</span><span class="o">)</span> <span class="k">in</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-14"></a>  <span class="o">[</span> <span class="n">div</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-15"></a>      <span class="o">[</span> <span class="k">class'</span> <span class="o">(</span><span class="s2">"resource resource-"</span><span class="o">^</span><span class="n">id</span><span class="o">)</span> <span class="o">]</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-16"></a>      <span class="o">[</span> <span class="n">div</span> <span class="o">[</span> <span class="k">class'</span> <span class="s2">"resource-name"</span> <span class="o">]</span> <span class="o">[</span> <span class="n">text</span> <span class="n">name</span> <span class="o">]</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-17"></a>      <span class="o">;</span> <span class="n">div</span> <span class="o">[</span> <span class="k">class'</span> <span class="s2">"resource-value"</span> <span class="o">]</span> <span class="o">[</span> <span class="n">text</span> <span class="k">value</span> <span class="o">]</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-18"></a>      <span class="o">]</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-19"></a>  <span class="o">]</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-20"></a>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-21"></a><span class="k">let</span> <span class="n">view_resources_categories</span> <span class="n">model</span> <span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">id</span><span class="o">,</span> <span class="n">resources</span><span class="o">)</span> <span class="o">=</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-22"></a>  <span class="k">let</span> <span class="n">children</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="o">(</span><span class="n">view_resources_category_resource</span> <span class="n">model</span><span class="o">)</span> <span class="n">resources</span> <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">flatten</span> <span class="k">in</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-23"></a>  <span class="k">if</span> <span class="n">children</span> <span class="o">==</span> <span class="bp">[]</span> <span class="k">then</span> <span class="bp">[]</span> <span class="k">else</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-24"></a>  <span class="k">let</span> <span class="n">children</span> <span class="o">=</span> <span class="k">if</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">""</span> <span class="k">then</span> <span class="n">children</span> <span class="k">else</span> <span class="n">div</span> <span class="o">[</span> <span class="k">class'</span> <span class="s2">"category-title"</span> <span class="o">]</span> <span class="o">[</span> <span class="n">text</span> <span class="n">name</span> <span class="o">]</span> <span class="o">::</span> <span class="n">children</span> <span class="k">in</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-25"></a>  <span class="o">[</span> <span class="n">div</span> <span class="o">[</span> <span class="k">class'</span> <span class="o">(</span><span class="s2">"resource-category resource-category-"</span><span class="o">^</span><span class="n">id</span><span class="o">)</span> <span class="o">]</span> <span class="n">children</span> <span class="o">]</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-26"></a>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-27"></a><span class="k">let</span> <span class="n">view_resources</span> <span class="n">model</span> <span class="o">=</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-28"></a>  <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="o">(</span><span class="n">view_resources_categories</span> <span class="n">model</span><span class="o">)</span> <span class="nn">Overbots_resource</span><span class="p">.</span><span class="n">displayed_resources</span>
-<a name="rest_code_ed4d395f8c954e3f9e8fea4e6f739efa-29"></a>  <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">flatten</span>
+<pre class="code ocaml"><a name="rest_code_161455c9216142b29a4cb2444d5974cc-1"></a><span class="k">let</span> <span class="n">format_value</span> <span class="k">value</span> <span class="o">=</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-2"></a>  <span class="k">if</span> <span class="k">value</span> <span class="o">&lt;</span> <span class="mi">10000</span><span class="o">.</span><span class="mi">0</span> <span class="k">then</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-3"></a>    <span class="k">let</span> <span class="n">str</span> <span class="o">=</span> <span class="n">string_of_float</span> <span class="k">value</span> <span class="k">in</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-4"></a>    <span class="k">let</span> <span class="n">str</span> <span class="o">=</span> <span class="nn">String</span><span class="p">.</span><span class="n">sub</span> <span class="n">str</span> <span class="mi">0</span> <span class="o">(</span><span class="n">min</span> <span class="o">(</span><span class="nn">String</span><span class="p">.</span><span class="n">length</span> <span class="n">str</span><span class="o">)</span> <span class="mi">6</span><span class="o">)</span> <span class="k">in</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-5"></a>    <span class="n">str</span> <span class="o">^</span> <span class="nn">String</span><span class="p">.</span><span class="n">make</span> <span class="o">(</span><span class="mi">6</span> <span class="o">-</span> <span class="nn">String</span><span class="p">.</span><span class="n">length</span> <span class="n">str</span><span class="o">)</span> <span class="sc">'0'</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-6"></a>  <span class="k">else</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-7"></a>    <span class="n">string_of_int</span> <span class="o">(</span><span class="n">int_of_float</span> <span class="k">value</span><span class="o">)</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-8"></a>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-9"></a><span class="k">let</span> <span class="n">view_resources_category_resource</span> <span class="n">model</span> <span class="o">(</span><span class="n">rid</span><span class="o">,</span> <span class="n">name</span><span class="o">,</span> <span class="n">id</span><span class="o">)</span> <span class="o">=</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-10"></a>  <span class="k">let</span> <span class="n">r</span> <span class="o">=</span> <span class="nn">Overbots_resource</span><span class="p">.</span><span class="n">get_resource_module</span> <span class="n">rid</span> <span class="k">in</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-11"></a>  <span class="k">let</span> <span class="k">module</span> <span class="nc">R</span> <span class="o">=</span> <span class="o">(</span><span class="k">val</span> <span class="n">r</span><span class="o">)</span> <span class="k">in</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-12"></a>  <span class="k">if</span> <span class="n">not</span> <span class="o">(</span><span class="nn">R</span><span class="p">.</span><span class="n">shown</span> <span class="n">model</span><span class="o">)</span> <span class="k">then</span> <span class="bp">[]</span> <span class="k">else</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-13"></a>  <span class="k">let</span> <span class="k">value</span> <span class="o">=</span> <span class="n">format_value</span> <span class="o">(</span><span class="nn">Overbots_resource</span><span class="p">.</span><span class="n">get_resource_value</span> <span class="n">rid</span> <span class="n">model</span><span class="o">)</span> <span class="k">in</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-14"></a>  <span class="o">[</span> <span class="n">div</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-15"></a>      <span class="o">[</span> <span class="k">class'</span> <span class="o">(</span><span class="s2">"resource resource-"</span><span class="o">^</span><span class="n">id</span><span class="o">)</span> <span class="o">]</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-16"></a>      <span class="o">[</span> <span class="n">div</span> <span class="o">[</span> <span class="k">class'</span> <span class="s2">"resource-name"</span> <span class="o">]</span> <span class="o">[</span> <span class="n">text</span> <span class="n">name</span> <span class="o">]</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-17"></a>      <span class="o">;</span> <span class="n">div</span> <span class="o">[</span> <span class="k">class'</span> <span class="s2">"resource-value"</span> <span class="o">]</span> <span class="o">[</span> <span class="n">text</span> <span class="k">value</span> <span class="o">]</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-18"></a>      <span class="o">]</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-19"></a>  <span class="o">]</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-20"></a>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-21"></a><span class="k">let</span> <span class="n">view_resources_categories</span> <span class="n">model</span> <span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">id</span><span class="o">,</span> <span class="n">resources</span><span class="o">)</span> <span class="o">=</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-22"></a>  <span class="k">let</span> <span class="n">children</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="o">(</span><span class="n">view_resources_category_resource</span> <span class="n">model</span><span class="o">)</span> <span class="n">resources</span> <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">flatten</span> <span class="k">in</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-23"></a>  <span class="k">if</span> <span class="n">children</span> <span class="o">==</span> <span class="bp">[]</span> <span class="k">then</span> <span class="bp">[]</span> <span class="k">else</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-24"></a>  <span class="k">let</span> <span class="n">children</span> <span class="o">=</span> <span class="k">if</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">""</span> <span class="k">then</span> <span class="n">children</span> <span class="k">else</span> <span class="n">div</span> <span class="o">[</span> <span class="k">class'</span> <span class="s2">"category-title"</span> <span class="o">]</span> <span class="o">[</span> <span class="n">text</span> <span class="n">name</span> <span class="o">]</span> <span class="o">::</span> <span class="n">children</span> <span class="k">in</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-25"></a>  <span class="o">[</span> <span class="n">div</span> <span class="o">[</span> <span class="k">class'</span> <span class="o">(</span><span class="s2">"resource-category resource-category-"</span><span class="o">^</span><span class="n">id</span><span class="o">)</span> <span class="o">]</span> <span class="n">children</span> <span class="o">]</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-26"></a>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-27"></a><span class="k">let</span> <span class="n">view_resources</span> <span class="n">model</span> <span class="o">=</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-28"></a>  <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="o">(</span><span class="n">view_resources_categories</span> <span class="n">model</span><span class="o">)</span> <span class="nn">Overbots_resource</span><span class="p">.</span><span class="n">displayed_resources</span>
+<a name="rest_code_161455c9216142b29a4cb2444d5974cc-29"></a>  <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">flatten</span>
 </pre>
 <p>And it displays!  Not formatted at all, so I'm adding some css, replacing the <tt class="docutils literal"><span class="pre">.container-resources</span></tt> block with:</p>
-<pre class="code scss"><a name="rest_code_217fc597376a4e91836287328a684a14-1"></a><span class="nc">.container-resources</span> <span class="p">{</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-2"></a>  <span class="nt">flex</span><span class="nd">:</span> <span class="nt">0</span> <span class="nt">0</span> <span class="nt">256px</span><span class="o">;</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-3"></a>  <span class="nt">order</span><span class="nd">:</span> <span class="nt">0</span><span class="o">;</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-4"></a>
-<a name="rest_code_217fc597376a4e91836287328a684a14-5"></a>  <span class="nc">.category-title</span> <span class="p">{</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-6"></a>    <span class="nt">border-bottom</span><span class="nd">:</span> <span class="nt">solid</span> <span class="nt">1px</span> <span class="nn">#000</span><span class="o">;</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-7"></a>    <span class="nt">flex</span><span class="nd">:</span> <span class="nt">0</span><span class="o">;</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-8"></a>    <span class="nt">font-weight</span><span class="nd">:</span> <span class="nt">bold</span><span class="o">;</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-9"></a>    <span class="nt">text-align</span><span class="nd">:</span> <span class="nt">center</span><span class="o">;</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-10"></a>  <span class="p">}</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-11"></a>
-<a name="rest_code_217fc597376a4e91836287328a684a14-12"></a>  <span class="nc">.resource</span> <span class="p">{</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-13"></a>    <span class="nt">border</span><span class="nd">:</span> <span class="nt">dashed</span> <span class="nt">1px</span> <span class="nn">#000</span><span class="o">;</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-14"></a>    <span class="nt">display</span><span class="nd">:</span> <span class="nt">flex</span><span class="o">;</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-15"></a>    <span class="nt">flex</span><span class="nd">:</span> <span class="nt">0</span><span class="o">;</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-16"></a>    <span class="nt">flex-direction</span><span class="nd">:</span> <span class="nt">row</span><span class="o">;</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-17"></a>  <span class="p">}</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-18"></a>
-<a name="rest_code_217fc597376a4e91836287328a684a14-19"></a>  <span class="nc">.resource-name</span> <span class="p">{</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-20"></a>    <span class="nt">display</span><span class="nd">:</span> <span class="nt">flex</span><span class="o">;</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-21"></a>    <span class="nt">flex</span><span class="nd">:</span> <span class="nt">2</span><span class="o">;</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-22"></a>    <span class="nt">font-weight</span><span class="nd">:</span> <span class="nt">bold</span><span class="o">;</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-23"></a>    <span class="nt">width</span><span class="nd">:</span> <span class="nt">50</span><span class="err">%</span><span class="o">;</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-24"></a>  <span class="p">}</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-25"></a>
-<a name="rest_code_217fc597376a4e91836287328a684a14-26"></a>  <span class="nc">.resource-value</span> <span class="p">{</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-27"></a>    <span class="nt">display</span><span class="nd">:</span> <span class="nt">flex</span><span class="o">;</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-28"></a>    <span class="nt">flex</span><span class="nd">:</span> <span class="nt">1</span><span class="o">;</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-29"></a>    <span class="nt">padding-left</span><span class="nd">:</span> <span class="nt">8px</span><span class="o">;</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-30"></a>  <span class="p">}</span>
-<a name="rest_code_217fc597376a4e91836287328a684a14-31"></a><span class="p">}</span>
+<pre class="code scss"><a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-1"></a><span class="nc">.container-resources</span> <span class="p">{</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-2"></a>  <span class="nt">flex</span><span class="nd">:</span> <span class="nt">0</span> <span class="nt">0</span> <span class="nt">256px</span><span class="o">;</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-3"></a>  <span class="nt">order</span><span class="nd">:</span> <span class="nt">0</span><span class="o">;</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-4"></a>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-5"></a>  <span class="nc">.category-title</span> <span class="p">{</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-6"></a>    <span class="nt">border-bottom</span><span class="nd">:</span> <span class="nt">solid</span> <span class="nt">1px</span> <span class="nn">#000</span><span class="o">;</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-7"></a>    <span class="nt">flex</span><span class="nd">:</span> <span class="nt">0</span><span class="o">;</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-8"></a>    <span class="nt">font-weight</span><span class="nd">:</span> <span class="nt">bold</span><span class="o">;</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-9"></a>    <span class="nt">text-align</span><span class="nd">:</span> <span class="nt">center</span><span class="o">;</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-10"></a>  <span class="p">}</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-11"></a>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-12"></a>  <span class="nc">.resource</span> <span class="p">{</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-13"></a>    <span class="nt">border</span><span class="nd">:</span> <span class="nt">dashed</span> <span class="nt">1px</span> <span class="nn">#000</span><span class="o">;</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-14"></a>    <span class="nt">display</span><span class="nd">:</span> <span class="nt">flex</span><span class="o">;</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-15"></a>    <span class="nt">flex</span><span class="nd">:</span> <span class="nt">0</span><span class="o">;</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-16"></a>    <span class="nt">flex-direction</span><span class="nd">:</span> <span class="nt">row</span><span class="o">;</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-17"></a>  <span class="p">}</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-18"></a>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-19"></a>  <span class="nc">.resource-name</span> <span class="p">{</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-20"></a>    <span class="nt">display</span><span class="nd">:</span> <span class="nt">flex</span><span class="o">;</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-21"></a>    <span class="nt">flex</span><span class="nd">:</span> <span class="nt">2</span><span class="o">;</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-22"></a>    <span class="nt">font-weight</span><span class="nd">:</span> <span class="nt">bold</span><span class="o">;</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-23"></a>    <span class="nt">width</span><span class="nd">:</span> <span class="nt">50</span><span class="err">%</span><span class="o">;</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-24"></a>  <span class="p">}</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-25"></a>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-26"></a>  <span class="nc">.resource-value</span> <span class="p">{</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-27"></a>    <span class="nt">display</span><span class="nd">:</span> <span class="nt">flex</span><span class="o">;</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-28"></a>    <span class="nt">flex</span><span class="nd">:</span> <span class="nt">1</span><span class="o">;</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-29"></a>    <span class="nt">padding-left</span><span class="nd">:</span> <span class="nt">8px</span><span class="o">;</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-30"></a>  <span class="p">}</span>
+<a name="rest_code_732e742648c140b0ba59a161bf2e3c7c-31"></a><span class="p">}</span>
 </pre>
 </div>
 </div>
 <div class="section" id="data-storage">
 <h2>Data Storage</h2>
 <p>Data storage I want to be type safe and easily able to be passed around, so I think I will use Map's for a lot of these as well.  Primarily a lot of things are going to be 'is this researched', 'is this on', and 'how many of this do I have' and so forth, so I think I will wrap that up into a pattern similar to the resource values as before, very simple:</p>
-<pre class="code ocaml"><a name="rest_code_c02ffe4da651476f96e51144a3cb999a-1"></a><span class="k">type</span> <span class="n">bool_flag</span> <span class="o">=</span>
-<a name="rest_code_c02ffe4da651476f96e51144a3cb999a-2"></a>  <span class="o">|</span> <span class="nc">SolarPanelsReadyToUnfold</span>
-<a name="rest_code_c02ffe4da651476f96e51144a3cb999a-3"></a>  <span class="o">|</span> <span class="nc">SolarPanelsGenerating</span>
-<a name="rest_code_c02ffe4da651476f96e51144a3cb999a-4"></a>  <span class="o">|</span> <span class="nc">DrillDeployed</span>
-<a name="rest_code_c02ffe4da651476f96e51144a3cb999a-5"></a><span class="k">module</span> <span class="nc">BoolFlagSet</span> <span class="o">=</span> <span class="nn">Set</span><span class="p">.</span><span class="nc">Make</span><span class="o">(</span><span class="k">struct</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="n">bool_flag</span> <span class="k">let</span> <span class="n">compare</span> <span class="o">=</span> <span class="n">compare</span> <span class="k">end</span><span class="o">)</span>
-<a name="rest_code_c02ffe4da651476f96e51144a3cb999a-6"></a><span class="k">type</span> <span class="n">bool_flags</span> <span class="o">=</span> <span class="nn">BoolFlagSet</span><span class="p">.</span><span class="n">t</span>
-<a name="rest_code_c02ffe4da651476f96e51144a3cb999a-7"></a><span class="k">let</span> <span class="n">init_bool_flags</span> <span class="o">=</span> <span class="nn">BoolFlagSet</span><span class="p">.</span><span class="n">empty</span>
-<a name="rest_code_c02ffe4da651476f96e51144a3cb999a-8"></a>
-<a name="rest_code_c02ffe4da651476f96e51144a3cb999a-9"></a>
-<a name="rest_code_c02ffe4da651476f96e51144a3cb999a-10"></a>
-<a name="rest_code_c02ffe4da651476f96e51144a3cb999a-11"></a><span class="k">type</span> <span class="n">int_flag</span> <span class="o">=</span>
-<a name="rest_code_c02ffe4da651476f96e51144a3cb999a-12"></a>  <span class="o">|</span> <span class="nc">NoIntFlagsYet</span>
-<a name="rest_code_c02ffe4da651476f96e51144a3cb999a-13"></a><span class="k">module</span> <span class="nc">IntFlagMap</span> <span class="o">=</span> <span class="nn">Map</span><span class="p">.</span><span class="nc">Make</span><span class="o">(</span><span class="k">struct</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="n">int_flag</span> <span class="k">let</span> <span class="n">compare</span> <span class="o">=</span> <span class="n">compare</span> <span class="k">end</span><span class="o">)</span>
-<a name="rest_code_c02ffe4da651476f96e51144a3cb999a-14"></a><span class="k">type</span> <span class="n">int_flags</span> <span class="o">=</span> <span class="kt">int</span> <span class="nn">IntFlagMap</span><span class="p">.</span><span class="n">t</span>
-<a name="rest_code_c02ffe4da651476f96e51144a3cb999a-15"></a><span class="k">let</span> <span class="n">init_int_flags</span> <span class="o">=</span>
-<a name="rest_code_c02ffe4da651476f96e51144a3cb999a-16"></a>  <span class="k">let</span> <span class="k">open</span> <span class="nc">IntFlagMap</span> <span class="k">in</span>
-<a name="rest_code_c02ffe4da651476f96e51144a3cb999a-17"></a>  <span class="n">empty</span>
-<a name="rest_code_c02ffe4da651476f96e51144a3cb999a-18"></a>  <span class="o">|&gt;</span> <span class="n">add</span> <span class="nc">NoIntFlagsYet</span> <span class="mi">0</span>
+<pre class="code ocaml"><a name="rest_code_40bd4302b9f247b791b5d71849640194-1"></a><span class="k">type</span> <span class="n">bool_flag</span> <span class="o">=</span>
+<a name="rest_code_40bd4302b9f247b791b5d71849640194-2"></a>  <span class="o">|</span> <span class="nc">SolarPanelsReadyToUnfold</span>
+<a name="rest_code_40bd4302b9f247b791b5d71849640194-3"></a>  <span class="o">|</span> <span class="nc">SolarPanelsGenerating</span>
+<a name="rest_code_40bd4302b9f247b791b5d71849640194-4"></a>  <span class="o">|</span> <span class="nc">DrillDeployed</span>
+<a name="rest_code_40bd4302b9f247b791b5d71849640194-5"></a><span class="k">module</span> <span class="nc">BoolFlagSet</span> <span class="o">=</span> <span class="nn">Set</span><span class="p">.</span><span class="nc">Make</span><span class="o">(</span><span class="k">struct</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="n">bool_flag</span> <span class="k">let</span> <span class="n">compare</span> <span class="o">=</span> <span class="n">compare</span> <span class="k">end</span><span class="o">)</span>
+<a name="rest_code_40bd4302b9f247b791b5d71849640194-6"></a><span class="k">type</span> <span class="n">bool_flags</span> <span class="o">=</span> <span class="nn">BoolFlagSet</span><span class="p">.</span><span class="n">t</span>
+<a name="rest_code_40bd4302b9f247b791b5d71849640194-7"></a><span class="k">let</span> <span class="n">init_bool_flags</span> <span class="o">=</span> <span class="nn">BoolFlagSet</span><span class="p">.</span><span class="n">empty</span>
+<a name="rest_code_40bd4302b9f247b791b5d71849640194-8"></a>
+<a name="rest_code_40bd4302b9f247b791b5d71849640194-9"></a>
+<a name="rest_code_40bd4302b9f247b791b5d71849640194-10"></a>
+<a name="rest_code_40bd4302b9f247b791b5d71849640194-11"></a><span class="k">type</span> <span class="n">int_flag</span> <span class="o">=</span>
+<a name="rest_code_40bd4302b9f247b791b5d71849640194-12"></a>  <span class="o">|</span> <span class="nc">NoIntFlagsYet</span>
+<a name="rest_code_40bd4302b9f247b791b5d71849640194-13"></a><span class="k">module</span> <span class="nc">IntFlagMap</span> <span class="o">=</span> <span class="nn">Map</span><span class="p">.</span><span class="nc">Make</span><span class="o">(</span><span class="k">struct</span> <span class="k">type</span> <span class="n">t</span> <span class="o">=</span> <span class="n">int_flag</span> <span class="k">let</span> <span class="n">compare</span> <span class="o">=</span> <span class="n">compare</span> <span class="k">end</span><span class="o">)</span>
+<a name="rest_code_40bd4302b9f247b791b5d71849640194-14"></a><span class="k">type</span> <span class="n">int_flags</span> <span class="o">=</span> <span class="kt">int</span> <span class="nn">IntFlagMap</span><span class="p">.</span><span class="n">t</span>
+<a name="rest_code_40bd4302b9f247b791b5d71849640194-15"></a><span class="k">let</span> <span class="n">init_int_flags</span> <span class="o">=</span>
+<a name="rest_code_40bd4302b9f247b791b5d71849640194-16"></a>  <span class="k">let</span> <span class="k">open</span> <span class="nc">IntFlagMap</span> <span class="k">in</span>
+<a name="rest_code_40bd4302b9f247b791b5d71849640194-17"></a>  <span class="n">empty</span>
+<a name="rest_code_40bd4302b9f247b791b5d71849640194-18"></a>  <span class="o">|&gt;</span> <span class="n">add</span> <span class="nc">NoIntFlagsYet</span> <span class="mi">0</span>
 </pre>
 <p>Easily expandable by adding to the variants for each.  I could wrap these up into a Functor with a set of helpers, but I'll likely just write helpers inline in another module, in fact let's do that now in <tt class="docutils literal">src/overbots_flags.ml</tt>:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_0c7fae8083964ec991cadce9fea214d8-1">1</a>
-<a href="#rest_code_0c7fae8083964ec991cadce9fea214d8-2">2</a>
-<a href="#rest_code_0c7fae8083964ec991cadce9fea214d8-3">3</a>
-<a href="#rest_code_0c7fae8083964ec991cadce9fea214d8-4">4</a>
-<a href="#rest_code_0c7fae8083964ec991cadce9fea214d8-5">5</a>
-<a href="#rest_code_0c7fae8083964ec991cadce9fea214d8-6">6</a>
-<a href="#rest_code_0c7fae8083964ec991cadce9fea214d8-7">7</a></pre></div></td>
-<td class="code"><pre class="code ocaml"><a name="rest_code_0c7fae8083964ec991cadce9fea214d8-1"></a><span class="k">open</span> <span class="nc">Overbots_types</span>
-<a name="rest_code_0c7fae8083964ec991cadce9fea214d8-2"></a>
-<a name="rest_code_0c7fae8083964ec991cadce9fea214d8-3"></a><span class="k">let</span> <span class="n">bool_flag_exists</span> <span class="n">fid</span> <span class="n">model</span> <span class="o">=</span>
-<a name="rest_code_0c7fae8083964ec991cadce9fea214d8-4"></a>  <span class="nn">BoolFlagSet</span><span class="p">.</span><span class="n">mem</span> <span class="n">fid</span> <span class="n">model</span><span class="o">.</span><span class="n">bool_flags</span>
-<a name="rest_code_0c7fae8083964ec991cadce9fea214d8-5"></a>
-<a name="rest_code_0c7fae8083964ec991cadce9fea214d8-6"></a><span class="k">let</span> <span class="n">int_flag_value</span> <span class="n">fid</span> <span class="n">model</span> <span class="o">=</span>
-<a name="rest_code_0c7fae8083964ec991cadce9fea214d8-7"></a>  <span class="nn">IntFlagMap</span><span class="p">.</span><span class="n">find</span> <span class="n">fid</span> <span class="n">model</span><span class="o">.</span><span class="n">int_flags</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_f9daec61c67744fb8ef86cfe286926bb-1">1</a>
+<a href="#rest_code_f9daec61c67744fb8ef86cfe286926bb-2">2</a>
+<a href="#rest_code_f9daec61c67744fb8ef86cfe286926bb-3">3</a>
+<a href="#rest_code_f9daec61c67744fb8ef86cfe286926bb-4">4</a>
+<a href="#rest_code_f9daec61c67744fb8ef86cfe286926bb-5">5</a>
+<a href="#rest_code_f9daec61c67744fb8ef86cfe286926bb-6">6</a>
+<a href="#rest_code_f9daec61c67744fb8ef86cfe286926bb-7">7</a></pre></div></td>
+<td class="code"><pre class="code ocaml"><a name="rest_code_f9daec61c67744fb8ef86cfe286926bb-1"></a><span class="k">open</span> <span class="nc">Overbots_types</span>
+<a name="rest_code_f9daec61c67744fb8ef86cfe286926bb-2"></a>
+<a name="rest_code_f9daec61c67744fb8ef86cfe286926bb-3"></a><span class="k">let</span> <span class="n">bool_flag_exists</span> <span class="n">fid</span> <span class="n">model</span> <span class="o">=</span>
+<a name="rest_code_f9daec61c67744fb8ef86cfe286926bb-4"></a>  <span class="nn">BoolFlagSet</span><span class="p">.</span><span class="n">mem</span> <span class="n">fid</span> <span class="n">model</span><span class="o">.</span><span class="n">bool_flags</span>
+<a name="rest_code_f9daec61c67744fb8ef86cfe286926bb-5"></a>
+<a name="rest_code_f9daec61c67744fb8ef86cfe286926bb-6"></a><span class="k">let</span> <span class="n">int_flag_value</span> <span class="n">fid</span> <span class="n">model</span> <span class="o">=</span>
+<a name="rest_code_f9daec61c67744fb8ef86cfe286926bb-7"></a>  <span class="nn">IntFlagMap</span><span class="p">.</span><span class="n">find</span> <span class="n">fid</span> <span class="n">model</span><span class="o">.</span><span class="n">int_flags</span>
 </pre></td>
 </tr></table>
 <p>And changing the main <tt class="docutils literal">model</tt> type to be:</p>
-<pre class="code ocaml"><a name="rest_code_ad5224fed9cf4e91b0e534c78e3a527c-1"></a><span class="k">type</span> <span class="n">model</span> <span class="o">=</span> <span class="o">{</span>
-<a name="rest_code_ad5224fed9cf4e91b0e534c78e3a527c-2"></a>  <span class="n">msgs</span> <span class="o">:</span> <span class="n">game_msg</span> <span class="kt">list</span><span class="o">;</span>
-<a name="rest_code_ad5224fed9cf4e91b0e534c78e3a527c-3"></a>  <span class="n">resource_values</span> <span class="o">:</span> <span class="n">resource_value</span> <span class="nn">ResourceMap</span><span class="p">.</span><span class="n">t</span><span class="o">;</span>
-<a name="rest_code_ad5224fed9cf4e91b0e534c78e3a527c-4"></a>  <span class="n">bool_flags</span> <span class="o">:</span> <span class="n">bool_flags</span><span class="o">;</span>
-<a name="rest_code_ad5224fed9cf4e91b0e534c78e3a527c-5"></a>  <span class="n">int_flags</span> <span class="o">:</span> <span class="n">int_flags</span><span class="o">;</span>
-<a name="rest_code_ad5224fed9cf4e91b0e534c78e3a527c-6"></a><span class="o">}</span>
+<pre class="code ocaml"><a name="rest_code_d456395acb5948fdbc8c5733dbe5cecb-1"></a><span class="k">type</span> <span class="n">model</span> <span class="o">=</span> <span class="o">{</span>
+<a name="rest_code_d456395acb5948fdbc8c5733dbe5cecb-2"></a>  <span class="n">msgs</span> <span class="o">:</span> <span class="n">game_msg</span> <span class="kt">list</span><span class="o">;</span>
+<a name="rest_code_d456395acb5948fdbc8c5733dbe5cecb-3"></a>  <span class="n">resource_values</span> <span class="o">:</span> <span class="n">resource_value</span> <span class="nn">ResourceMap</span><span class="p">.</span><span class="n">t</span><span class="o">;</span>
+<a name="rest_code_d456395acb5948fdbc8c5733dbe5cecb-4"></a>  <span class="n">bool_flags</span> <span class="o">:</span> <span class="n">bool_flags</span><span class="o">;</span>
+<a name="rest_code_d456395acb5948fdbc8c5733dbe5cecb-5"></a>  <span class="n">int_flags</span> <span class="o">:</span> <span class="n">int_flags</span><span class="o">;</span>
+<a name="rest_code_d456395acb5948fdbc8c5733dbe5cecb-6"></a><span class="o">}</span>
 </pre>
 <p>And lastly updating the base <tt class="docutils literal">init</tt> function:</p>
-<pre class="code ocaml"><a name="rest_code_ed83a71d837e4a708a3bf6ec45644cdb-1"></a><span class="k">let</span> <span class="n">init</span> <span class="bp">()</span> <span class="o">=</span>
-<a name="rest_code_ed83a71d837e4a708a3bf6ec45644cdb-2"></a>  <span class="k">let</span> <span class="n">model</span> <span class="o">=</span> <span class="o">{</span>
-<a name="rest_code_ed83a71d837e4a708a3bf6ec45644cdb-3"></a>    <span class="n">msgs</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">;</span>
-<a name="rest_code_ed83a71d837e4a708a3bf6ec45644cdb-4"></a>    <span class="n">resource_values</span> <span class="o">=</span> <span class="nn">Overbots_resource</span><span class="p">.</span><span class="n">init_resources_values</span><span class="o">;</span>
-<a name="rest_code_ed83a71d837e4a708a3bf6ec45644cdb-5"></a>    <span class="n">bool_flags</span> <span class="o">=</span> <span class="n">init_bool_flags</span><span class="o">;</span>
-<a name="rest_code_ed83a71d837e4a708a3bf6ec45644cdb-6"></a>    <span class="n">int_flags</span> <span class="o">=</span> <span class="n">init_int_flags</span><span class="o">;</span>
-<a name="rest_code_ed83a71d837e4a708a3bf6ec45644cdb-7"></a>  <span class="o">}</span> <span class="k">in</span>
-<a name="rest_code_ed83a71d837e4a708a3bf6ec45644cdb-8"></a>  <span class="o">(</span><span class="n">model</span><span class="o">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span><span class="o">)</span>
+<pre class="code ocaml"><a name="rest_code_20141e6298b44a9f850c2473b62f71a6-1"></a><span class="k">let</span> <span class="n">init</span> <span class="bp">()</span> <span class="o">=</span>
+<a name="rest_code_20141e6298b44a9f850c2473b62f71a6-2"></a>  <span class="k">let</span> <span class="n">model</span> <span class="o">=</span> <span class="o">{</span>
+<a name="rest_code_20141e6298b44a9f850c2473b62f71a6-3"></a>    <span class="n">msgs</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">;</span>
+<a name="rest_code_20141e6298b44a9f850c2473b62f71a6-4"></a>    <span class="n">resource_values</span> <span class="o">=</span> <span class="nn">Overbots_resource</span><span class="p">.</span><span class="n">init_resources_values</span><span class="o">;</span>
+<a name="rest_code_20141e6298b44a9f850c2473b62f71a6-5"></a>    <span class="n">bool_flags</span> <span class="o">=</span> <span class="n">init_bool_flags</span><span class="o">;</span>
+<a name="rest_code_20141e6298b44a9f850c2473b62f71a6-6"></a>    <span class="n">int_flags</span> <span class="o">=</span> <span class="n">init_int_flags</span><span class="o">;</span>
+<a name="rest_code_20141e6298b44a9f850c2473b62f71a6-7"></a>  <span class="o">}</span> <span class="k">in</span>
+<a name="rest_code_20141e6298b44a9f850c2473b62f71a6-8"></a>  <span class="o">(</span><span class="n">model</span><span class="o">,</span> <span class="nn">Cmd</span><span class="p">.</span><span class="n">none</span><span class="o">)</span>
 </pre>
 <p>And running it still reveals the resources, good to go where next time we should start putting in actions and buttons.</p>
 </div>
