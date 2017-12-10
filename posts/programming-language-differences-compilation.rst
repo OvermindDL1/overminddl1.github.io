@@ -10,6 +10,8 @@
 
 There are a variety of differences between programming languages that go far deeper than syntax, programming style, and programming patterns, that permeate through the language to effect its very core.  This post will go over the primary differences that drive the compilation of the language itself to how it handles these compilation differences at run-time.  This will be a *very* high level overview/descriptions and much will be glossed over at this time.
 
+.. TEASER_END
+
 Every languages bindings/variables/expression has a type, generally of the form such as where ``2`` is a number of some sort, such as an integer (such as in Python), a float (such as in JavaScript), or a few other specific types there-of, or a ``"something"`` string of some sort, regardless of how the language syntax shows it in textual form.  Some languages may even store every type in a singular format, such as a storing everything as a String as some languages do (such as the older Visual Basic's in the general case).
 
 Do note that this post may perpetually be in development, at this point it is primarily just a brain-dump rather then something curated.  As always feel free to leave comments for improvements.
