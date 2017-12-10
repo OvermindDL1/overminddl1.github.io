@@ -19,6 +19,8 @@ Do note that this post may perpetually be in development, at this point it is pr
 - `Static vs. Dynamic Typing`_
 - `Combinations of Typing`_
 
+(If you have javascript enabled then the source code entries are editable and you see the results in real-time)
+
 ================================
 Compiled vs. JIT vs. Interpreted
 ================================
