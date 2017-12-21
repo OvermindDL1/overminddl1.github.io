@@ -117,258 +117,258 @@ mdl-layout--small-screen-only
 <!-- TEASER_END -->
 <p>Let's start with a basic structure for the view first, something pretty generic to the incremental design.  I'm going to make a new file at <tt class="docutils literal">src/overbots_view.ml</tt> to put the view code in to keep the main file from getting too large.  In it I am going to put the view function:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_fdefa8bed1e14b31813c5392361f3d80-1">1</a>
-<a href="#rest_code_fdefa8bed1e14b31813c5392361f3d80-2">2</a>
-<a href="#rest_code_fdefa8bed1e14b31813c5392361f3d80-3">3</a>
-<a href="#rest_code_fdefa8bed1e14b31813c5392361f3d80-4">4</a>
-<a href="#rest_code_fdefa8bed1e14b31813c5392361f3d80-5">5</a>
-<a href="#rest_code_fdefa8bed1e14b31813c5392361f3d80-6">6</a>
-<a href="#rest_code_fdefa8bed1e14b31813c5392361f3d80-7">7</a></pre></div></td>
-<td class="code"><pre class="code ocaml"><a name="rest_code_fdefa8bed1e14b31813c5392361f3d80-1"></a><span class="k">open</span> <span class="nn">Tea</span><span class="p">.</span><span class="nc">Html</span>
-<a name="rest_code_fdefa8bed1e14b31813c5392361f3d80-2"></a>
-<a name="rest_code_fdefa8bed1e14b31813c5392361f3d80-3"></a><span class="k">let</span> <span class="n">view</span> <span class="n">model</span> <span class="o">=</span>
-<a name="rest_code_fdefa8bed1e14b31813c5392361f3d80-4"></a>  <span class="n">div</span>
-<a name="rest_code_fdefa8bed1e14b31813c5392361f3d80-5"></a>    <span class="bp">[]</span>
-<a name="rest_code_fdefa8bed1e14b31813c5392361f3d80-6"></a>    <span class="o">[</span> <span class="n">text</span> <span class="o">(</span><span class="n">string_of_int</span> <span class="n">model</span><span class="o">.</span><span class="n">notUsedYet</span><span class="o">)</span>
-<a name="rest_code_fdefa8bed1e14b31813c5392361f3d80-7"></a>    <span class="o">]</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_3c336af24cec46e4a32d8fd33ff07848-1">1</a>
+<a href="#rest_code_3c336af24cec46e4a32d8fd33ff07848-2">2</a>
+<a href="#rest_code_3c336af24cec46e4a32d8fd33ff07848-3">3</a>
+<a href="#rest_code_3c336af24cec46e4a32d8fd33ff07848-4">4</a>
+<a href="#rest_code_3c336af24cec46e4a32d8fd33ff07848-5">5</a>
+<a href="#rest_code_3c336af24cec46e4a32d8fd33ff07848-6">6</a>
+<a href="#rest_code_3c336af24cec46e4a32d8fd33ff07848-7">7</a></pre></div></td>
+<td class="code"><pre class="code ocaml"><a name="rest_code_3c336af24cec46e4a32d8fd33ff07848-1"></a><span class="k">open</span> <span class="nn">Tea</span><span class="p">.</span><span class="nc">Html</span>
+<a name="rest_code_3c336af24cec46e4a32d8fd33ff07848-2"></a>
+<a name="rest_code_3c336af24cec46e4a32d8fd33ff07848-3"></a><span class="k">let</span> <span class="n">view</span> <span class="n">model</span> <span class="o">=</span>
+<a name="rest_code_3c336af24cec46e4a32d8fd33ff07848-4"></a>  <span class="n">div</span>
+<a name="rest_code_3c336af24cec46e4a32d8fd33ff07848-5"></a>    <span class="bp">[]</span>
+<a name="rest_code_3c336af24cec46e4a32d8fd33ff07848-6"></a>    <span class="o">[</span> <span class="n">text</span> <span class="o">(</span><span class="n">string_of_int</span> <span class="n">model</span><span class="o">.</span><span class="n">notUsedYet</span><span class="o">)</span>
+<a name="rest_code_3c336af24cec46e4a32d8fd33ff07848-7"></a>    <span class="o">]</span>
 </pre></td>
 </tr></table>
 <p>However I need to expose the model type to it, so I am going to lift the model type out of the main model as well and it it in to <tt class="docutils literal">src/overbots_types.ml</tt> to become this:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_e60a40eea1e742ef974aeb915ed6c92e-1">1</a>
-<a href="#rest_code_e60a40eea1e742ef974aeb915ed6c92e-2">2</a>
-<a href="#rest_code_e60a40eea1e742ef974aeb915ed6c92e-3">3</a>
-<a href="#rest_code_e60a40eea1e742ef974aeb915ed6c92e-4">4</a>
-<a href="#rest_code_e60a40eea1e742ef974aeb915ed6c92e-5">5</a>
-<a href="#rest_code_e60a40eea1e742ef974aeb915ed6c92e-6">6</a>
-<a href="#rest_code_e60a40eea1e742ef974aeb915ed6c92e-7">7</a></pre></div></td>
-<td class="code"><pre class="code ocaml"><a name="rest_code_e60a40eea1e742ef974aeb915ed6c92e-1"></a><span class="k">type</span> <span class="n">msg</span> <span class="o">=</span>
-<a name="rest_code_e60a40eea1e742ef974aeb915ed6c92e-2"></a>  <span class="o">|</span> <span class="nc">NothingYet</span>
-<a name="rest_code_e60a40eea1e742ef974aeb915ed6c92e-3"></a>  <span class="o">[@@</span><span class="n">bs</span><span class="o">.</span><span class="n">deriving</span> <span class="o">{</span><span class="n">accessors</span><span class="o">}]</span>
-<a name="rest_code_e60a40eea1e742ef974aeb915ed6c92e-4"></a>
-<a name="rest_code_e60a40eea1e742ef974aeb915ed6c92e-5"></a><span class="k">type</span> <span class="n">model</span> <span class="o">=</span> <span class="o">{</span>
-<a name="rest_code_e60a40eea1e742ef974aeb915ed6c92e-6"></a>  <span class="n">notUsedYet</span> <span class="o">:</span> <span class="kt">int</span><span class="o">;</span>
-<a name="rest_code_e60a40eea1e742ef974aeb915ed6c92e-7"></a><span class="o">}</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_2cb660ed01d642098f1319f72c3e0533-1">1</a>
+<a href="#rest_code_2cb660ed01d642098f1319f72c3e0533-2">2</a>
+<a href="#rest_code_2cb660ed01d642098f1319f72c3e0533-3">3</a>
+<a href="#rest_code_2cb660ed01d642098f1319f72c3e0533-4">4</a>
+<a href="#rest_code_2cb660ed01d642098f1319f72c3e0533-5">5</a>
+<a href="#rest_code_2cb660ed01d642098f1319f72c3e0533-6">6</a>
+<a href="#rest_code_2cb660ed01d642098f1319f72c3e0533-7">7</a></pre></div></td>
+<td class="code"><pre class="code ocaml"><a name="rest_code_2cb660ed01d642098f1319f72c3e0533-1"></a><span class="k">type</span> <span class="n">msg</span> <span class="o">=</span>
+<a name="rest_code_2cb660ed01d642098f1319f72c3e0533-2"></a>  <span class="o">|</span> <span class="nc">NothingYet</span>
+<a name="rest_code_2cb660ed01d642098f1319f72c3e0533-3"></a>  <span class="o">[@@</span><span class="n">bs</span><span class="o">.</span><span class="n">deriving</span> <span class="o">{</span><span class="n">accessors</span><span class="o">}]</span>
+<a name="rest_code_2cb660ed01d642098f1319f72c3e0533-4"></a>
+<a name="rest_code_2cb660ed01d642098f1319f72c3e0533-5"></a><span class="k">type</span> <span class="n">model</span> <span class="o">=</span> <span class="o">{</span>
+<a name="rest_code_2cb660ed01d642098f1319f72c3e0533-6"></a>  <span class="n">notUsedYet</span> <span class="o">:</span> <span class="kt">int</span><span class="o">;</span>
+<a name="rest_code_2cb660ed01d642098f1319f72c3e0533-7"></a><span class="o">}</span>
 </pre></td>
 </tr></table>
 <p>And I am going to import those types into both the <tt class="docutils literal">src/overbots.ml</tt> file and the <tt class="docutils literal">src/overbots_view.ml</tt> file via:</p>
-<pre class="code ocaml"><a name="rest_code_2213e3dd78b94bcbbdc13693f350d105-1"></a><span class="k">open</span> <span class="nc">Overbots_types</span>
+<pre class="code ocaml"><a name="rest_code_702fdcd1cf1243d3bbdaaf47b89d92e7-1"></a><span class="k">open</span> <span class="nc">Overbots_types</span>
 </pre>
 <p>As well as I am going to change the program definition in the main <tt class="docutils literal">src/overbots.ml</tt> file to use the new view module's <tt class="docutils literal">view</tt> function:</p>
-<pre class="code ocaml"><a name="rest_code_0e44f2a4ac224677bf562cf20438a8ae-1"></a><span class="k">let</span> <span class="n">main</span> <span class="o">=</span>
-<a name="rest_code_0e44f2a4ac224677bf562cf20438a8ae-2"></a>  <span class="nn">App</span><span class="p">.</span><span class="n">standardProgram</span> <span class="o">{</span>
-<a name="rest_code_0e44f2a4ac224677bf562cf20438a8ae-3"></a>    <span class="n">init</span><span class="o">;</span>
-<a name="rest_code_0e44f2a4ac224677bf562cf20438a8ae-4"></a>    <span class="n">update</span><span class="o">;</span>
-<a name="rest_code_0e44f2a4ac224677bf562cf20438a8ae-5"></a>    <span class="n">view</span> <span class="o">=</span> <span class="nn">Overbots_view</span><span class="p">.</span><span class="n">view</span><span class="o">;</span>
-<a name="rest_code_0e44f2a4ac224677bf562cf20438a8ae-6"></a>    <span class="n">subscriptions</span><span class="o">;</span>
-<a name="rest_code_0e44f2a4ac224677bf562cf20438a8ae-7"></a>  <span class="o">}</span>
+<pre class="code ocaml"><a name="rest_code_766e319a4f9b495fb4434d8c994825a9-1"></a><span class="k">let</span> <span class="n">main</span> <span class="o">=</span>
+<a name="rest_code_766e319a4f9b495fb4434d8c994825a9-2"></a>  <span class="nn">App</span><span class="p">.</span><span class="n">standardProgram</span> <span class="o">{</span>
+<a name="rest_code_766e319a4f9b495fb4434d8c994825a9-3"></a>    <span class="n">init</span><span class="o">;</span>
+<a name="rest_code_766e319a4f9b495fb4434d8c994825a9-4"></a>    <span class="n">update</span><span class="o">;</span>
+<a name="rest_code_766e319a4f9b495fb4434d8c994825a9-5"></a>    <span class="n">view</span> <span class="o">=</span> <span class="nn">Overbots_view</span><span class="p">.</span><span class="n">view</span><span class="o">;</span>
+<a name="rest_code_766e319a4f9b495fb4434d8c994825a9-6"></a>    <span class="n">subscriptions</span><span class="o">;</span>
+<a name="rest_code_766e319a4f9b495fb4434d8c994825a9-7"></a>  <span class="o">}</span>
 </pre>
 <p>Importing the types will be done in to about every module as almost everything should use it, so it will be a common theme.  I may break up the types module into more and import those types in to it if it becomes too large, complex, or unreadable as well.</p>
 <div class="section" id="view">
 <h2>View</h2>
 <p>I think I will go for a standard format of a title at the top, a few 'container' type elements around, like perhaps the resource listing on the left, the buttons on the right, messages at the bottom, and something in the center like a scanner or other changeable interface.  Since the container part will have a lot of duplicates I'll pull it's builder into a new function, but otherwise I'll start with changing the view to this:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-1"> 1</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-2"> 2</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-3"> 3</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-4"> 4</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-5"> 5</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-6"> 6</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-7"> 7</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-8"> 8</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-9"> 9</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-10">10</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-11">11</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-12">12</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-13">13</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-14">14</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-15">15</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-16">16</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-17">17</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-18">18</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-19">19</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-20">20</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-21">21</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-22">22</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-23">23</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-24">24</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-25">25</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-26">26</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-27">27</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-28">28</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-29">29</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-30">30</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-31">31</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-32">32</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-33">33</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-34">34</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-35">35</a>
-<a href="#rest_code_2d836a55e8b24c228555c8972dc5d0d6-36">36</a></pre></div></td>
-<td class="code"><pre class="code ocaml"><a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-1"></a><span class="k">open</span> <span class="nn">Tea</span><span class="p">.</span><span class="nc">Html</span>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-2"></a><span class="k">open</span> <span class="nc">Overbots_types</span>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-3"></a>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-4"></a>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-5"></a><span class="k">let</span> <span class="n">view_container</span> <span class="n">enabled</span> <span class="n">id</span> <span class="n">title</span> <span class="n">children</span> <span class="o">=</span>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-6"></a>  <span class="k">if</span> <span class="n">not</span> <span class="n">enabled</span> <span class="k">then</span> <span class="n">noNode</span> <span class="k">else</span>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-7"></a>    <span class="n">div</span>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-8"></a>      <span class="o">[</span> <span class="k">class'</span> <span class="o">(</span><span class="s2">"container container-"</span> <span class="o">^</span> <span class="n">id</span><span class="o">)]</span>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-9"></a>      <span class="o">[</span> <span class="n">div</span> <span class="o">[</span> <span class="k">class'</span> <span class="s2">"title"</span><span class="o">]</span> <span class="o">[</span> <span class="n">text</span> <span class="n">title</span> <span class="o">]</span>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-10"></a>      <span class="o">;</span> <span class="n">div</span> <span class="o">[</span> <span class="k">class'</span> <span class="o">(</span><span class="s2">"scroller "</span> <span class="o">^</span> <span class="n">id</span><span class="o">)</span> <span class="o">]</span> <span class="n">children</span>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-11"></a>      <span class="o">]</span>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-12"></a>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-13"></a>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-14"></a><span class="k">let</span> <span class="n">view_resources</span> <span class="n">model</span> <span class="o">=</span> <span class="bp">[]</span>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-15"></a>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-16"></a>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-17"></a><span class="k">let</span> <span class="n">view_buttons</span> <span class="n">model</span> <span class="o">=</span> <span class="bp">[]</span>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-18"></a>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-19"></a>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-20"></a><span class="k">let</span> <span class="n">view_scanner</span> <span class="n">model</span> <span class="o">=</span> <span class="bp">[]</span>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-21"></a>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-22"></a>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-23"></a><span class="k">let</span> <span class="n">view_msgs</span> <span class="n">model</span> <span class="o">=</span> <span class="bp">[]</span>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-24"></a>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-25"></a>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-26"></a><span class="k">let</span> <span class="n">view</span> <span class="n">model</span> <span class="o">=</span>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-27"></a>  <span class="n">div</span>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-28"></a>    <span class="o">[</span> <span class="k">class'</span> <span class="s2">"overbots"</span> <span class="o">]</span>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-29"></a>    <span class="o">[</span> <span class="n">div</span> <span class="o">[</span> <span class="k">class'</span> <span class="s2">"header"</span> <span class="o">]</span> <span class="o">[</span> <span class="n">text</span> <span class="s2">"OverBots"</span> <span class="o">]</span>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-30"></a>    <span class="o">;</span> <span class="n">div</span> <span class="o">[</span> <span class="k">class'</span> <span class="s2">"body"</span> <span class="o">]</span>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-31"></a>        <span class="o">[</span> <span class="n">view_container</span> <span class="bp">true</span> <span class="s2">"resources"</span> <span class="s2">"Resources"</span> <span class="o">(</span><span class="n">view_resources</span> <span class="n">model</span><span class="o">)</span>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-32"></a>        <span class="o">;</span> <span class="n">view_container</span> <span class="bp">true</span> <span class="s2">"actions"</span> <span class="s2">"Actions"</span> <span class="o">(</span><span class="n">view_buttons</span> <span class="n">model</span><span class="o">)</span>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-33"></a>        <span class="o">;</span> <span class="n">view_container</span> <span class="bp">true</span> <span class="s2">"scanner"</span> <span class="s2">"Scanner"</span> <span class="o">(</span><span class="n">view_scanner</span> <span class="n">model</span><span class="o">)</span>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-34"></a>        <span class="o">]</span>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-35"></a>    <span class="o">;</span> <span class="n">view_container</span> <span class="bp">true</span> <span class="s2">"msgs"</span> <span class="s2">"Messages"</span> <span class="o">(</span><span class="n">view_msgs</span> <span class="n">model</span><span class="o">)</span>
-<a name="rest_code_2d836a55e8b24c228555c8972dc5d0d6-36"></a>    <span class="o">]</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-1"> 1</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-2"> 2</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-3"> 3</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-4"> 4</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-5"> 5</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-6"> 6</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-7"> 7</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-8"> 8</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-9"> 9</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-10">10</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-11">11</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-12">12</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-13">13</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-14">14</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-15">15</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-16">16</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-17">17</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-18">18</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-19">19</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-20">20</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-21">21</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-22">22</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-23">23</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-24">24</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-25">25</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-26">26</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-27">27</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-28">28</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-29">29</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-30">30</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-31">31</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-32">32</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-33">33</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-34">34</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-35">35</a>
+<a href="#rest_code_423a893a5ccf49d596bac897fba9a2bd-36">36</a></pre></div></td>
+<td class="code"><pre class="code ocaml"><a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-1"></a><span class="k">open</span> <span class="nn">Tea</span><span class="p">.</span><span class="nc">Html</span>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-2"></a><span class="k">open</span> <span class="nc">Overbots_types</span>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-3"></a>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-4"></a>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-5"></a><span class="k">let</span> <span class="n">view_container</span> <span class="n">enabled</span> <span class="n">id</span> <span class="n">title</span> <span class="n">children</span> <span class="o">=</span>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-6"></a>  <span class="k">if</span> <span class="n">not</span> <span class="n">enabled</span> <span class="k">then</span> <span class="n">noNode</span> <span class="k">else</span>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-7"></a>    <span class="n">div</span>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-8"></a>      <span class="o">[</span> <span class="k">class'</span> <span class="o">(</span><span class="s2">"container container-"</span> <span class="o">^</span> <span class="n">id</span><span class="o">)]</span>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-9"></a>      <span class="o">[</span> <span class="n">div</span> <span class="o">[</span> <span class="k">class'</span> <span class="s2">"title"</span><span class="o">]</span> <span class="o">[</span> <span class="n">text</span> <span class="n">title</span> <span class="o">]</span>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-10"></a>      <span class="o">;</span> <span class="n">div</span> <span class="o">[</span> <span class="k">class'</span> <span class="o">(</span><span class="s2">"scroller "</span> <span class="o">^</span> <span class="n">id</span><span class="o">)</span> <span class="o">]</span> <span class="n">children</span>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-11"></a>      <span class="o">]</span>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-12"></a>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-13"></a>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-14"></a><span class="k">let</span> <span class="n">view_resources</span> <span class="n">model</span> <span class="o">=</span> <span class="bp">[]</span>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-15"></a>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-16"></a>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-17"></a><span class="k">let</span> <span class="n">view_buttons</span> <span class="n">model</span> <span class="o">=</span> <span class="bp">[]</span>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-18"></a>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-19"></a>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-20"></a><span class="k">let</span> <span class="n">view_scanner</span> <span class="n">model</span> <span class="o">=</span> <span class="bp">[]</span>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-21"></a>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-22"></a>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-23"></a><span class="k">let</span> <span class="n">view_msgs</span> <span class="n">model</span> <span class="o">=</span> <span class="bp">[]</span>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-24"></a>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-25"></a>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-26"></a><span class="k">let</span> <span class="n">view</span> <span class="n">model</span> <span class="o">=</span>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-27"></a>  <span class="n">div</span>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-28"></a>    <span class="o">[</span> <span class="k">class'</span> <span class="s2">"overbots"</span> <span class="o">]</span>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-29"></a>    <span class="o">[</span> <span class="n">div</span> <span class="o">[</span> <span class="k">class'</span> <span class="s2">"header"</span> <span class="o">]</span> <span class="o">[</span> <span class="n">text</span> <span class="s2">"OverBots"</span> <span class="o">]</span>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-30"></a>    <span class="o">;</span> <span class="n">div</span> <span class="o">[</span> <span class="k">class'</span> <span class="s2">"body"</span> <span class="o">]</span>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-31"></a>        <span class="o">[</span> <span class="n">view_container</span> <span class="bp">true</span> <span class="s2">"resources"</span> <span class="s2">"Resources"</span> <span class="o">(</span><span class="n">view_resources</span> <span class="n">model</span><span class="o">)</span>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-32"></a>        <span class="o">;</span> <span class="n">view_container</span> <span class="bp">true</span> <span class="s2">"actions"</span> <span class="s2">"Actions"</span> <span class="o">(</span><span class="n">view_buttons</span> <span class="n">model</span><span class="o">)</span>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-33"></a>        <span class="o">;</span> <span class="n">view_container</span> <span class="bp">true</span> <span class="s2">"scanner"</span> <span class="s2">"Scanner"</span> <span class="o">(</span><span class="n">view_scanner</span> <span class="n">model</span><span class="o">)</span>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-34"></a>        <span class="o">]</span>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-35"></a>    <span class="o">;</span> <span class="n">view_container</span> <span class="bp">true</span> <span class="s2">"msgs"</span> <span class="s2">"Messages"</span> <span class="o">(</span><span class="n">view_msgs</span> <span class="n">model</span><span class="o">)</span>
+<a name="rest_code_423a893a5ccf49d596bac897fba9a2bd-36"></a>    <span class="o">]</span>
 </pre></td>
 </tr></table>
 <p>So this will be the basic structure, running it now shows the format that I will start with, which is just a listing of text on the web page of:</p>
-<pre class="code text"><a name="rest_code_76ba534d124b42a1b33bd5fed26a2a5b-1"></a>OverBots
-<a name="rest_code_76ba534d124b42a1b33bd5fed26a2a5b-2"></a>Resources
-<a name="rest_code_76ba534d124b42a1b33bd5fed26a2a5b-3"></a>Actions
-<a name="rest_code_76ba534d124b42a1b33bd5fed26a2a5b-4"></a>Scanner
-<a name="rest_code_76ba534d124b42a1b33bd5fed26a2a5b-5"></a>Messages
+<pre class="code text"><a name="rest_code_613a5cebc8364574b4d3043f97a08b1a-1"></a>OverBots
+<a name="rest_code_613a5cebc8364574b4d3043f97a08b1a-2"></a>Resources
+<a name="rest_code_613a5cebc8364574b4d3043f97a08b1a-3"></a>Actions
+<a name="rest_code_613a5cebc8364574b4d3043f97a08b1a-4"></a>Scanner
+<a name="rest_code_613a5cebc8364574b4d3043f97a08b1a-5"></a>Messages
 </pre>
 <p>So that is not 'quite' what I want, let's add some scss to the <cite>scss/overbots.scss</cite> file of:</p>
 <table class="codetable"><tr>
-<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-1"> 1</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-2"> 2</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-3"> 3</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-4"> 4</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-5"> 5</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-6"> 6</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-7"> 7</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-8"> 8</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-9"> 9</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-10">10</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-11">11</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-12">12</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-13">13</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-14">14</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-15">15</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-16">16</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-17">17</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-18">18</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-19">19</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-20">20</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-21">21</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-22">22</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-23">23</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-24">24</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-25">25</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-26">26</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-27">27</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-28">28</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-29">29</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-30">30</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-31">31</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-32">32</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-33">33</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-34">34</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-35">35</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-36">36</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-37">37</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-38">38</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-39">39</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-40">40</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-41">41</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-42">42</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-43">43</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-44">44</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-45">45</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-46">46</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-47">47</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-48">48</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-49">49</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-50">50</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-51">51</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-52">52</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-53">53</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-54">54</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-55">55</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-56">56</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-57">57</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-58">58</a>
-<a href="#rest_code_d4fa45fffd59414b99b46f2ae6d33e94-59">59</a></pre></div></td>
-<td class="code"><pre class="code scss"><a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-1"></a><span class="nc">.overbots</span> <span class="p">{</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-2"></a>  <span class="nt">display</span><span class="nd">:</span> <span class="nt">flex</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-3"></a>  <span class="nt">flex-direction</span><span class="nd">:</span> <span class="nt">column</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-4"></a>  <span class="nt">height</span><span class="nd">:</span> <span class="nt">100</span><span class="err">%</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-5"></a>  <span class="nt">width</span><span class="nd">:</span> <span class="nt">100</span><span class="err">%</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-6"></a>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-7"></a>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-8"></a>  <span class="o">//</span> <span class="nt">Generic</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-9"></a>  <span class="nc">.container</span> <span class="p">{</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-10"></a>    <span class="nt">border</span><span class="nd">:</span> <span class="nt">solid</span> <span class="nt">1px</span> <span class="nn">#000</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-11"></a>    <span class="nt">display</span><span class="nd">:</span> <span class="nt">flex</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-12"></a>    <span class="nt">flex-direction</span><span class="nd">:</span> <span class="nt">column</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-13"></a>    <span class="nt">overflow</span><span class="nd">:</span> <span class="nt">hidden</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-14"></a>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-15"></a>    <span class="o">&gt;</span><span class="nc">.title</span> <span class="p">{</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-16"></a>      <span class="nt">border-bottom</span><span class="nd">:</span> <span class="nt">solid</span> <span class="nt">1px</span> <span class="nn">#000</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-17"></a>      <span class="nt">font-weight</span><span class="nd">:</span> <span class="nt">bold</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-18"></a>      <span class="nt">text-align</span><span class="nd">:</span> <span class="nt">center</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-19"></a>    <span class="p">}</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-20"></a>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-21"></a>    <span class="o">&gt;</span><span class="nc">.scroller</span> <span class="p">{</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-22"></a>      <span class="nt">overflow</span><span class="nd">:</span> <span class="nt">auto</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-23"></a>    <span class="p">}</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-24"></a>  <span class="p">}</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-25"></a>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-26"></a>  <span class="c1">// Specific</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-27"></a>  <span class="nc">.header</span> <span class="p">{</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-28"></a>    <span class="nt">border-bottom</span><span class="nd">:</span> <span class="nt">solid</span> <span class="nt">1px</span> <span class="nn">#000</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-29"></a>    <span class="nt">flex</span><span class="nd">:</span> <span class="nt">0</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-30"></a>    <span class="nt">font-size</span><span class="nd">:</span> <span class="nt">24px</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-31"></a>    <span class="nt">font-weight</span><span class="nd">:</span> <span class="nt">bold</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-32"></a>    <span class="nt">text-align</span><span class="nd">:</span> <span class="nt">center</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-33"></a>  <span class="p">}</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-34"></a>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-35"></a>  <span class="nc">.body</span> <span class="p">{</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-36"></a>    <span class="nt">display</span><span class="nd">:</span> <span class="nt">flex</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-37"></a>    <span class="nt">flex</span><span class="nd">:</span> <span class="nt">1</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-38"></a>    <span class="nt">flex-direction</span><span class="nd">:</span> <span class="nt">row</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-39"></a>  <span class="p">}</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-40"></a>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-41"></a>  <span class="nc">.container-resources</span> <span class="p">{</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-42"></a>    <span class="nt">flex</span><span class="nd">:</span> <span class="nt">0</span> <span class="nt">0</span> <span class="nt">256px</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-43"></a>    <span class="nt">order</span><span class="nd">:</span> <span class="nt">0</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-44"></a>  <span class="p">}</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-45"></a>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-46"></a>  <span class="nc">.container-actions</span> <span class="p">{</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-47"></a>    <span class="nt">flex</span><span class="nd">:</span> <span class="nt">0</span> <span class="nt">0</span> <span class="nt">256px</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-48"></a>    <span class="nt">order</span><span class="nd">:</span> <span class="nt">2</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-49"></a>  <span class="p">}</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-50"></a>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-51"></a>  <span class="nc">.container-scanner</span> <span class="p">{</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-52"></a>    <span class="nt">flex</span><span class="nd">:</span> <span class="nt">1</span> <span class="nt">0</span> <span class="nt">256px</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-53"></a>    <span class="nt">order</span><span class="nd">:</span> <span class="nt">1</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-54"></a>  <span class="p">}</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-55"></a>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-56"></a>  <span class="nc">.container-msgs</span> <span class="p">{</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-57"></a>    <span class="nt">flex</span><span class="nd">:</span> <span class="nt">0</span> <span class="nt">0</span> <span class="nt">192px</span><span class="o">;</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-58"></a>  <span class="p">}</span>
-<a name="rest_code_d4fa45fffd59414b99b46f2ae6d33e94-59"></a><span class="p">}</span>
+<td class="linenos"><div class="linenodiv"><pre><a href="#rest_code_7e59b6afacc4466e865884dda2e96442-1"> 1</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-2"> 2</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-3"> 3</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-4"> 4</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-5"> 5</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-6"> 6</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-7"> 7</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-8"> 8</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-9"> 9</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-10">10</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-11">11</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-12">12</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-13">13</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-14">14</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-15">15</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-16">16</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-17">17</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-18">18</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-19">19</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-20">20</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-21">21</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-22">22</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-23">23</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-24">24</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-25">25</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-26">26</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-27">27</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-28">28</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-29">29</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-30">30</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-31">31</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-32">32</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-33">33</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-34">34</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-35">35</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-36">36</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-37">37</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-38">38</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-39">39</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-40">40</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-41">41</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-42">42</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-43">43</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-44">44</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-45">45</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-46">46</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-47">47</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-48">48</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-49">49</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-50">50</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-51">51</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-52">52</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-53">53</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-54">54</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-55">55</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-56">56</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-57">57</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-58">58</a>
+<a href="#rest_code_7e59b6afacc4466e865884dda2e96442-59">59</a></pre></div></td>
+<td class="code"><pre class="code scss"><a name="rest_code_7e59b6afacc4466e865884dda2e96442-1"></a><span class="nc">.overbots</span> <span class="p">{</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-2"></a>  <span class="nt">display</span><span class="nd">:</span> <span class="nt">flex</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-3"></a>  <span class="nt">flex-direction</span><span class="nd">:</span> <span class="nt">column</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-4"></a>  <span class="nt">height</span><span class="nd">:</span> <span class="nt">100</span><span class="err">%</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-5"></a>  <span class="nt">width</span><span class="nd">:</span> <span class="nt">100</span><span class="err">%</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-6"></a>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-7"></a>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-8"></a>  <span class="o">//</span> <span class="nt">Generic</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-9"></a>  <span class="nc">.container</span> <span class="p">{</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-10"></a>    <span class="nt">border</span><span class="nd">:</span> <span class="nt">solid</span> <span class="nt">1px</span> <span class="nn">#000</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-11"></a>    <span class="nt">display</span><span class="nd">:</span> <span class="nt">flex</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-12"></a>    <span class="nt">flex-direction</span><span class="nd">:</span> <span class="nt">column</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-13"></a>    <span class="nt">overflow</span><span class="nd">:</span> <span class="nt">hidden</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-14"></a>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-15"></a>    <span class="o">&gt;</span><span class="nc">.title</span> <span class="p">{</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-16"></a>      <span class="nt">border-bottom</span><span class="nd">:</span> <span class="nt">solid</span> <span class="nt">1px</span> <span class="nn">#000</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-17"></a>      <span class="nt">font-weight</span><span class="nd">:</span> <span class="nt">bold</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-18"></a>      <span class="nt">text-align</span><span class="nd">:</span> <span class="nt">center</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-19"></a>    <span class="p">}</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-20"></a>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-21"></a>    <span class="o">&gt;</span><span class="nc">.scroller</span> <span class="p">{</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-22"></a>      <span class="nt">overflow</span><span class="nd">:</span> <span class="nt">auto</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-23"></a>    <span class="p">}</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-24"></a>  <span class="p">}</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-25"></a>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-26"></a>  <span class="c1">// Specific</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-27"></a>  <span class="nc">.header</span> <span class="p">{</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-28"></a>    <span class="nt">border-bottom</span><span class="nd">:</span> <span class="nt">solid</span> <span class="nt">1px</span> <span class="nn">#000</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-29"></a>    <span class="nt">flex</span><span class="nd">:</span> <span class="nt">0</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-30"></a>    <span class="nt">font-size</span><span class="nd">:</span> <span class="nt">24px</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-31"></a>    <span class="nt">font-weight</span><span class="nd">:</span> <span class="nt">bold</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-32"></a>    <span class="nt">text-align</span><span class="nd">:</span> <span class="nt">center</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-33"></a>  <span class="p">}</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-34"></a>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-35"></a>  <span class="nc">.body</span> <span class="p">{</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-36"></a>    <span class="nt">display</span><span class="nd">:</span> <span class="nt">flex</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-37"></a>    <span class="nt">flex</span><span class="nd">:</span> <span class="nt">1</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-38"></a>    <span class="nt">flex-direction</span><span class="nd">:</span> <span class="nt">row</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-39"></a>  <span class="p">}</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-40"></a>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-41"></a>  <span class="nc">.container-resources</span> <span class="p">{</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-42"></a>    <span class="nt">flex</span><span class="nd">:</span> <span class="nt">0</span> <span class="nt">0</span> <span class="nt">256px</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-43"></a>    <span class="nt">order</span><span class="nd">:</span> <span class="nt">0</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-44"></a>  <span class="p">}</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-45"></a>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-46"></a>  <span class="nc">.container-actions</span> <span class="p">{</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-47"></a>    <span class="nt">flex</span><span class="nd">:</span> <span class="nt">0</span> <span class="nt">0</span> <span class="nt">256px</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-48"></a>    <span class="nt">order</span><span class="nd">:</span> <span class="nt">2</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-49"></a>  <span class="p">}</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-50"></a>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-51"></a>  <span class="nc">.container-scanner</span> <span class="p">{</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-52"></a>    <span class="nt">flex</span><span class="nd">:</span> <span class="nt">1</span> <span class="nt">0</span> <span class="nt">256px</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-53"></a>    <span class="nt">order</span><span class="nd">:</span> <span class="nt">1</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-54"></a>  <span class="p">}</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-55"></a>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-56"></a>  <span class="nc">.container-msgs</span> <span class="p">{</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-57"></a>    <span class="nt">flex</span><span class="nd">:</span> <span class="nt">0</span> <span class="nt">0</span> <span class="nt">192px</span><span class="o">;</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-58"></a>  <span class="p">}</span>
+<a name="rest_code_7e59b6afacc4466e865884dda2e96442-59"></a><span class="p">}</span>
 </pre></td>
 </tr></table>
 <p>And that is looking <em>much</em> better!</p>
@@ -376,22 +376,22 @@ mdl-layout--small-screen-only
 <div class="section" id="build-system">
 <h2>Build System</h2>
 <p>Lastly I want to add a bit more parallelism to the build step since there is no reason for the css to be built 'after' the javascript when they could be built concurrently, so I'm changing my <tt class="docutils literal">package.json</tt>'s <tt class="docutils literal">"scripts"</tt> section to be this instead:</p>
-<pre class="code json"><a name="rest_code_c71cd853cd0f4f7eb7cfc5d5495bd4a6-1"></a><span class="p">{</span>
-<a name="rest_code_c71cd853cd0f4f7eb7cfc5d5495bd4a6-2"></a>  <span class="nt">"build:bsb"</span><span class="p">:</span> <span class="s2">"bsb -make-world"</span><span class="p">,</span>
-<a name="rest_code_c71cd853cd0f4f7eb7cfc5d5495bd4a6-3"></a>  <span class="nt">"build:js"</span><span class="p">:</span> <span class="s2">"rollup -c"</span><span class="p">,</span>
-<a name="rest_code_c71cd853cd0f4f7eb7cfc5d5495bd4a6-4"></a>  <span class="nt">"build:scss"</span><span class="p">:</span> <span class="s2">"node-sass --include-path scss scss/overbots.scss css/overbots.css"</span><span class="p">,</span>
-<a name="rest_code_c71cd853cd0f4f7eb7cfc5d5495bd4a6-5"></a>  <span class="nt">"build:css"</span><span class="p">:</span> <span class="s2">"postcss --use autoprefixer -o release/overbots.css css/overbots.css"</span><span class="p">,</span>
-<a name="rest_code_c71cd853cd0f4f7eb7cfc5d5495bd4a6-6"></a>  <span class="nt">"build:code"</span><span class="p">:</span> <span class="s2">"run-s build:bsb build:js"</span><span class="p">,</span>
-<a name="rest_code_c71cd853cd0f4f7eb7cfc5d5495bd4a6-7"></a>  <span class="nt">"build:styles"</span><span class="p">:</span> <span class="s2">"run-s build:scss build:css"</span><span class="p">,</span>
-<a name="rest_code_c71cd853cd0f4f7eb7cfc5d5495bd4a6-8"></a>  <span class="nt">"build"</span><span class="p">:</span> <span class="s2">"run-p build:code build:styles"</span><span class="p">,</span>
-<a name="rest_code_c71cd853cd0f4f7eb7cfc5d5495bd4a6-9"></a>  <span class="nt">"watch:bsb"</span><span class="p">:</span> <span class="s2">"bsb -w"</span><span class="p">,</span>
-<a name="rest_code_c71cd853cd0f4f7eb7cfc5d5495bd4a6-10"></a>  <span class="nt">"watch:js"</span><span class="p">:</span> <span class="s2">"rollup -c -w"</span><span class="p">,</span>
-<a name="rest_code_c71cd853cd0f4f7eb7cfc5d5495bd4a6-11"></a>  <span class="nt">"watch:scss"</span><span class="p">:</span> <span class="s2">"nodemon -e scss -x \"npm run build:scss\""</span><span class="p">,</span>
-<a name="rest_code_c71cd853cd0f4f7eb7cfc5d5495bd4a6-12"></a>  <span class="nt">"watch:css"</span><span class="p">:</span> <span class="s2">"nodemon -e css -x \"npm run build:css\""</span><span class="p">,</span>
-<a name="rest_code_c71cd853cd0f4f7eb7cfc5d5495bd4a6-13"></a>  <span class="nt">"prewatch"</span><span class="p">:</span> <span class="s2">"run-s build"</span><span class="p">,</span>
-<a name="rest_code_c71cd853cd0f4f7eb7cfc5d5495bd4a6-14"></a>  <span class="nt">"watch"</span><span class="p">:</span> <span class="s2">"run-p watch:bsb watch:js watch:scss watch:css"</span><span class="p">,</span>
-<a name="rest_code_c71cd853cd0f4f7eb7cfc5d5495bd4a6-15"></a>  <span class="nt">"test"</span><span class="p">:</span> <span class="s2">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>
-<a name="rest_code_c71cd853cd0f4f7eb7cfc5d5495bd4a6-16"></a><span class="p">}</span>
+<pre class="code json"><a name="rest_code_3768a7421e934d42bd89d3cef88fc2aa-1"></a><span class="p">{</span>
+<a name="rest_code_3768a7421e934d42bd89d3cef88fc2aa-2"></a>  <span class="nt">"build:bsb"</span><span class="p">:</span> <span class="s2">"bsb -make-world"</span><span class="p">,</span>
+<a name="rest_code_3768a7421e934d42bd89d3cef88fc2aa-3"></a>  <span class="nt">"build:js"</span><span class="p">:</span> <span class="s2">"rollup -c"</span><span class="p">,</span>
+<a name="rest_code_3768a7421e934d42bd89d3cef88fc2aa-4"></a>  <span class="nt">"build:scss"</span><span class="p">:</span> <span class="s2">"node-sass --include-path scss scss/overbots.scss css/overbots.css"</span><span class="p">,</span>
+<a name="rest_code_3768a7421e934d42bd89d3cef88fc2aa-5"></a>  <span class="nt">"build:css"</span><span class="p">:</span> <span class="s2">"postcss --use autoprefixer -o release/overbots.css css/overbots.css"</span><span class="p">,</span>
+<a name="rest_code_3768a7421e934d42bd89d3cef88fc2aa-6"></a>  <span class="nt">"build:code"</span><span class="p">:</span> <span class="s2">"run-s build:bsb build:js"</span><span class="p">,</span>
+<a name="rest_code_3768a7421e934d42bd89d3cef88fc2aa-7"></a>  <span class="nt">"build:styles"</span><span class="p">:</span> <span class="s2">"run-s build:scss build:css"</span><span class="p">,</span>
+<a name="rest_code_3768a7421e934d42bd89d3cef88fc2aa-8"></a>  <span class="nt">"build"</span><span class="p">:</span> <span class="s2">"run-p build:code build:styles"</span><span class="p">,</span>
+<a name="rest_code_3768a7421e934d42bd89d3cef88fc2aa-9"></a>  <span class="nt">"watch:bsb"</span><span class="p">:</span> <span class="s2">"bsb -w"</span><span class="p">,</span>
+<a name="rest_code_3768a7421e934d42bd89d3cef88fc2aa-10"></a>  <span class="nt">"watch:js"</span><span class="p">:</span> <span class="s2">"rollup -c -w"</span><span class="p">,</span>
+<a name="rest_code_3768a7421e934d42bd89d3cef88fc2aa-11"></a>  <span class="nt">"watch:scss"</span><span class="p">:</span> <span class="s2">"nodemon -e scss -x \"npm run build:scss\""</span><span class="p">,</span>
+<a name="rest_code_3768a7421e934d42bd89d3cef88fc2aa-12"></a>  <span class="nt">"watch:css"</span><span class="p">:</span> <span class="s2">"nodemon -e css -x \"npm run build:css\""</span><span class="p">,</span>
+<a name="rest_code_3768a7421e934d42bd89d3cef88fc2aa-13"></a>  <span class="nt">"prewatch"</span><span class="p">:</span> <span class="s2">"run-s build"</span><span class="p">,</span>
+<a name="rest_code_3768a7421e934d42bd89d3cef88fc2aa-14"></a>  <span class="nt">"watch"</span><span class="p">:</span> <span class="s2">"run-p watch:bsb watch:js watch:scss watch:css"</span><span class="p">,</span>
+<a name="rest_code_3768a7421e934d42bd89d3cef88fc2aa-15"></a>  <span class="nt">"test"</span><span class="p">:</span> <span class="s2">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>
+<a name="rest_code_3768a7421e934d42bd89d3cef88fc2aa-16"></a><span class="p">}</span>
 </pre>
 <p>I just split up the code and styles section into their own commands and then I run those two concurrently.  I could also pipe the scss output to postcss directly to save a tiny bit of time, but I like seeing the intermediate output so I can watch how things change from step to step.  I can always build an optimized pipeline that skips this if I really want, might be useful to do on the watcher, but it is fast enough right now that I do not care, it all builds in &lt;500ms as it is for me in watch mode, all of that being the css as the bsb and rollup steps are &lt;100ms thus far total.</p>
 <p>Next time let's start taking a look at the types of the model and start fleshing out just how to store the data in the model state.</p>
