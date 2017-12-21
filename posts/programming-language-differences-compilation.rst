@@ -16,6 +16,8 @@ Every languages bindings/variables/expression has a type, generally of the form 
 
 Do note that this post may perpetually be in development, at this point it is primarily just a brain-dump rather then something curated.  As always feel free to leave comments for improvements.
 
+The awesome inline code snippets compilation and results is supplied by the awesome Klipse_ library!
+
 - `Compiled vs. JIT vs. Interpreted`_
 - `Strong vs. Weak Typing`_
 - `Static vs. Dynamic Typing`_
@@ -228,3 +230,7 @@ Languages that are strongly and statically typed tend to be the ones that are th
   let _ = test ()
 
 This would prevent the user of this module from using ``safe_length`` (pretend it may do something more special, like send html to a socket or something with ``escape`` escaping html or something), thus this prevents mis-using the function accidentally.  If programming in a proper Type-Based Programming style then even many logic bugs can be prevented.
+
+
+.. _Klipse: http://blog.klipse.tech/
+
