@@ -232,5 +232,5 @@ Languages that are strongly and statically typed tend to be the ones that are th
 This would prevent the user of this module from using ``safe_length`` (pretend it may do something more special, like send html to a socket or something with ``escape`` escaping html or something), thus this prevents mis-using the function accidentally.  If programming in a proper Type-Based Programming style then even many logic bugs can be prevented.
 
 
-.. _Klipse: http://blog.klipse.tech/
+.. _Klipse: https://github.com/viebel/klipse
 
