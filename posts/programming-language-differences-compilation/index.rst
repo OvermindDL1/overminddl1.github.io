@@ -106,7 +106,6 @@ Other languages enforce knowing the types at compile-time, and if the types or t
 .. klipse:: eval-cpp
 
   #include <iostream>
-  #include <string>
   using namespace std;
   int main() {
     char *hw = "Hello World!";
