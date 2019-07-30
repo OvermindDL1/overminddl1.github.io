@@ -125,7 +125,7 @@ And here it is with a type error introduced, thus printing nothing and instead c
     return 0;
   }
 
-Even if a language is strongly typed does not mean that it has the overhead of having to statically type its bindings/variables in all cases, for example you can use the ``auto`` keyword in C++, and even in some languages, such as OCaml, yours program can be entirely strongly typed but with no declarations needed at all, such as this:
+Even if a language is strongly typed does not mean that it has the overhead of having to statically type its bindings/variables in all cases, for example you can use the ``auto`` keyword in C++, and even in some languages, such as OCaml, your program can be entirely strongly typed but with no declarations needed at all, such as this:
 
 .. klipse:: eval-ocaml
 
